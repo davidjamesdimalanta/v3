@@ -1,26 +1,195 @@
 @import "tailwindcss";
 
+/* FONTS */
+@font-face {
+    font-family: 'NewRodin Pro';
+    src: url('/fonts/New Rodin Pro/NewRodin Pro L.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NewRodin Pro';
+    src: url('/fonts/New Rodin Pro/NewRodin Pro M.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NewRodin Pro';
+    src: url('/fonts/New Rodin Pro/NewRodin Pro DB.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NewRodin Pro';
+    src: url('/fonts/New Rodin Pro/NewRodin Pro B.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NewRodin Pro';
+    src: url('/fonts/New Rodin Pro/NewRodin Pro EB.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NewRodin Pro';
+    src: url('/fonts/New Rodin Pro/NewRodin Pro UB.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+
+/* VARIABLES */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --dark-color: rgb(0, 0, 1);
+    --text-color: rgb(245, 245, 245);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* GENERAL */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    overflow-y: scroll;
+    overflow-x: none;
+    overscroll-behavior: auto !important;
+    width: 100%;
+    min-height: 100dvh;
+    color: var(--text-color);
+    background-color: var(--dark-color);
+    font-family: 'NewRodin Pro', sans-serif;
+}
+
+/* CANVAS */
+#webgl-canvas {
+    background-color: var(--dark-color);
+}
+
+
+/* CUSTOM BACKDROP UTILITIES */
+@layer utilities {
+    .bd-text {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+        paint-order: stroke fill;
+    }
+
+    .bd {
+        backdrop-filter: blur(16px);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .bd-active {
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+        box-shadow: inset 0 2px 12px rgba(255, 255, 255, 0.5);
+    }
+
+    /* TEXT STYLES */
+    .text-lg {
+        font-size: 41px;
+        line-height: 43px;
+    }
+
+    .text-md {
+        font-size: 23px;
+        line-height: 28px;
+    }
+
+    .text-base {
+        font-size: 15px;
+        line-height: 21px;
+    }
+
+    .text-sm {
+        font-size: 13px;
+        line-height: 17px;
+    }
+
+    .text-xs {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    /* RESPONSIVE PADDING */
+    .padding-page {
+        padding: 64px 12px 12px 12px; /* Mobile */
+    }
+
+    @media (min-width: 768px) {
+        .padding-page {
+            padding: 100px 20px 20px 20px; /* Desktop */
+        }
+    }
+
+    /* GUTTER CLASSES */
+    .gutter-lg {
+        gap: 40px;
+    }
+
+    .gutter-md {
+        gap: 32px;
+    }
+
+    .gutter-base {
+        gap: 24px;
+    }
+
+    .gutter-sm {
+        gap: 16px;
+    }
+
+    .gutter-xs {
+        gap: 8px;
+    }
+
+    /* FIGMA-STYLE SIZING */
+    .w-fill {
+        width: 100%;
+    }
+
+    .w-hug {
+        width: fit-content;
+    }
+
+    .h-fill {
+        height: 100%;
+    }
+
+    .h-hug {
+        height: fit-content;
+    }
+
+    /* FONT WEIGHTS - NEW RODIN PRO */
+    .text-300 {
+        font-family: 'NewRodin Pro', sans-serif;
+        font-weight: 300; /* Light */
+    }
+
+    .text-400 {
+        font-family: 'NewRodin Pro', sans-serif;
+        font-weight: 400; /* Medium */
+    }
+
+    .text-500 {
+        font-family: 'NewRodin Pro', sans-serif;
+        font-weight: 500; /* DemiBold */
+    }
+
+    .text-600 {
+        font-family: 'NewRodin Pro', sans-serif;
+        font-weight: 600; /* Bold */
+    }
+
+    .text-700 {
+        font-family: 'NewRodin Pro', sans-serif;
+        font-weight: 700; /* ExtraBold */
+    }
+
+    .text-800 {
+        font-family: 'NewRodin Pro', sans-serif;
+        font-weight: 800; /* UltraBold */
+    }
 }
