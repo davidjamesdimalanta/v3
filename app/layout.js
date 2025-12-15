@@ -1,6 +1,7 @@
-import Script from "next/script";
 import "./globals.css";
 import Nav from "./ui/nav";
+import SmoothScroll from "./ui/SmoothScroll";
+import WaveBackground from "./ui/WaveBackground";
 
 
 export const metadata = {
@@ -12,9 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="relative antialiased">
+        <SmoothScroll />
+        <WaveBackground />
         <Nav />
         {children}
-        <Script src="/scripts/wave.js" strategy="afterInteractive" />
       </body>
     </html>
   );

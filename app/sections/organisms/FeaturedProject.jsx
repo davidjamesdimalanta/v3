@@ -11,7 +11,7 @@ export default function FeaturedProject({
   year
 }) {
   return (
-    <div className="bd hover:bd-active overflow-hidden w-fill flex flex-col">
+    <div className="bd hover:bd-active transition-all duration-150 overflow-hidden w-fill flex flex-col">
       {/* Image Container */}
       <div className="relative w-full aspect-video">
         {imageSrc && (
@@ -28,8 +28,8 @@ export default function FeaturedProject({
       <div className="px-4 py-2 flex flex-col gutter-base">
         {/* Header with title and year */}
         <div className="flex justify-between items-start gutter-sm">
-          <h3 className="text-md text-500">{title}</h3>
-          {description && ( <p className="text-sm text-400">{description}</p>)}        
+          <h3 className="text-medium text-500">{title}</h3>
+          {description && ( <p className="text-small text-400">{description}</p>)}        
         </div>
       </div>
     </div>

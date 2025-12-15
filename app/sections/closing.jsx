@@ -3,7 +3,7 @@ import Outro from "./organisms/outro";
 
 export default function Closing() {
   return (
-    <div className="relative flex flex-col w-full h-svh justify-between padding-page">
+    <div id="closing" className="relative flex flex-col w-full h-svh justify-between padding-page">
         <Outro />
 
         {/* Currently Up to and Contact*/}

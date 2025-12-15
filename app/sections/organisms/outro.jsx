@@ -6,7 +6,7 @@ export default function Outro() {
     return (
     <div className="w-full flex flex-col gutter-md">
         <div className="md:max-w-[800px] flex flex-col">
-            <span className="text-md text-500">
+            <span className="text-medium text-500">
                 Toronto-based Product Designer and Developer 
             </span>
             <span className="text-base text-300">
