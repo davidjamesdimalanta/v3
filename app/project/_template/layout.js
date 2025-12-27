@@ -10,10 +10,10 @@ import { projectData } from "./data";
 
 export async function generateMetadata() {
   return {
-    title: `${projectData.title} | David Dimalanta`,
+    title: `${projectData.name} | David Dimalanta`,
     description: projectData.description[0], // First paragraph as meta description
     openGraph: {
-      title: `${projectData.title} | David Dimalanta`,
+      title: `${projectData.name} | David Dimalanta`,
       description: projectData.description[0],
       type: "website",
     },

@@ -4,6 +4,7 @@ export default function ContentBlock({
   title,
   text,
   media,
+  thumbnail, // Optional thumbnail for video media (e.g., Mux thumbnail)
   caption,
   className = ""
 }) {
@@ -20,7 +21,7 @@ export default function ContentBlock({
   };
 
   return (
-    <section className={`flex flex-col gutter-base ${className}`}>
+    <section className={`flex flex-col gutter-xs ${className}`}>
       {/* Optional Title */}
       {title && <h3 className="text-medium text-600">{title}</h3>}
 
@@ -28,7 +29,7 @@ export default function ContentBlock({
       {text && renderText(text)}
 
       {/* Optional Media Block */}
-      {media?.src && <MediaBlock {...media} />}
+      {media?.src && <MediaBlock {...media} thumbnail={thumbnail} />}
 
       {/* Optional Caption (separate from media caption) */}
       {caption && <p className="text-tiny text-400 opacity-60">{caption}</p>}

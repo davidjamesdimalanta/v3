@@ -13,10 +13,6 @@ export default function Closing() {
                     <span>Currently: </span>
                     <span>MI Candidate at UofT iSchool</span>
                 </div>
-                <div className="flex flex-col">
-                    <span>Currently: </span>
-                    <span>MI Candidate at UofT iSchool</span>
-                </div>
             </div>
             <Button />
         </div>

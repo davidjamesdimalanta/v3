@@ -18,7 +18,9 @@ export default function ProjectHero({
             className="hidden lg:flex items-center gutter-xs text-small text-400 hover:bd-text transition-all duration-150 w-hug"
             aria-label="Close project"
           >
-            <span>←</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.7407 0.740723L0.740723 10.7407M0.740723 0.740723L10.7407 10.7407" stroke="currentColor" strokeWidth="1.48148" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             <span>Close</span>
           </button>
 
@@ -61,7 +63,7 @@ export default function ProjectHero({
               </div>
             </div>
           )}
-          
+
           {/* Project Details */}
           {Object.keys(details).length > 0 && (
             <div className="flex flex-col gutter-sm pt-4">

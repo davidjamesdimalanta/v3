@@ -17,13 +17,11 @@
  * }
  */
 export const projectsRegistry = [
-  // Add your projects here
-  // Example:
-  // {
-  //   slug: 'my-project',
-  //   title: 'My Amazing Project',
-  //   nextProject: 'another-project'
-  // },
+  {
+    slug: 'goable',
+    title: 'Unearthing Hidden Barriers in Accessible Washrooms',
+    nextProject: null
+  },
 ];
 
 /**

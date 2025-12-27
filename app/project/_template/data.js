@@ -5,6 +5,9 @@
  */
 
 export const projectData = {
+  // Short project name (used for tab title and card titles)
+  name: "Project Name",
+
   // Main project title (displayed prominently in the hero section)
   title: "Your Project Title Goes Here",
 

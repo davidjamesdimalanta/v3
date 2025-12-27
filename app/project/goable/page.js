@@ -29,69 +29,48 @@ export default function ProjectPage() {
 
   return (
     <>
-      {/* Example 1: ContentBlock with text only */}
       <ContentBlock
-        title="Section Title"
-        text="Add your project content here. This could include design process, research findings, or key insights."
-      />
-
-      {/* Example 2: ContentBlock with text array (multiple paragraphs) */}
-      <ContentBlock
-        title="Another Section"
-        text={[
-          "You can pass an array of paragraphs for longer content.",
-          "Each string in the array becomes a separate paragraph with proper spacing.",
-        ]}
-      />
-
-      {/* Example 3: ContentBlock with text and media */}
-      <ContentBlock
-        title="Visual Examples"
-        text="Include images or videos to showcase your work. The media block handles aspect ratios automatically."
-        media={{
-          type: "image", // or "video"
-          src: "/placeholder-image.jpg",
-          alt: "Description of image",
-          aspectRatio: "video", // "video" (16:9), "square" (1:1), "portrait" (3:4), or custom like "21/9"
-          caption: "Optional caption for the image",
-        }}
-      />
-
-      {/* Example 4: ContentBlock with media only (no text) */}
-      <ContentBlock
+        title=""
+        text=""
         media={{
           type: "image",
-          src: "/another-image.jpg",
-          alt: "Description",
+          src: "/assets/images/goAble/Spread2.webp",
           aspectRatio: "video",
+          caption: "",
         }}
       />
-
-      {/* Example 5: Composition pattern with ProjectSection + MediaBlock */}
-      <ProjectSection title="Custom Layout">
-        <p className="text-base text-400 leading-relaxed">
-          For more control, use the composition pattern with ProjectSection and MediaBlock.
-        </p>
-
-        <MediaBlock
-          type="image"
-          src="/custom-image.jpg"
-          alt="Custom layout image"
-          aspectRatio="square"
-          caption="This uses the composition pattern for maximum flexibility"
-        />
-      </ProjectSection>
-
-      {/* Example 6: ContentBlock with custom caption separate from media */}
       <ContentBlock
-        title="Final Results"
-        text="Share the outcomes, metrics, and impact of your work."
+        title=""
+        text=""
         media={{
           type: "video",
-          src: "/project-demo.mp4",
+          src: "https://stream.mux.com/Kj01AIk5dJC6h9fppRUVlNtROykz7l01pIe02fMYnskk01A.m3u8?min_resolution=1080p",
           aspectRatio: "video",
+          caption: "",
         }}
-        caption="This caption appears below the media block and can describe results or context."
+        thumbnail="https://image.mux.com/Kj01AIk5dJC6h9fppRUVlNtROykz7l01pIe02fMYnskk01A/thumbnail.png?width=1919&height=1080&time=0"
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "video",
+          src: "https://stream.mux.com/i5ShqXfOWRH7tXz3xrE3202UZuCT4Ffqe7P5GoJlgKLA.m3u8?min_resolution=1080p",
+          aspectRatio: "video",
+          caption: ""
+        }}
+        thumbnail="https://image.mux.com/i5ShqXfOWRH7tXz3xrE3202UZuCT4Ffqe7P5GoJlgKLA/thumbnail.png?width=1919&height=1080&time=0"
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "video",
+          src: "https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p",
+          aspectRatio: "video",
+          caption: ""
+        }}
+        thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
       />
 
       {/* Navigation to Next Project */}
