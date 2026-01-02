@@ -40,7 +40,7 @@ export function useStartupAudio(audioPath, options = {}) {
       try {
         await audio.play();
         setAudioStatus('playing');
-        console.log('Startup audio playing at 65% volume');
+        console.log('Startup audio playing at 45% volume');
 
         if (onPlaySuccess) {
           onPlaySuccess();
@@ -80,7 +80,7 @@ export function useStartupAudio(audioPath, options = {}) {
         audioRef.current = audio;
 
         // Set audio properties
-        audio.volume = 0.65; // 65% volume
+        audio.volume = 0.45; // 45% volume
         audio.preload = 'auto';
 
         setAudioStatus('loading');
