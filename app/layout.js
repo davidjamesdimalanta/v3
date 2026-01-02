@@ -2,6 +2,8 @@ import "./globals.css";
 import Nav from "./ui/nav";
 import SmoothScroll from "./ui/SmoothScroll";
 import WaveBackground from "./ui/WaveBackground";
+import { newRodinPro } from "./fonts";
+import FontLoadingMonitor from "./components/FontLoadingMonitor";
 
 
 export const metadata = {
@@ -51,8 +53,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={newRodinPro.variable}>
       <body className="relative antialiased">
+        <FontLoadingMonitor />
         <SmoothScroll />
         <WaveBackground />
         <Nav />
