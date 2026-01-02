@@ -15,7 +15,7 @@ export default function Projects() {
         slug: project.slug,
         title: data.name, // Display name as the title
         description: data.title, // Display title as the description
-        imageSrc: "/assets/placeholder-project.png", // TODO: Add coverImage to projectData
+        imageSrc: data.coverImage,
         imageAlt: `${data.name} Preview`,
         tags: [data.details.role],
         year: data.details.year

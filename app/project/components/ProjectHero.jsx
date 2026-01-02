@@ -10,18 +10,20 @@ export default function ProjectHero({
 }) {
   return (
     <aside className="relative flex flex-1 flex-col lg:basis-[720px]">
-      <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh padding-page bg-black">
-        <div className="flex flex-col gutter-xs">
-          {/* Close Button - Desktop Only */}
+      <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh p-4">
+        <div className="flex flex-col gutter-sm">
+          {/* Close Button */}
           <button
             onClick={onClose}
-            className="hidden lg:flex items-center gutter-xs text-small text-400 hover:bd-text transition-all duration-150 w-hug"
+            className="flex items-center gutter-xs text-small text-400 hover:bd-text transition-all duration-150 w-hug"
             aria-label="Close project"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.7407 0.740723L0.740723 10.7407M0.740723 0.740723L10.7407 10.7407" stroke="currentColor" strokeWidth="1.48148" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span>Close</span>
+            <span>
+              Close
+            </span>
           </button>
 
           {/* Project Title */}

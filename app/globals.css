@@ -49,6 +49,7 @@
 :root {
     --dark-color: rgb(0, 0, 0);
     --text-color: rgb(245, 245, 245);
+    --figma-blue: rgb(11, 153, 255);
 }
 
 /* THEME OVERRIDES */
@@ -110,7 +111,7 @@ body {
 
 /* RESPONSIVE PADDING */
 @utility padding-page {
-    @apply p-[64px_12px_12px_12px] md:p-[100px_20px_20px_20px];
+    @apply p-[64px_12px_12px_12px] md:p-[64px_20px_20px_20px];
 }
 
 /* GUTTER CLASSES */
@@ -174,5 +175,43 @@ body {
 
 @utility text-800 {
     @apply font-extrabold;
+}
+
+/* ===================================
+   FADE-UP ANIMATION UTILITIES
+   =================================== */
+
+/**
+ * Initial hidden state for fade-up animations
+ * Applied before animation triggers
+ */
+.fade-up-hidden {
+  opacity: 0;
+  transform: translateY(1rem); /* 16px upward offset */
+}
+
+/**
+ * Final visible state for fade-up animations
+ * Includes transition configuration
+ */
+.fade-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.44, 0.17, 0.76, 0.47);
+  /* Duration and delay are set inline via React style prop */
+}
+
+/**
+ * Respect user's motion preferences
+ * Disable animations for users who prefer reduced motion
+ */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up-hidden,
+  .fade-up-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 

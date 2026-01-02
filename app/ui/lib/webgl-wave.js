@@ -16,6 +16,7 @@ export class WaveRenderer {
     this.waveStagger = 250;
     this.numWaves = 7;
     this.waveOpacities = new Array(this.numWaves).fill(0.0);
+    this.completionEventFired = false;
 
     // WebGL resources
     this.shaderProgram = null;
@@ -230,11 +231,11 @@ void main() {
   }
 
   setDarkModeBackground() {
-    // CSS: rgb(18, 19, 18) -> normalized sRGB -> linear RGB
-    const darkR = this.sRGBToLinear(18 / 255);
-    const darkG = this.sRGBToLinear(19 / 255);
-    const darkB = this.sRGBToLinear(18 / 255);
-    this.context.clearColor(darkR, darkG, darkB, 1.0);
+    // CSS: rgb(0, 0, 0) -> normalized sRGB -> linear RGB
+    const darkR = this.sRGBToLinear(0 / 255);
+    const darkG = this.sRGBToLinear(0 / 255);
+    const darkB = this.sRGBToLinear(0 / 255);
+    this.context.clearColor(darkR, darkG, darkB, 0.0);
   }
 
   setColorMode(mode) {
@@ -265,6 +266,7 @@ void main() {
     }
 
     const elapsed = currentTime - this.fadeInStartTime;
+    let allComplete = true;
 
     // Calculate opacity for each wave with stagger
     for (let i = 0; i < this.numWaves; i++) {
@@ -274,11 +276,23 @@ void main() {
 
       if (elapsed < waveStart) {
         this.waveOpacities[i] = 0.0;
+        allComplete = false;
       } else if (elapsed < waveEnd) {
         const progress = (elapsed - waveStart) / this.fadeInDuration;
         this.waveOpacities[i] = this.cubicBezier(progress, 0.44, 0.17, 0.76, 0.47);
+        allComplete = false;
       } else {
         this.waveOpacities[i] = 1.0;
+      }
+    }
+
+    // Dispatch completion event when all waves are fully visible
+    if (allComplete && !this.completionEventFired) {
+      this.completionEventFired = true;
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('wave-animation-complete', {
+          detail: { completionTime: currentTime }
+        }));
       }
     }
   }
