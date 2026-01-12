@@ -2,11 +2,13 @@ import Link from "next/link";
 import FeaturedProject from "./organisms/FeaturedProject";
 import { projectsRegistry } from "../project/projects";
 import { projectData as goableData } from "../project/goable/data";
+import { projectData as ihubData } from "../project/ihub/data";
 
 export default function Projects() {
     // Map registry to project data
     const projectDataMap = {
       'goable': goableData,
+      'ihub': ihubData,
     };
 
     const projects = projectsRegistry.map((project) => {

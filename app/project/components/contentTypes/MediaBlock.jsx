@@ -9,6 +9,50 @@ const isMuxHLSVideo = (url) => {
   return url.includes('.m3u8') || url.includes('stream.mux.com');
 };
 
+function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
+  const handleTogglePlayback = () => {
+    if (isPlaying) {
+      onPause();
+    } else {
+      onPlay();
+    }
+  };
+
+  return (
+    <div className="absolute bottom-0 left-0 right-0 flex items-center justify-end p-3 z-50">
+      {!hasEnded ? (
+        <button
+          onClick={handleTogglePlayback}
+          aria-label={isPlaying ? "Pause video" : "Play video"}
+          aria-pressed={isPlaying}
+          className="bg-black/80 hover:bg-black/90 rounded-full min-w-[44px] min-h-[44px] px-3 py-3 flex items-center justify-center text-[rgb(245,245,245)] transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+        >
+          {isPlaying ? (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="6" y="4" width="2.5" height="12" rx="1" fill="currentColor" />
+              <rect x="11.5" y="4" width="2.5" height="12" rx="1" fill="currentColor" />
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 4.5L15 10L6 15.5V4.5Z" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" />
+            </svg>
+          )}
+        </button>
+      ) : (
+        <button
+          onClick={onRestart}
+          aria-label="Restart video"
+          className="bg-black/80 hover:bg-black/90 rounded-full min-w-[44px] min-h-[44px] px-3 py-3 flex items-center justify-center text-[rgb(245,245,245)] transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 10C4 6.686 6.686 4 10 4C12.2 4 14.1 5.2 15.1 7M16 7V3M16 7H12M16 10C16 13.314 13.314 16 10 16C7.8 16 5.9 14.8 4.9 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
+    </div>
+  );
+}
+
 export default function MediaBlock({
   type = "image", // "image", "video", or "lottie"
   src,
@@ -24,7 +68,8 @@ export default function MediaBlock({
   const hlsRef = useRef(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasEnded, setHasEnded] = useState(false);
 
   useEffect(() => {
     if (type === "lottie" && src && lottieRef.current) {
@@ -93,9 +138,13 @@ export default function MediaBlock({
     // Handle video loaded events - Safari needs multiple event listeners
     const handleCanPlay = () => setVideoLoaded(true);
     const handleLoadedData = () => setVideoLoaded(true);
+    const handleVideoPlay = () => setIsPlaying(true);
+    const handleVideoPause = () => setIsPlaying(false);
 
     videoElement.addEventListener('canplay', handleCanPlay);
     videoElement.addEventListener('loadeddata', handleLoadedData);
+    videoElement.addEventListener('play', handleVideoPlay);
+    videoElement.addEventListener('pause', handleVideoPause);
 
     // Safari supports HLS natively
     if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
@@ -105,6 +154,8 @@ export default function MediaBlock({
       return () => {
         videoElement.removeEventListener('canplay', handleCanPlay);
         videoElement.removeEventListener('loadeddata', handleLoadedData);
+        videoElement.removeEventListener('play', handleVideoPlay);
+        videoElement.removeEventListener('pause', handleVideoPause);
       };
     }
 
@@ -141,6 +192,9 @@ export default function MediaBlock({
 
     return () => {
       videoElement.removeEventListener('canplay', handleCanPlay);
+      videoElement.removeEventListener('loadeddata', handleLoadedData);
+      videoElement.removeEventListener('play', handleVideoPlay);
+      videoElement.removeEventListener('pause', handleVideoPause);
       if (hlsRef.current) {
         hlsRef.current.destroy();
         hlsRef.current = null;
@@ -162,11 +216,6 @@ export default function MediaBlock({
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         setIsInView(entry.isIntersecting);
-
-        // Reset playback state when leaving view to enable replay
-        if (!entry.isIntersecting) {
-          setHasPlayedOnce(false);
-        }
       });
     };
 
@@ -179,55 +228,51 @@ export default function MediaBlock({
     };
   }, [type]);
 
-  // Playback control based on visibility
+  // Playback control based on visibility - pause when out of view
   useEffect(() => {
     if (type !== "video" || !videoRef.current) return;
 
     const videoElement = videoRef.current;
-    let canPlayHandler = null;
-
-    const playVideo = async () => {
-      // Safari requires video to be ready before playing
-      if (videoElement.readyState < 3) {
-        // Wait for video to be ready
-        canPlayHandler = async () => {
-          try {
-            await videoElement.play();
-            setHasPlayedOnce(true);
-          } catch (error) {
-            console.error('Video playback failed:', error);
-          }
-        };
-        videoElement.addEventListener('canplay', canPlayHandler, { once: true });
-      } else {
-        try {
-          await videoElement.play();
-          setHasPlayedOnce(true);
-        } catch (error) {
-          console.error('Video playback failed:', error);
-        }
-      }
-    };
 
     const pauseVideo = () => {
       if (!videoElement.paused) {
         videoElement.pause();
+        setIsPlaying(false);
       }
     };
 
-    if (isInView && !hasPlayedOnce) {
-      playVideo();
-    } else if (!isInView && videoElement) {
+    // Only pause when scrolled out of view, no autoplay
+    if (!isInView && videoElement && isPlaying) {
       pauseVideo();
     }
 
-    // Cleanup function
-    return () => {
-      if (canPlayHandler) {
-        videoElement.removeEventListener('canplay', canPlayHandler);
-      }
-    };
-  }, [isInView, hasPlayedOnce, type]);
+    return () => {};
+  }, [isInView, type, isPlaying]);
+
+  // Event handlers for video controls
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+      setHasEnded(false);
+    }
+  };
+
+  const handlePause = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const handleRestart = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+      setIsPlaying(true);
+      setHasEnded(false);
+    }
+  };
 
   const aspectClasses = {
     video: "aspect-video",
@@ -237,9 +282,10 @@ export default function MediaBlock({
 
   const aspectClass = aspectClasses[aspectRatio] || aspectRatio;
 
-  // Handle video end - allow replay on next scroll-in
+  // Handle video end - show replay button
   const handleVideoEnded = () => {
-    setHasPlayedOnce(false);
+    setHasEnded(true);
+    setIsPlaying(false);
   };
 
   return (
@@ -269,20 +315,30 @@ export default function MediaBlock({
             style={{ display: 'block' }}
           />
         ) : type === "video" && src ? (
-          <video
-            ref={videoRef}
-            preload="metadata"
-            loop
-            muted
-            playsInline
-            controls={false}
-            disablePictureInPicture
-            controlsList="nodownload nofullscreen noremoteplayback"
-            onEnded={handleVideoEnded}
-            className="w-full h-full object-cover"
-          >
-            Your browser does not support the video tag.
-          </video>
+          <>
+            <video
+              ref={videoRef}
+              preload="metadata"
+              muted
+              playsInline
+              controls={false}
+              disablePictureInPicture
+              controlsList="nodownload nofullscreen noremoteplayback"
+              onEnded={handleVideoEnded}
+              className="w-full h-full object-cover"
+            >
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Video Controls */}
+            <VideoControls
+              isPlaying={isPlaying}
+              hasEnded={hasEnded}
+              onPlay={handlePlay}
+              onPause={handlePause}
+              onRestart={handleRestart}
+            />
+          </>
         ) : type === "image" && src ? (
           <Image
             src={src}

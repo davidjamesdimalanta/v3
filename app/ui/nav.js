@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useWaveCompleteAnimation } from "./hooks/useWaveCompleteAnimation";
 import { useNavbarScrollFade } from "./hooks/useNavbarScrollFade";
@@ -24,14 +25,14 @@ export default function Nav() {
         style={getAnimationStyle('nav-logo-name')}
         href="/">
           <div className="flex gutter-xs hover:cursor-pointer items-center">
-          <img
+          <Image
             src="/assets/icon/shiny-logo.png"
             alt="logo"
             width={30}
             height={24}
             style={{ objectFit: 'contain' }}
           />
-          <span className="hidden md:block">David Dimalanta</span>
+          <span className="block">David Dimalanta</span>
           </div>
 
         </Link>

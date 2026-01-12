@@ -94,7 +94,7 @@ export default function ProjectPage() {
         </div>
       </ProjectSection>
 
-      {/* Example 6: ContentBlock with custom caption separate from media */}
+      {/* Example 6: ContentBlock with video (includes accessible player controls) */}
       <ContentBlock
         title="Final Results"
         text="Share the outcomes, metrics, and impact of your work."

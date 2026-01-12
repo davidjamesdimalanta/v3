@@ -4,8 +4,8 @@ import Button from "../../ui/Button";
 
 export default function Intro() {
     return (
-    <div className="w-full flex flex-col gutter-md">
-        <div className="md:max-w-[800px] flex flex-col">
+    <div className="w-full flex flex-col">
+        <div className="md:max-w-[800px] flex flex-col gutter-xs">
             <span className="text-medium text-500">
                 Toronto-based Product Designer and Developer
             </span>

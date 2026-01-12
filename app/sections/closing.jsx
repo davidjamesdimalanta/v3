@@ -9,7 +9,7 @@ export default function Closing() {
   return (
     <div id="closing" className="relative flex flex-col w-full h-hug justify-between p-4">
         {/* Currently Up to and Contact*/}
-        <div className="flex flex-row md:justify-between items-end gutter-md">
+        <div className="flex flex-col md:flex-row md:justify-between items-end gutter-md">
             <div
               className={`w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-small ${getAnimationClass('bottom-bar-currently')}`}
               style={getAnimationStyle('bottom-bar-currently')}
@@ -18,17 +18,29 @@ export default function Closing() {
                     <span>Currently: </span>
                     <div>
                         <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener">
-                            <span className="text-[#0B99FF]">MI Candidate @ UofT iSchool </span>
+                            <span style={{
+                                background: 'linear-gradient(to right, #0B99FF, #6CC2FF)',
+                                WebkitBackgroundClip: 'text',
+                                backgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                color: 'transparent'
+                            }}>MI Candidate @ UofT iSchool </span>
                         </Link>
                         <span>&& </span>
                         <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener">
-                            <span className="text-[#13AE5C]">Web Designer @ Innovation Hub</span>
+                            <span style={{
+                                background: 'linear-gradient(to right, #39FF14, #71CF88)',
+                                WebkitBackgroundClip: 'text',
+                                backgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                color: 'transparent'
+                            }}>Web Designer @ Innovation Hub</span>
                         </Link>
                     </div>
                 </div>
             </div>
             <div
-              className={`w-fill flex-1 flex flex-col md:flex-row justify-end gap-2 lg:gap-4 ${getAnimationClass('bottom-bar-button')}`}
+              className={`w-fill flex-1 flex flex-col md:flex-row justify-end gap-4 lg:gap-4 ${getAnimationClass('bottom-bar-button')}`}
               style={getAnimationStyle('bottom-bar-button')}
             >
                 <Button

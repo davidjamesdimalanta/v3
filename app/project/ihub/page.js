@@ -24,8 +24,10 @@ import { getNextProject } from "../projects";
 export default function ProjectPage() {
   // Get the slug of the current project from the URL
   // Replace 'your-project-slug' with your actual project slug
-  const currentSlug = "goable";
+  const currentSlug = "ihub";
   const nextProject = getNextProject(currentSlug);
+
+  let videoIndex = 0; // Track video count for first video delay
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function ProjectPage() {
         text=""
         media={{
           type: "image",
-          src: "/assets/images/goAble/Spread2.webp",
+          src: "https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0",
           aspectRatio: "video",
           caption: "",
         }}
@@ -44,33 +46,12 @@ export default function ProjectPage() {
         text=""
         media={{
           type: "video",
-          src: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
+          src: "https://stream.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc.m3u8?min_resolution=1080p",
           aspectRatio: "video",
           caption: "",
         }}
-        thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
-      />
-      <ContentBlock
-        title=""
-        text=""
-        media={{
-          type: "video",
-          src: "https://stream.mux.com/i5ShqXfOWRH7tXz3xrE3202UZuCT4Ffqe7P5GoJlgKLA.m3u8?min_resolution=1080p",
-          aspectRatio: "video",
-          caption: ""
-        }}
-        thumbnail="https://image.mux.com/i5ShqXfOWRH7tXz3xrE3202UZuCT4Ffqe7P5GoJlgKLA/thumbnail.png?width=1919&height=1080&time=0"
-      />
-      <ContentBlock
-        title=""
-        text=""
-        media={{
-          type: "video",
-          src: "https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p",
-          aspectRatio: "video",
-          caption: ""
-        }}
-        thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
+        thumbnail="https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0"
+        videoIndex={videoIndex++}
       />
 
       {/* Navigation to Next Project */}
