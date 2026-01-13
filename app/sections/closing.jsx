@@ -17,7 +17,7 @@ export default function Closing() {
                 <div className="flex flex-col gap-[4px]">
                     <span>Currently: </span>
                     <div>
-                        <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener">
+                        <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150">
                             <span style={{
                                 background: 'linear-gradient(to right, #0B99FF, #6CC2FF)',
                                 WebkitBackgroundClip: 'text',
@@ -27,7 +27,7 @@ export default function Closing() {
                             }}>MI Candidate @ UofT iSchool </span>
                         </Link>
                         <span>&& </span>
-                        <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener">
+                        <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150">
                             <span style={{
                                 background: 'linear-gradient(to right, #39FF14, #71CF88)',
                                 WebkitBackgroundClip: 'text',
@@ -46,12 +46,14 @@ export default function Closing() {
                 <Button
                     text={"Get in Touch"}
                     href="mailto:david.dimalanta@mail.utoronto.ca"
+                    soundEffect="hover"
                 />
                 <Button
                     text={"CV"}
                     href="/cv/David_Dimalanta_CV.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    soundEffect="hover"
                 />
             </div>
         </div>

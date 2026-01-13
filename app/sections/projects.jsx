@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import FeaturedProject from "./organisms/FeaturedProject";
 import { projectsRegistry } from "../project/projects";
 import { projectData as goableData } from "../project/goable/data";
 import { projectData as ihubData } from "../project/ihub/data";
+import { useSoundEffects } from "../ui/hooks/useSoundEffects";
 
 export default function Projects() {
+    // Sound effects
+    const { playHover, playNavigateProject } = useSoundEffects();
     // Map registry to project data
     const projectDataMap = {
       'goable': goableData,
@@ -29,7 +34,12 @@ export default function Projects() {
             <h1 className="text-base text-500">Selected Works</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gutter-sm w-full">
             {projects.map((project, index) => (
-                <Link key={index} href={`/project/${project.slug}`} className="block">
+                <Link
+                  key={index}
+                  href={`/project/${project.slug}`}
+                  className="block"
+                  onMouseEnter={playHover}
+                  onClick={playNavigateProject}>
                   <FeaturedProject {...project} />
                 </Link>
             ))}

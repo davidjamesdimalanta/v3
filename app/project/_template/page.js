@@ -5,6 +5,7 @@ import ContentBlock from "../components/contentTypes/ContentBlock";
 import MediaBlock from "../components/contentTypes/MediaBlock";
 import ProjectSection from "../components/ProjectSection";
 import { getNextProject } from "../projects";
+import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 /**
  * Project Content Page Template
@@ -22,10 +23,16 @@ import { getNextProject } from "../projects";
  */
 
 export default function ProjectPage() {
+  // Sound effects
+  const { playHover } = useSoundEffects();
+
   // Get the slug of the current project from the URL
   // Replace 'your-project-slug' with your actual project slug
   const currentSlug = "your-project-slug";
   const nextProject = getNextProject(currentSlug);
+
+  // Track which video is first for autoplay (first video autoplays with 2-second delay)
+  let videoCount = 0;
 
   return (
     <>
@@ -95,6 +102,7 @@ export default function ProjectPage() {
       </ProjectSection>
 
       {/* Example 6: ContentBlock with video (includes accessible player controls) */}
+      {/* First video will autoplay after 2-second delay */}
       <ContentBlock
         title="Final Results"
         text="Share the outcomes, metrics, and impact of your work."
@@ -104,6 +112,17 @@ export default function ProjectPage() {
           aspectRatio: "video",
         }}
         caption="This caption appears below the media block and can describe results or context."
+        shouldAutoplay={videoCount++ === 0}
+      />
+
+      {/* Example 7: Additional video (will NOT autoplay) */}
+      <ContentBlock
+        media={{
+          type: "video",
+          src: "/another-demo.mp4",
+          aspectRatio: "video",
+        }}
+        shouldAutoplay={videoCount++ === 0}
       />
 
       {/* Navigation to Next Project */}
@@ -113,6 +132,7 @@ export default function ProjectPage() {
           <Link
             href={`/project/${nextProject.slug}`}
             className="group text-medium text-600 hover:bd-text transition-all duration-150 w-hug"
+            onMouseEnter={playHover}
           >
             {nextProject.title} →
           </Link>

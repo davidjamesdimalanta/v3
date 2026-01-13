@@ -60,16 +60,19 @@ export default function MediaBlock({
   caption,
   thumbnail, // Optional thumbnail/poster image (e.g., Mux thumbnail)
   aspectRatio = "video", // "video" (16:9), "square", "portrait", or custom class
-  className = ""
+  className = "",
+  shouldAutoplay = false // Enable autoplay with delay for first video
 }) {
   const lottieRef = useRef(null);
   const dotLottieInstanceRef = useRef(null);
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
+  const autoplayTimeoutRef = useRef(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
+  const [autoplayExecuted, setAutoplayExecuted] = useState(false);
 
   useEffect(() => {
     if (type === "lottie" && src && lottieRef.current) {
@@ -248,6 +251,46 @@ export default function MediaBlock({
 
     return () => {};
   }, [isInView, type, isPlaying]);
+
+  // Autoplay logic for first video with accessibility delay
+  useEffect(() => {
+    if (
+      type !== "video" ||
+      !shouldAutoplay ||
+      !videoRef.current ||
+      autoplayExecuted ||
+      !videoLoaded
+    ) return;
+
+    // Clear any existing timeout
+    if (autoplayTimeoutRef.current) {
+      clearTimeout(autoplayTimeoutRef.current);
+    }
+
+    // Only autoplay if video is in viewport
+    if (isInView) {
+      autoplayTimeoutRef.current = setTimeout(() => {
+        if (videoRef.current && videoRef.current.paused) {
+          videoRef.current.play()
+            .then(() => {
+              setIsPlaying(true);
+              setAutoplayExecuted(true);
+            })
+            .catch((error) => {
+              // Browser blocked autoplay - graceful fallback
+              console.log('Autoplay prevented by browser:', error);
+              setAutoplayExecuted(true);
+            });
+        }
+      }, 2000); // 2-second accessibility delay
+    }
+
+    return () => {
+      if (autoplayTimeoutRef.current) {
+        clearTimeout(autoplayTimeoutRef.current);
+      }
+    };
+  }, [type, shouldAutoplay, videoLoaded, isInView, autoplayExecuted]);
 
   // Event handlers for video controls
   const handlePlay = () => {

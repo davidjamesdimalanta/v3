@@ -5,6 +5,7 @@ import ContentBlock from "../components/contentTypes/ContentBlock";
 import MediaBlock from "../components/contentTypes/MediaBlock";
 import ProjectSection from "../components/ProjectSection";
 import { getNextProject } from "../projects";
+import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 /**
  * Project Content Page Template
@@ -22,25 +23,19 @@ import { getNextProject } from "../projects";
  */
 
 export default function ProjectPage() {
+  // Sound effects
+  const { playHover } = useSoundEffects();
+
   // Get the slug of the current project from the URL
   // Replace 'your-project-slug' with your actual project slug
   const currentSlug = "ihub";
   const nextProject = getNextProject(currentSlug);
 
-  let videoIndex = 0; // Track video count for first video delay
+  // Track which video is first for autoplay
+  let videoCount = 0;
 
   return (
     <>
-      <ContentBlock
-        title=""
-        text=""
-        media={{
-          type: "image",
-          src: "https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0",
-          aspectRatio: "video",
-          caption: "",
-        }}
-      />
       <ContentBlock
         title=""
         text=""
@@ -51,7 +46,41 @@ export default function ProjectPage() {
           caption: "",
         }}
         thumbnail="https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0"
-        videoIndex={videoIndex++}
+        shouldAutoplay={videoCount++ === 0}
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "video",
+          src: "https://stream.mux.com/sxYCsBhOdHwUkxhxJSSdD8OUqBfrd8K5XzDTpUEq01AY.m3u8?min_resolution=1080p",
+          aspectRatio: "video",
+          caption: "",
+        }}
+        thumbnail="https://image.mux.com/sxYCsBhOdHwUkxhxJSSdD8OUqBfrd8K5XzDTpUEq01AY/thumbnail.png?width=1919&height=1080&time=0"
+        shouldAutoplay={videoCount++ === 0}
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "video",
+          src: "https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p",
+          aspectRatio: "video",
+          caption: "",
+        }}
+        thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
+        shouldAutoplay={videoCount++ === 0}
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "image",
+          src: "/assets/images/ihub/Design-system.png",
+          aspectRatio: "video",
+          caption: "",
+        }}
       />
 
       {/* Navigation to Next Project */}
@@ -61,6 +90,7 @@ export default function ProjectPage() {
           <Link
             href={`/project/${nextProject.slug}`}
             className="group text-medium text-600 hover:bd-text transition-all duration-150 w-hug"
+            onMouseEnter={playHover}
           >
             {nextProject.title} →
           </Link>

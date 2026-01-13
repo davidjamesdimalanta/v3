@@ -1,5 +1,7 @@
 "use client";
 
+import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
+
 export default function ProjectHero({
   title,
   liveUrl,
@@ -8,13 +10,18 @@ export default function ProjectHero({
   details = {},
   onClose
 }) {
+  // Sound effects
+  const { playHover, playNavigateHome } = useSoundEffects();
   return (
     <aside className="relative flex flex-1 flex-col lg:basis-[720px]">
       <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh p-4">
         <div className="flex flex-col gutter-sm">
           {/* Close Button */}
           <button
-            onClick={onClose}
+            onClick={() => {
+              playNavigateHome();
+              onClose();
+            }}
             className="flex items-center gutter-xs text-small text-400 hover:bd-text transition-all duration-150 w-hug"
             aria-label="Close project"
           >
@@ -38,6 +45,7 @@ export default function ProjectHero({
               target="_blank"
               rel="noopener noreferrer"
               className="text-base text-400 hover:bd-text transition-all duration-150 w-hug"
+              onMouseEnter={playHover}
             >
               Visit Live Project →
             </a>
@@ -57,6 +65,7 @@ export default function ProjectHero({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center justify-between text-base text-400 hover:bd-text transition-all duration-150"
+                    onMouseEnter={playHover}
                   >
                     <span>{award.name}</span>
                     <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150">→</span>

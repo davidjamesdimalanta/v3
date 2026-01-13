@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useWaveCompleteAnimation } from "./hooks/useWaveCompleteAnimation";
 import { useNavbarScrollFade } from "./hooks/useNavbarScrollFade";
+import { useSoundEffects } from "./hooks/useSoundEffects";
 
 
 export default function Nav() {
@@ -14,6 +15,9 @@ export default function Nav() {
   // Phase 2: Scroll-based fade
   const { navbarOpacity } = useNavbarScrollFade();
 
+  // Sound effects
+  const { playHover, playNavigateHome } = useSoundEffects();
+
   return (
     <nav
       id="nav"
@@ -21,9 +25,11 @@ export default function Nav() {
       style={{ opacity: navbarOpacity, transition: 'none' }}
     >
         <Link
-        className={`text-medium text-600 ${getAnimationClass('nav-logo-name')}`}
+        className={`text-medium text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
         style={getAnimationStyle('nav-logo-name')}
-        href="/">
+        href="/"
+        onMouseEnter={playHover}
+        onClick={playNavigateHome}>
           <div className="flex gutter-xs hover:cursor-pointer items-center">
           <Image
             src="/assets/icon/shiny-logo.png"

@@ -5,6 +5,7 @@ import ContentBlock from "../components/contentTypes/ContentBlock";
 import MediaBlock from "../components/contentTypes/MediaBlock";
 import ProjectSection from "../components/ProjectSection";
 import { getNextProject } from "../projects";
+import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 /**
  * Project Content Page Template
@@ -22,10 +23,16 @@ import { getNextProject } from "../projects";
  */
 
 export default function ProjectPage() {
+  // Sound effects
+  const { playHover } = useSoundEffects();
+
   // Get the slug of the current project from the URL
   // Replace 'your-project-slug' with your actual project slug
   const currentSlug = "goable";
   const nextProject = getNextProject(currentSlug);
+
+  // Track which video is first for autoplay
+  let videoCount = 0;
 
   return (
     <>
@@ -49,17 +56,19 @@ export default function ProjectPage() {
           caption: "",
         }}
         thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
+        shouldAutoplay={videoCount++ === 0}
       />
       <ContentBlock
         title=""
         text=""
         media={{
           type: "video",
-          src: "https://stream.mux.com/i5ShqXfOWRH7tXz3xrE3202UZuCT4Ffqe7P5GoJlgKLA.m3u8?min_resolution=1080p",
+          src: "https://stream.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8.m3u8?min_resolution=1080p",
           aspectRatio: "video",
           caption: ""
         }}
-        thumbnail="https://image.mux.com/i5ShqXfOWRH7tXz3xrE3202UZuCT4Ffqe7P5GoJlgKLA/thumbnail.png?width=1919&height=1080&time=0"
+        thumbnail="https://image.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8/thumbnail.png?width=1919&height=1080&time=0"
+        shouldAutoplay={videoCount++ === 0}
       />
       <ContentBlock
         title=""
@@ -71,6 +80,17 @@ export default function ProjectPage() {
           caption: ""
         }}
         thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
+        shouldAutoplay={videoCount++ === 0}
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "image",
+          src: "/assets/images/goAble/goAble_screens.png",
+          aspectRatio: "video",
+          caption: "",
+        }}
       />
 
       {/* Navigation to Next Project */}
@@ -80,6 +100,7 @@ export default function ProjectPage() {
           <Link
             href={`/project/${nextProject.slug}`}
             className="group text-medium text-600 hover:bd-text transition-all duration-150 w-hug"
+            onMouseEnter={playHover}
           >
             {nextProject.title} →
           </Link>
