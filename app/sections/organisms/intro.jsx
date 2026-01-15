@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Closing from "../closing";
 import Button from "../../ui/Button";
 
 
@@ -15,6 +16,7 @@ export default function Intro() {
                 how I can make real change through interaction design, accessible design, and Human-AI Interaction. Based in Toronto.
             </span>
         </div>
+        <Closing />
     </div>
     );
 }

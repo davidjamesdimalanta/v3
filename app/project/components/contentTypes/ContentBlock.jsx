@@ -7,7 +7,7 @@ export default function ContentBlock({
   thumbnail, // Optional thumbnail for video media (e.g., Mux thumbnail)
   caption,
   className = "",
-  shouldAutoplay // Pass through to MediaBlock for first video autoplay
+  isFirstVideo = false // Pass through to MediaBlock for first video delay
 }) {
   // Helper function to render text (handles both string and array)
   const renderText = (textContent) => {
@@ -30,7 +30,7 @@ export default function ContentBlock({
       {text && renderText(text)}
 
       {/* Optional Media Block */}
-      {media?.src && <MediaBlock {...media} thumbnail={thumbnail} shouldAutoplay={shouldAutoplay} />}
+      {media?.src && <MediaBlock {...media} thumbnail={thumbnail} isFirstVideo={isFirstVideo} />}
 
       {/* Optional Caption (separate from media caption) */}
       {caption && <p className="text-tiny text-400 opacity-60">{caption}</p>}

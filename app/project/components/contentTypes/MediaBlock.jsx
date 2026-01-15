@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { DotLottie } from "@lottiefiles/dotlottie-web";
+import { useMediaQuery } from "../../../ui/hooks/useMediaQuery";
 
 const isMuxHLSVideo = (url) => {
   if (!url || typeof url !== 'string') return false;
@@ -61,7 +62,7 @@ export default function MediaBlock({
   thumbnail, // Optional thumbnail/poster image (e.g., Mux thumbnail)
   aspectRatio = "video", // "video" (16:9), "square", "portrait", or custom class
   className = "",
-  shouldAutoplay = false // Enable autoplay with delay for first video
+  isFirstVideo = false // First video has 2-second delay, others autoplay instantly
 }) {
   const lottieRef = useRef(null);
   const dotLottieInstanceRef = useRef(null);
@@ -73,6 +74,11 @@ export default function MediaBlock({
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
   const [autoplayExecuted, setAutoplayExecuted] = useState(false);
+
+  // Desktop/mobile and accessibility detection for autoplay
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const shouldEnableAutoplay = isDesktop && !prefersReducedMotion;
 
   useEffect(() => {
     if (type === "lottie" && src && lottieRef.current) {
@@ -252,14 +258,25 @@ export default function MediaBlock({
     return () => {};
   }, [isInView, type, isPlaying]);
 
-  // Autoplay logic for first video with accessibility delay
+  // Reset autoplay ability when video scrolls out of view (unless it has ended)
+  useEffect(() => {
+    if (type !== "video") return;
+
+    if (!isInView && !hasEnded) {
+      setAutoplayExecuted(false);
+    }
+  }, [isInView, hasEnded, type]);
+
+  // Autoplay logic when video comes into view (desktop only, respects reduced motion)
   useEffect(() => {
     if (
       type !== "video" ||
-      !shouldAutoplay ||
       !videoRef.current ||
+      !videoLoaded ||
+      !isInView ||
       autoplayExecuted ||
-      !videoLoaded
+      !shouldEnableAutoplay ||
+      hasEnded  // Don't autoplay if video has finished
     ) return;
 
     // Clear any existing timeout
@@ -267,30 +284,29 @@ export default function MediaBlock({
       clearTimeout(autoplayTimeoutRef.current);
     }
 
-    // Only autoplay if video is in viewport
-    if (isInView) {
-      autoplayTimeoutRef.current = setTimeout(() => {
-        if (videoRef.current && videoRef.current.paused) {
-          videoRef.current.play()
-            .then(() => {
-              setIsPlaying(true);
-              setAutoplayExecuted(true);
-            })
-            .catch((error) => {
-              // Browser blocked autoplay - graceful fallback
-              console.log('Autoplay prevented by browser:', error);
-              setAutoplayExecuted(true);
-            });
-        }
-      }, 2000); // 2-second accessibility delay
-    }
+    // First video has 2-second accessibility delay, others autoplay instantly
+    const delay = isFirstVideo ? 2000 : 0;
+
+    autoplayTimeoutRef.current = setTimeout(() => {
+      if (videoRef.current && videoRef.current.paused) {
+        videoRef.current.play()
+          .then(() => {
+            setIsPlaying(true);
+            setAutoplayExecuted(true);
+          })
+          .catch((error) => {
+            console.log('Autoplay prevented by browser:', error);
+            setAutoplayExecuted(true);
+          });
+      }
+    }, delay);
 
     return () => {
       if (autoplayTimeoutRef.current) {
         clearTimeout(autoplayTimeoutRef.current);
       }
     };
-  }, [type, shouldAutoplay, videoLoaded, isInView, autoplayExecuted]);
+  }, [type, videoLoaded, isInView, autoplayExecuted, shouldEnableAutoplay, hasEnded, isFirstVideo]);
 
   // Event handlers for video controls
   const handlePlay = () => {

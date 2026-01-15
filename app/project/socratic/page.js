@@ -28,7 +28,7 @@ export default function ProjectPage() {
 
   // Get the slug of the current project from the URL
   // Replace 'your-project-slug' with your actual project slug
-  const currentSlug = "goable";
+  const currentSlug = "socratic";
   const nextProject = getNextProject(currentSlug);
 
   return (
@@ -38,7 +38,7 @@ export default function ProjectPage() {
         text=""
         media={{
           type: "image",
-          src: "/assets/images/goAble/Spread2.webp",
+          src: "/assets/images/socratic/socratic_splash.png",
           aspectRatio: "video",
           caption: "",
         }}
@@ -48,45 +48,22 @@ export default function ProjectPage() {
         text=""
         media={{
           type: "video",
-          src: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
+          src: "https://stream.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo.m3u8?min_resolution=1080p",
           aspectRatio: "video",
           caption: "",
         }}
-        thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
-        isFirstVideo={true}
+        thumbnail="https://image.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo/thumbnail.png?width=1919&height=1080&time=0"
       />
       <ContentBlock
-        title=""
-        text=""
-        media={{
-          type: "video",
-          src: "https://stream.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8.m3u8?min_resolution=1080p",
-          aspectRatio: "video",
-          caption: ""
-        }}
-        thumbnail="https://image.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8/thumbnail.png?width=1919&height=1080&time=0"
-      />
-      <ContentBlock
-        title=""
-        text=""
-        media={{
-          type: "video",
-          src: "https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p",
-          aspectRatio: "video",
-          caption: ""
-        }}
-        thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
-      />
-      <ContentBlock
-        title=""
-        text=""
-        media={{
-          type: "image",
-          src: "/assets/images/goAble/goAble_screens.png",
-          aspectRatio: "video",
-          caption: "",
-        }}
-      />
+      title=""
+      text=""
+      media={{
+        type: "image",
+        src: "/assets/images/socratic/socratic-example-cropped.png",
+        aspectRatio: "video",
+        caption: "",
+      }}
+    />
 
       {/* Navigation to Next Project */}
       {nextProject && (

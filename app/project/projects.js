@@ -25,6 +25,11 @@ export const projectsRegistry = [
   {
     slug: 'ihub',
     title: 'Web Developer of a campus design agency.',
+    nextProject: 'socratic'
+  },
+  {
+    slug: 'socratic',
+    title: 'Tailor Your Scholarship Essays with Critical Thinkers',
     nextProject: 'goable'
   },
 ];

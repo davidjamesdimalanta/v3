@@ -117,13 +117,13 @@ void main() {
 
 	// Accumulate wave colors with individual opacities.
 	vec3 accumulatedColor = vec3(0.0);
-	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, 0.5, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
-	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, 0.5, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);
-	accumulatedColor += calcSine(uv, 0.3, 0.60, 0.15, 0.0, 0.5, uWaveColor, 0.05, 23.0, false, uWaveOpacity2);
-	accumulatedColor += calcSine(uv, 0.1, 0.26, 0.07, 0.0, 0.3, uWaveColor, 0.1, 17.0, true, uWaveOpacity3);
-	accumulatedColor += calcSine(uv, 0.3, 0.36, 0.07, 0.0, 0.3, uWaveColor, 0.1, 17.0, true, uWaveOpacity4);
-	accumulatedColor += calcSine(uv, 0.5, 0.46, 0.07, 0.0, 0.3, uWaveColor, 0.05, 23.0, true, uWaveOpacity5);
-	accumulatedColor += calcSine(uv, 0.2, 0.58, 0.05, 0.0, 0.3, uWaveColor, 0.2, 15.0, true, uWaveOpacity6);
+	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, 0.65, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
+	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, 0.65, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);
+	accumulatedColor += calcSine(uv, 0.3, 0.60, 0.15, 0.0, 0.65, uWaveColor, 0.05, 23.0, false, uWaveOpacity2);
+	accumulatedColor += calcSine(uv, 0.1, 0.26, 0.07, 0.0, 0.45, uWaveColor, 0.1, 17.0, true, uWaveOpacity3);
+	accumulatedColor += calcSine(uv, 0.3, 0.36, 0.07, 0.0, 0.45, uWaveColor, 0.1, 17.0, true, uWaveOpacity4);
+	accumulatedColor += calcSine(uv, 0.5, 0.46, 0.07, 0.0, 0.45, uWaveColor, 0.05, 23.0, true, uWaveOpacity5);
+	accumulatedColor += calcSine(uv, 0.2, 0.58, 0.05, 0.0, 0.45, uWaveColor, 0.2, 15.0, true, uWaveOpacity6);
 
 	// Determine mask from max channel.
 	float maxChannel = accumulatedColor.r;

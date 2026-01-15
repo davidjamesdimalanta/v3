@@ -31,9 +31,6 @@ export default function ProjectPage() {
   const currentSlug = "ihub";
   const nextProject = getNextProject(currentSlug);
 
-  // Track which video is first for autoplay
-  let videoCount = 0;
-
   return (
     <>
       <ContentBlock
@@ -46,7 +43,7 @@ export default function ProjectPage() {
           caption: "",
         }}
         thumbnail="https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0"
-        shouldAutoplay={videoCount++ === 0}
+        isFirstVideo={true}
       />
       <ContentBlock
         title=""
@@ -58,7 +55,6 @@ export default function ProjectPage() {
           caption: "",
         }}
         thumbnail="https://image.mux.com/sxYCsBhOdHwUkxhxJSSdD8OUqBfrd8K5XzDTpUEq01AY/thumbnail.png?width=1919&height=1080&time=0"
-        shouldAutoplay={videoCount++ === 0}
       />
       <ContentBlock
         title=""
@@ -70,7 +66,6 @@ export default function ProjectPage() {
           caption: "",
         }}
         thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
-        shouldAutoplay={videoCount++ === 0}
       />
       <ContentBlock
         title=""
@@ -78,6 +73,16 @@ export default function ProjectPage() {
         media={{
           type: "image",
           src: "/assets/images/ihub/Design-system.png",
+          aspectRatio: "video",
+          caption: "",
+        }}
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "image",
+          src: "/assets/images/ihub/design-system-example.png",
           aspectRatio: "video",
           caption: "",
         }}

@@ -5,6 +5,7 @@ import FeaturedProject from "./organisms/FeaturedProject";
 import { projectsRegistry } from "../project/projects";
 import { projectData as goableData } from "../project/goable/data";
 import { projectData as ihubData } from "../project/ihub/data";
+import { projectData as socraticData } from "../project/socratic/data";
 import { useSoundEffects } from "../ui/hooks/useSoundEffects";
 
 export default function Projects() {
@@ -14,6 +15,7 @@ export default function Projects() {
     const projectDataMap = {
       'goable': goableData,
       'ihub': ihubData,
+      'socratic': socraticData,
     };
 
     const projects = projectsRegistry.map((project) => {

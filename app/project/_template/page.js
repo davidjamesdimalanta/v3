@@ -31,9 +31,6 @@ export default function ProjectPage() {
   const currentSlug = "your-project-slug";
   const nextProject = getNextProject(currentSlug);
 
-  // Track which video is first for autoplay (first video autoplays with 2-second delay)
-  let videoCount = 0;
-
   return (
     <>
       {/* Example 1: ContentBlock with text only */}
@@ -101,8 +98,11 @@ export default function ProjectPage() {
         </div>
       </ProjectSection>
 
-      {/* Example 6: ContentBlock with video (includes accessible player controls) */}
-      {/* First video will autoplay after 2-second delay */}
+      {/* Example 6: First video with autoplay (includes accessible player controls) */}
+      {/* Videos autoplay on desktop when scrolled into view */}
+      {/* First video has 2-second delay, subsequent videos autoplay instantly */}
+      {/* On mobile, videos require manual play via controls */}
+      {/* Respects prefers-reduced-motion accessibility setting */}
       <ContentBlock
         title="Final Results"
         text="Share the outcomes, metrics, and impact of your work."
@@ -112,17 +112,16 @@ export default function ProjectPage() {
           aspectRatio: "video",
         }}
         caption="This caption appears below the media block and can describe results or context."
-        shouldAutoplay={videoCount++ === 0}
+        isFirstVideo={true}
       />
 
-      {/* Example 7: Additional video (will NOT autoplay) */}
+      {/* Example 7: Additional video (autoplays instantly on desktop, no delay) */}
       <ContentBlock
         media={{
           type: "video",
           src: "/another-demo.mp4",
           aspectRatio: "video",
         }}
-        shouldAutoplay={videoCount++ === 0}
       />
 
       {/* Navigation to Next Project */}
