@@ -5,8 +5,11 @@ export const projectData = {
   // Main project title (displayed prominently in the hero section)
   title: "Unearthing Hidden Barriers in \"Accessible\" Washrooms",
 
-  // URL to the live project (optional - can be null or empty string)
-  liveUrl: null,
+  // Project links (optional - can be empty array)
+  // Example: links: [{ url: "https://example.com", label: "View Project" }]
+  links: [
+    { url: "https://www.figma.com/proto/iG4xpMKAf0sGxsGdxL5cOt/INF1611_SECTION0103_A8_DavidDimalanta_-FinalPrototype_2025-12-04?node-id=4612-20274&p=f&viewport=334%2C61%2C0.12&t=VkwkgXaU6Dqa2Buz-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4612%3A20276&show-proto-sidebar=1", label: "Figma Prototype" },
+  ],
 
   // Cover image for project card
   coverImage: "/assets/images/goAble/Spread2.webp",

@@ -334,7 +334,7 @@ export default function MediaBlock({
   };
 
   const aspectClasses = {
-    video: "aspect-video",
+    video: "aspect-[11/6]",
     square: "aspect-square",
     portrait: "aspect-[3/4]",
   };

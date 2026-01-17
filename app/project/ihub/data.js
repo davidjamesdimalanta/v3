@@ -5,8 +5,12 @@ export const projectData = {
     // Main project title (displayed prominently in the hero section)
     title: "Develeoping on the web for a campus design agency.",
   
-    // URL to the live project (optional - can be null or empty string)
-    liveUrl: "https://blogs.studentlife.utoronto.ca/innovationhub/",
+    // Project links (optional - can be empty array)
+    // Example: links: [{ url: "https://example.com", label: "View Project" }]
+    links: [
+      { url: "https://blogs.studentlife.utoronto.ca/innovationhub/", label: "Innovation Hub" },
+      { url: "https://familycare.utoronto.ca/supporting-student-parents/", label: "FCO Virtual Toolkit" }
+    ],
   
     // Cover image for project card
     coverImage: "https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0",

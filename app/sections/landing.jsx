@@ -7,7 +7,9 @@ import AudioPermissionButton from "../ui/AudioPermissionButton";
 import { useWaveCompleteAnimation } from "../ui/hooks/useWaveCompleteAnimation";
 
 export default function Landing() {
-  const { getAnimationClass, getAnimationStyle } = useWaveCompleteAnimation();
+  const { getAnimationClass, getAnimationStyle } = useWaveCompleteAnimation({
+    playOnlyOnInitialLoad: true
+  });
 
   return (
     <div id="landing" className="relative flex flex-col-reverse justify-between w-full h-svh padding-page">

@@ -11,8 +11,9 @@ export const projectData = {
   // Main project title (displayed prominently in the hero section)
   title: "Your Project Title Goes Here",
 
-  // URL to the live project (optional - can be null or empty string)
-  liveUrl: "https://example.com",
+  // Project links (optional - can be empty array)
+  // Example: links: [{ url: "https://example.com", label: "View Project" }]
+  links: [],
 
   // Array of awards and recognition (optional - can be empty array)
   awards: [

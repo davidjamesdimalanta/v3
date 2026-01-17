@@ -5,7 +5,7 @@
 /* VARIABLES */
 :root {
     --dark-color: rgb(0, 0, 0);
-    --text-color: rgb(245, 245, 245);
+    --text-color: rgb(255, 255, 255);
     --figma-blue: rgb(11, 153, 255);
 }
 
@@ -55,15 +55,74 @@ body {
 }
 
 @utility text-base {
-    @apply text-[15px] leading-[21px];
+    @apply text-[15px] leading-[24px] tracking-wide;
 }
 
 @utility text-small {
-    @apply text-[13px] leading-[17px];
+    @apply text-[13px] leading-[20px] tracking-wide;
 }
 
 @utility text-tiny {
-    @apply text-[11px] leading-[13px];
+    @apply text-[11px] leading-[13px] tracking-wide;
+    letter-spacing: 0.025em;
+}
+
+/* ===================================
+   RESPONSIVE TEXT UTILITIES (CLAMP)
+   =================================== */
+
+/**
+ * Responsive text utilities using CSS clamp()
+ * Scales smoothly from mobile (14px base) to desktop (16px base)
+ */
+
+@utility text-h1 {
+  font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem);
+  line-height: 1.1;
+}
+
+@utility text-h2 {
+  font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem);
+  line-height: 1.1;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem);
+  line-height: 1.2;
+}
+
+@utility text-h4 {
+  font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
+  line-height: 1.2;
+}
+
+@utility text-h5 {
+  font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
+  line-height: 1.2;
+}
+
+@utility text-h6 {
+  font-size: clamp(1.05rem, 0.99rem + 0.23vw, 1.2rem);
+  line-height: 1.2;
+}
+
+@utility text-p {
+  font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1rem);
+  line-height: 1.4;
+  letter-spacing: 0.025em;
+}
+
+@utility text-sm {
+  font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+  line-height: 1.4;
+  letter-spacing: 0.015em;
+}
+
+@utility text-xs {
+  font-size: clamp(0.6075rem, 0.58rem + 0.11vw, 0.69438rem);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+
 }
 
 /* RESPONSIVE PADDING */
@@ -145,6 +204,9 @@ body {
 .fade-up-hidden {
   opacity: 0;
   transform: translateY(1rem); /* 16px upward offset */
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.44, 0.17, 0.76, 0.47);
+  /* Duration and delay are set inline via React style prop */
 }
 
 /**

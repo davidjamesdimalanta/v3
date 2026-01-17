@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Button from "./Button";
 import { useWaveCompleteAnimation } from "./hooks/useWaveCompleteAnimation";
 import { useNavbarScrollFade } from "./hooks/useNavbarScrollFade";
 import { useSoundEffects } from "./hooks/useSoundEffects";
@@ -21,8 +22,12 @@ export default function Nav() {
   return (
     <nav
       id="nav"
-      className="fixed top-0 left-0 right-0 z-50 py-[20px] px-[12px] md:px-[20px] flex justify-between w-full"
-      style={{ opacity: navbarOpacity, transition: 'none' }}
+      className="fixed top-0 left-0 right-0 z-50 py-[20px] px-[12px] md:px-[20px] flex justify-between items-center w-full"
+      style={{
+        opacity: navbarOpacity,
+        transition: 'none',
+        pointerEvents: navbarOpacity === 0 ? 'none' : 'auto'
+      }}
     >
         <Link
         className={`text-medium text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
@@ -42,6 +47,23 @@ export default function Nav() {
           </div>
 
         </Link>
+        <div
+          className={`hidden md:flex flex-row gap-4 ${getAnimationClass('nav-logo-name')}`}
+          style={getAnimationStyle('nav-logo-name')}
+        >
+          <Button
+            text={"Get in Touch"}
+            href="mailto:david.dimalanta@mail.utoronto.ca"
+            soundEffect="hover"
+          />
+          <Button
+            text={"CV"}
+            href="/cv/David_Dimalanta_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            soundEffect="hover"
+          />
+        </div>
     </nav>
   );
 }

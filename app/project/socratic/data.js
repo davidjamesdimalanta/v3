@@ -5,8 +5,9 @@ export const projectData = {
   // Main project title (displayed prominently in the hero section)
   title: "Tailor Your Scholarship Essays with Critical Thinkers",
 
-  // URL to the live project (optional - can be null or empty string)
-  liveUrl: "https://socraticai.vercel.app/",
+  // Project links (optional - can be empty array)
+  // Example: links: [{ url: "https://example.com", label: "View Project" }]
+  links: [{ url: "https://socraticai.vercel.app/", label: "Try Socratic.ai" }],
 
   // Cover image for project card
   coverImage: "/assets/images/socratic/socratic_splash.png",
@@ -21,9 +22,9 @@ export const projectData = {
   // Project description (array of paragraphs)
   // First paragraph is used as meta description for SEO
   description: [
-    "Socratic.ai is a platform that helps students draft scholarship essays. It reveals hidden criteria behind scholarship essay prompts, and engages with users through socratic questioning. We reimagine human-AI interaction as less of a black box and more of a collaborative experience that leads to quality responses and a reflection of one's scholarship identity.",
+    "Socratic.ai is a platform that helps students draft scholarship essays. It reveals hidden criteria behind scholarship essay prompts, and engages with users critically. We reimagine human-AI interaction as less of a black box and more of a collaborative experience that leads to quality responses and a reflection of one's scholarship identity.",
     "As the team's product designer and lead, I stood a team up daily, and in 7 days we resolved issues around visual feedback of the AI thinking and current mental models of chat interfaces.",
-    "The result is a vector canvas-based platform powered by the claude API for multiple drafts organized visually, insights from scholarship winning drafts, and AI interaction that feels more like a conversation.",
+    "The result is a vector canvas-based platform powered by the claude API for multiple drafts organized visually, insight from scholarship winning drafts, and AI interaction that feels more like a conversation.",
 ],
 
   // Project details displayed in a grid

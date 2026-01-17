@@ -63,6 +63,8 @@ uniform float uTime;
 uniform vec2  uResolution;
 // Wave color.
 uniform vec3  uWaveColor;
+// Mobile detection.
+uniform bool  uIsMobile;
 // Wave opacities for each wave.
 uniform float uWaveOpacity0;
 uniform float uWaveOpacity1;
@@ -117,13 +119,17 @@ void main() {
 
 	// Accumulate wave colors with individual opacities.
 	vec3 accumulatedColor = vec3(0.0);
-	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, 0.65, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
-	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, 0.65, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);
-	accumulatedColor += calcSine(uv, 0.3, 0.60, 0.15, 0.0, 0.65, uWaveColor, 0.05, 23.0, false, uWaveOpacity2);
-	accumulatedColor += calcSine(uv, 0.1, 0.26, 0.07, 0.0, 0.45, uWaveColor, 0.1, 17.0, true, uWaveOpacity3);
-	accumulatedColor += calcSine(uv, 0.3, 0.36, 0.07, 0.0, 0.45, uWaveColor, 0.1, 17.0, true, uWaveOpacity4);
-	accumulatedColor += calcSine(uv, 0.5, 0.46, 0.07, 0.0, 0.45, uWaveColor, 0.05, 23.0, true, uWaveOpacity5);
-	accumulatedColor += calcSine(uv, 0.2, 0.58, 0.05, 0.0, 0.45, uWaveColor, 0.2, 15.0, true, uWaveOpacity6);
+	// Use higher vertical offsets on mobile: 0.65 -> 0.8, 0.45 -> 0.55
+	float offset1 = uIsMobile ? 0.8 : 0.65;
+	float offset2 = uIsMobile ? 0.55 : 0.45;
+
+	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, offset1, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
+	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, offset1, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);
+	accumulatedColor += calcSine(uv, 0.3, 0.60, 0.15, 0.0, offset1, uWaveColor, 0.05, 23.0, false, uWaveOpacity2);
+	accumulatedColor += calcSine(uv, 0.1, 0.26, 0.07, 0.0, offset2, uWaveColor, 0.1, 17.0, true, uWaveOpacity3);
+	accumulatedColor += calcSine(uv, 0.3, 0.36, 0.07, 0.0, offset2, uWaveColor, 0.1, 17.0, true, uWaveOpacity4);
+	accumulatedColor += calcSine(uv, 0.5, 0.46, 0.07, 0.0, offset2, uWaveColor, 0.05, 23.0, true, uWaveOpacity5);
+	accumulatedColor += calcSine(uv, 0.2, 0.58, 0.05, 0.0, offset2, uWaveColor, 0.2, 15.0, true, uWaveOpacity6);
 
 	// Determine mask from max channel.
 	float maxChannel = accumulatedColor.r;
@@ -173,6 +179,7 @@ void main() {
     this.timeUniformLocation = this.context.getUniformLocation(this.shaderProgram, 'uTime');
     this.resolutionUniformLocation = this.context.getUniformLocation(this.shaderProgram, 'uResolution');
     this.waveColorUniformLocation = this.context.getUniformLocation(this.shaderProgram, 'uWaveColor');
+    this.isMobileUniformLocation = this.context.getUniformLocation(this.shaderProgram, 'uIsMobile');
 
     // Get uniform locations for each wave's opacity
     this.waveOpacityUniformLocation = [
@@ -204,6 +211,9 @@ void main() {
 
     // Set initial wave color mode
     this.setColorMode(this.currentMode);
+
+    // Set mobile detection (768px breakpoint)
+    this.updateMobileDetection();
 
     // Resize canvas to match window
     this.resize();
@@ -320,12 +330,20 @@ void main() {
     this.animationFrameId = requestAnimationFrame(this.render.bind(this));
   }
 
+  updateMobileDetection() {
+    const isMobile = window.innerWidth <= 768;
+    this.context.uniform1i(this.isMobileUniformLocation, isMobile ? 1 : 0);
+  }
+
   resize() {
     if (!this.canvas || !this.context) return;
 
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
     this.context.viewport(0, 0, this.canvas.width, this.canvas.height);
+
+    // Update mobile detection on resize
+    this.updateMobileDetection();
   }
 
   start() {

@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * Custom hook to manage startup audio playback with permission checking
- * Only attempts to play audio if user has granted permission via localStorage
+ * Plays audio once per browser session if user has granted permission via localStorage
+ * Uses sessionStorage to track playback and prevent replay during same session
+ *
+ * Note: Respects browser autoplay policies. Audio may not play in fresh tabs
+ * without user interaction. In such cases, audio will play after page refresh.
  *
  * @param {string} audioPath - Path to the audio file to play
  * @param {Object} options - Configuration options
@@ -19,13 +23,16 @@ export function useStartupAudio(audioPath, options = {}) {
   } = options;
 
   const audioRef = useRef(null);
-  const hasAttemptedPlayRef = useRef(false);
+  const strictModeGuardRef = useRef(false);
   const [audioStatus, setAudioStatus] = useState('idle'); // 'idle' | 'permission_required' | 'loading' | 'playing' | 'error'
 
   useEffect(() => {
-    // Only run once on mount - prevents double execution in React Strict Mode
-    if (hasAttemptedPlayRef.current) return;
-    hasAttemptedPlayRef.current = true;
+    // Prevent double execution in React Strict Mode (same effect cycle only)
+    // Session-based playback tracking is handled via sessionStorage below
+    if (strictModeGuardRef.current) {
+      return;
+    }
+    strictModeGuardRef.current = true;
 
     const getAudioPermission = () => {
       try {
@@ -49,6 +56,7 @@ export function useStartupAudio(audioPath, options = {}) {
         return true;
       } catch (error) {
         if (error.name === 'NotAllowedError') {
+          console.warn('Autoplay blocked by browser.');
           return false; // Autoplay blocked
         } else {
           console.error('Audio playback error:', error);
@@ -64,8 +72,19 @@ export function useStartupAudio(audioPath, options = {}) {
         const permission = getAudioPermission();
         if (permission !== 'allowed') {
           setAudioStatus('permission_required');
-          console.log('Audio permission not granted. User must enable sound.');
           return; // Exit early - no audio setup
+        }
+
+        // Check if audio has already played this session
+        try {
+          const hasPlayedThisSession = sessionStorage.getItem('startupAudioPlayed');
+          if (hasPlayedThisSession === 'true') {
+            setAudioStatus('idle');
+            return; // Exit - audio already played
+          }
+        } catch (error) {
+          console.warn('sessionStorage unavailable:', error);
+          // Continue anyway - allow playback if sessionStorage is blocked
         }
 
         // Feature detection - check if Audio API is supported
@@ -103,7 +122,17 @@ export function useStartupAudio(audioPath, options = {}) {
         });
 
         // Attempt to play immediately
-        await playAudio(audio);
+        const playSuccess = await playAudio(audio);
+
+        // Mark as played this session if successful
+        if (playSuccess) {
+          try {
+            sessionStorage.setItem('startupAudioPlayed', 'true');
+          } catch (error) {
+            console.warn('Could not set sessionStorage:', error);
+            // Non-critical - continue
+          }
+        }
 
       } catch (error) {
         if (error.name === 'NotSupportedError') {

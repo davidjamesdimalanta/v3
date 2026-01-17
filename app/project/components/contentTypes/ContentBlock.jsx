@@ -13,18 +13,18 @@ export default function ContentBlock({
   const renderText = (textContent) => {
     if (Array.isArray(textContent)) {
       return textContent.map((paragraph, index) => (
-        <p key={index} className="text-base text-400 leading-relaxed">
+        <p key={index} className="text-p text-400">
           {paragraph}
         </p>
       ));
     }
-    return <p className="text-base text-400 leading-relaxed">{textContent}</p>;
+    return <p className="text-p text-400">{textContent}</p>;
   };
 
   return (
     <section className={`flex flex-col gutter-xs ${className}`}>
       {/* Optional Title */}
-      {title && <h3 className="text-medium text-600">{title}</h3>}
+      {title && <h3 className="text-medium text-600">{typeof title === 'string' ? title : <>{title}</>}</h3>}
 
       {/* Optional Text Content */}
       {text && renderText(text)}

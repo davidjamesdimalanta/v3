@@ -11,7 +11,7 @@ import ProjectContent from "../components/ProjectContent";
  * This component provides the consistent 2-column layout structure
  * (ProjectHero + ProjectContent) while allowing unique content per project
  *
- * @param {Object} projectData - Project metadata (title, liveUrl, awards, description, details)
+ * @param {Object} projectData - Project metadata (title, links, awards, description, details)
  * @param {React.ReactNode} children - Unique project content (rendered inside ProjectContent)
  */
 export default function ProjectLayout({ projectData, children }) {
@@ -37,7 +37,7 @@ export default function ProjectLayout({ projectData, children }) {
         {/* LEFT COLUMN - Project Metadata (Sticky on desktop) */}
         <ProjectHero
           title={projectData.title}
-          liveUrl={projectData.liveUrl}
+          links={projectData.links}
           awards={projectData.awards}
           description={projectData.description}
           details={projectData.details}

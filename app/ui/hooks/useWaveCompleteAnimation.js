@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { ANIMATION_CONFIG, getElementDelay, getElementDuration } from '../lib/animation-config';
+import { animationStateManager } from '../lib/animationStateManager';
 
 /**
  * Custom hook to manage fade-up animations triggered after WebGL wave completion
@@ -9,15 +10,22 @@ import { ANIMATION_CONFIG, getElementDelay, getElementDuration } from '../lib/an
  * Listens for the 'wave-animation-complete' event from the WebGL renderer
  * and provides animation timing coordination for landing page elements.
  *
+ * @param {Object} options - Configuration options
+ * @param {boolean} options.playOnlyOnInitialLoad - If true, animation only plays on first page load (default: false)
  * @returns {Object} - Animation state and helper functions
  *   - isReady: boolean - Whether WebGL animation has completed
  *   - getAnimationClass: function - Returns CSS classes for element animation
  *   - getAnimationStyle: function - Returns inline styles for element animation
  *   - shouldAnimate: boolean - Whether to apply animations (respects prefers-reduced-motion)
  */
-export function useWaveCompleteAnimation() {
+export function useWaveCompleteAnimation({ playOnlyOnInitialLoad = false } = {}) {
   const [isReady, setIsReady] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(true);
+
+  // Capture wave completion status at mount time to prevent race conditions
+  const [wasInitiallyComplete] = useState(() =>
+    playOnlyOnInitialLoad && animationStateManager.hasAnimationCompleted('wave')
+  );
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -34,6 +42,13 @@ export function useWaveCompleteAnimation() {
   }, []);
 
   useEffect(() => {
+    // If wave animation was already complete when component mounted,
+    // skip animation and show immediately
+    if (wasInitiallyComplete) {
+      setIsReady(true);
+      return;
+    }
+
     if (!shouldAnimate) {
       // Skip animations if reduced motion is preferred
       setIsReady(true);
@@ -42,6 +57,11 @@ export function useWaveCompleteAnimation() {
 
     const handleWaveComplete = () => {
       setIsReady(true);
+
+      // Mark initial load as complete when wave finishes
+      if (playOnlyOnInitialLoad) {
+        animationStateManager.setInitialLoadComplete();
+      }
     };
 
     // Listen for custom event from WebGL renderer
@@ -51,6 +71,10 @@ export function useWaveCompleteAnimation() {
     // Add 100ms buffer to total WebGL duration
     const fallbackTimeout = setTimeout(() => {
       setIsReady(true);
+
+      if (playOnlyOnInitialLoad) {
+        animationStateManager.setInitialLoadComplete();
+      }
     }, ANIMATION_CONFIG.webgl.totalDuration + 100);
 
     // Cleanup
@@ -58,7 +82,7 @@ export function useWaveCompleteAnimation() {
       window.removeEventListener('wave-animation-complete', handleWaveComplete);
       clearTimeout(fallbackTimeout);
     };
-  }, [shouldAnimate]);
+  }, [shouldAnimate, playOnlyOnInitialLoad]);
 
   /**
    * Get animation CSS classes for an element
@@ -70,8 +94,13 @@ export function useWaveCompleteAnimation() {
       return 'fade-up-visible'; // Show immediately if animations disabled
     }
 
+    // If animation was complete when component mounted, show immediately
+    if (wasInitiallyComplete) {
+      return 'fade-up-visible';
+    }
+
     return isReady ? 'fade-up-visible' : 'fade-up-hidden';
-  }, [isReady, shouldAnimate]);
+  }, [isReady, shouldAnimate, wasInitiallyComplete]);
 
   /**
    * Get inline styles for an element (delay + duration)
@@ -83,6 +112,11 @@ export function useWaveCompleteAnimation() {
       return { opacity: 1, transform: 'translateY(0)' };
     }
 
+    // If animation was complete when component mounted, show immediately
+    if (wasInitiallyComplete) {
+      return { opacity: 1, transform: 'translateY(0)' };
+    }
+
     const delay = getElementDelay(elementId) - ANIMATION_CONFIG.landing.startDelay;
     const duration = getElementDuration(elementId);
 
@@ -90,7 +124,7 @@ export function useWaveCompleteAnimation() {
       transitionDelay: `${delay}ms`,
       transitionDuration: `${duration}ms`,
     };
-  }, [shouldAnimate]);
+  }, [shouldAnimate, wasInitiallyComplete]);
 
   return {
     isReady,

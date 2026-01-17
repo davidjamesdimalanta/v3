@@ -13,7 +13,7 @@ export default function FeaturedProject({
   return (
     <div className="bd hover:bd-active transition-all duration-150 overflow-hidden w-fill flex flex-col">
       {/* Image Container */}
-      <div className="relative w-full aspect-video">
+      <div className="relative w-full aspect-[11/6]">
         {imageSrc && (
           <Image
             src={imageSrc}

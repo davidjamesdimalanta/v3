@@ -44,8 +44,8 @@ export default function ProjectPage() {
         }}
       />
       <ContentBlock
-        title=""
-        text=""
+        title="Tailoring the washroom-finding experience through personalized search."
+        text="The 'accessible' label on washrooms fails to account for the diverse washroom needs of users. GoAble addresses this issue with an onboarding that saves individual preferences and tailors future search results accordingly."
         media={{
           type: "video",
           src: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
@@ -56,8 +56,8 @@ export default function ProjectPage() {
         isFirstVideo={true}
       />
       <ContentBlock
-        title=""
-        text=""
+        title="Meeting user expectations of washroom conditions and status updates."
+        text="Outdated images and comments often lead users to washrooms that don't meet their needs. GoAble solves this with a community-driven updates page that provides real-time, crowdsourced information, so users can choose with confidence."
         media={{
           type: "video",
           src: "https://stream.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8.m3u8?min_resolution=1080p",
@@ -67,8 +67,8 @@ export default function ProjectPage() {
         thumbnail="https://image.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8/thumbnail.png?width=1919&height=1080&time=0"
       />
       <ContentBlock
-        title=""
-        text=""
+        title="Focusing on friction instead of incentives."
+        text="Users described that sometimes, no amount of incentive will get them to leave a review. GoAble reduces this friction with quick-select, pre-loaded options, and three-tap reporting, in order to make the reviewing process equally as easy as skipping it."
         media={{
           type: "video",
           src: "https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p",
@@ -78,13 +78,34 @@ export default function ProjectPage() {
         thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
       />
       <ContentBlock
+        title="Prototypes that reveal valuable insights."
+        text="Low-fidelity prototypes exposed foundational flaws but couldn't capture micro-level friction. High-fidelity iterations I developed surfaced issues with filter toggles and map icon clarity in our second round of testing."
+        media={{
+          type: "video",
+          src: "https://stream.mux.com/XU4Ly1w1M6d4pmZOKZDIbBdYchQz8njlM008npcId02NQ.m3u8?min_resolution=1080p",
+          aspectRatio: "video",
+          caption: "Our prototype saves button states, locations, and map views to simulate a production-ready experience."
+        }}
+        thumbnail="https://image.mux.com/XU4Ly1w1M6d4pmZOKZDIbBdYchQz8njlM008npcId02NQ/thumbnail.png?width=1919&height=1080&time=0"
+      />
+      <ContentBlock
         title=""
         text=""
         media={{
           type: "image",
           src: "/assets/images/goAble/goAble_screens.png",
           aspectRatio: "video",
-          caption: "",
+          caption: "Screens included in user flows: Map-based finding, search-based finding, washroom Information Pages, navigation Screens"
+        }}
+      />
+      <ContentBlock
+        title=""
+        text=""
+        media={{
+          type: "image",
+          src: "/assets/images/goAble/styletile_superfinal.png",
+          aspectRatio: "video",
+          caption: "Design Guide",
         }}
       />
 

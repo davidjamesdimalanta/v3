@@ -4,7 +4,7 @@ import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 export default function ProjectHero({
   title,
-  liveUrl,
+  links = [],
   awards = [],
   description = [],
   details = {},
@@ -22,7 +22,7 @@ export default function ProjectHero({
               playNavigateHome();
               onClose();
             }}
-            className="flex items-center gutter-xs text-small text-400 hover:bd-text transition-all duration-150 w-hug"
+            className="flex items-center gutter-xs text-small text-400 hover:bd-text transition-all duration-150 w-hug cursor-pointer"
             aria-label="Close project"
           >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,17 +38,22 @@ export default function ProjectHero({
             {title}
           </h1>
 
-          {/* Live Project Link */}
-          {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-base text-400 hover:bd-text transition-all duration-150 w-hug"
-              onMouseEnter={playHover}
-            >
-              Visit Live Project →
-            </a>
+          {/* Live Project Links */}
+          {links.length > 0 && (
+            <div className="flex flex-col gutter-xs">
+              {links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base text-400 hover:bd-text transition-all duration-150 w-hug"
+                  onMouseEnter={playHover}
+                >
+                  {link.label} →
+                </a>
+              ))}
+            </div>
           )}
         </div>
 
@@ -110,7 +115,7 @@ export default function ProjectHero({
           {/* Project Description */}
           {description.length > 0 && (
             <div className="flex flex-col gutter-sm pt-4">
-              <div className="flex flex-col gutter-xs text-small text-500">
+              <div className="flex flex-col gutter-xs text-sm text-400">
                 {description.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}

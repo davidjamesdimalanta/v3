@@ -5,11 +5,13 @@ import Button from "../ui/Button";
 import { useWaveCompleteAnimation } from "../ui/hooks/useWaveCompleteAnimation";
 
 export default function Closing() {
-  const { getAnimationClass, getAnimationStyle } = useWaveCompleteAnimation();
+  const { getAnimationClass, getAnimationStyle } = useWaveCompleteAnimation({
+    playOnlyOnInitialLoad: true
+  });
   return (
-    <div id="closing" className="relative flex flex-col w-full h-hug justify-between pt-4">
+    <div id="closing" className="relative flex flex-col w-full h-hug justify-between py-4 md:pt-4 md:pb-0">
         {/* Currently Up to and Contact*/}
-        <div className="flex flex-col md:flex-row md:justify-between gutter-md md:gutter-md">
+        <div className="flex flex-col md:flex-row md:justify-between gutter-sm md:gutter-md">
             <div
               className={`w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-small ${getAnimationClass('bottom-bar-currently')}`}
               style={getAnimationStyle('bottom-bar-currently')}
@@ -33,14 +35,16 @@ export default function Closing() {
                                 WebkitBackgroundClip: 'text',
                                 backgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
-                                color: 'transparent'
+                                color: 'transparent',
+                                paddingBottom: '4px',
+                                display: 'inline-block'
                             }}>Web Design @ Innovation Hub</span>
                         </Link>
                     </div>
                 </div>
             </div>
             <div
-              className={`w-fill flex-1 flex flex-row justify-start sm:justify-end gap-4 lg:gap-4 ${getAnimationClass('bottom-bar-button')}`}
+              className={`md:hidden w-fill flex-1 flex flex-row justify-end gap-4 lg:gap-4 ${getAnimationClass('bottom-bar-button')}`}
               style={getAnimationStyle('bottom-bar-button')}
             >
                 <Button
