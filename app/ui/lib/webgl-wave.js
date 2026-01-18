@@ -41,7 +41,6 @@ export class WaveRenderer {
     });
 
     if (!this.context) {
-      console.error('WebGL not supported');
       return;
     }
 
@@ -167,7 +166,6 @@ void main() {
     this.context.linkProgram(this.shaderProgram);
 
     if (!this.context.getProgramParameter(this.shaderProgram, this.context.LINK_STATUS)) {
-      console.error('Link error:', this.context.getProgramInfoLog(this.shaderProgram));
       return;
     }
 
@@ -225,7 +223,6 @@ void main() {
     this.context.compileShader(shader);
 
     if (!this.context.getShaderParameter(shader, this.context.COMPILE_STATUS)) {
-      console.error('Shader error:', this.context.getShaderInfoLog(shader));
       this.context.deleteShader(shader);
       return null;
     }

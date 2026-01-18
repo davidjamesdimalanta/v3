@@ -15,7 +15,6 @@ export default function Landing() {
     <div id="landing" className="relative flex flex-col-reverse justify-between w-full h-svh padding-page">
       {/* Audio Permission Button */}
       <AudioPermissionButton />
-
       <Intro />
     </div>
   );

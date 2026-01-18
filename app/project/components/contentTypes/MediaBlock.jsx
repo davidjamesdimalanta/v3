@@ -173,7 +173,6 @@ export default function MediaBlock({
       const Hls = (await import('hls.js')).default;
 
       if (!Hls.isSupported()) {
-        console.error('HLS is not supported in this browser');
         return;
       }
 
@@ -189,12 +188,6 @@ export default function MediaBlock({
       hlsRef.current = hls;
       hls.loadSource(src);
       hls.attachMedia(videoElement);
-
-      hls.on(Hls.Events.ERROR, (event, data) => {
-        if (data.fatal) {
-          console.error('Fatal HLS error:', data);
-        }
-      });
     };
 
     loadHLS();
@@ -294,8 +287,7 @@ export default function MediaBlock({
             setIsPlaying(true);
             setAutoplayExecuted(true);
           })
-          .catch((error) => {
-            console.log('Autoplay prevented by browser:', error);
+          .catch(() => {
             setAutoplayExecuted(true);
           });
       }

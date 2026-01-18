@@ -23,14 +23,31 @@ export default function Button({ text, href, className = "", target, rel, soundE
     }
   }
 
-  // If href is provided, render as a Link
+  // If href is provided, determine whether to use Link or anchor tag
   if (href) {
+    // Use regular anchor tag for external URLs, downloads, or when target="_blank"
+    const isExternal = href.startsWith('http') || href.startsWith('mailto:') || target === '_blank';
+
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          className={`${baseStyles} ${variantStyles} ${className}`}
+          target={target}
+          rel={rel}
+          {...eventHandlers}
+          {...props}
+        >
+          {text}
+        </a>
+      );
+    }
+
+    // Use Next.js Link for internal navigation
     return (
       <Link
         href={href}
         className={`${baseStyles} ${variantStyles} ${className}`}
-        target={target}
-        rel={rel}
         {...eventHandlers}
         {...props}
       >

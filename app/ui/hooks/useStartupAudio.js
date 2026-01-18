@@ -38,7 +38,6 @@ export function useStartupAudio(audioPath, options = {}) {
       try {
         return localStorage.getItem('audioPermission');
       } catch (error) {
-        console.warn('localStorage unavailable:', error);
         return null;
       }
     };
@@ -47,7 +46,6 @@ export function useStartupAudio(audioPath, options = {}) {
       try {
         await audio.play();
         setAudioStatus('playing');
-        console.log('Startup audio playing at 45% volume');
 
         if (onPlaySuccess) {
           onPlaySuccess();
@@ -56,10 +54,8 @@ export function useStartupAudio(audioPath, options = {}) {
         return true;
       } catch (error) {
         if (error.name === 'NotAllowedError') {
-          console.warn('Autoplay blocked by browser.');
           return false; // Autoplay blocked
         } else {
-          console.error('Audio playback error:', error);
           setAudioStatus('error');
           return false;
         }
@@ -83,13 +79,11 @@ export function useStartupAudio(audioPath, options = {}) {
             return; // Exit - audio already played
           }
         } catch (error) {
-          console.warn('sessionStorage unavailable:', error);
           // Continue anyway - allow playback if sessionStorage is blocked
         }
 
         // Feature detection - check if Audio API is supported
         if (typeof Audio === 'undefined') {
-          console.warn('Audio API not supported in this browser');
           setAudioStatus('error');
           return;
         }
@@ -129,22 +123,12 @@ export function useStartupAudio(audioPath, options = {}) {
           try {
             sessionStorage.setItem('startupAudioPlayed', 'true');
           } catch (error) {
-            console.warn('Could not set sessionStorage:', error);
             // Non-critical - continue
           }
         }
 
       } catch (error) {
-        if (error.name === 'NotSupportedError') {
-          console.error('Audio file format not supported:', error);
-          setAudioStatus('error');
-        } else if (error.message && error.message.includes('timeout')) {
-          console.error('Audio loading timeout:', error);
-          setAudioStatus('error');
-        } else {
-          console.error('Audio setup error:', error);
-          setAudioStatus('error');
-        }
+        setAudioStatus('error');
       }
     };
 

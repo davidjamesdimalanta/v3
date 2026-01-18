@@ -45,7 +45,6 @@ class AudioManager {
       // Check permission first
       const permission = this.getAudioPermission();
       if (permission !== 'allowed') {
-        console.log('Audio permission not granted. Sound effects disabled.');
         return false;
       }
 
@@ -53,14 +52,12 @@ class AudioManager {
       if (typeof window !== 'undefined') {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
-          console.log('Prefers reduced motion enabled. Sound effects disabled.');
           return false;
         }
       }
 
       // Feature detection - check if Audio API is supported
       if (typeof Audio === 'undefined') {
-        console.warn('Audio API not supported in this browser');
         return false;
       }
 
@@ -82,11 +79,9 @@ class AudioManager {
       this.navigateProjectAudio.preload = 'auto';
 
       this.initialized = true;
-      console.log('Sound effects audio pool initialized (singleton)');
       return true;
 
     } catch (error) {
-      console.error('Error initializing audio pool:', error);
       return false;
     }
   }
@@ -101,7 +96,6 @@ class AudioManager {
     try {
       return localStorage.getItem('audioPermission');
     } catch (error) {
-      console.warn('localStorage unavailable:', error);
       return null;
     }
   }
@@ -122,18 +116,15 @@ class AudioManager {
 
       // Play new hover sound
       this.hoverAudio.currentTime = 0;
-      this.hoverAudio.play().catch((error) => {
+      this.hoverAudio.play().catch(() => {
         // Silently handle playback errors (e.g., user hasn't interacted yet)
-        if (error.name !== 'NotAllowedError') {
-          console.warn('Hover sound playback error:', error);
-        }
       });
 
       // Track this as the currently playing hover sound
       this.currentHoverAudio = this.hoverAudio;
 
     } catch (error) {
-      console.error('Error playing hover sound:', error);
+      // Silently handle errors
     }
   }
 
@@ -153,18 +144,15 @@ class AudioManager {
 
       // Play button hover sound
       this.buttonHoverAudio.currentTime = 0;
-      this.buttonHoverAudio.play().catch((error) => {
+      this.buttonHoverAudio.play().catch(() => {
         // Silently handle playback errors (e.g., user hasn't interacted yet)
-        if (error.name !== 'NotAllowedError') {
-          console.warn('Button hover sound playback error:', error);
-        }
       });
 
       // Track this as the currently playing hover sound
       this.currentHoverAudio = this.buttonHoverAudio;
 
     } catch (error) {
-      console.error('Error playing button hover sound:', error);
+      // Silently handle errors
     }
   }
 
@@ -176,13 +164,11 @@ class AudioManager {
 
     try {
       this.navigateHomeAudio.currentTime = 0;
-      this.navigateHomeAudio.play().catch((error) => {
-        if (error.name !== 'NotAllowedError') {
-          console.warn('Navigate home sound playback error:', error);
-        }
+      this.navigateHomeAudio.play().catch(() => {
+        // Silently handle playback errors
       });
     } catch (error) {
-      console.error('Error playing navigate home sound:', error);
+      // Silently handle errors
     }
   }
 
@@ -194,13 +180,11 @@ class AudioManager {
 
     try {
       this.navigateProjectAudio.currentTime = 0;
-      this.navigateProjectAudio.play().catch((error) => {
-        if (error.name !== 'NotAllowedError') {
-          console.warn('Navigate project sound playback error:', error);
-        }
+      this.navigateProjectAudio.play().catch(() => {
+        // Silently handle playback errors
       });
     } catch (error) {
-      console.error('Error playing navigate project sound:', error);
+      // Silently handle errors
     }
   }
 }
