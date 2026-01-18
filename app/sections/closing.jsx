@@ -28,7 +28,7 @@ export default function Closing() {
                                 color: 'transparent'
                             }}>MI Candidate @ UofT iSchool </span>
                         </Link>
-                        <span>&& </span>
+                        <span>&</span>
                         <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150">
                             <span style={{
                                 background: 'linear-gradient(to right, #39FF14, #71CF88)',
