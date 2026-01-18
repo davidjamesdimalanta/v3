@@ -34,7 +34,7 @@ export default function ProjectPage() {
   return (
     <>
       <ContentBlock
-        title="For people with specific washroom needs, the “Accessible” label doesn&apos;t always meet them."
+        title="For people with specific washroom needs, the &quot;Accessible&quot; label doesn&apos;t always meet them."
         text="Current washroom listings lack critical information, such as amenity offering, for users with specific washroom needs. In order to resolve this, we ask: how might we make washroom finding more accessible, when it means something different for everyone?"
         media={{
           type: "image",
