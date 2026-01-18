@@ -1,0 +1,44 @@
+{
+  "redirects": [
+    {
+      "source": "/projects/:slug",
+      "destination": "/project/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/work/:slug",
+      "destination": "/project/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/:slug",
+      "destination": "/project/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/:slug",
+      "destination": "/project/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
