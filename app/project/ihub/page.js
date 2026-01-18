@@ -48,7 +48,7 @@ export default function ProjectPage() {
       <div className="flex flex-col gap-4">
       <ContentBlock
         title="Balancing stakeholder needs to create a family-friendly campus resource."
-        text="UofT's Family Care Office wanted a campus-wide resources for educators supporting student-parents. Limited to a single WordPress page, it conflicted with the design team's multi-page design. To solve this, we created a single-page app that pushes each resource's slug to the URL dynamically, giving every resource a shareable link despite the technical constraint."
+        text="UofT's Family Care Office wanted a campus-wide resource for educators supporting student-parents. Limited to a single WordPress page, it conflicted with the design team's multi-page design. To solve this, we created a single-page app that pushes each resource's slug to the URL dynamically, giving every resource a shareable link despite the technical constraint."
         media={{
           type: "video",
           src: "https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p",
