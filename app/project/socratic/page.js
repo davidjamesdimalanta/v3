@@ -66,7 +66,7 @@ export default function ProjectPage() {
       />
       <ContentBlock
         title="Leading a multi-disciplinary team"
-        text="In order to deliver a 0→1 app in 7 days, I recruited one ML engineer, two developers, and a UX researcher. Making the most of 7 days meant coordinating busy student schedules, providing direction and functional requirements while ensuring a fun working environment."
+        text="In order to deliver a 0→1 app in 7 days, I recruited one ML engineer, two developers, and a UX researcher. Making the most of 7 days meant coordinating busy student schedules, providing direction and functional requirements for each ticket while ensuring a fun working environment."
         media={{
           type: "image",
           src: "/assets/images/socratic/leadership.png",
