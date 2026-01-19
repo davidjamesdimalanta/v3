@@ -32,9 +32,9 @@ export default function Projects() {
     });
 
     return (
-        <div className="w-full h-hug flex flex-col gutter-sm padding-page">
+        <div className="w-full h-hug flex flex-col gutter-sm p-6 md:p-8">
             <h1 className="text-base text-500">Selected Works</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gutter-sm w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gutter-base w-full">
             {projects.map((project, index) => (
                 <Link
                   key={index}

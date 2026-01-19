@@ -22,7 +22,7 @@ export default function ContentBlock({
   };
 
   return (
-    <section className={`flex flex-col gutter-xs ${className}`}>
+    <section className={`flex flex-col gutter-sm ${className}`}>
       {/* Optional Title */}
       {title && <h3 className="text-medium text-600">{typeof title === 'string' ? title : <>{title}</>}</h3>}
 

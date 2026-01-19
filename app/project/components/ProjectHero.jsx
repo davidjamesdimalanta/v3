@@ -14,8 +14,8 @@ export default function ProjectHero({
   const { playHover, playNavigateHome } = useSoundEffects();
   return (
     <aside className="relative flex flex-1 flex-col lg:basis-[720px]">
-      <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh p-4">
-        <div className="flex flex-col gutter-sm">
+      <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh p-8">
+        <div className="flex flex-col gutter-base">
           {/* Close Button */}
           <button
             onClick={() => {
