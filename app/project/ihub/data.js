@@ -1,9 +1,9 @@
 export const projectData = {
     // Short project name (used for tab title and card titles)
-    name: "Innovation Hub",
+    name: "iHub",
   
     // Main project title (displayed prominently in the hero section)
-    title: "Develeoping on the web for a campus design agency.",
+    title: "Developing on the web for a campus design agency.",
   
     // Project links (optional - can be empty array)
     // Example: links: [{ url: "https://example.com", label: "View Project" }]
