@@ -43,23 +43,6 @@ export default function Closing() {
                     </div>
                 </div>
             </div>
-            <div
-              className={`py-4 md:hidden w-fill flex-1 flex flex-row justify-end gap-4 lg:gap-4 ${getAnimationClass('bottom-bar-button')}`}
-              style={getAnimationStyle('bottom-bar-button')}
-            >
-                <Button
-                    text={"Get in Touch"}
-                    href="mailto:david.dimalanta@mail.utoronto.ca"
-                    soundEffect="hover"
-                />
-                <Button
-                    text={"CV"}
-                    href="/cv/David_Dimalanta_CV.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    soundEffect="hover"
-                />
-            </div>
         </div>
     </div>
   );
