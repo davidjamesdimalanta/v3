@@ -48,11 +48,11 @@ export default function Nav() {
 
         </Link>
         <div
-          className={`flex flex-col md:flex-row gap-4 items-center ${getAnimationClass('nav-logo-name')}`}
+          className={`flex flex-row gap-4 items-center ${getAnimationClass('nav-logo-name')}`}
           style={getAnimationStyle('nav-logo-name')}
         >
           <Button
-            text={"Get in Touch"}
+            text={"Contact"}
             href="mailto:david.dimalanta@mail.utoronto.ca"
             soundEffect="hover"
           />
