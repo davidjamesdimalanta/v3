@@ -30,7 +30,7 @@ export default function Nav() {
       }}
     >
         <Link
-        className={`text-base text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
+        className={`text-p text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
         style={getAnimationStyle('nav-logo-name')}
         href="/"
         onMouseEnter={playHover}
@@ -48,11 +48,11 @@ export default function Nav() {
 
         </Link>
         <div
-          className={`hidden md:flex flex-row gap-4 ${getAnimationClass('nav-logo-name')}`}
+          className={`flex flex-row gap-4 items-center ${getAnimationClass('nav-logo-name')}`}
           style={getAnimationStyle('nav-logo-name')}
         >
           <Button
-            text={"Get in Touch"}
+            text={"Contact"}
             href="mailto:david.dimalanta@mail.utoronto.ca"
             soundEffect="hover"
           />

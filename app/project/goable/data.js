@@ -34,9 +34,15 @@ export const projectData = {
 
   // Project details displayed in a grid
   details: {
-    role: "Product Designer",     
-    timeline: "3 months",           
+    role: "Product Designer",
+    timeline: "3 months",
     team: "4 designers",
-    year: "2025",                  
+    year: "2025",
+  },
+
+  // Case study section theme colors
+  caseStudy: {
+    bgColor: "#F1F3EF",  // Background color for media matting effect
+    fgColor: "#2B390A",  // Text/caption color
   },
 };

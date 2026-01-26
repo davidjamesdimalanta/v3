@@ -4,6 +4,26 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { DotLottie } from "@lottiefiles/dotlottie-web";
 import { useMediaQuery } from "../../../ui/hooks/useMediaQuery";
+import { useCaseStudyTheme } from "../../_shared/CaseStudyThemeContext";
+
+/**
+ * Case Study Media Block Component
+ *
+ * Full-width media block with Daybreak Studio-inspired matting effect.
+ * Features rounded corners, colored background, and internal padding.
+ * Supports images, videos (Mux HLS), and Lottie animations.
+ *
+ * @param {string} type - Media type: "image", "video", or "lottie"
+ * @param {string} src - Source URL for the media
+ * @param {string} alt - Alt text for images
+ * @param {string} caption - Optional caption text
+ * @param {string} thumbnail - Optional thumbnail/poster (for videos)
+ * @param {string} aspectRatio - "video", "square", "portrait", or custom like "1000/750"
+ * @param {string} bgColor - Optional background color override
+ * @param {string} fgColor - Optional caption color override
+ * @param {boolean} isFirstVideo - First video has 2-second delay
+ * @param {string} className - Additional custom classes
+ */
 
 const isMuxHLSVideo = (url) => {
   if (!url || typeof url !== 'string') return false;
@@ -54,16 +74,43 @@ function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
   );
 }
 
-export default function MediaBlock({
-  type = "image", // "image", "video", or "lottie"
+export default function CaseStudyMediaBlock({
+  type = "image",
   src,
   alt = "",
   caption,
-  thumbnail, // Optional thumbnail/poster image (e.g., Mux thumbnail)
-  aspectRatio = "video", // "video" (16:9), "square", "portrait", or custom class
+  thumbnail,
+  aspectRatio = "1000/750",  // Default to Daybreak's 4:3 ratio
+  bgColor,  // Optional override
+  fgColor,  // Optional override
+  isFirstVideo = false,
   className = "",
-  isFirstVideo = false // First video has 2-second delay, others autoplay instantly
 }) {
+  // Get theme from context (can be overridden by props)
+  const theme = useCaseStudyTheme();
+  const backgroundColor = bgColor || theme.bgColor;
+  const foregroundColor = fgColor || theme.fgColor;
+
+  // Parse aspect ratio
+  const getAspectRatio = () => {
+    const presets = {
+      video: "16/9",
+      square: "1/1",
+      portrait: "3/4",
+    };
+
+    // If it's a preset, use the mapped value
+    if (presets[aspectRatio]) {
+      return presets[aspectRatio];
+    }
+
+    // Otherwise, assume it's already a ratio like "1000/750"
+    return aspectRatio;
+  };
+
+  const ratio = getAspectRatio();
+
+  // Video/Lottie state and refs (same as MediaBlock)
   const lottieRef = useRef(null);
   const dotLottieInstanceRef = useRef(null);
   const videoRef = useRef(null);
@@ -75,19 +122,17 @@ export default function MediaBlock({
   const [hasEnded, setHasEnded] = useState(false);
   const [autoplayExecuted, setAutoplayExecuted] = useState(false);
 
-  // Desktop/mobile and accessibility detection for autoplay
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const shouldEnableAutoplay = isDesktop && !prefersReducedMotion;
 
+  // Lottie effect (same as MediaBlock)
   useEffect(() => {
     if (type === "lottie" && src && lottieRef.current) {
-      // Early return if no valid source
       if (!src) return;
 
       const canvas = lottieRef.current;
 
-      // Set canvas dimensions based on container size for better performance
       const updateCanvasSize = () => {
         const rect = canvas.getBoundingClientRect();
         canvas.width = rect.width;
@@ -96,13 +141,11 @@ export default function MediaBlock({
 
       updateCanvasSize();
 
-      // Cleanup previous DotLottie instance if exists
       if (dotLottieInstanceRef.current) {
         dotLottieInstanceRef.current.destroy();
         dotLottieInstanceRef.current = null;
       }
 
-      // Create new DotLottie instance
       const dotLottie = new DotLottie({
         canvas: canvas,
         src: src,
@@ -110,16 +153,13 @@ export default function MediaBlock({
         loop: true,
       });
 
-      // Store instance reference
       dotLottieInstanceRef.current = dotLottie;
 
-      // Optimize rendering performance
       dotLottie.setRenderConfig({
         devicePixelRatio: 2,
         autoResize: true,
       });
 
-      // Handle window resize events
       const handleResize = () => {
         updateCanvasSize();
         dotLottie.resize();
@@ -137,14 +177,13 @@ export default function MediaBlock({
     }
   }, [type, src]);
 
-  // HLS.js integration for Mux videos
+  // HLS.js integration (same as MediaBlock)
   useEffect(() => {
     if (type !== "video" || !src || !isMuxHLSVideo(src)) return;
 
     const videoElement = videoRef.current;
     if (!videoElement) return;
 
-    // Handle video loaded events - Safari needs multiple event listeners
     const handleCanPlay = () => setVideoLoaded(true);
     const handleLoadedData = () => setVideoLoaded(true);
     const handleVideoPlay = () => setIsPlaying(true);
@@ -155,10 +194,8 @@ export default function MediaBlock({
     videoElement.addEventListener('play', handleVideoPlay);
     videoElement.addEventListener('pause', handleVideoPause);
 
-    // Safari supports HLS natively
     if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
       videoElement.src = src;
-      // Force Safari to start loading the video
       videoElement.load();
       return () => {
         videoElement.removeEventListener('canplay', handleCanPlay);
@@ -168,7 +205,6 @@ export default function MediaBlock({
       };
     }
 
-    // Load HLS.js for other browsers (dynamic import)
     const loadHLS = async () => {
       const Hls = (await import('hls.js')).default;
 
@@ -180,9 +216,9 @@ export default function MediaBlock({
         enableWorker: true,
         lowLatencyMode: false,
         backBufferLength: 90,
-        startLevel: -1, // Auto-select quality, but will prefer higher
-        capLevelToPlayerSize: false, // Allow quality higher than player size
-        maxMaxBufferLength: 600, // Larger buffer for better quality
+        startLevel: -1,
+        capLevelToPlayerSize: false,
+        maxMaxBufferLength: 600,
       });
 
       hlsRef.current = hls;
@@ -204,14 +240,14 @@ export default function MediaBlock({
     };
   }, [type, src]);
 
-  // Intersection Observer for scroll-triggered video playback
+  // Intersection Observer (same as MediaBlock)
   useEffect(() => {
     if (type !== "video" || !videoRef.current) return;
 
-    const videoElement = videoRef.current; // Capture ref for cleanup
+    const videoElement = videoRef.current;
 
     const observerOptions = {
-      threshold: 0.75,  // 75% visibility required (practical for most layouts)
+      threshold: 0.75,
       rootMargin: '0px'
     };
 
@@ -230,7 +266,7 @@ export default function MediaBlock({
     };
   }, [type]);
 
-  // Playback control based on visibility - pause when out of view
+  // Playback control (same as MediaBlock)
   useEffect(() => {
     if (type !== "video" || !videoRef.current) return;
 
@@ -243,7 +279,6 @@ export default function MediaBlock({
       }
     };
 
-    // Only pause when scrolled out of view, no autoplay
     if (!isInView && videoElement && isPlaying) {
       pauseVideo();
     }
@@ -251,7 +286,7 @@ export default function MediaBlock({
     return () => {};
   }, [isInView, type, isPlaying]);
 
-  // Reset autoplay ability when video scrolls out of view (unless it has ended)
+  // Reset autoplay (same as MediaBlock)
   useEffect(() => {
     if (type !== "video") return;
 
@@ -260,7 +295,7 @@ export default function MediaBlock({
     }
   }, [isInView, hasEnded, type]);
 
-  // Autoplay logic when video comes into view (desktop only, respects reduced motion)
+  // Autoplay logic (same as MediaBlock)
   useEffect(() => {
     if (
       type !== "video" ||
@@ -269,15 +304,13 @@ export default function MediaBlock({
       !isInView ||
       autoplayExecuted ||
       !shouldEnableAutoplay ||
-      hasEnded  // Don't autoplay if video has finished
+      hasEnded
     ) return;
 
-    // Clear any existing timeout
     if (autoplayTimeoutRef.current) {
       clearTimeout(autoplayTimeoutRef.current);
     }
 
-    // First video has 2-second accessibility delay, others autoplay instantly
     const delay = isFirstVideo ? 2000 : 0;
 
     autoplayTimeoutRef.current = setTimeout(() => {
@@ -300,7 +333,7 @@ export default function MediaBlock({
     };
   }, [type, videoLoaded, isInView, autoplayExecuted, shouldEnableAutoplay, hasEnded, isFirstVideo]);
 
-  // Event handlers for video controls
+  // Video control handlers
   const handlePlay = () => {
     if (videoRef.current) {
       videoRef.current.play();
@@ -325,89 +358,110 @@ export default function MediaBlock({
     }
   };
 
-  const aspectClasses = {
-    video: "aspect-[11/6]",
-    square: "aspect-square",
-    portrait: "aspect-[3/4]",
-  };
-
-  const aspectClass = aspectClasses[aspectRatio] || aspectRatio;
-
-  // Handle video end - show replay button
   const handleVideoEnded = () => {
     setHasEnded(true);
     setIsPlaying(false);
   };
 
   return (
-    <div className={`flex flex-col gutter-xs ${className}`}>
-      <div className={`w-full ${aspectClass} bg-[#F9F9F9] overflow-hidden relative`}>
-        {/* Thumbnail/Poster Image - shown while video loads */}
-        {thumbnail && type === "video" && (
+    <figure
+      className={`mx-auto flex flex-col items-center justify-center pt-8 w-full max-w-[1664px] ${className}`}
+      style={{
+        '--bg-color': backgroundColor,
+        '--fg-color': foregroundColor,
+        '--aspect-ratio': ratio,
+      }}
+    >
+      {/* Rounded container with background color */}
+      <div
+        className="relative w-full overflow-hidden rounded-3xl transition-all"
+        style={{ backgroundColor: 'var(--bg-color)' }}
+      >
+        <div className="relative">
+          {/* Aspect ratio spacer with responsive margins (8px mobile, 16px desktop) */}
           <div
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              videoLoaded ? 'opacity-0' : 'opacity-100'
-            }`}
-            style={{ pointerEvents: videoLoaded ? 'none' : 'auto' }}
-          >
-            <Image
-              src={thumbnail}
-              alt={alt || "Video thumbnail"}
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
-
-        {type === "lottie" && src ? (
-          <canvas
-            ref={lottieRef}
-            className="w-full h-full"
-            style={{ display: 'block' }}
+            className="mx-2 md:mx-4"
+            style={{
+              aspectRatio: 'var(--aspect-ratio)',
+            }}
           />
-        ) : type === "video" && src ? (
-          <>
-            <video
-              ref={videoRef}
-              preload="metadata"
-              muted
-              playsInline
-              controls={false}
-              disablePictureInPicture
-              controlsList="nodownload nofullscreen noremoteplayback"
-              onEnded={handleVideoEnded}
-              className="w-full h-full object-cover"
-            >
-              Your browser does not support the video tag.
-            </video>
 
-            {/* Video Controls */}
-            <VideoControls
-              isPlaying={isPlaying}
-              hasEnded={hasEnded}
-              onPlay={handlePlay}
-              onPause={handlePause}
-              onRestart={handleRestart}
-            />
-          </>
-        ) : type === "image" && src ? (
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="text-sm opacity-40">
-              {type === "lottie" ? "Lottie" : type === "video" ? "Video" : "Image"}
-            </span>
+          {/* Absolute positioned media container */}
+          <div className="absolute inset-0">
+            {type === "lottie" && src ? (
+              <canvas
+                ref={lottieRef}
+                className="w-full h-full"
+                style={{ display: 'block' }}
+              />
+            ) : type === "video" && src ? (
+              <>
+                {/* Video thumbnail */}
+                {thumbnail && (
+                  <div
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      videoLoaded ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    style={{ pointerEvents: videoLoaded ? 'none' : 'auto' }}
+                  >
+                    <Image
+                      src={thumbnail}
+                      alt={alt || "Video thumbnail"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+
+                <video
+                  ref={videoRef}
+                  preload="metadata"
+                  muted
+                  playsInline
+                  controls={false}
+                  disablePictureInPicture
+                  controlsList="nodownload nofullscreen noremoteplayback"
+                  onEnded={handleVideoEnded}
+                  className="w-full h-full object-cover"
+                >
+                  Your browser does not support the video tag.
+                </video>
+
+                <VideoControls
+                  isPlaying={isPlaying}
+                  hasEnded={hasEnded}
+                  onPlay={handlePlay}
+                  onPause={handlePause}
+                  onRestart={handleRestart}
+                />
+              </>
+            ) : type === "image" && src ? (
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-sm opacity-40">
+                  {type === "lottie" ? "Lottie" : type === "video" ? "Video" : "Image"}
+                </span>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Caption */}
       {caption && (
-        <p className="text-xs text-400 opacity-60 text-center">{caption}</p>
+        <figcaption
+          className="mb-3 mt-3 max-w-prose text-center text-sm"
+          style={{ color: 'var(--fg-color)' }}
+        >
+          {caption}
+        </figcaption>
       )}
-    </div>
+    </figure>
   );
 }

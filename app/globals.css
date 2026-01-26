@@ -23,6 +23,15 @@ body {
     min-height: 100dvh;
     color: var(--text-color);
     background-color: var(--dark-color);
+    font-family: var(--font-aspekta), sans-serif;
+}
+
+/* HEADINGS - Use New Rodin Pro */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-new-rodin-pro), sans-serif;
+}
+
+span {
     font-family: var(--font-new-rodin-pro), sans-serif;
 }
 
@@ -45,28 +54,6 @@ body {
     @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(255,255,255,0.8)];
 }
 
-/* TEXT STYLES */
-@utility text-large {
-    @apply text-[41px] leading-[43px];
-}
-
-@utility text-medium {
-    @apply text-[23px] leading-[28px];
-}
-
-@utility text-base {
-    @apply text-[15px] leading-[24px] tracking-wide;
-}
-
-@utility text-small {
-    @apply text-[13px] leading-[20px] tracking-wide;
-}
-
-@utility text-tiny {
-    @apply text-[11px] leading-[13px] tracking-wide;
-    letter-spacing: 0.025em;
-}
-
 /* ===================================
    RESPONSIVE TEXT UTILITIES (CLAMP)
    =================================== */
@@ -77,52 +64,64 @@ body {
  */
 
 @utility text-h1 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem);
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 @utility text-h2 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem);
   line-height: 1.1;
 }
 
 @utility text-h3 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem);
   line-height: 1.2;
 }
 
 @utility text-h4 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
   line-height: 1.2;
 }
 
 @utility text-h5 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
   line-height: 1.2;
 }
 
 @utility text-h6 {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.05rem, 0.99rem + 0.23vw, 1.2rem);
   line-height: 1.2;
 }
 
 @utility text-p {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1rem);
   line-height: 1.4;
-  letter-spacing: 0.025em;
 }
 
 @utility text-sm {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
-  line-height: 1.4;
-  letter-spacing: 0.015em;
+  line-height: 1.5;
 }
 
 @utility text-xs {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(0.6075rem, 0.58rem + 0.11vw, 0.69438rem);
-  line-height: 1.4;
-  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
 
+@utility text-button {
+  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 /* RESPONSIVE PADDING */
@@ -253,7 +252,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-new-rodin-pro), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-aspekta), -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: hidden;
 }
 

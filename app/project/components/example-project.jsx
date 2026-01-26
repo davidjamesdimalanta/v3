@@ -88,7 +88,7 @@ export default function ExampleProject() {
 
           {/* Section 1 - Challenge */}
           <ProjectSection title="The Challenge">
-            <p className="text-base text-400 leading-relaxed">
+            <p className="text-p text-400 leading-relaxed">
               Describe the problem you were solving. What were the user needs?
               What were the business goals? What constraints did you face?
             </p>
@@ -102,7 +102,7 @@ export default function ExampleProject() {
 
           {/* Section 2 - Research */}
           <ProjectSection title="Research & Discovery">
-            <p className="text-base text-400 leading-relaxed">
+            <p className="text-p text-400 leading-relaxed">
               Share your research process. What did you learn from users?
               What insights drove your design decisions?
             </p>
@@ -136,7 +136,7 @@ export default function ExampleProject() {
 
           {/* Section 5 - Traditional ProjectSection (still valid) */}
           <ProjectSection title="Design Process (Traditional Composition)">
-            <p className="text-base text-400 leading-relaxed">
+            <p className="text-p text-400 leading-relaxed">
               Walk through your design iterations. Show wireframes, prototypes,
               and how the design evolved based on feedback and testing.
             </p>
@@ -149,7 +149,7 @@ export default function ExampleProject() {
 
           {/* Section 4 - Solution */}
           <ProjectSection title="The Solution">
-            <p className="text-base text-400 leading-relaxed">
+            <p className="text-p text-400 leading-relaxed">
               Present your final design. Explain key design decisions and how
               they solve the original problem.
             </p>
@@ -162,32 +162,32 @@ export default function ExampleProject() {
 
           {/* Section 5 - Impact */}
           <ProjectSection title="Impact & Results">
-            <p className="text-base text-400 leading-relaxed">
+            <p className="text-p text-400 leading-relaxed">
               Share the outcomes. What metrics improved? What did users say?
               What did you learn from this project?
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
               <div className="flex flex-col gutter-xs">
-                <span className="text-large text-600">40%</span>
-                <span className="text-small text-400 opacity-60">Metric improvement</span>
+                <span className="text-h1 text-600">40%</span>
+                <span className="text-sm text-400 opacity-60">Metric improvement</span>
               </div>
               <div className="flex flex-col gutter-xs">
-                <span className="text-large text-600">2.5x</span>
-                <span className="text-small text-400 opacity-60">User engagement</span>
+                <span className="text-h1 text-600">2.5x</span>
+                <span className="text-sm text-400 opacity-60">User engagement</span>
               </div>
               <div className="flex flex-col gutter-xs">
-                <span className="text-large text-600">95%</span>
-                <span className="text-small text-400 opacity-60">Satisfaction rate</span>
+                <span className="text-h1 text-600">95%</span>
+                <span className="text-sm text-400 opacity-60">Satisfaction rate</span>
               </div>
             </div>
           </ProjectSection>
 
           {/* Navigation to Next Project */}
           <ProjectSection className="pt-8 pb-16">
-            <span className="text-tiny text-400 opacity-60">Next Project</span>
+            <span className="text-xs text-400 opacity-60">Next Project</span>
             <Link
               href="/project/next-project"
-              className="group text-medium text-600 hover:bd-text transition-all duration-150 w-hug"
+              className="group text-h5 text-600 hover:bd-text transition-all duration-150 w-hug"
             >
               Next Project Title →
             </Link>

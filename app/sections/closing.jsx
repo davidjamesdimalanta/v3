@@ -13,7 +13,7 @@ export default function Closing() {
         {/* Currently Up to and Contact*/}
         <div className="flex flex-col md:flex-row md:justify-between gutter-sm md:gutter-md">
             <div
-              className={`w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-small ${getAnimationClass('bottom-bar-currently')}`}
+              className={`w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-sm ${getAnimationClass('bottom-bar-currently')}`}
               style={getAnimationStyle('bottom-bar-currently')}
             >
                 <div className="flex flex-col">
@@ -42,23 +42,6 @@ export default function Closing() {
                         </Link>
                     </div>
                 </div>
-            </div>
-            <div
-              className={`py-4 md:hidden w-fill flex-1 flex flex-row justify-end gap-4 lg:gap-4 ${getAnimationClass('bottom-bar-button')}`}
-              style={getAnimationStyle('bottom-bar-button')}
-            >
-                <Button
-                    text={"Get in Touch"}
-                    href="mailto:david.dimalanta@mail.utoronto.ca"
-                    soundEffect="hover"
-                />
-                <Button
-                    text={"CV"}
-                    href="/cv/David_Dimalanta_CV.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    soundEffect="hover"
-                />
             </div>
         </div>
     </div>
