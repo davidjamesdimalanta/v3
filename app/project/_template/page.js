@@ -73,7 +73,7 @@ export default function ProjectPage() {
 
       {/* Example 5: Composition pattern with ProjectSection + MediaBlock */}
       <ProjectSection title="Custom Layout">
-        <p className="text-base text-400 leading-relaxed">
+        <p className="text-p text-400 leading-relaxed">
           For more control, use the composition pattern with ProjectSection and MediaBlock.
         </p>
 
@@ -88,12 +88,12 @@ export default function ProjectPage() {
         {/* Add any custom JSX here */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white/5 p-4 rounded-lg">
-            <h4 className="text-small text-500 mb-2">Metric 1</h4>
-            <p className="text-large text-600">+42%</p>
+            <h4 className="text-sm text-500 mb-2">Metric 1</h4>
+            <p className="text-h1 text-600">+42%</p>
           </div>
           <div className="bg-white/5 p-4 rounded-lg">
-            <h4 className="text-small text-500 mb-2">Metric 2</h4>
-            <p className="text-large text-600">2.5x</p>
+            <h4 className="text-sm text-500 mb-2">Metric 2</h4>
+            <p className="text-h1 text-600">2.5x</p>
           </div>
         </div>
       </ProjectSection>
@@ -127,10 +127,10 @@ export default function ProjectPage() {
       {/* Navigation to Next Project */}
       {nextProject && (
         <section className="flex flex-col gutter-sm pt-8 pb-16">
-          <span className="text-tiny text-400 opacity-60">Next Project</span>
+          <span className="text-h6 text-400 opacity-60">Next Project</span>
           <Link
             href={`/project/${nextProject.slug}`}
-            className="group text-medium text-600 hover:bd-text transition-all duration-150 w-hug"
+            className="group text-h5 hover:bd-text transition-all duration-150 w-hug"
             onMouseEnter={playHover}
           >
             {nextProject.title} →

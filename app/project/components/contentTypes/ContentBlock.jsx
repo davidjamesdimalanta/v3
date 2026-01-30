@@ -24,7 +24,7 @@ export default function ContentBlock({
   return (
     <section className={`flex flex-col gutter-sm ${className}`}>
       {/* Optional Title */}
-      {title && <h3 className="text-medium text-600">{typeof title === 'string' ? title : <>{title}</>}</h3>}
+      {title && <h3 className="text-h5">{typeof title === 'string' ? title : <>{title}</>}</h3>}
 
       {/* Optional Text Content */}
       {text && renderText(text)}
@@ -33,7 +33,7 @@ export default function ContentBlock({
       {media?.src && <MediaBlock {...media} thumbnail={thumbnail} isFirstVideo={isFirstVideo} />}
 
       {/* Optional Caption (separate from media caption) */}
-      {caption && <p className="text-tiny text-400 opacity-60">{caption}</p>}
+      {caption && <p className="text-xs text-400 opacity-60">{caption}</p>}
     </section>
   );
 }

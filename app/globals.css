@@ -14,6 +14,86 @@
     --text-shadow-sm: 0 0 4px rgb(0 0 0 / 0.05);
 }
 
+/* ===================================
+   ANIMATION KEYFRAMES
+   =================================== */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoom-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes slide-in-from-top {
+    from {
+        transform: translateY(-0.5rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-from-bottom {
+    from {
+        transform: translateY(0.5rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-from-left {
+    from {
+        transform: translateX(-0.5rem);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-from-right {
+    from {
+        transform: translateX(0.5rem);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
 /* GENERAL */
 body {
     overflow-y: scroll;
@@ -23,6 +103,15 @@ body {
     min-height: 100dvh;
     color: var(--text-color);
     background-color: var(--dark-color);
+    font-family: var(--font-aspekta), sans-serif;
+}
+
+/* HEADINGS - Use New Rodin Pro */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-new-rodin-pro), sans-serif;
+}
+
+span {
     font-family: var(--font-new-rodin-pro), sans-serif;
 }
 
@@ -37,6 +126,16 @@ body {
     @apply text-shadow-white text-shadow-sm;
 }
 
+/* TOUCH INTERACTION FIX */
+@media (hover: none) and (pointer: coarse) {
+  [data-slot="hover-card-trigger"] {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
 @utility bd {
     @apply backdrop-blur-xl shadow-[0_0_4px_2px_rgba(255,255,255,0.5)];
 }
@@ -45,26 +144,101 @@ body {
     @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(255,255,255,0.8)];
 }
 
-/* TEXT STYLES */
-@utility text-large {
-    @apply text-[41px] leading-[43px];
+/* GRADIENT TEXT UTILITIES */
+@utility text-gradient-blue {
+    background: linear-gradient(to right, #0B99FF, #6CC2FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
 }
 
-@utility text-medium {
-    @apply text-[23px] leading-[28px];
+@utility text-gradient-green {
+    background: linear-gradient(to right, #39FF14, #71CF88);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
 }
 
-@utility text-base {
-    @apply text-[15px] leading-[24px] tracking-wide;
+/* ===================================
+   ANIMATION UTILITIES
+   =================================== */
+
+/* Base animation utilities */
+@utility animate-in {
+    animation-name: fade-in, zoom-in;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
 }
 
-@utility text-small {
-    @apply text-[13px] leading-[20px] tracking-wide;
+@utility animate-out {
+    animation-name: fade-out, zoom-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
 }
 
-@utility text-tiny {
-    @apply text-[11px] leading-[13px] tracking-wide;
-    letter-spacing: 0.025em;
+/* Fade utilities */
+@utility fade-in-0 {
+    animation-name: fade-in;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility fade-out-0 {
+    animation-name: fade-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+/* Zoom utilities */
+@utility zoom-in-95 {
+    animation-name: zoom-in;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility zoom-out-95 {
+    animation-name: zoom-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+/* Slide utilities */
+@utility slide-in-from-top-2 {
+    animation-name: slide-in-from-top;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility slide-in-from-bottom-2 {
+    animation-name: slide-in-from-bottom;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility slide-in-from-left-2 {
+    animation-name: slide-in-from-left;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility slide-in-from-right-2 {
+    animation-name: slide-in-from-right;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
 }
 
 /* ===================================
@@ -77,52 +251,64 @@ body {
  */
 
 @utility text-h1 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem);
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 @utility text-h2 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem);
   line-height: 1.1;
 }
 
 @utility text-h3 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem);
   line-height: 1.2;
 }
 
 @utility text-h4 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
   line-height: 1.2;
 }
 
 @utility text-h5 {
+  font-family: var(--font-new-rodin-pro), sans-serif;
   font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
   line-height: 1.2;
 }
 
 @utility text-h6 {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.05rem, 0.99rem + 0.23vw, 1.2rem);
   line-height: 1.2;
 }
 
 @utility text-p {
-  font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1rem);
+  font-family: var(--font-aspekta), sans-serif;
+  font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1.125rem);
   line-height: 1.4;
-  letter-spacing: 0.025em;
 }
 
 @utility text-sm {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
-  line-height: 1.4;
-  letter-spacing: 0.015em;
+  line-height: 1.5;
 }
 
 @utility text-xs {
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(0.6075rem, 0.58rem + 0.11vw, 0.69438rem);
-  line-height: 1.4;
-  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
 
+@utility text-button {
+  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 /* RESPONSIVE PADDING */
@@ -253,7 +439,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-new-rodin-pro), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-aspekta), -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: hidden;
 }
 

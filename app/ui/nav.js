@@ -30,7 +30,7 @@ export default function Nav() {
       }}
     >
         <Link
-        className={`text-base text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
+        className={`text-p text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
         style={getAnimationStyle('nav-logo-name')}
         href="/"
         onMouseEnter={playHover}

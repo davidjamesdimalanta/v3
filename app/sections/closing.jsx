@@ -13,7 +13,7 @@ export default function Closing() {
         {/* Currently Up to and Contact*/}
         <div className="flex flex-col md:flex-row md:justify-between gutter-sm md:gutter-md">
             <div
-              className={`w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-small ${getAnimationClass('bottom-bar-currently')}`}
+              className={`w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-sm ${getAnimationClass('bottom-bar-currently')}`}
               style={getAnimationStyle('bottom-bar-currently')}
             >
                 <div className="flex flex-col">

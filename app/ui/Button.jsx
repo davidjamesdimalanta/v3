@@ -7,7 +7,7 @@ export default function Button({ text, href, className = "", target, rel, soundE
   // Sound effects (opt-in via soundEffect prop)
   const { playButtonHover, playNavigateHome, playNavigateProject } = useSoundEffects();
   const baseStyles = "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center";
-  const variantStyles = "bd text-small text-400 hover:bd-text hover:bd-active transition-all duration-150";
+  const variantStyles = "bd text-button text-400 hover:bd-text hover:bd-active transition-all duration-150";
 
   // Conditional event handlers based on soundEffect prop
   const eventHandlers = {};

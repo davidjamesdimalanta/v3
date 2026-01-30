@@ -6,10 +6,10 @@ export default function Outro() {
     return (
     <div className="w-full flex flex-col gutter-md">
         <div className="md:max-w-[800px] flex flex-col">
-            <span className="text-medium text-500">
-                Toronto-based Product Designer and Developer 
+            <span className="text-h5 text-500">
+                Toronto-based Product Designer and Developer
             </span>
-            <span className="text-base text-300">
+            <span className="text-p text-300">
                 Passionate about creating accessible and mobile-first tools for other digital natives, 
                 imagining and build for the web with a UX and accessibility lens. Currently curious about 
                 how I can make real change through interaction design, accessible design, UX tools, and AI.

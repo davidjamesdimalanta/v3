@@ -34,4 +34,10 @@ export const projectData = {
     team: "1 designer, 1 researcher, 2 developers",
     year: "2025",
   },
+
+  // Case study section theme colors
+  caseStudy: {
+    bgColor: "#FFF9F0",  // Background color for media matting effect
+    fgColor: "#6B4423",  // Text/caption color
+  },
 };

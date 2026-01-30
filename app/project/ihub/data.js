@@ -39,5 +39,11 @@ export const projectData = {
       timeline: "4 months",
       year: "2025"
     },
+
+    // Case study section theme colors
+    caseStudy: {
+      bgColor: "#EEF2F7",  // Background color for media matting effect
+      fgColor: "#1E3A5F",  // Text/caption color
+    },
   };
   

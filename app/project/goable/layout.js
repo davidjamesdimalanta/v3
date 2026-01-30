@@ -1,11 +1,10 @@
-import ProjectLayout from "../_shared/ProjectLayout";
 import { projectData } from "./data";
 
 /**
  * Project-specific layout
  *
- * This layout wraps your project page with the shared ProjectLayout component
- * and provides project-specific metadata for SEO
+ * This layout provides project-specific metadata for SEO.
+ * The page.js file controls the actual layout composition.
  */
 
 export async function generateMetadata() {
@@ -21,9 +20,5 @@ export async function generateMetadata() {
 }
 
 export default function Layout({ children }) {
-  return (
-    <ProjectLayout projectData={projectData}>
-      {children}
-    </ProjectLayout>
-  );
+  return children;
 }
