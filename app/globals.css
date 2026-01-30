@@ -14,6 +14,86 @@
     --text-shadow-sm: 0 0 4px rgb(0 0 0 / 0.05);
 }
 
+/* ===================================
+   ANIMATION KEYFRAMES
+   =================================== */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoom-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes slide-in-from-top {
+    from {
+        transform: translateY(-0.5rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-from-bottom {
+    from {
+        transform: translateY(0.5rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-from-left {
+    from {
+        transform: translateX(-0.5rem);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-from-right {
+    from {
+        transform: translateX(0.5rem);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
 /* GENERAL */
 body {
     overflow-y: scroll;
@@ -46,12 +126,119 @@ span {
     @apply text-shadow-white text-shadow-sm;
 }
 
+/* TOUCH INTERACTION FIX */
+@media (hover: none) and (pointer: coarse) {
+  [data-slot="hover-card-trigger"] {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
 @utility bd {
     @apply backdrop-blur-xl shadow-[0_0_4px_2px_rgba(255,255,255,0.5)];
 }
 
 @utility bd-active {
     @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(255,255,255,0.8)];
+}
+
+/* GRADIENT TEXT UTILITIES */
+@utility text-gradient-blue {
+    background: linear-gradient(to right, #0B99FF, #6CC2FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+}
+
+@utility text-gradient-green {
+    background: linear-gradient(to right, #39FF14, #71CF88);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+}
+
+/* ===================================
+   ANIMATION UTILITIES
+   =================================== */
+
+/* Base animation utilities */
+@utility animate-in {
+    animation-name: fade-in, zoom-in;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility animate-out {
+    animation-name: fade-out, zoom-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+/* Fade utilities */
+@utility fade-in-0 {
+    animation-name: fade-in;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility fade-out-0 {
+    animation-name: fade-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+/* Zoom utilities */
+@utility zoom-in-95 {
+    animation-name: zoom-in;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility zoom-out-95 {
+    animation-name: zoom-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+/* Slide utilities */
+@utility slide-in-from-top-2 {
+    animation-name: slide-in-from-top;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility slide-in-from-bottom-2 {
+    animation-name: slide-in-from-bottom;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility slide-in-from-left-2 {
+    animation-name: slide-in-from-left;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@utility slide-in-from-right-2 {
+    animation-name: slide-in-from-right;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
 }
 
 /* ===================================
@@ -101,7 +288,7 @@ span {
 
 @utility text-p {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1rem);
+  font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1.125rem);
   line-height: 1.4;
 }
 

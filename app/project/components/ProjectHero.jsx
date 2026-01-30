@@ -14,8 +14,8 @@ export default function ProjectHero({
   const { playHover, playNavigateHome } = useSoundEffects();
   return (
     <aside className="relative flex flex-1 flex-col lg:basis-[720px]">
-      <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh p-8">
-        <div className="flex flex-col gutter-base">
+      <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh px-4 py-8 md:p-8">
+        <div className="flex flex-col gutter-base pb-4 md:pb-0">
           {/* Close Button */}
           <button
             onClick={() => {
@@ -47,7 +47,7 @@ export default function ProjectHero({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-p text-400 hover:bd-text transition-all duration-150 w-hug"
+                  className="text-button text-400 hover:bd-text transition-all duration-150 w-hug"
                   onMouseEnter={playHover}
                 >
                   {link.label} →
@@ -114,8 +114,8 @@ export default function ProjectHero({
           )}
           {/* Project Description */}
           {description.length > 0 && (
-            <div className="flex flex-col gutter-sm pt-4">
-              <div className="flex flex-col gutter-xs text-sm text-400">
+            <div className="flex flex-col gutter-sm pt-2 md:pt-4">
+              <div className="flex flex-col gutter-xs text-sm md:text-p text-400">
                 {description.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}

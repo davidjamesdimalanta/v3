@@ -13,13 +13,13 @@ import { createContext, useContext } from "react";
 
 const CaseStudyThemeContext = createContext({
   bgColor: "#F9F9F9",  // Default: current gray background
-  fgColor: "#A0A0A0",  // Default: neutral gray for captions
+  fgColor: "#F9F9F9",  // Default: neutral gray for captions
 });
 
 export function CaseStudyThemeProvider({ children, theme }) {
   const themeValue = {
     bgColor: theme?.bgColor || "#F9F9F9",
-    fgColor: theme?.fgColor || "#A0A0A0",
+    fgColor: theme?.fgColor || "#F9F9F9",
   };
 
   return (
