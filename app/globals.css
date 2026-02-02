@@ -144,7 +144,10 @@ span {
     @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(255,255,255,0.8)];
 }
 
-/* GRADIENT TEXT UTILITIES */
+/* GRADIENT TEXT UTILITIES
+ * DEPRECATED: Use TextShimmer component instead for animated shimmer effect
+ * These utilities are kept for backward compatibility only
+ */
 @utility text-gradient-blue {
     background: linear-gradient(to right, #0B99FF, #6CC2FF);
     -webkit-background-clip: text;

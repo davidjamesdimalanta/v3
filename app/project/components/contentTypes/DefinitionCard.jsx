@@ -5,6 +5,7 @@ import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/app/ui/hover-ca
 import { Popover, PopoverTrigger, PopoverContent } from "@/app/ui/popover"
 import { cn } from "@/app/ui/lib/utils"
 import Image from "next/image"
+import { TextShimmer } from "@/app/ui/text-shimmer"
 
 /**
  * DefinitionCard Component
@@ -16,7 +17,8 @@ import Image from "next/image"
  * MOBILE: Automatically positions Popover above or below based on viewport position
  *
  * @param {string|JSX.Element} trigger - The highlighted text/term to display (can include JSX for styling)
- * @param {string} triggerClassName - Optional className for trigger styling (e.g., "text-gradient-blue")
+ * @param {"blue"|"green"} shimmerVariant - Shimmer animation color variant (default: "blue")
+ * @param {string} triggerClassName - [DEPRECATED] Optional className for trigger styling. Use shimmerVariant instead.
  * @param {Object} triggerProps - Optional additional props for the trigger element (e.g., onMouseEnter)
  * @param {JSX.Element|string} content - Main content displayed in the card
  * @param {Object} image - Optional image object { src, alt }
@@ -28,7 +30,7 @@ import Image from "next/image"
  * @example
  * <DefinitionCard
  *   trigger="Washroom access"
- *   triggerClassName="text-gradient-blue"
+ *   shimmerVariant="blue"
  *   triggerProps={{ onMouseEnter: handleHover }}
  *   content={<>involves both physical and emotional barriers</>}
  *   caption={{ text: "DOI : 10.17577/IJERTV9IS070564", link: "https://doi.org/..." }}
@@ -37,6 +39,7 @@ import Image from "next/image"
  */
 export default function DefinitionCard({
   trigger,
+  shimmerVariant = "blue",
   triggerClassName,
   triggerProps = {},
   content,
@@ -129,11 +132,12 @@ export default function DefinitionCard({
       <HoverCard>
         <HoverCardTrigger asChild>
           <i
-            className={cn("pr-[2px] cursor-help border-b", triggerClassName)}
-            style={{ borderColor: 'currentColor' }}
+            className={cn("pr-[2px] cursor-help", triggerClassName)}
             {...triggerProps}
           >
-            {trigger}
+            <TextShimmer variant={shimmerVariant} as="span">
+              {typeof trigger === 'string' ? trigger : String(trigger)}
+            </TextShimmer>
           </i>
         </HoverCardTrigger>
         <HoverCardContent
@@ -159,11 +163,12 @@ export default function DefinitionCard({
       <PopoverTrigger asChild>
         <i
           ref={triggerRef}
-          className={cn("pr-[2px] cursor-help border-b", triggerClassName)}
-          style={{ borderColor: 'currentColor' }}
+          className={cn("pr-[2px] cursor-help", triggerClassName)}
           {...triggerProps}
         >
-          {trigger}
+          <TextShimmer variant={shimmerVariant} as="span">
+            {typeof trigger === 'string' ? trigger : String(trigger)}
+          </TextShimmer>
         </i>
       </PopoverTrigger>
       <PopoverContent
