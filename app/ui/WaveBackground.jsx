@@ -22,11 +22,11 @@ export default function WaveBackground({ mode = 'design' }) {
     fadeStart: 0,
     fadeEnd: 100,
     minOpacity: 0.4,
-    maxOpacity: 1.0
+    maxOpacity: 0.9
   });
 
   // Use full opacity on project pages, scroll-based opacity elsewhere
-  const waveOpacity = isProjectPage ? 1.0 : scrollOpacity;
+  const waveOpacity = isProjectPage ? 0.9 : scrollOpacity;
 
   // Initialize WebGL once, persist across navigation
   useEffect(() => {

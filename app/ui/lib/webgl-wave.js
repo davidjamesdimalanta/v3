@@ -118,9 +118,9 @@ void main() {
 
 	// Accumulate wave colors with individual opacities.
 	vec3 accumulatedColor = vec3(0.0);
-	// Use higher vertical offsets on mobile: 0.65 -> 0.8, 0.45 -> 0.55
-	float offset1 = uIsMobile ? 0.8 : 0.65;
-	float offset2 = uIsMobile ? 0.55 : 0.45;
+	// Use higher vertical offsets on mobile: 0.65 -> 0.7, 0.45 -> 0.5
+	float offset1 = uIsMobile ? 0.7 : 0.65;
+	float offset2 = uIsMobile ? 0.5 : 0.45;
 
 	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, offset1, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
 	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, offset1, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);
