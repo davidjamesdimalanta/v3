@@ -5,6 +5,7 @@ import WaveBackground from "./ui/WaveBackground";
 import { inter, newRodinPro, aspekta } from "./fonts";
 import FontLoadingMonitor from "./components/FontLoadingMonitor";
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export const metadata = {
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${newRodinPro.variable} ${aspekta.variable}`}>
       <body className="relative antialiased">
+        <SpeedInsights />
         <Analytics/>
         <FontLoadingMonitor />
         <SmoothScroll />
