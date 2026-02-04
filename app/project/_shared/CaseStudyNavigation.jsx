@@ -81,7 +81,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
   if (sections.length === 0) return null;
 
   return (
-    <nav className="sticky top-0 z-[60] w-full bg-black/95 backdrop-blur-md border-b border-white/10 hidden lg:block">
+    <nav className="sticky top-0 z-60 w-full bg-black/95 backdrop-blur-md border-b border-white/10 hidden lg:block">
       <div className="mx-auto px-4 md:px-8 py-4">
         <ul className="flex flex-wrap justify-center items-center gap-6">
           {sections.map(({ id, heading }) => (
@@ -91,7 +91,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
                 className={`
                   text-button uppercase tracking-wider
                   transition-all duration-300 ease-in-out
-                  hover:opacity-100
+                  hover:opacity-100 cursor-pointer
                   ${
                     activeSection === id
                       ? "text-gradient-blue opacity-100 scale-105"
