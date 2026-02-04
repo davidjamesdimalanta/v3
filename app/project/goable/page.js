@@ -163,8 +163,9 @@ export default function ProjectPage() {
               text: "",
               link: ""
             }}
-            side="left"
-            width="w-180"
+            side="bottom"
+            mobileWidth="w-80"
+            desktopWidth="w-120"
             sideOffset="1"
           />
           {" "}
@@ -194,9 +195,9 @@ export default function ProjectPage() {
               text: "",
               link: ""
             }}
-            side="right"
+            side="bottom"
             width="w-120"
-            sideOffset="2"
+            sideOffset="1"
           />, the project aimed to tackle the three critical issues in washroom finding:</>
 
         ]}
@@ -387,13 +388,12 @@ export default function ProjectPage() {
         <>
           Different prototype fidelities serve their purposes and all are equally needed in the design process. Doing UXR without one or the other can compromise your designs further down the line.
         </>,
-
         ]}
       />
 
         {/* Navigation to Next Project - Inside Case Study Section */}
         {nextProject && (
-          <div className="max-w-lg mx-auto text-center pt-8">
+          <div className="max-w-lg mx-auto text-center pt-16">
             <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>
             <Link
               href={`/project/${nextProject.slug}`}

@@ -34,7 +34,7 @@ export default function ProjectHero({
           </button>
 
           {/* Project Title */}
-          <h1 className="text-h5 md:text-h1 text-400">
+          <h1 className="text-h3 md:text-h1 text-400">
             {title}
           </h1>
 
@@ -114,8 +114,8 @@ export default function ProjectHero({
           )}
           {/* Project Description */}
           {description.length > 0 && (
-            <div className="flex flex-col gutter-sm pt-2 md:pt-4">
-              <div className="flex flex-col gutter-xs text-sm md:text-p text-400">
+            <div className="flex flex-col gutter-sm pt-4 md:pt-4">
+              <div className="flex flex-col gutter-xs text-p">
                 {description.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}

@@ -13,8 +13,8 @@ import { TextShimmer } from "@/app/ui/text-shimmer"
  * A hybrid component that uses HoverCard on desktop (hover) and Popover on mobile (tap).
  * Combines text, optional images, and citations in a reusable package.
  *
- * DESKTOP: Uses HoverCard with the specified `side` prop (e.g., "left")
- * MOBILE: Automatically positions Popover above or below based on viewport position
+ * DESKTOP (≥810px): Uses HoverCard with the specified `side` prop (e.g., "left")
+ * MOBILE (<810px): Automatically positions Popover above or below based on viewport position
  *
  * @param {string|JSX.Element} trigger - The highlighted text/term to display (can include JSX for styling)
  * @param {"blue"|"green"} shimmerVariant - Shimmer animation color variant (default: "blue")
@@ -24,7 +24,9 @@ import { TextShimmer } from "@/app/ui/text-shimmer"
  * @param {Object} image - Optional image object { src, alt }
  * @param {Object} caption - Optional caption object { text, link }
  * @param {string} side - Position of HoverCard on desktop (default: "left"). Ignored on mobile.
- * @param {string} width - Width class for card content (default: "w-80")
+ * @param {string} width - Width class for card content (default: "w-80"). Can be responsive (e.g., "w-80 lg:w-120")
+ * @param {string} mobileWidth - Optional separate width for mobile (<810px). If not provided, uses `width`
+ * @param {string} desktopWidth - Optional separate width for desktop (≥810px). If not provided, uses `width`
  * @param {string|number} sideOffset - Offset distance from trigger (default: "1")
  *
  * @example
@@ -47,22 +49,30 @@ export default function DefinitionCard({
   caption,
   side = "left",
   width = "w-80",
+  mobileWidth,
+  desktopWidth,
   sideOffset = "1"
 }) {
-  const [hasHover, setHasHover] = useState(true) // Default to hover for SSR
+  const [isDesktop, setIsDesktop] = useState(true) // Default to desktop for SSR
   const [popoverSide, setPopoverSide] = useState("bottom") // Dynamic side for mobile
   const triggerRef = useRef(null) // Ref to track trigger element
 
+  // Determine which width to use based on props
+  const effectiveWidth = isDesktop ? (desktopWidth || width) : (mobileWidth || width)
+
   useEffect(() => {
-    // Detect if device has hover capability
-    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-    setHasHover(mediaQuery.matches)
+    // Detect viewport width (810px breakpoint)
+    const checkViewport = () => {
+      setIsDesktop(window.innerWidth >= 810)
+    }
 
-    // Listen for changes (e.g., device rotation, external display)
-    const handleChange = (e) => setHasHover(e.matches)
-    mediaQuery.addEventListener('change', handleChange)
+    // Initial check
+    checkViewport()
 
-    return () => mediaQuery.removeEventListener('change', handleChange)
+    // Listen for window resize
+    window.addEventListener('resize', checkViewport)
+
+    return () => window.removeEventListener('resize', checkViewport)
   }, [])
 
   // Calculate optimal popover position on mobile
@@ -111,7 +121,7 @@ export default function DefinitionCard({
               rel="noopener noreferrer"
               className={cn(
                 "text-sm opacity-60 hover:bd-text transition-all duration-150",
-                !hasHover && "underline underline-offset-2" // Underline on mobile
+                !isDesktop && "underline underline-offset-2" // Underline on mobile
               )}
             >
               {caption.text}
@@ -126,13 +136,13 @@ export default function DefinitionCard({
     </div>
   )
 
-  // Render HoverCard on desktop (hover devices)
-  if (hasHover) {
+  // Render HoverCard on desktop (≥810px)
+  if (isDesktop) {
     return (
       <HoverCard>
         <HoverCardTrigger asChild>
           <i
-            className={cn("pr-[2px] cursor-help", triggerClassName)}
+            className={cn("pr-[2px] cursor-pointer", triggerClassName)}
             {...triggerProps}
           >
             <TextShimmer variant={shimmerVariant} as="span">
@@ -141,7 +151,7 @@ export default function DefinitionCard({
           </i>
         </HoverCardTrigger>
         <HoverCardContent
-          className={width}
+          className={effectiveWidth}
           sideOffset={sideOffset}
           side={side}
         >
@@ -151,7 +161,7 @@ export default function DefinitionCard({
     )
   }
 
-  // Render Popover on mobile (touch devices)
+  // Render Popover on mobile (<810px)
   return (
     <Popover
       onOpenChange={(open) => {
@@ -163,7 +173,7 @@ export default function DefinitionCard({
       <PopoverTrigger asChild>
         <i
           ref={triggerRef}
-          className={cn("pr-[2px] cursor-help", triggerClassName)}
+          className={cn("pr-[2px] cursor-pointer", triggerClassName)}
           {...triggerProps}
         >
           <TextShimmer variant={shimmerVariant} as="span">
@@ -172,7 +182,7 @@ export default function DefinitionCard({
         </i>
       </PopoverTrigger>
       <PopoverContent
-        className={cn(width, "max-w-[calc(100vw-2rem)]")}
+        className={cn(effectiveWidth, "max-w-[calc(100vw-2rem)]")}
         sideOffset={sideOffset}
         side={popoverSide}
       >

@@ -99,21 +99,23 @@ body {
     overflow-y: scroll;
     overflow-x: none;
     overscroll-behavior: contain !important;
+    scrollbar-gutter: stable; /* Prevent layout shift when scroll is locked */
     width: 100%;
     min-height: 100dvh;
     color: var(--text-color);
     background-color: var(--dark-color);
     font-family: var(--font-aspekta), sans-serif;
+    transition: padding-right 0.15s ease; /* Smooth padding transition for drawer */
 }
 
 /* HEADINGS - Use New Rodin Pro */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-new-rodin-pro), sans-serif;
-}
-
+} */
+/* 
 span {
     font-family: var(--font-new-rodin-pro), sans-serif;
-}
+} */
 
 /* CANVAS */
 #webgl-canvas {
@@ -291,7 +293,7 @@ span {
 
 @utility text-p {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(0.875rem, 0.83rem + 0.19vw, 1.125rem);
+  font-size: clamp(1rem, 0.9rem + 0.19vw, 1.125rem);
   line-height: 1.4;
 }
 

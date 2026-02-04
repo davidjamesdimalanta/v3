@@ -406,7 +406,7 @@ export default function MediaBlock({
         )}
       </div>
       {caption && (
-        <p className="text-xs text-400 opacity-60 text-center">{caption}</p>
+        <p className="text-sm text-400 opacity-60 text-center">{caption}</p>
       )}
     </div>
   );

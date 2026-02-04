@@ -5,6 +5,8 @@ import ProjectLayout from "../_shared/ProjectLayout";
 import ContentBlock from "../components/contentTypes/ContentBlock";
 import CaseStudySection from "../_shared/CaseStudySection";
 import CaseStudyTextBlock from "../components/contentTypes/CaseStudyTextBlock";
+import DefinitionCard from "../components/contentTypes/DefinitionCard";
+import { TextShimmer } from "../../ui/text-shimmer";
 import { projectData } from "./data";
 import { getNextProject } from "../projects";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
@@ -26,7 +28,7 @@ import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 export default function ProjectPage() {
   // Sound effects
-  const { playHover } = useSoundEffects();
+  const { playHover, playButtonHover } = useSoundEffects();
 
   // Get the slug of the current project from the URL
   // Replace 'your-project-slug' with your actual project slug
@@ -59,7 +61,26 @@ export default function ProjectPage() {
           thumbnail="https://image.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo/thumbnail.png?width=1919&height=1080&time=0"
         />
         <ContentBlock
-          title={<>Reimagining <Link href="https://www.interaction-design.org/literature/topics/human-ai-interaction?srsltid=AfmBOop8f0ApVA-MkRFEqsslVKxJ4GZ43gwWndx2gTsac1OPLJKC_OHV" target="_blank" rel="noopener noreferrer" className="underline hover:bd-text transition-all duration-150" onMouseEnter={playHover}>HAX</Link></>}
+          title={<>Reimagining{" "}
+          <DefinitionCard
+            trigger="HAX"
+            shimmerVariant="blue"
+            triggerProps={{ onMouseEnter: playButtonHover }}
+            content={
+              <>
+                <strong>What is Human-AI Interaction (HAX)?</strong>
+                <br /><br />
+                Human-AI interaction studies and designs how humans and artificial intelligence (AI) systems communicate and collaborate. AI systems are computer programs that can perform tasks that usually require human intelligence, such as understanding natural language, recognizing images, making decisions, and learning from data. Human-AI interaction aims to create AI systems that are user-friendly, trustworthy, ethical, and beneficial for humans.
+              </>
+            }
+            caption={{
+              text: "From the IxDF",
+              link: "https://www.interaction-design.org/literature/topics/human-ai-interaction?srsltid=AfmBOop8f0ApVA-MkRFEqsslVKxJ4GZ43gwWndx2gTsac1OPLJKC_OHV"
+            }}
+            side="right"
+            width="w-120"
+            sideOffset="2"
+          /></>}
           text="Resolving common issues of chat interfaces, we made interactions live on a canvas to give users more control over visual and spatial relationships between AI-insights and their writing."
           media={{
             type: "image",
@@ -88,7 +109,7 @@ export default function ProjectPage() {
 
         {/* Navigation to Next Project */}
         {nextProject && (
-          <div className="max-w-lg mx-auto text-center pt-8">
+          <div className="max-w-lg mx-auto text-center pt-16">
             <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>
             <Link
               href={`/project/${nextProject.slug}`}

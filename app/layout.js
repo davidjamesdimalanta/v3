@@ -35,8 +35,8 @@ export const metadata = {
     images: ['/assets/images/web-preview/preview.png'],
   },
   icons: {
-    icon: '/assets/icon/Logo.svg',
-    apple: '/assets/icon/Logo-dark.png',
+    icon: '/assets/icon/favicon2.png',
+    apple: '/assets/icon/favicon2.png',
   },
   appleWebApp: {
     capable: true,

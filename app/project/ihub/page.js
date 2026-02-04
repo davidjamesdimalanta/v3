@@ -96,17 +96,10 @@ export default function ProjectPage() {
             }}
           />
         </div>
-      </ProjectLayout>
-
-      {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
-      <CaseStudySection title="Design Process" theme={projectData.caseStudy}>
-        <CaseStudyTextBlock
-          text="This section is currently a work in progress. Check back soon for detailed insights into the design process!"
-        />
 
         {/* Navigation to Next Project */}
         {nextProject && (
-          <div className="max-w-lg mx-auto text-center pt-8">
+          <div className="max-w-lg mx-auto text-center pt-16">
             <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>
             <Link
               href={`/project/${nextProject.slug}`}
@@ -117,7 +110,7 @@ export default function ProjectPage() {
             </Link>
           </div>
         )}
-      </CaseStudySection>
+      </ProjectLayout>
     </>
   );
 }

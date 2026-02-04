@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 /**
  * Case Study Navigation Component
@@ -16,6 +17,7 @@ import { useState, useEffect } from "react";
  */
 export default function CaseStudyNavigation({ sections = [] }) {
   const [activeSection, setActiveSection] = useState(null);
+  const { playButtonHover } = useSoundEffects();
 
   useEffect(() => {
     // Don't run if no sections
@@ -88,10 +90,11 @@ export default function CaseStudyNavigation({ sections = [] }) {
             <li key={id}>
               <button
                 onClick={() => handleNavigationClick(id)}
+                onMouseEnter={playButtonHover}
                 className={`
                   text-button uppercase tracking-wider
                   transition-all duration-300 ease-in-out
-                  hover:opacity-100 cursor-pointer
+                  hover:bd-text cursor-pointer
                   ${
                     activeSection === id
                       ? "text-gradient-blue opacity-100 scale-105"

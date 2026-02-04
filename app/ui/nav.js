@@ -30,8 +30,11 @@ export default function Nav() {
       }}
     >
         <Link
-        className={`text-p text-600 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
-        style={getAnimationStyle('nav-logo-name')}
+        className={`text-h6 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
+        style={{
+          ...getAnimationStyle('nav-logo-name'),
+          fontFamily: 'var(--font-new-rodin-pro), sans-serif'
+        }}
         href="/"
         onMouseEnter={playHover}
         onClick={playNavigateHome}>

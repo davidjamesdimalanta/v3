@@ -126,7 +126,7 @@ export default function ProjectPage() {
 
       {/* Navigation to Next Project */}
       {nextProject && (
-        <section className="flex flex-col gutter-sm pt-8 pb-16">
+        <section className="flex flex-col gutter-sm pt-16 pb-16">
           <span className="text-h6 text-400 opacity-60">Next Project</span>
           <Link
             href={`/project/${nextProject.slug}`}
