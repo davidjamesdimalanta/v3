@@ -67,7 +67,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
     return () => {
       observer.disconnect();
     };
-  }, [sections]);
+  }, [sections, activeSection]);
 
   const handleNavigationClick = (id) => {
     const element = document.getElementById(id);
