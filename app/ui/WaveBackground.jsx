@@ -1,32 +1,18 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
 import { WaveRenderer } from './lib/webgl-wave';
 import { useStartupAudio } from './hooks/useStartupAudio';
-import { useScrollFade } from './hooks/useScrollFade';
 
 export default function WaveBackground({ mode = 'design' }) {
   const canvasRef = useRef(null);
   const rendererRef = useRef(null);
-  const pathname = usePathname();
-
-  // Check if on a project page - disable scroll fade for project pages
-  const isProjectPage = pathname?.startsWith('/project/') && pathname !== '/project';
 
   // Initialize startup audio
   useStartupAudio('/assets/psp/sounds/01 Startup.mp3');
 
-  // Scroll-based opacity fade (disabled on project pages)
-  const { opacity: scrollOpacity } = useScrollFade({
-    fadeStart: 0,
-    fadeEnd: 100,
-    minOpacity: 0.4,
-    maxOpacity: 0.9
-  });
-
-  // Use full opacity on project pages, scroll-based opacity elsewhere
-  const waveOpacity = isProjectPage ? 0.9 : scrollOpacity;
+  // Constant opacity - no scroll fade
+  const waveOpacity = 0.3;
 
   // Initialize WebGL once, persist across navigation
   useEffect(() => {

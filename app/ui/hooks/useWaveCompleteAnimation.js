@@ -19,8 +19,8 @@ import { animationStateManager } from '../lib/animationStateManager';
  *   - shouldAnimate: boolean - Whether to apply animations (respects prefers-reduced-motion)
  */
 export function useWaveCompleteAnimation({ playOnlyOnInitialLoad = false } = {}) {
-  const [isReady, setIsReady] = useState(false);
-  const [shouldAnimate, setShouldAnimate] = useState(true);
+  const [isReady, setIsReady] = useState(true);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   // Capture wave completion status at mount time to prevent race conditions
   const [wasInitiallyComplete] = useState(() =>

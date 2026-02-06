@@ -22,7 +22,7 @@ export default function Nav() {
   return (
     <nav
       id="nav"
-      className="fixed top-0 left-0 right-0 z-50 py-[20px] px-[12px] md:px-[20px] flex justify-between items-center w-full"
+      className="fixed top-0 left-0 right-0 z-50 py-[20px] px-4 md:px-8 flex justify-between items-center w-full"
       style={{
         opacity: navbarOpacity,
         transition: 'none',

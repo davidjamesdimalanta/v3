@@ -42,3 +42,7 @@ next-env.d.ts
 
 .claude
 .playwright-mcp
+
+# FCO stuff
+FCO.md
+FCO.txt

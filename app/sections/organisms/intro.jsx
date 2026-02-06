@@ -5,14 +5,16 @@ import Button from "../../ui/Button";
 
 export default function Intro() {
     return (
-    <div className="w-full flex flex-col">
-        <div className="flex flex-col gutter-xs">
-            <span className="text-h5 md:text-h5">
+    <div className="w-full flex flex-col gutter-md">
+        <div className="grid grid-cols-1 md:grid-cols-3 gutter-sm w-full">
+            <span className="text-h4 md:text-h3 max-w-96">
                 Product Designer and Developer
             </span>
-            <span className="text-p">
-                Imagining and building for other digital natives with a UX and developer lens. 
-                Currently curious about how I can make real change through interaction design, accessible design, and Human-AI Interaction.
+            <span className="text-p max-w-96">
+                A early-career designer with experience in web development, interaction design, 
+                accessibility design, and Human-AI Interaction.
+            </span>
+            <span className="text-p max-w-96">
                 Based in Toronto, currently seeking a Co-op for Summer 2026.
             </span>
         </div>

@@ -9,13 +9,13 @@ export class WaveRenderer {
     this.animationFrameId = null;
     this.currentMode = initialMode;
 
-    // Animation state
+    // Animation state - disabled, waves are immediately visible
     this.fadeInStartTime = null;
-    this.fadeInDelay = 500;
-    this.fadeInDuration = 1500;
-    this.waveStagger = 250;
+    this.fadeInDelay = 0;
+    this.fadeInDuration = 0;
+    this.waveStagger = 0;
     this.numWaves = 7;
-    this.waveOpacities = new Array(this.numWaves).fill(0.0);
+    this.waveOpacities = new Array(this.numWaves).fill(1.0);
     this.completionEventFired = false;
 
     // WebGL resources
@@ -118,9 +118,9 @@ void main() {
 
 	// Accumulate wave colors with individual opacities.
 	vec3 accumulatedColor = vec3(0.0);
-	// Use higher vertical offsets on mobile: 0.65 -> 0.7, 0.45 -> 0.5
-	float offset1 = uIsMobile ? 0.7 : 0.65;
-	float offset2 = uIsMobile ? 0.5 : 0.45;
+	// Spread waves around center (0.5): 0.6 -> 0.65, 0.35 -> 0.4
+	float offset1 = uIsMobile ? 0.65 : 0.6;
+	float offset2 = uIsMobile ? 0.4 : 0.35;
 
 	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, offset1, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
 	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, offset1, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);

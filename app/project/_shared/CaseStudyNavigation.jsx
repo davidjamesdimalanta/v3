@@ -98,7 +98,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
                   ${
                     activeSection === id
                       ? "text-gradient-blue opacity-100 scale-105"
-                      : "text-white/60 hover:text-white/80"
+                      : "text-white"
                   }
                 `}
               >

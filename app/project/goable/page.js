@@ -43,15 +43,6 @@ export default function ProjectPage() {
       <ProjectLayout projectData={projectData}>
         <ContentBlock
           media={{
-            type: "image",
-            src: "/assets/images/goAble/Spread2.webp",
-            aspectRatio: "video",
-            caption: "",
-          }}
-        />
-
-        <ContentBlock
-          media={{
             type: "video",
             src: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
             aspectRatio: "video",
@@ -80,7 +71,7 @@ export default function ProjectPage() {
           }}
           thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
         />
-
+{/* 
         <ContentBlock
           media={{
             type: "video",
@@ -106,14 +97,14 @@ export default function ProjectPage() {
             aspectRatio: "video",
             caption: "Design Guide",
           }}
-        />
+        /> */}
       </ProjectLayout>
 
       {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
       <CaseStudySection title="" theme={projectData.caseStudy}>
 
       <CaseStudyTextBlock
-        sectionHeading="TL;DR"
+        sectionHeading="The Problem"
         title="Current washroom listings lack accessibility-related information."
         text={[
           <>Whether it&apos;s Google Maps, or dedicated washroom finding apps like Toilet Finder, washroom listings on the current market lack sufficient{" "}
@@ -150,7 +141,7 @@ export default function ProjectPage() {
       />
 
       <CaseStudyTextBlock
-        sectionHeading="The Problem"
+        sectionHeading="Discovery"
         title="Washroom access is different for everyone."
         text={[
           <>
@@ -221,7 +212,7 @@ export default function ProjectPage() {
 
 
       <CaseStudyTextBlock
-        sectionHeading="Solutioning"
+        sectionHeading="Designs"
         title="Personalizing the search"
         text="Since the accessibility label didn't always cater to people's needs, we ask users about them during onboarding. We also let them filter preferences as they influence the washroom listings suggested during the search."
       />
@@ -275,7 +266,7 @@ export default function ProjectPage() {
       />
 
        <CaseStudyTextBlock
-        sectionHeading="Iteration Issues"
+        sectionHeading="Iterations"
         title="Less is More"
         text="Participants spent a lot of time worrying about which filters to pick. Ommiting the least popular search filters lets users focus on washroom amenities that differentiate washrooms."
       />

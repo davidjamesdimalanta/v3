@@ -12,7 +12,7 @@ export default function Landing() {
   });
 
   return (
-    <div id="landing" className="relative flex flex-col-reverse justify-between w-full h-svh p-6 md:p-8">
+    <div id="landing" className="relative flex flex-col justify-between w-full p-6 md:p-8 mt-40">
       {/* Audio Permission Button */}
       <AudioPermissionButton />
       <Intro />
