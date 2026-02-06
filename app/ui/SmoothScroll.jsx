@@ -16,6 +16,9 @@ export default function SmoothScroll() {
       infinite: false,
     });
 
+    // Expose Lenis instance globally for other components
+    window.lenis = lenis;
+
     // Use requestAnimationFrame to continuously update the scroll
     function raf(time) {
       lenis.raf(time);
@@ -31,6 +34,7 @@ export default function SmoothScroll() {
 
     // Cleanup on unmount
     return () => {
+      delete window.lenis;
       lenis.destroy();
     };
   }, []);

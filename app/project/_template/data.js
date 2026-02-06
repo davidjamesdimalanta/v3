@@ -37,4 +37,21 @@ export const projectData = {
     team: "4 designers, 6 engineers", // Team composition
     year: "2024",                   // Year completed
   },
+
+  // Skills and technologies used in this project
+  // Categories: 'design', 'dev', 'tools', 'specialized'
+  skills: [
+    { name: "Product Design", category: "design" },
+    { name: "UX Research", category: "design" },
+    { name: "Figma", category: "tools" },
+    { name: "React", category: "dev" },
+    { name: "Design Systems", category: "design" },
+    // Add more skills relevant to your project
+  ],
+
+  // Case study section theme colors
+  caseStudy: {
+    bgColor: "#f5f5f5",  // Background color for media matting effect
+    fgColor: "#333333",  // Text/caption color
+  },
 };

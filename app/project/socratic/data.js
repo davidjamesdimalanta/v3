@@ -35,6 +35,15 @@ export const projectData = {
     year: "2025",
   },
 
+  // Skills and technologies used in this project
+  skills: [
+    { name: "Project Management", category: "tools" },
+    { name: "AI/ML", category: "tools" },
+    { name: "Human-AI Interaction", category: "tools" },
+    { name: "Interactive Prototyping", category: "design" },
+    { name: "Product Development", category: "dev" },
+  ],
+
   // Case study section theme colors
   caseStudy: {
     bgColor: "#FFF9F0",  // Background color for media matting effect

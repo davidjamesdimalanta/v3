@@ -40,6 +40,16 @@ export const projectData = {
       year: "2025"
     },
 
+    // Skills and technologies used in this project
+    skills: [
+      { name: "Web Development", category: "dev" },
+      { name: "Technical Documentation", category: "dev" },
+      { name: "Handoff", category: "dev" },
+      { name: "Design Systems", category: "design" },
+      { name: "Responsive Design", category: "design" },
+
+    ],
+
     // Case study section theme colors
     caseStudy: {
       bgColor: "#EEF2F7",  // Background color for media matting effect

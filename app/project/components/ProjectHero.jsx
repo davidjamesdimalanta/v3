@@ -1,6 +1,7 @@
 "use client";
 
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
+import SkillTag from "../../ui/SkillTag";
 
 export default function ProjectHero({
   title,
@@ -8,6 +9,7 @@ export default function ProjectHero({
   awards = [],
   description = [],
   details = {},
+  skills = [],
   onClose
 }) {
   // Sound effects
@@ -111,6 +113,22 @@ export default function ProjectHero({
               </div>
             </div>
 
+          )}
+
+          {/* Skills Tags */}
+          {skills.length > 0 && (
+            <div className="flex flex-col gutter-sm pt-4">
+              <h2 className="text-xs text-500 opacity-60">Skills</h2>
+              <div className="flex flex-wrap gutter-xs">
+                {skills.map((skill, index) => (
+                  <SkillTag
+                    key={index}
+                    skill={skill.name}
+                    category={skill.category}
+                  />
+                ))}
+              </div>
+            </div>
           )}
           {/* Project Description */}
           {description.length > 0 && (

@@ -27,6 +27,7 @@ export default function Projects() {
         imageSrc: data.coverImage,
         imageAlt: `${data.name} Preview`,
         tags: [data.details.role],
+        skills: data.skills || [],
         year: data.details.year
       };
     });

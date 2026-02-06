@@ -11,11 +11,11 @@ export default function Intro() {
                 Product Designer and Developer
             </span>
             <span className="text-p max-w-96">
-                A early-career designer with experience in web development, interaction design, 
-                accessibility design, and Human-AI Interaction.
+                An early-career designer with experience in web development, interaction design, 
+                accessibility design, and human-AI interaction.
             </span>
             <span className="text-p max-w-96">
-                Based in Toronto, currently seeking a Co-op for Summer 2026.
+                Based in Toronto, currently seeking a co-op for Summer 2026.
             </span>
         </div>
         <Closing />

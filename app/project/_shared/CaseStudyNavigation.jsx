@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
+import { useLenis } from "../../ui/hooks/useLenis";
 
 /**
  * Case Study Navigation Component
@@ -18,6 +19,7 @@ import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 export default function CaseStudyNavigation({ sections = [] }) {
   const [activeSection, setActiveSection] = useState(null);
   const { playButtonHover } = useSoundEffects();
+  const lenis = useLenis();
 
   useEffect(() => {
     // Don't run if no sections
@@ -71,7 +73,14 @@ export default function CaseStudyNavigation({ sections = [] }) {
 
   const handleNavigationClick = (id) => {
     const element = document.getElementById(id);
-    if (element) {
+    if (element && lenis) {
+      // Use Lenis for smooth scrolling with custom easing
+      lenis.scrollTo(element, {
+        offset: 0,
+        duration: 1.2,
+      });
+    } else if (element) {
+      // Fallback to native scroll if Lenis isn't available
       element.scrollIntoView({
         behavior: "smooth",
         block: "center",

@@ -36,6 +36,15 @@ export const projectData = {
     year: "2025",
   },
 
+  // Skills and technologies used in this project
+  skills: [
+    { name: "Product Design", category: "design" },
+    { name: "Design Systems", category: "design" },
+    { name: "User Testing", category: "design" },
+    { name: "Interactive Prototyping", category: "design" },
+    { name: "Accessibility", category: "tools" },
+  ],
+
   // Case study section theme colors
   caseStudy: {
     bgColor: "#f5f5f5",  // Background color for media matting effect
