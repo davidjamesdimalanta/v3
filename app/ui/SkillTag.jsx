@@ -28,11 +28,12 @@ export default function SkillTag({ skill, category = 'tools' }) {
 
   return (
     <span
+      // style={{ fontFamily: 'var(--font-new-rodin-pro)' }}
       className={`
         inline-block w-hug h-hug
-        px-3 py-1.5
+        px-3 py-1
         rounded-full
-        text-xs text-400
+        text-xs text-700
         transition-all duration-150
         ${getCategoryStyles(category)}
       `}
