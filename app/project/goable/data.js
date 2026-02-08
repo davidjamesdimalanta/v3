@@ -23,7 +23,7 @@ export const projectData = {
 
 
   description: [
-    "GoAble addresses the hidden barriers in \"Accessibility\" washrooms by addressing current issues of generalization, sparse listing information, and lack of relevant community insights.",
+    "GoAble addresses the hidden barriers in \"accessible\" washrooms by addressing current issues of generalization, sparse listing information, and lack of relevant community insights.",
     "I led the development of the design system and the interactive prototypes, using Figma Variables to flesh out interaction insights in our initial designs.",
     "Notable features include a personalized onboarding experience, live & crowdsourced washroom updates, and a system-prompted review tab with saved data. The result is a platform that provides real-time, friction-less, and tailored information on washroom amenities, access updates, and community sentiments, all in one place."
 ],
