@@ -2,6 +2,7 @@ import "./globals.css";
 import Nav from "./ui/nav";
 import SmoothScroll from "./ui/SmoothScroll";
 import WaveBackground from "./ui/WaveBackground";
+import Footer from "./ui/Footer";
 import { inter, newRodinPro, aspekta } from "./fonts";
 import FontLoadingMonitor from "./components/FontLoadingMonitor";
 import { Analytics } from "@vercel/analytics/next"
@@ -67,6 +68,7 @@ export default function RootLayout({ children }) {
         <WaveBackground />
         <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );

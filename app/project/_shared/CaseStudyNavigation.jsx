@@ -75,15 +75,22 @@ export default function CaseStudyNavigation({ sections = [] }) {
     const element = document.getElementById(id);
     if (element && lenis) {
       // Use Lenis for smooth scrolling with custom easing
+      // Negative offset accounts for sticky nav height (~72px) + extra spacing (~40px)
       lenis.scrollTo(element, {
-        offset: 0,
+        offset: -112,
         duration: 1.2,
       });
     } else if (element) {
       // Fallback to native scroll if Lenis isn't available
-      element.scrollIntoView({
+      // Calculate offset for native scroll
+      const navHeight = 72; // Approximate nav height
+      const extraSpace = 40; // Extra breathing room
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight - extraSpace;
+
+      window.scrollTo({
+        top: offsetPosition,
         behavior: "smooth",
-        block: "center",
       });
     }
   };
