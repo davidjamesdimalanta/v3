@@ -1,12 +1,30 @@
 "use client";
 
-import React, { useMemo, type JSX } from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "./lib/utils";
 
+// Create motion components at module level to avoid creating components during render
+const MotionSpan = motion.span;
+const MotionDiv = motion.div;
+const MotionP = motion.p;
+const MotionH1 = motion.h1;
+const MotionH2 = motion.h2;
+const MotionH3 = motion.h3;
+
+// Map of supported component types to motion components
+const motionComponents = {
+  span: MotionSpan,
+  div: MotionDiv,
+  p: MotionP,
+  h1: MotionH1,
+  h2: MotionH2,
+  h3: MotionH3,
+} as const;
+
 export type TextShimmerProps = {
   children: string;
-  as?: React.ElementType;
+  as?: keyof typeof motionComponents;
   className?: string;
   duration?: number;
   spread?: number;
@@ -30,13 +48,12 @@ function TextShimmerComponent({
   children,
   as: Component = "span",
   className,
-  duration = 2,
-  spread = 1.5,
+  duration = 1.8,
+  spread = 2.5,
   variant = "blue",
 }: TextShimmerProps) {
-  const MotionComponent = motion.create(
-    Component as keyof JSX.IntrinsicElements
-  );
+  // Look up the motion component from the pre-defined map
+  const MotionComponent = motionComponents[Component];
 
   const dynamicSpread = useMemo(() => {
     return children.length * spread;
@@ -59,7 +76,7 @@ function TextShimmerComponent({
   return (
     <MotionComponent
       className={cn(
-        "relative inline bg-[length:250%_100%,auto] bg-clip-text",
+        "relative inline bg-size-[250%_100%,auto] bg-clip-text",
         "text-transparent [background-repeat:no-repeat,padding-box]",
         className
       )}

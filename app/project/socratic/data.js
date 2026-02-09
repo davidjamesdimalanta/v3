@@ -31,7 +31,7 @@ export const projectData = {
   details: {
     role: "Product Design, Project Management",
     timeline: "7 days",
-    team: "1 designer, 1 researcher, 2 developers",
+    team: "2 designers, 3 developers",
     year: "2025",
   },
 
@@ -47,6 +47,6 @@ export const projectData = {
   // Case study section theme colors
   caseStudy: {
     bgColor: "#FFF9F0",  // Background color for media matting effect
-    fgColor: "#6B4423",  // Text/caption color
+    fgColor: "#999999",  // Text/caption color
   },
 };

@@ -15,26 +15,26 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
   const renderText = (textContent) => {
     if (Array.isArray(textContent)) {
       return textContent.map((paragraph, index) => (
-        <p key={index} className="text-p text-400">
+        <p key={index} className="text-p text-400 text-[#D9D9D9]">
           {paragraph}
         </p>
       ));
     }
-    return <p className="text-p text-400">{textContent}</p>;
+    return <p className="text-p text-400 text-[#D9D9D9]">{textContent}</p>;
   };
 
   return (
     <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 ${className}`}>
       {/* Optional Section Heading */}
       {sectionHeading && (
-        <span className="text-sm uppercase tracking-wide opacity-60" style={{ color: 'var(--fg-color)' }}>
+        <span className="text-sm uppercase tracking-wide text-[#999999]">
           {sectionHeading}
         </span>
       )}
 
       {/* Optional Title */}
       {title && (
-        <h3 className="text-h5 mb-2">
+        <h3 className="text-h5 text-500 mb-2">
           {typeof title === "string" ? title : <>{title}</>}
         </h3>
       )}

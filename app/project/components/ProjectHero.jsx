@@ -1,9 +1,9 @@
 "use client";
-
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import SkillTag from "../../ui/SkillTag";
 
 export default function ProjectHero({
+  name,
   title,
   links = [],
   awards = [],
@@ -36,9 +36,15 @@ export default function ProjectHero({
           </button>
 
           {/* Project Title */}
-          <h1 className="text-h3 md:text-h1 text-400">
-            {title}
-          </h1>
+          <div className="flex flex-col gutter-xs">
+            <h1 className="text-h3 md:text-h1 text-400">
+              {name}
+            </h1>
+            <h6 className="text-h6 text-400 text-[#999999]">
+              {title}
+            </h6>
+          </div>
+         
 
           {/* Live Project Links */}
           {links.length > 0 && (
@@ -59,7 +65,7 @@ export default function ProjectHero({
           )}
         </div>
 
-        <div className="flex flex-col gutter-xs">
+        <div className="flex flex-col gutter-sm">
           {/* Awards Section */}
           {awards.length > 0 && (
             <div className="flex flex-col gutter-sm pt-4">
@@ -84,7 +90,7 @@ export default function ProjectHero({
 
           {/* Project Details */}
           {Object.keys(details).length > 0 && (
-            <div className="flex flex-col gutter-sm pt-4">
+            <div className="flex flex-col gutter-xs pt-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 {details.role && (
                   <div className="flex flex-col gutter-xs">
@@ -112,13 +118,23 @@ export default function ProjectHero({
                 )}
               </div>
             </div>
+          )}
 
+          {/* Project Description */}
+          {description.length > 0 && (
+            <div className="flex flex-col gutter-sm">
+              <div className="flex flex-col gutter-xs text-p">
+                {description.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
           )}
 
           {/* Skills Tags */}
           {skills.length > 0 && (
-            <div className="flex flex-col gutter-sm pt-4">
-              <h2 className="text-xs text-500 opacity-60">Skills</h2>
+            <div className="flex flex-col gutter-sm">
+              {/* <h2 className="text-xs text-500 opacity-60">Skills</h2> */}
               <div className="flex flex-wrap gutter-xs">
                 {skills.map((skill, index) => (
                   <SkillTag
@@ -126,16 +142,6 @@ export default function ProjectHero({
                     skill={skill.name}
                     category={skill.category}
                   />
-                ))}
-              </div>
-            </div>
-          )}
-          {/* Project Description */}
-          {description.length > 0 && (
-            <div className="flex flex-col gutter-sm pt-4 md:pt-4">
-              <div className="flex flex-col gutter-xs text-p">
-                {description.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
                 ))}
               </div>
             </div>
