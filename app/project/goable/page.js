@@ -361,24 +361,18 @@ export default function ProjectPage() {
         sectionHeading="Closing"
         title="Final thoughts and learnings"
         text={[
-          <>
-          <strong>Access is Multidimensional</strong>
-          </>,
-          <>
-          <>This project taught me that access doesn&apos;t just mean physical, but also emotional and political barriers people face.</>
-          </>,
-          <>
+          <div key="access" className="flex flex-col mb-2">
+            <strong>Access is Multidimensional</strong>
+            <span className="text-[#D9D9D9]">This project taught me that access doesn&apos;t just mean physical, but also emotional and political barriers people face.</span>
+          </div>,
+          <div key="restraint" className="flex flex-col mb-2">
             <strong>The Power of Restraint</strong>
-          </>,
-          <>
-            Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers show restraint—providing exactly what they need, when they need it, while respecting their choice to participate or not.
-          </>,
-          <>
-          <strong>Details Can Distract</strong>
-        </>,
-        <>
-          Different prototype fidelities serve their purposes and all are equally needed in the design process. Doing UXR without one or the other can compromise your designs further down the line.
-        </>,
+            <span className="text-[#D9D9D9]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers show restraint—providing exactly what they need, when they need it, while respecting their choice to participate or not.</span>
+          </div>,
+          <div key="details" className="flex flex-col mb-2">
+            <strong>Details Can Distract</strong>
+            <span className="text-[#D9D9D9]">Different prototype fidelities serve their purposes and all are equally needed in the design process. Doing UXR without one or the other can compromise your designs further down the line.</span>
+          </div>,
         ]}
       />
 

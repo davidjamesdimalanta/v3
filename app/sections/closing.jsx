@@ -17,7 +17,7 @@ export default function Closing() {
               style={getAnimationStyle('bottom-bar-currently')}
             >
                 <div className="flex flex-col">
-                    <span className="text-sm uppercase tracking-wide opacity-60">Currently: </span>
+                    <span className="text-button text-[#cdcdcd] uppercase tracking-wide">Currently: </span>
                     <div>
                         <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150">
                             <span className="md:hidden" style={{

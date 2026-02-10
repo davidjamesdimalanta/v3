@@ -104,7 +104,7 @@ export default function ProjectPage() {
       {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
       <CaseStudySection title="Design Process" theme={projectData.caseStudy}>
         <CaseStudyTextBlock
-          text="This section is currently a work in progress. Check back soon for detailed insights into the design process!"
+          text="This case study is currently a work in progress. Reach out if you're curious about it :)"
         />
 
         {/* Navigation to Next Project */}

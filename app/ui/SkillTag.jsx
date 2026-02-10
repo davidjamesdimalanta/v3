@@ -13,9 +13,9 @@ export default function SkillTag({ skill, category = 'tools' }) {
   const getCategoryStyles = (category) => {
     switch (category) {
       case 'design':
-        return 'bg-gradient-to-r from-[#0B99FF] to-[#6CC2FF] text-black';
+        return 'bg-gradient-to-r from-[#0B99FF] to-[#6CC2FF] text-[#112E41]';
       case 'dev':
-        return 'bg-gradient-to-r from-[#39FF14] to-[#71CF88] text-black';
+        return 'bg-gradient-to-r from-[#39FF14] to-[#71CF88] text-[#123221]';
       case 'specialized':
         // Alternate between blue and green for visual interest
         // This can be enhanced later with index-based logic if needed

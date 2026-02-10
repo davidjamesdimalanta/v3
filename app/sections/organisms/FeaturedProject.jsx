@@ -28,8 +28,8 @@ export default function FeaturedProject({
       <div className="p-4 flex flex-col xl:flex-row gutter-base h-fill">
         {/* Header with title and year */}
         <div className="flex flex-col flex-1 h-hug lg:h-fill items-start gap-2">
-          <h3 className="text-h4 leading-none">{title}</h3>
-          {description && ( <p className="text-base text-400 leading-none">{description}</p>)}
+          <h3 className="text-h4 text-400 leading-none">{title}</h3>
+          {description && ( <p className="text-base text-[#cdcdcd] leading-none">{description}</p>)}
         </div>
 
         {/* Skills Tags */}

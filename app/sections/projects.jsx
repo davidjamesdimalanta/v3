@@ -34,7 +34,7 @@ export default function Projects() {
 
     return (
         <div className="w-full h-hug flex flex-col gutter-sm p-6 md:p-8">
-            <h1 className="text-p text-500">Selected Works</h1>
+            <h1 className="text-button text-[#cdcdcd] uppercase">Selected Works</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gutter-base w-full">
             {projects.map((project, index) => (
                 <Link

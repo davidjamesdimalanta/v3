@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Case Study Text Block Component
  *
@@ -14,11 +16,21 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
   // Helper function to render text (handles both string and array)
   const renderText = (textContent) => {
     if (Array.isArray(textContent)) {
-      return textContent.map((paragraph, index) => (
-        <p key={index} className="text-p text-400 text-[#D9D9D9]">
-          {paragraph}
-        </p>
-      ));
+      return textContent.map((paragraph, index) => {
+        // If it's already a block-level flex container, render as-is without wrapping in <p>
+        if (
+          typeof paragraph === 'object' &&
+          paragraph?.props?.className?.includes('flex')
+        ) {
+          return React.cloneElement(paragraph, { key: index });
+        }
+        // Otherwise wrap in <p>
+        return (
+          <p key={index} className="text-p text-400 text-[#D9D9D9]">
+            {paragraph}
+          </p>
+        );
+      });
     }
     return <p className="text-p text-400 text-[#D9D9D9]">{textContent}</p>;
   };

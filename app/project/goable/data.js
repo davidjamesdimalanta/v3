@@ -3,7 +3,7 @@ export const projectData = {
   name: "GoAble",
 
   // Main project title (displayed prominently in the hero section)
-  title: "Redefining \"Washroom Access\"",
+  title: "Redefining \"washroom access\"",
 
   // Project links (optional - can be empty array)
   // Example: links: [{ url: "https://example.com", label: "View Project" }]
@@ -12,7 +12,7 @@ export const projectData = {
   ],
 
   // Cover image for project card
-  coverImage: "/assets/images/goAble/Spread2.webp",
+  coverImage: "/assets/images/goAble/Spread_semitransparent.png",
 
   // Array of awards and recognition (optional - can be empty array)
   awards: [

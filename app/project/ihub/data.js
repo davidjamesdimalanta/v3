@@ -3,7 +3,7 @@ export const projectData = {
     name: "iHub",
   
     // Main project title (displayed prominently in the hero section)
-    title: "Developing on the web for a campus design agency.",
+    title: "Designing and developing for a campus design agency.",
   
     // Project links (optional - can be empty array)
     // Example: links: [{ url: "https://example.com", label: "View Project" }]
@@ -13,7 +13,7 @@ export const projectData = {
     ],
   
     // Cover image for project card
-    coverImage: "https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0",
+    coverImage: "/assets/images/ihub/ihub_spread.png",
   
     // Array of awards and recognition (optional - can be empty array)
     awards: [
@@ -52,7 +52,7 @@ export const projectData = {
 
     // Case study section theme colors
     caseStudy: {
-      bgColor: "#EEF2F7",  // Background color for media matting effect
+      bgColor: "##000000",  // Background color for media matting effect
       fgColor: "#999999",  // Text/caption color
     },
   };
