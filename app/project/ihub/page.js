@@ -61,7 +61,7 @@ export default function ProjectPage() {
           isFirstVideo={true}
         />
 
-{/*         
+        
         <div className="flex flex-col gap-4">
           <ContentBlock
             title="Project 2: Family Care Office Website"
@@ -86,7 +86,7 @@ export default function ProjectPage() {
             thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
           />
         </div>
- */}
+
 {/* 
         <div className="flex flex-col gap-4">
           <ContentBlock
@@ -230,7 +230,7 @@ export default function ProjectPage() {
           ]}
         /> */}
 
-        <CaseStudyMediaBlock
+        {/* <CaseStudyMediaBlock
           type="video"
           src="https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p"
           aspectRatio="video"
@@ -244,7 +244,7 @@ export default function ProjectPage() {
           aspectRatio="video"
           caption=""
           thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
-        />
+        /> */}
 
         {/* <CaseStudyTextBlock
           title="When stakeholder needs collide with technical reality"
