@@ -212,7 +212,7 @@ export default function ProjectPage() {
 
 
       <CaseStudyTextBlock
-        sectionHeading="Designs"
+        sectionHeading="Wireframes"
         title="Personalizing the search"
         text="Since the accessibility label didn't always cater to people's needs, we ask users about them during onboarding. We also let them filter preferences as they influence the washroom listings suggested during the search."
       />
