@@ -45,7 +45,7 @@ export default function Closing() {
                                 color: 'transparent',
                                 paddingBottom: '4px',
                                 display: 'inline-block'
-                            }}>Web Design @ Innovation Hub</span>
+                            }}>UX/UI @ Innovation Hub</span>
                         </Link>
                     </div>
                 </div>
