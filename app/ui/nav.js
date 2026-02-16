@@ -33,7 +33,7 @@ export default function Nav() {
         className={`text-h6 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
         style={{
           ...getAnimationStyle('nav-logo-name'),
-          fontFamily: 'var(--font-new-rodin-pro), sans-serif'
+          fontFamily: 'var(--aspekta), sans-serif'
         }}
         href="/"
         onMouseEnter={playHover}
@@ -61,7 +61,7 @@ export default function Nav() {
           />
           <Button
             text={"CV"}
-            href="/cv/David_Dimalanta_CV.pdf"
+            href="/cv/DavidDimalanta_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             soundEffect="hover"

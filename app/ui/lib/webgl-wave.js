@@ -27,7 +27,11 @@ export class WaveRenderer {
 
     // Wave color modes
     this.figGreen = { r: 0.067, g: 0.682, b: 0.361 };
-    this.figBlue = { r: 0.043, g: 0.600, b: 1.000 };
+    // this.figBlue = { r: 0.368, g: 0.278, b: 0.173 };
+    this.figBlue = { r: 0.227, g: 0.172, b: 0.168 };
+    // this.figBlue = { r: 1.0, g: 1.0, b: 1.0 };
+    // this.figBlue = { r: 0.043, g: 0.600, b: 1.000 };
+
 
     // Initialize WebGL
     this.initWebGL();
@@ -119,8 +123,8 @@ void main() {
 	// Accumulate wave colors with individual opacities.
 	vec3 accumulatedColor = vec3(0.0);
 	// Spread waves around center (0.5): 0.6 -> 0.65, 0.35 -> 0.4
-	float offset1 = uIsMobile ? 0.65 : 0.6;
-	float offset2 = uIsMobile ? 0.4 : 0.35;
+	float offset1 = uIsMobile ? 0.9 : 0.9;
+	float offset2 = uIsMobile ? 0.85 : 0.8;
 
 	accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2, 0.0, offset1, uWaveColor, 0.1, 15.0, false, uWaveOpacity0);
 	accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, offset1, uWaveColor, 0.1, 17.0, false, uWaveOpacity1);
@@ -147,7 +151,7 @@ void main() {
 	}
 
 	// Output final color.
-	gl_FragColor = vec4(accumulatedColor, 1.0);
+	gl_FragColor = vec4(accumulatedColor, maxChannel);
 }
 `;
 
@@ -239,9 +243,9 @@ void main() {
 
   setDarkModeBackground() {
     // CSS: rgb(0, 0, 0) -> normalized sRGB -> linear RGB
-    const darkR = this.sRGBToLinear(0 / 255);
-    const darkG = this.sRGBToLinear(0 / 255);
-    const darkB = this.sRGBToLinear(0 / 255);
+    const darkR = this.sRGBToLinear(237 / 255);
+    const darkG = this.sRGBToLinear(236 / 255);
+    const darkB = this.sRGBToLinear(234 / 255);
     this.context.clearColor(darkR, darkG, darkB, 0.0);
   }
 

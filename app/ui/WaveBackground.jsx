@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { WaveRenderer } from './lib/webgl-wave';
 import { useStartupAudio } from './hooks/useStartupAudio';
+import { useScrollFade } from './hooks/useScrollFade';
 
 export default function WaveBackground({ mode = 'design' }) {
   const canvasRef = useRef(null);
@@ -11,8 +12,12 @@ export default function WaveBackground({ mode = 'design' }) {
   // Initialize startup audio
   useStartupAudio('/assets/psp/sounds/01 Startup.mp3');
 
-  // Constant opacity - no scroll fade
-  const waveOpacity = 0.3;
+  const { opacity: waveOpacity } = useScrollFade({
+    fadeStart: 0,
+    fadeEnd: 100,
+    minOpacity: 0,
+    maxOpacity: 0.5,
+  });
 
   // Initialize WebGL once, persist across navigation
   useEffect(() => {

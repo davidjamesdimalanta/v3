@@ -3,11 +3,24 @@
 import Link from "next/link";
 import { useSoundEffects } from "./hooks/useSoundEffects";
 
-export default function Button({ text, href, className = "", target, rel, soundEffect, ...props }) {
+const CloseIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.7407 0.740723L0.740723 10.7407M0.740723 0.740723L10.7407 10.7407" stroke="currentColor" strokeWidth="1.48148" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+export default function Button({ text, icon, href, className = "", target, rel, soundEffect, ...props }) {
   // Sound effects (opt-in via soundEffect prop)
   const { playButtonHover, playNavigateHome, playNavigateProject } = useSoundEffects();
-  const baseStyles = "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center";
+
+  const isIconOnly = icon && !text;
+  const baseStyles = isIconOnly
+    ? "flex items-center justify-center w-8 h-8 rounded-full cursor-pointer"
+    : "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center uppercase";
   const variantStyles = "bd text-button text-400 hover:bd-text hover:bd-active transition-all duration-150";
+
+  const iconElement = icon === 'close' ? <CloseIcon /> : null;
+  const content = isIconOnly ? iconElement : text;
 
   // Conditional event handlers based on soundEffect prop
   const eventHandlers = {};
@@ -38,7 +51,7 @@ export default function Button({ text, href, className = "", target, rel, soundE
           {...eventHandlers}
           {...props}
         >
-          {text}
+          {content}
         </a>
       );
     }
@@ -51,7 +64,7 @@ export default function Button({ text, href, className = "", target, rel, soundE
         {...eventHandlers}
         {...props}
       >
-        {text}
+        {content}
       </Link>
     );
   }
@@ -63,7 +76,7 @@ export default function Button({ text, href, className = "", target, rel, soundE
       {...eventHandlers}
       {...props}
     >
-      {text}
+      {content}
     </button>
   );
 }

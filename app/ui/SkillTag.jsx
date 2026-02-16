@@ -13,17 +13,19 @@ export default function SkillTag({ skill, category = 'tools' }) {
   const getCategoryStyles = (category) => {
     switch (category) {
       case 'design':
-        return 'bg-gradient-to-r from-[#0B99FF] to-[#6CC2FF] text-[#112E41]';
+        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]';
+
       case 'dev':
-        return 'bg-gradient-to-r from-[#39FF14] to-[#71CF88] text-[#123221]';
+        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]'; 
+
       case 'specialized':
-        // Alternate between blue and green for visual interest
-        // This can be enhanced later with index-based logic if needed
-        return 'bg-gradient-to-r from-[#0B99FF] to-[#6CC2FF] text-black';
+        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]'; 
+
       case 'tools':
+
       default:
-        return 'bd text-white';
-    }
+        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]';   
+      }
   };
 
   return (
@@ -33,8 +35,7 @@ export default function SkillTag({ skill, category = 'tools' }) {
         inline-block w-hug h-hug
         px-3 py-1
         rounded-full
-        text-xs text-700
-        transition-all duration-150
+        text-xs text-500
         ${getCategoryStyles(category)}
       `}
     >

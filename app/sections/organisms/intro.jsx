@@ -6,19 +6,14 @@ import Button from "../../ui/Button";
 export default function Intro() {
     return (
     <div className="w-full flex flex-col gutter-md">
-        <div className="grid grid-cols-1 md:grid-cols-3 gutter-sm w-full">
-            <span className="text-h4 md:text-h3 max-w-96">
-                Product Designer
+        <div className="grid grid-cols-1 md:grid-cols-4 gutter-sm md:gutter-base lg:gutter-base w-full">
+            <span className="text-h2 text-500 md:text-h2 lg:text-h1 md:col-span-4">
+                I design products. I ship them too.
             </span>
-            <span className="text-p max-w-96">
-                An early-career designer with experience in front-end development, interaction design, 
-                accessibility design, and human-AI interaction.
-            </span>
-            <span className="text-p max-w-96">
-                Based in Toronto, currently seeking a co-op for Summer 2026.
-            </span>
+            <div className="col-span-2">
+                <Closing />
+            </div>
         </div>
-        <Closing />
     </div>
     );
 }

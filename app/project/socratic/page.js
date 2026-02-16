@@ -64,7 +64,7 @@ export default function ProjectPage() {
           title={<>Reimagining{" "}
           <DefinitionCard
             trigger="HAX"
-            shimmerVariant="blue"
+            shimmerVariant="brown"
             triggerProps={{ onMouseEnter: playButtonHover }}
             content={
               <>

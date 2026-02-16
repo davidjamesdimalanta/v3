@@ -50,7 +50,7 @@ export default function CaseStudySection({ children, title, theme, className = "
   });
 
   return (
-    <section className={`w-full bg-black/30 ${className}`}>
+    <section className={`w-full ${className}`}>
       {/* Sticky navigation for section headings */}
       <CaseStudyNavigation sections={sections} />
 

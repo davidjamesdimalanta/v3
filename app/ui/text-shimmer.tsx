@@ -61,10 +61,10 @@ function TextShimmerComponent({
 
   // Color configurations matching existing gradients
   const colorConfig = {
-    blue: {
-      baseColor: "#0B99FF",
+    brown: {
+      baseColor: "#3A1F1E",
       // gradientColor: "#6CC2FF",
-      gradientColor: "#9DD6FF", 
+      gradientColor: "#D6CAC8", 
     },
     green: {
       baseColor: "#39FF14",

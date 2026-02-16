@@ -20,16 +20,16 @@ export const projectsRegistry = [
   {
     slug: 'goable',
     title: 'Unearthing Hidden Barriers in Accessible Washrooms',
-    nextProject: 'ihub'
-  },
-  {
-    slug: 'ihub',
-    title: 'Web Developer of a campus design agency.',
     nextProject: 'socratic'
   },
   {
     slug: 'socratic',
     title: 'Tailor Your Scholarship Essays with Critical Thinkers',
+    nextProject: 'ihub'
+  },
+  {
+    slug: 'ihub',
+    title: 'Web Developer of a campus design agency.',
     nextProject: 'goable'
   },
 ];

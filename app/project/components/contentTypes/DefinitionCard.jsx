@@ -32,7 +32,7 @@ import { TextShimmer } from "@/app/ui/text-shimmer"
  * @example
  * <DefinitionCard
  *   trigger="Washroom access"
- *   shimmerVariant="blue"
+ *   shimmerVariant="brown"
  *   triggerProps={{ onMouseEnter: handleHover }}
  *   content={<>involves both physical and emotional barriers</>}
  *   caption={{ text: "DOI : 10.17577/IJERTV9IS070564", link: "https://doi.org/..." }}

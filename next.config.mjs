@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'image.mux.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
     ],
   },
 };

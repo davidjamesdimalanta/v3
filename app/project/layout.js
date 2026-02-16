@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
       siteName: 'David Dimalanta — Toronto-based Product Designer',
       images: [
         {
-          url: '/assets/images/web-preview/preview.png',
+          url: '/assets/images/web-preview/preview_.png',
           width: 1200,
           height: 630,
           alt: 'Project Case Study Preview',
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: 'Project Case Study | David Dimalanta',
       description: 'Detailed case study showcasing design process, challenges, and outcomes',
-      images: ['/assets/images/web-preview/preview.png'],
+      images: ['/assets/images/web-preview/preview_.png'],
     },
   };
 }

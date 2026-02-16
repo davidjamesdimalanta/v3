@@ -19,8 +19,8 @@ export default function Footer() {
   const [isPaused, setIsPaused] = useState(false);
 
   return (
-    <footer className="p-4 md:p-8 text-left flex justify-between w-fill">
-      <div className="inline-flex whitespace-pre-wrap text-button text-[#D9D9D9] tracking-wide uppercase">
+    <footer className="p-4 pb-16 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill">
+      <div className="inline-flex whitespace-pre-wrap text-button text-[#2C4E47] tracking-wide uppercase">
         Built with{' '}
         <TextLoop
           className="overflow-y-clip"
@@ -52,7 +52,7 @@ export default function Footer() {
               href={tech.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bd-text hover:text-white cursor-pointer transition-all duration-200"
+              className="hover:bd-text cursor-pointer transition-all duration-200"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
@@ -61,20 +61,20 @@ export default function Footer() {
           ))}
         </TextLoop>
       </div>
-      <div className="flex gutter-sm">
-        <Link href="/" className="text-button text-[#D9D9D9] hover:bd-text">
+      <div className="flex flex-wrap gutter-sm">
+        <Link href="/" className="text-button text-[#2C4E47] hover:bd-text">
           HOME
         </Link>  
-        <Link href="https://www.linkedin.com/in/daviddimalanta/" target="_blank" rel="noopener noreferrer" className="text-button text-[#D9D9D9] hover:bd-text">
+        <Link href="https://www.linkedin.com/in/daviddimalanta/" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text">
           LINKEDIN
       </Link>  
-        <Link href="https://github.com/davidjamesdimalanta" target="_blank" rel="noopener noreferrer" className="text-button text-[#D9D9D9] hover:bd-text">
+        <Link href="https://github.com/davidjamesdimalanta" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text">
           GITHUB
       </Link>  
-      <Link href="mailto:david.dimalanta@mail.utoronto.ca" className="text-button text-[#D9D9D9] hover:bd-text">
+      <Link href="mailto:david.dimalanta@mail.utoronto.ca" className="text-button text-[#2C4E47] hover:bd-text">
           CONTACT
       </Link>  
-      <Link href="/cv/David_Dimalanta_CV.pdf" target="_blank" rel="noopener noreferrer" className="text-button text-[#D9D9D9] hover:bd-text">
+      <Link href="/cv/DavidDimalanta_CV.pdf" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text">
           CV
       </Link>  
       </div>

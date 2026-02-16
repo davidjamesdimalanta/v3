@@ -9,7 +9,7 @@ export default function Closing() {
     playOnlyOnInitialLoad: true
   });
   return (
-    <div id="closing" className="relative flex flex-col w-full h-hug justify-between pt-4 md:pb-0">
+    <div id="closing" className="relative flex flex-col w-full h-hug justify-between md:pb-0">
         {/* Currently Up to and Contact*/}
         <div className="flex flex-col md:flex-row md:justify-between gutter-sm md:gutter-md">
             <div
@@ -17,34 +17,41 @@ export default function Closing() {
               style={getAnimationStyle('bottom-bar-currently')}
             >
                 <div className="flex flex-col">
-                    <span className="text-button text-[#cdcdcd] uppercase tracking-wide">Currently: </span>
+                    <span className=" text-[#799A92] uppercase tracking-wide">Currently: </span>
                     <div>
                         <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150">
-                            <span className="md:hidden" style={{
-                                background: 'linear-gradient(to right, #0B99FF, #6CC2FF)',
-                                WebkitBackgroundClip: 'text',
-                                backgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                color: 'transparent'
+                            <span className="md:hidden text-p" style={{
+                                // background: 'linear-gradient(to right, #3A1F1E, #9F807B)',
+                                // WebkitBackgroundClip: 'text',
+                                // backgroundClip: 'text',
+                                // WebkitTextFillColor: 'transparent',
+                                // color: 'transparent'
                             }}>MI @ UofT </span>
-                            <span className="hidden md:inline" style={{
-                                background: 'linear-gradient(to right, #0B99FF, #6CC2FF)',
-                                WebkitBackgroundClip: 'text',
-                                backgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                color: 'transparent'
+                            <span className="hidden md:inline text-p" style={{
+                                // background: 'linear-gradient(to right, #3A1F1E, #9F807B)',
+                                // WebkitBackgroundClip: 'text',
+                                // backgroundClip: 'text',
+                                // WebkitTextFillColor: 'transparent',
+                                // color: 'transparent'
                             }}>MI Candidate @ UofT iSchool </span>
                         </Link>
-                        <span>& </span>
+                        <span className="text-p">& </span>
                         <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150">
-                            <span className="hidden md:inline" style={{
-                                background: 'linear-gradient(to right, #39FF14, #71CF88)',
-                                WebkitBackgroundClip: 'text',
-                                backgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                color: 'transparent',
-                                paddingBottom: '4px',
-                                display: 'inline-block'
+                            <span className="md:hidden inline-block text-p" style={{
+                                // background: 'linear-gradient(to right, #3A1F1E, #9F807B)',
+                                // WebkitBackgroundClip: 'text',
+                                // backgroundClip: 'text',
+                                // WebkitTextFillColor: 'transparent',
+                                // color: 'transparent',
+                                // paddingBottom: '4px'
+                            }}>UX/UI @ iHub</span>
+                            <span className="hidden md:inline-block text-p" style={{
+                                // background: 'linear-gradient(to right, #3A1F1E, #9F807B)',
+                                // WebkitBackgroundClip: 'text',
+                                // backgroundClip: 'text',
+                                // WebkitTextFillColor: 'transparent',
+                                // color: 'transparent',
+                                // paddingBottom: '4px'
                             }}>UX/UI @ Innovation Hub</span>
                         </Link>
                     </div>

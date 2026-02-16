@@ -29,7 +29,7 @@ export default function ProjectLayout({ projectData, children }) {
   };
 
   return (
-    <div className={`relative w-full min-h-screen bg-black/60 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
+    <div className={`relative w-full min-h-screen transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
 
       {/* Two-column layout: Sticky left metadata, scrollable right content */}
       <div className="flex flex-col lg:flex-row lg:gutter-lg">

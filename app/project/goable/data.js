@@ -11,8 +11,9 @@ export const projectData = {
     { url: "https://www.figma.com/proto/iG4xpMKAf0sGxsGdxL5cOt/INF1611_SECTION0103_A8_DavidDimalanta_-FinalPrototype_2025-12-04?node-id=4612-20274&p=f&viewport=334%2C61%2C0.12&t=VkwkgXaU6Dqa2Buz-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4612%3A20276&show-proto-sidebar=1", label: "Figma Prototype" },
   ],
 
-  // Cover image for project card
-  coverImage: "/assets/images/goAble/Spread_semitransparent.png",
+  // Cover video and thumbnail for project card
+  coverVideo: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
+  coverImage: "https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0",
 
   // Array of awards and recognition (optional - can be empty array)
   awards: [
@@ -40,14 +41,14 @@ export const projectData = {
   skills: [
     { name: "Product Design", category: "design" },
     { name: "Design Systems", category: "design" },
-    { name: "User Testing", category: "design" },
-    { name: "Interactive Prototyping", category: "design" },
-    { name: "Accessibility", category: "tools" },
+    // { name: "User Testing", category: "design" },
+    // { name: "Interactive Prototyping", category: "design" },
+    // { name: "Accessibility", category: "tools" },
   ],
 
   // Case study section theme colors
   caseStudy: {
     bgColor: "#f5f5f5",  // Background color for media matting effect
-    fgColor: "#999999",  // Text/caption color
+    fgColor: "#799A92",  // Text/caption color
   },
 };

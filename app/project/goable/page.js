@@ -110,12 +110,12 @@ export default function ProjectPage() {
           <>Whether it&apos;s Google Maps, or dedicated washroom finding apps like Toilet Finder, washroom listings on the current market lack sufficient{" "}
           <DefinitionCard
             trigger="Washroom Access"
-            shimmerVariant="blue"
+            shimmerVariant="brown"
             triggerProps={{ onMouseEnter: playButtonHover }}
             content={
               <>
                 <i className="pr-[4px]">
-                  <TextShimmer variant="blue">Washroom access</TextShimmer>
+                  <TextShimmer variant="brown">Washroom access</TextShimmer>
                 </i>
                 {" "}involves both physical barriers: <strong>amenity offerings</strong> and <strong>reliable availability</strong>; and emotional barriers: <strong>security & trust</strong>—for users with specific needs.
               </>
@@ -147,7 +147,7 @@ export default function ProjectPage() {
           <>
           <DefinitionCard
             trigger="Our participants"
-            shimmerVariant="blue"
+            shimmerVariant="brown"
             triggerProps={{ onMouseEnter: playButtonHover }}
             content={<ParticipantDemographics />}
             caption={{
@@ -164,7 +164,7 @@ export default function ProjectPage() {
           {" "}
           <DefinitionCard
             trigger="design goals"
-            shimmerVariant="blue"
+            shimmerVariant="brown"
             triggerProps={{ onMouseEnter: playButtonHover }}
             content={
               <>
@@ -246,7 +246,7 @@ export default function ProjectPage() {
           To validate the status of the washroom, we envisioned a community section that acts as a source of truth that users can contribute to, so{" "}
           <DefinitionCard
             trigger="users"
-            shimmerVariant="blue"
+            shimmerVariant="brown"
             content={
               <>
                 Our survey (<strong>n=58</strong>) revealed that <strong>52.9%</strong> <i>prioritize reviews when looking up washrooms online</i>, and <strong>79.4%</strong> indicated they would likely <i>trust user-generated accessibility reviews</i>.
@@ -335,7 +335,7 @@ export default function ProjectPage() {
         size="medium"
         thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
       />
-
+{/* 
       <CaseStudyTextBlock
         sectionHeading="Note: Prototypes"
         title="Prototypes that reveal valuable insights."
@@ -347,15 +347,15 @@ export default function ProjectPage() {
           Our higher-fidelity iterations surfaced more micro-level interaction insights, such as issues with filter toggles and map icon clarity in our second round of testing.
           </>
         ]}
-      />
+      /> */}
 
-      <CaseStudyMediaBlock
+      {/* <CaseStudyMediaBlock
         type="video"
         src="https://stream.mux.com/XU4Ly1w1M6d4pmZOKZDIbBdYchQz8njlM008npcId02NQ.m3u8?min_resolution=1080p"
         size="medium"
         thumbnail="https://image.mux.com/XU4Ly1w1M6d4pmZOKZDIbBdYchQz8njlM008npcId02NQ/thumbnail.png?width=1919&height=1080&time=0"
         caption= "Our prototype saves button states, locations, and map views to simulate a production-ready experience."
-      />
+      /> */}
 
       <CaseStudyTextBlock
         sectionHeading="Closing"
@@ -363,15 +363,15 @@ export default function ProjectPage() {
         text={[
           <div key="access" className="flex flex-col mb-2">
             <strong>Access is Multidimensional</strong>
-            <span className="text-[#D9D9D9]">This project taught me that access doesn&apos;t just mean physical, but also emotional and political barriers people face.</span>
+            <span className="text-[#2C4E47]">This project taught me that access doesn&apos;t just mean physical, but also emotional and political barriers people face.</span>
           </div>,
           <div key="restraint" className="flex flex-col mb-2">
             <strong>The Power of Restraint</strong>
-            <span className="text-[#D9D9D9]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers show restraint—providing exactly what they need, when they need it, while respecting their choice to participate or not.</span>
+            <span className="text-[#2C4E47]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers show restraint—providing exactly what they need, when they need it, while respecting their choice to participate or not.</span>
           </div>,
           <div key="details" className="flex flex-col mb-2">
             <strong>Details Can Distract</strong>
-            <span className="text-[#D9D9D9]">Different prototype fidelities serve their purposes and all are equally needed in the design process. Doing UXR without one or the other can compromise your designs further down the line.</span>
+            <span className="text-[#2C4E47]">Different prototype fidelities serve their purposes and all are equally needed in the design process. Doing UXR without one or the other can compromise your designs further down the line.</span>
           </div>,
         ]}
       />

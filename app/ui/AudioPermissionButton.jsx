@@ -1,7 +1,6 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
-import Button from './Button';
 
 function shouldShowAudioButton() {
   // Server-side: don't show button
@@ -43,11 +42,17 @@ export default function AudioPermissionButton() {
 
   return (
     <div className="fixed top-20 left-4 z-50">
-      <Button
-        text="Enable Sound"
+      <button
         onClick={handleEnableSound}
-        className="shadow-lg"
-      />
+        className="p-3 rounded-full bd text-400 hover:bd-text hover:bd-active transition-all duration-150 cursor-pointer shadow-lg"
+        aria-label="Enable sound"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M23 9L17 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M17 9L23 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
     </div>
   );
 }

@@ -386,19 +386,19 @@ export default function ProjectPage() {
           text={[
             <div key="constraints" className="flex flex-col mb-2">
               <strong>Constraints can be creative catalysts</strong>
-              <span className="text-[#D9D9D9]">When I first learned about the single-page limitation, I saw it as a frustrating obstacle. But working through the constraint led to a solution (URL hash routing) that actually improved the user experience with seamless transitions between resources. This project taught me to view technical constraints as design opportunities, not just problems to solve.</span>
+              <span className="text-[#2C4E47]">When I first learned about the single-page limitation, I saw it as a frustrating obstacle. But working through the constraint led to a solution (URL hash routing) that actually improved the user experience with seamless transitions between resources. This project taught me to view technical constraints as design opportunities, not just problems to solve.</span>
             </div>,
             <div key="technical" className="flex flex-col mb-2">
               <strong>Technical knowledge expands design possibilities</strong>
-              <span className="text-[#D9D9D9]">My background in web development helped me see a solution that a designer-only team might not have considered. But more importantly, understanding technical possibilities early in the design process meant I could propose solutions that were both user-friendly and technically feasible—rather than designing ideal experiences and hoping they could be built.</span>
+              <span className="text-[#2C4E47]">My background in web development helped me see a solution that a designer-only team might not have considered. But more importantly, understanding technical possibilities early in the design process meant I could propose solutions that were both user-friendly and technically feasible—rather than designing ideal experiences and hoping they could be built.</span>
             </div>,
             <div key="sustainability" className="flex flex-col mb-2">
               <strong>Sustainability requires intentional design</strong>
-              <span className="text-[#D9D9D9]">Before this project, I thought of documentation as an afterthought—something you do when the &quot;real work&quot; is finished. But designing for handoff taught me that creating maintainable systems is just as important as the initial build. The three-layer documentation approach, custom WordPress blocks, and design system contributions were all intentional design decisions aimed at future maintainers—they were part of the project&apos;s core value, not extra tasks.</span>
+              <span className="text-[#2C4E47]">Before this project, I thought of documentation as an afterthought—something you do when the &quot;real work&quot; is finished. But designing for handoff taught me that creating maintainable systems is just as important as the initial build. The three-layer documentation approach, custom WordPress blocks, and design system contributions were all intentional design decisions aimed at future maintainers—they were part of the project&apos;s core value, not extra tasks.</span>
             </div>,
             <div key="research" className="flex flex-col mb-2">
               <strong>Research translation is design work</strong>
-              <span className="text-[#D9D9D9]">Converting a 26-page research report into a web experience required design decisions at every level: information architecture, content hierarchy, navigation patterns, and interaction design. I learned that &quot;putting content online&quot; is actually a sophisticated design challenge—it&apos;s about understanding user intent, creating intuitive pathways through information, and making complex insights actionable.</span>
+              <span className="text-[#2C4E47]">Converting a 26-page research report into a web experience required design decisions at every level: information architecture, content hierarchy, navigation patterns, and interaction design. I learned that &quot;putting content online&quot; is actually a sophisticated design challenge—it&apos;s about understanding user intent, creating intuitive pathways through information, and making complex insights actionable.</span>
             </div>,
           />
           ]} */}

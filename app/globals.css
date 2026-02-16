@@ -4,9 +4,9 @@
 
 /* VARIABLES */
 :root {
-    --dark-color: rgb(0, 0, 0);
-    --text-color: rgb(255, 255, 255);
-    --figma-blue: rgb(11, 153, 255);
+    --bg-color: rgb(237, 236, 234);
+    --text-color: rgb(59, 45, 28);
+    --figma-brown: rgb(58, 31, 30);
 }
 
 /* THEME OVERRIDES */
@@ -103,29 +103,29 @@ body {
     width: 100%;
     min-height: 100dvh;
     color: var(--text-color);
-    background-color: var(--dark-color);
+    background-color: var(--bg-color);
     font-family: var(--font-aspekta), sans-serif;
     transition: padding-right 0.15s ease; /* Smooth padding transition for drawer */
 }
 
 /* HEADINGS - Use New Rodin Pro */
 /* h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-new-rodin-pro), sans-serif;
+    font-family: var(--font-aspekta), sans-serif;
 } */
 /* 
 span {
-    font-family: var(--font-new-rodin-pro), sans-serif;
+    font-family: var(--font-aspekta), sans-serif;
 } */
 
 /* CANVAS */
 #webgl-canvas {
-    background-color: var(--dark-color);
+    background-color: var(--bg-color);
 }
 
 
 /* CUSTOM BACKDROP UTILITIES */
 @utility bd-text {
-    @apply text-shadow-white text-shadow-sm;
+    @apply text-shadow-[#9B907A] text-shadow-sm;
 }
 
 /* TOUCH INTERACTION FIX */
@@ -139,19 +139,19 @@ span {
 }
 
 @utility bd {
-    @apply backdrop-blur-xl shadow-[0_0_4px_2px_rgba(255,255,255,0.5)];
+    @apply backdrop-blur-xl shadow-[0_0_4px_2px_rgba(155,144,122,0.3)];
 }
 
 @utility bd-active {
-    @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(255,255,255,0.8)];
+    @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(155,144,122,1.0)];
 }
 
 /* GRADIENT TEXT UTILITIES
  * DEPRECATED: Use TextShimmer component instead for animated shimmer effect
  * These utilities are kept for backward compatibility only
  */
-@utility text-gradient-blue {
-    background: linear-gradient(to right, #0B99FF, #6CC2FF);
+@utility text-gradient-brown {
+    background: linear-gradient(to right, #3A1F1E, #9F807B);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -256,31 +256,31 @@ span {
  */
 
 @utility text-h1 {
-  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem);
   line-height: 1.05;
 }
 
 @utility text-h2 {
-  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem);
   line-height: 1.1;
 }
 
 @utility text-h3 {
-  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem);
   line-height: 1.2;
 }
 
 @utility text-h4 {
-  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
   line-height: 1.2;
 }
 
 @utility text-h5 {
-  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
   line-height: 1.2;
 }
@@ -310,7 +310,7 @@ span {
 }
 
 @utility text-button {
-  font-family: var(--font-new-rodin-pro), sans-serif;
+  font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
   line-height: 1.5;
   font-weight: 400;

@@ -24,7 +24,8 @@ export default function Projects() {
         slug: project.slug,
         title: data.name, // Display name as the title
         description: data.title, // Display title as the description
-        imageSrc: data.coverImage,
+        videoSrc: data.coverVideo,
+        thumbnail: data.coverImage,
         imageAlt: `${data.name} Preview`,
         tags: [data.details.role],
         skills: data.skills || [],
@@ -34,7 +35,7 @@ export default function Projects() {
 
     return (
         <div className="w-full h-hug flex flex-col gutter-sm p-6 md:p-8">
-            <h1 className="text-button text-[#cdcdcd] uppercase">Selected Works</h1>
+            <h1 className="text-button text-[#799A92] uppercase">Selected Works</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gutter-base w-full">
             {projects.map((project, index) => (
                 <Link
@@ -43,7 +44,7 @@ export default function Projects() {
                   className="block"
                   onMouseEnter={playHover}
                   onClick={playNavigateProject}>
-                  <FeaturedProject {...project} />
+                  <FeaturedProject {...project} autoplay={index === 0} />
                 </Link>
             ))}
             </div>

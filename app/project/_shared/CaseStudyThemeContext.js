@@ -12,14 +12,14 @@ import { createContext, useContext } from "react";
  */
 
 const CaseStudyThemeContext = createContext({
-  bgColor: "#F9F9F9",  // Default: current gray background
-  fgColor: "#F9F9F9",  // Default: neutral gray for captions
+  bgColor: "##EDECEA", 
+  fgColor: "#2C4E47",  
 });
 
 export function CaseStudyThemeProvider({ children, theme }) {
   const themeValue = {
-    bgColor: theme?.bgColor || "#F9F9F9",
-    fgColor: theme?.fgColor || "#F9F9F9",
+    bgColor: theme?.bgColor || "##EDECEA",
+    fgColor: theme?.fgColor || "#2C4E47",
   };
 
   return (

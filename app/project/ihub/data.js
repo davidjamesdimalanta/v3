@@ -12,8 +12,9 @@ export const projectData = {
       { url: "https://familycare.utoronto.ca/supporting-student-parents/", label: "FCO Virtual Toolkit" }
     ],
   
-    // Cover image for project card
-    coverImage: "/assets/images/ihub/ihub_spread.png",
+    // Cover video and thumbnail for project card
+    coverVideo: "https://stream.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc.m3u8?min_resolution=1080p",
+    coverImage: "https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0",
   
     // Array of awards and recognition (optional - can be empty array)
     awards: [
@@ -42,18 +43,18 @@ export const projectData = {
 
     // Skills and technologies used in this project
     skills: [
-      { name: "Web Development", category: "dev" },
+      // { name: "Web Development", category: "dev" },
       { name: "Technical Documentation", category: "dev" },
       { name: "Handoff", category: "dev" },
       { name: "Design Systems", category: "design" },
-      { name: "Responsive Design", category: "design" },
+      // { name: "Responsive Design", category: "design" },
 
     ],
 
     // Case study section theme colors
     caseStudy: {
       bgColor: "##000000",  // Background color for media matting effect
-      fgColor: "#999999",  // Text/caption color
+      fgColor: "#799A92",  // Text/caption color
     },
   };
   

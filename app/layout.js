@@ -20,7 +20,7 @@ export const metadata = {
     siteName: 'David Dimalanta — Toronto-based Product Designer',
     images: [
       {
-        url: '/assets/images/web-preview/preview.png',
+        url: '/assets/images/web-preview/preview_.png',
         width: 1200,
         height: 630,
         alt: 'David Dimalanta Portfolio Preview',
@@ -33,7 +33,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "David Dimalanta",
     description: "Toronto-based Product Designer",
-    images: ['/assets/images/web-preview/preview.png'],
+    images: ['/assets/images/web-preview/preview_.png'],
   },
   icons: {
     icon: '/assets/icon/favicon2.png',
@@ -68,7 +68,7 @@ export default function RootLayout({ children }) {
         <WaveBackground />
         <Nav />
         {children}
-        <Footer />
+        <Footer /> 
       </body>
     </html>
   );
