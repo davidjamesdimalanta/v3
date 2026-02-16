@@ -44,7 +44,7 @@ export default function ProjectPage() {
           text="Scholarship prompts are often vague and open-ended. As part of the UofTxAnthropic Hackathon, the challenge was to create an AI-powered application that detecs hidden criteria and writes applications that meet them."
           media={{
             type: "image",
-            src: "/assets/images/socratic/socratic_splash.png",
+            src: "https://cdn.sanity.io/images/iy4m4myd/production/fb22b5dad342c2282ecb24dc8a93b72720928a2b-1980x1080.png",
             aspectRatio: "video",
             caption: "",
           }}
@@ -84,7 +84,7 @@ export default function ProjectPage() {
           text="Resolving common issues of chat interfaces, we made interactions live on a canvas to give users more control over visual and spatial relationships between AI-insights and their writing."
           media={{
             type: "image",
-            src: "/assets/images/socratic/socratic-example-cropped.png",
+            src: "https://cdn.sanity.io/images/iy4m4myd/production/9b61285d1d9d73ac27dc06a4db2f4912b91b7c39-1803x983.png",
             aspectRatio: "video",
             caption: "This mode of interaction was applauded for its innovative and visual-based approach.",
           }}
@@ -94,7 +94,7 @@ export default function ProjectPage() {
           text="In order to deliver a 0→1 app in 7 days, I recruited one ML engineer, two developers, and a UX researcher. Making the most of 7 days meant coordinating busy student schedules, providing direction and functional requirements for each ticket while ensuring a fun working environment."
           media={{
             type: "image",
-            src: "/assets/images/socratic/leadership.png",
+            src: "https://cdn.sanity.io/images/iy4m4myd/production/58bf804f5281efdff99301a485dd73a761e03ef6-1803x1125.png",
             aspectRatio: "video",
             caption: "I used notion's kanban board for sprint planning (3 day sprints), when2meet to coordinate availability for in-person work sessions, and discord for daily standups and check-ins.",
           }}

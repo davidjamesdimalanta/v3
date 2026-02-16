@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { WaveRenderer } from './lib/webgl-wave';
+import { WaveRenderer } from './lib/webgpu-wave';
 import { useStartupAudio } from './hooks/useStartupAudio';
 import { useScrollFade } from './hooks/useScrollFade';
 
@@ -16,21 +16,27 @@ export default function WaveBackground({ mode = 'design' }) {
     fadeStart: 0,
     fadeEnd: 100,
     minOpacity: 0,
-    maxOpacity: 0.5,
+    maxOpacity: 0.3,
   });
 
-  // Initialize WebGL once, persist across navigation
+  // Initialize WebGPU once, persist across navigation
   useEffect(() => {
     if (!canvasRef.current) return;
+    if (!navigator.gpu) return; // No WebGPU = no waves
 
-    // Create renderer instance (singleton pattern within ref)
-    if (!rendererRef.current) {
-      rendererRef.current = new WaveRenderer(canvasRef.current, mode);
-      rendererRef.current.start();
-    }
+    let cancelled = false;
+    const init = async () => {
+      const renderer = new WaveRenderer(canvasRef.current, mode);
+      await renderer.init();
+      if (cancelled) { renderer.destroy(); return; }
+      rendererRef.current = renderer;
+      renderer.start();
+    };
+    init();
 
     // Cleanup only on unmount (which never happens in root layout)
     return () => {
+      cancelled = true;
       if (rendererRef.current) {
         rendererRef.current.destroy();
         rendererRef.current = null;

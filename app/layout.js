@@ -1,10 +1,7 @@
 import "./globals.css";
-import Nav from "./ui/nav";
-import SmoothScroll from "./ui/SmoothScroll";
-import WaveBackground from "./ui/WaveBackground";
-import Footer from "./ui/Footer";
 import { inter, newRodinPro, aspekta } from "./fonts";
 import FontLoadingMonitor from "./components/FontLoadingMonitor";
+import SiteShell from "./ui/SiteShell";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -36,8 +33,9 @@ export const metadata = {
     images: ['/assets/images/web-preview/preview_.png'],
   },
   icons: {
-    icon: '/assets/icon/favicon2.png',
-    apple: '/assets/icon/favicon2.png',
+    icon: '/assets/icon/tabicon.png',
+    shortcut: '/assets/icon/tabicon.png',
+    apple: '/assets/icon/tabicon.png',
   },
   appleWebApp: {
     capable: true,
@@ -64,11 +62,7 @@ export default function RootLayout({ children }) {
         <SpeedInsights />
         <Analytics/>
         <FontLoadingMonitor />
-        <SmoothScroll />
-        <WaveBackground />
-        <Nav />
-        {children}
-        <Footer /> 
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

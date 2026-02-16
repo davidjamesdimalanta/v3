@@ -380,7 +380,7 @@ export default function CaseStudyMediaBlock({
       clearTimeout(autoplayTimeoutRef.current);
     }
 
-    const delay = isFirstVideo ? 2000 : 0;
+    const delay = isFirstVideo ? 1000 : 0;
 
     autoplayTimeoutRef.current = setTimeout(() => {
       if (videoRef.current && videoRef.current.paused) {

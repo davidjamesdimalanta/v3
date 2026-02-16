@@ -30,7 +30,7 @@ export default function Nav() {
       }}
     >
         <Link
-        className={`text-h6 hover:bd-text transition-all duration-150 ${getAnimationClass('nav-logo-name')}`}
+        className={`text-h5 text-500 ${getAnimationClass('nav-logo-name')}`}
         style={{
           ...getAnimationStyle('nav-logo-name'),
           fontFamily: 'var(--aspekta), sans-serif'
@@ -38,15 +38,15 @@ export default function Nav() {
         href="/"
         onMouseEnter={playHover}
         onClick={playNavigateHome}>
-          <div className="flex gutter-xs hover:cursor-pointer items-center">
+          <div className="flex gutter-sm items-center">
           <Image
-            src="/assets/icon/shiny-logo.png"
+            src="/assets/icon/New_Logo.png"
             alt="logo"
             width={30}
             height={24}
             style={{ objectFit: 'contain' }}
           />
-          <span className="block">David Dimalanta</span>
+          <span className="hidden md:block">David Dimalanta</span>
           </div>
 
         </Link>

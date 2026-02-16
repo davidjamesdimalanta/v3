@@ -11,8 +11,9 @@ const technologies = [
   { name: "Lenis", url: "https://lenis.darkroom.engineering/" },
   { name: "Radix UI", url: "https://www.radix-ui.com/" },
   { name: "Motion-Primitives", url:"https://motion-primitives.com/docs" },
+  { name: "WebGL", url: "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API" },
   { name: "Mux", url: "https://www.mux.com/solutions/video-for-vercel" },
-  { name: "WebGL", url: "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API" }
+  { name: "Sanity", url: "https://www.sanity.io/docs" }
 ];
 
 export default function Footer() {
@@ -24,6 +25,7 @@ export default function Footer() {
         Built with{' '}
         <TextLoop
           className="overflow-y-clip"
+          interval={1.5}
           trigger={!isPaused}
           variants={{
             initial: {

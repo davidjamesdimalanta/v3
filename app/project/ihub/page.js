@@ -43,7 +43,7 @@ export default function ProjectPage() {
         <ContentBlock 
           media={{
             type: "image",
-            src: "/assets/images/ihub/ihub_spread2.png",
+            src: "https://cdn.sanity.io/images/iy4m4myd/production/06f5335aa8fe0b070994ddf56c66c3b44414bce2-3200x1800.png",
             aspectRatio: "video",
             caption: "",
           }}
@@ -184,7 +184,7 @@ export default function ProjectPage() {
 
         <CaseStudyMediaBlock 
           type="image"
-          src="/assets/images/ihub/mobile-media3.png"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/fbfb2ca718c25b149bd787e115df3d3daa067d90-3734x1800.png"
           size="medium"
           caption="Working on the &quot;Our Work&quot; page, designing responsively from the start."
         />
@@ -368,13 +368,13 @@ export default function ProjectPage() {
         />
         <CaseStudyMediaBlock
           type="image"
-          src="/assets/images/ihub/technical_documentation.png"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/f5f3ef414e484fe39ef0afc5b469cda62bee787a-3734x1800.png"
           size="medium"
         />
 
         <CaseStudyMediaBlock
           type="image"
-          src="/assets/images/ihub/design_system.png"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/a7ab016e4654b5542e78ca836736d578c15ea19b-3734x1800.png"
           size="medium"
           caption=""
         />

@@ -134,7 +134,7 @@ export default function ProjectPage() {
 
       <CaseStudyMediaBlock
         type="image"
-        src="/assets/images/goAble/caseStudy/Problem-space5.png"
+        src="https://cdn.sanity.io/images/iy4m4myd/production/e168ddbe4769eeba822e95a530fe9624c3dace17-3734x1800.png"
         size="medium"
         caption={"For example: here is an actual washroom listing on the UofT campus"}
         bgColor={"#000000"}
@@ -196,7 +196,7 @@ export default function ProjectPage() {
 
       <CaseStudyMediaBlock
         type="image"
-        src="/assets/images/goAble/caseStudy/critical_issues4.png"
+        src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
         size="medium"
         bgColor={"#00"}
         className="hidden md:block"
@@ -204,7 +204,7 @@ export default function ProjectPage() {
 
       <CaseStudyMediaBlock
         type="image"
-        src="/assets/images/goAble/caseStudy/critical_issues_square.png"
+        src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
         size="small"
         bgColor={"#00"}
         className="md:hidden"
@@ -273,7 +273,7 @@ export default function ProjectPage() {
 
       <CaseStudyMediaBlock
         type="image"
-        src="/assets/images/goAble/caseStudy/Before&After_Onboarding5.png"
+        src="https://cdn.sanity.io/images/iy4m4myd/production/414c95bfd0b674f67fff9f211a09ebec86c64450-3734x1800.png"
         size="medium"
       />
 
@@ -284,7 +284,7 @@ export default function ProjectPage() {
 
       <CaseStudyMediaBlock
         type="image"
-        src="/assets/images/goAble/caseStudy/Before&InfoPage.png"
+        src="https://cdn.sanity.io/images/iy4m4myd/production/fad969c057cb189a0fa9c45824ece8ffb6eda3c0-3734x1800.png"
         size="medium"
       />
 
@@ -295,7 +295,7 @@ export default function ProjectPage() {
 
       <CaseStudyMediaBlock
         type="image"
-        src="/assets/images/goAble/caseStudy/Before&After_Reviews.png"
+        src="https://cdn.sanity.io/images/iy4m4myd/production/88f3523caf9f1931a3d7f82dda374a137b6963a3-3734x1800.png"
         size="medium"
       />
 

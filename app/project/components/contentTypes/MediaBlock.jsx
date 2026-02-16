@@ -277,8 +277,8 @@ export default function MediaBlock({
       clearTimeout(autoplayTimeoutRef.current);
     }
 
-    // First video has 2-second accessibility delay, others autoplay instantly
-    const delay = isFirstVideo ? 2000 : 0;
+    // First video has 1-second accessibility delay, others autoplay instantly
+    const delay = isFirstVideo ? 1000 : 0;
 
     autoplayTimeoutRef.current = setTimeout(() => {
       if (videoRef.current && videoRef.current.paused) {
