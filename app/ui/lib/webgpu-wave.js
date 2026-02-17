@@ -123,6 +123,8 @@ export class WaveRenderer {
     this.canvasFormat = null;
     this.animationFrameId = null;
     this.initialized = false;
+    this.destroyed = false;
+    this.cancelled = false;
     this.currentMode = initialMode;
 
     // Animation state
@@ -148,15 +150,48 @@ export class WaveRenderer {
     this.uniformData[6] = color.b; // waveColor.b
   }
 
+  cancel() {
+    this.cancelled = true;
+  }
+
   async init() {
-    const adapter = await navigator.gpu.requestAdapter();
-    if (!adapter) {
-      console.error('WebGPU: No adapter found');
-      return;
+    // 1. Adapter
+    let adapter;
+    try {
+      adapter = await navigator.gpu.requestAdapter();
+    } catch {
+      adapter = null;
+    }
+    if (this.cancelled) return false;
+    if (!adapter) return false;
+
+    // 2. Device
+    let device;
+    try {
+      device = await adapter.requestDevice();
+    } catch {
+      return false;
+    }
+    if (this.cancelled) { device.destroy(); return false; }
+
+    // 3. Canvas context — returns null when Chrome's context provider is exhausted
+    const ctx = this.canvas.getContext('webgpu');
+    if (!ctx) {
+      device.destroy();
+      return false;
     }
 
-    this.device = await adapter.requestDevice();
-    this.context = this.canvas.getContext('webgpu');
+    this.device = device;
+    this.context = ctx;
+
+    // Listen for device loss and attempt recovery
+    this.device.lost.then((info) => {
+      console.warn('WebGPU device lost:', info.message);
+      if (!this.destroyed) {
+        this.handleDeviceLost();
+      }
+    });
+
     this.canvasFormat = navigator.gpu.getPreferredCanvasFormat();
 
     this.context.configure({
@@ -233,6 +268,28 @@ export class WaveRenderer {
     this.resize();
 
     this.initialized = true;
+    return true;
+  }
+
+  handleDeviceLost() {
+    // Stop the current animation loop
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+
+    // Clear stale GPU state (device is already lost, no need to destroy it)
+    this.device = null;
+    this.uniformBuffer = null;
+    this.bindGroup = null;
+    this.pipeline = null;
+    this.context = null;
+    this.initialized = false;
+
+    // Signal to the component that it needs to replace the canvas and re-init
+    if (this._onNeedsRecovery) {
+      this._onNeedsRecovery();
+    }
   }
 
   setColorMode(mode) {
@@ -264,7 +321,6 @@ export class WaveRenderer {
   cubicBezier(t, p1x, p1y, p2x, p2y) {
     const cx = 3.0 * p1x;
     const bx = 3.0 * (p2x - p1x) - cx;
-    const ax = 1.0 - cx - bx;
 
     const cy = 3.0 * p1y;
     const by = 3.0 * (p2y - p1y) - cy;
@@ -331,27 +387,34 @@ export class WaveRenderer {
       this.uniformData[8 + i] = this.waveOpacities[i];
     }
 
-    this.device.queue.writeBuffer(this.uniformBuffer, 0, this.uniformData);
+    try {
+      this.device.queue.writeBuffer(this.uniformBuffer, 0, this.uniformData);
 
-    // Create render pass
-    const textureView = this.context.getCurrentTexture().createView();
+      // Create render pass
+      const textureView = this.context.getCurrentTexture().createView();
 
-    const commandEncoder = this.device.createCommandEncoder();
-    const renderPass = commandEncoder.beginRenderPass({
-      colorAttachments: [{
-        view: textureView,
-        clearValue: { r: 0, g: 0, b: 0, a: 0 },
-        loadOp: 'clear',
-        storeOp: 'store',
-      }],
-    });
+      const commandEncoder = this.device.createCommandEncoder();
+      const renderPass = commandEncoder.beginRenderPass({
+        colorAttachments: [{
+          view: textureView,
+          clearValue: { r: 0, g: 0, b: 0, a: 0 },
+          loadOp: 'clear',
+          storeOp: 'store',
+        }],
+      });
 
-    renderPass.setPipeline(this.pipeline);
-    renderPass.setBindGroup(0, this.bindGroup);
-    renderPass.draw(4);
-    renderPass.end();
+      renderPass.setPipeline(this.pipeline);
+      renderPass.setBindGroup(0, this.bindGroup);
+      renderPass.draw(4);
+      renderPass.end();
 
-    this.device.queue.submit([commandEncoder.finish()]);
+      this.device.queue.submit([commandEncoder.finish()]);
+    } catch {
+      // Device lost or context invalid — stop the loop.
+      // Recovery is handled by the device.lost promise handler.
+      this.animationFrameId = null;
+      return;
+    }
 
     this.animationFrameId = requestAnimationFrame(this.render.bind(this));
   }
@@ -365,9 +428,17 @@ export class WaveRenderer {
   }
 
   destroy() {
+    this.destroyed = true;
+    this._onNeedsRecovery = null;
+
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
+    }
+
+    if (this.context) {
+      try { this.context.unconfigure(); } catch { /* ignore */ }
+      this.context = null;
     }
 
     if (this.uniformBuffer) {
@@ -380,7 +451,6 @@ export class WaveRenderer {
       this.device = null;
     }
 
-    this.context = null;
     this.initialized = false;
   }
 }
