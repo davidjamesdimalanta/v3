@@ -11,7 +11,7 @@ const technologies = [
   { name: "Lenis", url: "https://lenis.darkroom.engineering/" },
   { name: "Radix UI", url: "https://www.radix-ui.com/" },
   { name: "Motion-Primitives", url:"https://motion-primitives.com/docs" },
-  { name: "WebGL", url: "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API" },
+  { name: "webGPU", url: "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API" },
   { name: "Mux", url: "https://www.mux.com/solutions/video-for-vercel" },
   { name: "Sanity", url: "https://www.sanity.io/docs" }
 ];
