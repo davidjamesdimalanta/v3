@@ -91,6 +91,7 @@ export default function CaseStudyMediaBlock({
   size = "large",  // "small", "medium", or "large"
   id,
   className = "",
+  priority = false,  // Eager loading for above-the-fold images/thumbnails
 }) {
   // Get theme from context (can be overridden by props)
   const theme = useCaseStudyTheme();
@@ -117,6 +118,13 @@ export default function CaseStudyMediaBlock({
   };
 
   const currentSize = sizeConfig[size] || sizeConfig.large;
+
+  // Compute sizes hint for Next.js Image optimization based on size variant
+  const imageSizes = {
+    small: "(max-width: 512px) calc(100vw - 32px), 480px",
+    medium: "(max-width: 768px) calc(100vw - 32px), (max-width: 1290px) calc(100vw - 64px), 1226px",
+    large: "(max-width: 768px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px",
+  }[size] || "(max-width: 768px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px";
 
   // Parse aspect ratio
   const getAspectRatio = () => {
@@ -485,6 +493,8 @@ export default function CaseStudyMediaBlock({
                       src={thumbnail}
                       alt={alt || "Video thumbnail"}
                       fill
+                      priority={priority}
+                      sizes={imageSizes}
                       className="object-cover"
                     />
                   </div>
@@ -517,6 +527,8 @@ export default function CaseStudyMediaBlock({
                 src={src}
                 alt={alt}
                 fill
+                priority={priority}
+                sizes={imageSizes}
                 className="object-cover"
               />
             ) : (

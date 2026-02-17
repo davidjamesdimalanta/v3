@@ -32,6 +32,7 @@ export const projectData = {
 
   // Project details displayed in a grid
   details: {
+    type: "Shipped",                 // Project type: "Concept", "Hackathon", or "Shipped"
     role: "Product Designer",      // Your role on the project
     timeline: "6 months",           // Project duration
     team: "4 designers, 6 engineers", // Team composition

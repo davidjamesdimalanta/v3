@@ -2,7 +2,8 @@
 
 import { TextLoop } from "@/components/motion-primitives/text-loop";
 import { useState } from "react";
-import Link from 'next/link'; 
+import Link from 'next/link';
+import { useSoundEffects } from "./hooks/useSoundEffects";
 
 const technologies = [
   { name: "Next.js", url: "https://nextjs.org/docs" },
@@ -18,11 +19,12 @@ const technologies = [
 
 export default function Footer() {
   const [isPaused, setIsPaused] = useState(false);
+  const { playButtonHover } = useSoundEffects();
 
   return (
     <footer className="p-4 pb-16 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill">
       <div className="inline-flex whitespace-pre-wrap text-button text-[#2C4E47] tracking-wide uppercase">
-        Built with{' '}
+        Powered by matcha pandan. Built with{' '}
         <TextLoop
           className="overflow-y-clip"
           interval={1.5}
@@ -55,7 +57,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:bd-text cursor-pointer transition-all duration-200"
-              onMouseEnter={() => setIsPaused(true)}
+              onMouseEnter={() => { setIsPaused(true); playButtonHover(); }}
               onMouseLeave={() => setIsPaused(false)}
             >
               {tech.name}
@@ -64,19 +66,19 @@ export default function Footer() {
         </TextLoop>
       </div>
       <div className="flex flex-wrap gutter-sm">
-        <Link href="/" className="text-button text-[#2C4E47] hover:bd-text">
+        <Link href="/" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           HOME
-        </Link>  
-        <Link href="https://www.linkedin.com/in/daviddimalanta/" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text">
+        </Link>
+        <Link href="https://www.linkedin.com/in/daviddimalanta/" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           LINKEDIN
-      </Link>  
-        <Link href="https://github.com/davidjamesdimalanta" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text">
+      </Link>
+        <Link href="https://github.com/davidjamesdimalanta" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           GITHUB
-      </Link>  
-      <Link href="mailto:david.dimalanta@mail.utoronto.ca" className="text-button text-[#2C4E47] hover:bd-text">
+      </Link>
+      <Link href="mailto:david.dimalanta@mail.utoronto.ca" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           CONTACT
-      </Link>  
-      <Link href="/cv/DavidDimalanta_CV.pdf" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text">
+      </Link>
+      <Link href="https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           CV
       </Link>  
       </div>

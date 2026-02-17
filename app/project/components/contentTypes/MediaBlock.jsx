@@ -62,7 +62,8 @@ export default function MediaBlock({
   thumbnail, // Optional thumbnail/poster image (e.g., Mux thumbnail)
   aspectRatio = "video", // "video" (16:9), "square", "portrait", or custom class
   className = "",
-  isFirstVideo = false // First video has 2-second delay, others autoplay instantly
+  isFirstVideo = false, // First video has 2-second delay, others autoplay instantly
+  priority = false, // Eager loading for above-the-fold images
 }) {
   const lottieRef = useRef(null);
   const dotLottieInstanceRef = useRef(null);
@@ -354,6 +355,8 @@ export default function MediaBlock({
               src={thumbnail}
               alt={alt || "Video thumbnail"}
               fill
+              priority={priority}
+              sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 64px), 75vw"
               className="object-cover"
             />
           </div>
@@ -395,6 +398,8 @@ export default function MediaBlock({
             src={src}
             alt={alt}
             fill
+            priority={priority}
+            sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(100vw - 64px), 75vw"
             className="object-cover"
           />
         ) : (

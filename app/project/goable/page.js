@@ -50,6 +50,7 @@ export default function ProjectPage() {
           }}
           thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
           isFirstVideo={true}
+          priority
         />
 
         <ContentBlock

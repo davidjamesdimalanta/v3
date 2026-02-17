@@ -30,6 +30,7 @@ export const projectData = {
 
   // Project details displayed in a grid
   details: {
+    type: "Hackathon",
     role: "Product Design, Project Management",
     timeline: "7 days",
     team: "2 designers, 3 developers",

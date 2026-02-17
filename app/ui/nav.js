@@ -61,7 +61,7 @@ export default function Nav() {
           />
           <Button
             text={"CV"}
-            href="/cv/DavidDimalanta_CV.pdf"
+            href="https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             soundEffect="hover"

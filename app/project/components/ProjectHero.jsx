@@ -14,7 +14,7 @@ export default function ProjectHero({
   onClose
 }) {
   // Sound effects
-  const { playHover, playNavigateHome } = useSoundEffects();
+  const { playButtonHover, playNavigateHome } = useSoundEffects();
   return (
     <aside className="relative flex flex-1 flex-col lg:basis-[720px]">
       <div className="justify-between sticky top-0 flex h-full flex-col lg:max-h-svh px-4 py-8 md:p-8">
@@ -50,7 +50,7 @@ export default function ProjectHero({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-button text-400 uppercase hover:bd-text transition-all duration-150 w-hug"
-                  onMouseEnter={playHover}
+                  onMouseEnter={playButtonHover}
                 >
                   {link.label} →
                 </a>
@@ -74,7 +74,7 @@ export default function ProjectHero({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center justify-between text-p text-400 hover:bd-text transition-all duration-150"
-                    onMouseEnter={playHover}
+                    onMouseEnter={playButtonHover}
                   >
                     <span>{award.name}</span>
                     <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150">→</span>

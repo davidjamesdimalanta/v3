@@ -134,7 +134,7 @@ export default function FeaturedProject({
   return (
     <div
       ref={containerRef}
-      className="bd hover:bd-active transition-all duration-150 overflow-hidden w-fill flex flex-col"
+      className="bd hover:bd-active transition-all duration-150 overflow-hidden w-fill h-full flex flex-col"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -175,7 +175,7 @@ export default function FeaturedProject({
       </div>
 
       {/* Content Container */}
-      <div className="p-4 flex flex-col md:flex-row xl:flex-row gutter-xs md:gutter-base h-fill">
+      <div className="p-4 flex flex-col md:flex-row xl:flex-row gutter-xs md:gutter-base flex-1">
         {/* Header with title and year */}
         <div className="flex flex-col flex-1 h-hug lg:h-fill items-start gap-2">
           <h3 className="text-h4 text-400 leading-none">{title}</h3>
@@ -200,6 +200,7 @@ export default function FeaturedProject({
           </div>
         )}
       </div>
+
     </div>
   );
 }
