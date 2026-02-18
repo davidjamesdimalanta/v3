@@ -247,6 +247,29 @@ span {
 }
 
 /* ===================================
+   VINYL SPIN ANIMATION
+   =================================== */
+
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility vinyl-spinning {
+  animation: vinyl-spin 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl-spinning {
+    animation: none;
+  }
+}
+
+/* ===================================
    RESPONSIVE TEXT UTILITIES (CLAMP)
    =================================== */
 
@@ -322,6 +345,14 @@ span {
 }
 
 /* GUTTER CLASSES */
+@utility gutter-2xl {
+  @apply gap-[96px];
+}
+
+@utility gutter-xl {
+  @apply gap-[64px];
+}
+
 @utility gutter-lg {
     @apply gap-[40px];
 }

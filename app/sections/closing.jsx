@@ -20,11 +20,13 @@ export default function Closing() {
                             <span className="md:hidden text-p">MI @ UofT </span>
                             <span className="hidden md:inline text-p">MI Candidate @ UofT iSchool </span>
                         </Link>
-                        <span className="text-p">& </span>
+                        <span className="text-p">, </span>
                         <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150" onMouseEnter={playButtonHover}>
                             <span className="md:hidden inline-block text-p">UX/UI @ iHub</span>
                             <span className="hidden md:inline-block text-p">UX/UI @ Innovation Hub</span>
                         </Link>
+                        <span className="text-p">, &</span>
+                        <span className="text-p text-600"> looking for a 2026 summer co-op!</span>
                     </div>
                 </div>
             </div>

@@ -55,6 +55,11 @@ export default function Nav() {
           style={getAnimationStyle('nav-logo-name')}
         >
           <Button
+            text={"About"}
+            href="/about"
+            soundEffect="hover"
+          />
+          <Button
             text={"Contact"}
             href="mailto:david.dimalanta@mail.utoronto.ca"
             soundEffect="hover"

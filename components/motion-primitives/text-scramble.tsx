@@ -1,5 +1,5 @@
 'use client';
-import { type JSX, useEffect, useState } from 'react';
+import { type JSX, useEffect, useRef, useState } from 'react';
 import { motion, MotionProps } from 'motion/react';
 
 export type TextScrambleProps = {
@@ -31,28 +31,54 @@ export function TextScramble({
     Component as keyof JSX.IntrinsicElements
   );
   const [displayText, setDisplayText] = useState(children);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const text = children;
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const targetTextRef = useRef(children);
+  const hasBeenTriggeredRef = useRef(false);
 
-  const scramble = async () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
+  // Always keep the target text ref in sync with children
+  targetTextRef.current = children;
+
+  // Clean up interval on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // Cancel any in-progress animation
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    const target = targetTextRef.current;
+
+    if (!hasBeenTriggeredRef.current && !trigger) {
+      // On first mount with trigger=false, just sync the display text (no animation)
+      setDisplayText(target);
+      return;
+    }
+    hasBeenTriggeredRef.current = true;
 
     const steps = duration / speed;
     let step = 0;
 
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
+      const currentTarget = targetTextRef.current;
       let scrambled = '';
       const progress = step / steps;
 
-      for (let i = 0; i < text.length; i++) {
-        if (text[i] === ' ') {
+      for (let i = 0; i < currentTarget.length; i++) {
+        if (currentTarget[i] === ' ') {
           scrambled += ' ';
           continue;
         }
 
-        if (progress * text.length > i) {
-          scrambled += text[i];
+        if (progress * currentTarget.length > i) {
+          scrambled += currentTarget[i];
         } else {
           scrambled +=
             characterSet[Math.floor(Math.random() * characterSet.length)];
@@ -63,19 +89,13 @@ export function TextScramble({
       step++;
 
       if (step > steps) {
-        clearInterval(interval);
-        setDisplayText(text);
-        setIsAnimating(false);
+        clearInterval(intervalRef.current!);
+        intervalRef.current = null;
+        setDisplayText(currentTarget);
         onScrambleComplete?.();
       }
     }, speed * 1000);
-  };
-
-  useEffect(() => {
-    if (!trigger) return;
-
-    scramble();
-  }, [trigger]);
+  }, [trigger, children]);
 
   return (
     <MotionComponent className={className} {...props}>
