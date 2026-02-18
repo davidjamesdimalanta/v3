@@ -23,9 +23,9 @@ export default function Footer() {
 
   return (
     <footer className="p-4 pb-16 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill">
-      <div className="inline-flex whitespace-pre-wrap text-button text-[#2C4E47] tracking-wide uppercase">
-        Powered by matcha pandan. Built with{' '}
-        <TextLoop
+      <div className="inline-flex flex-wrap text-button text-[#2C4E47] tracking-wide uppercase">
+        <span>Powered by matcha pandan.&nbsp;</span>
+        <span className="inline-flex whitespace-nowrap">Built with&nbsp;<TextLoop
           className="overflow-y-clip"
           interval={1.5}
           trigger={!isPaused}
@@ -63,7 +63,7 @@ export default function Footer() {
               {tech.name}
             </a>
           ))}
-        </TextLoop>
+        </TextLoop></span>
       </div>
       <div className="flex flex-wrap gutter-sm">
         <Link href="/" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
