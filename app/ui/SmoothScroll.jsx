@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
 export default function SmoothScroll() {
+  const pathname = usePathname();
+
+  // Initialize Lenis once
   useEffect(() => {
-    // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => 1 - Math.pow(1 - t, 5), // easeOutQuint
@@ -38,6 +41,15 @@ export default function SmoothScroll() {
       lenis.destroy();
     };
   }, []);
+
+  // Reset scroll to top on route change
+  useEffect(() => {
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
 
   return null;
 }

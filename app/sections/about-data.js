@@ -57,4 +57,32 @@ export const vinylRecords = [
     cover: "/assets/aboutme/vinyls/Hyakkei - Kagefumi.webp",
     audioSrc: "/assets/aboutme/songs/Hyakkei - Kagefumi.mp3",
   },
+  {
+    id: "macdemarco-preoccupied",
+    artist: "Mac Demarco",
+    song: "Preoccupied",
+    cover: "/assets/aboutme/vinyls/Mac Demarco - Preoccupied.webp",
+    audioSrc: "/assets/aboutme/songs/Mac Demarco - Preoccupied.mp3",
+  },
+  {
+    id: "sade-kissoflife",
+    artist: "Sade",
+    song: "Kiss of Life",
+    cover: "/assets/aboutme/vinyls/Sade - Kiss of Life.webp",
+    audioSrc: "/assets/aboutme/songs/Sade - Kiss of Life.mp3",
+  },
+  {
+    id: "spandauballet-true",
+    artist: "Spandau Ballet",
+    song: "True",
+    cover: "/assets/aboutme/vinyls/Spandau Ballet - True.webp",
+    audioSrc: "/assets/aboutme/songs/Spandau Ballet - True.mp3",
+  },
+  {
+    id: "pokemon-eternacity",
+    artist: "Pokemon",
+    song: "Eterna City (Night)",
+    cover: "/assets/aboutme/vinyls/Pokemon - Eterna City (Night).webp",
+    audioSrc: "/assets/aboutme/songs/Pokemon - Eterna City (Night).mp3",
+  },
 ];

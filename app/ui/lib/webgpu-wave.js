@@ -311,6 +311,17 @@ export class WaveRenderer {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
 
+    // Reconfigure context so Chrome creates a fresh texture for the new size.
+    // Without this, the previous texture is invalidated by the dimension change
+    // but may still be referenced by Chrome's compositor (CopyTextureToTexture).
+    if (this.device && this.canvasFormat) {
+      this.context.configure({
+        device: this.device,
+        format: this.canvasFormat,
+        alphaMode: 'premultiplied',
+      });
+    }
+
     // Update resolution in uniform data
     this.uniformData[2] = this.canvas.width;
     this.uniformData[3] = this.canvas.height;

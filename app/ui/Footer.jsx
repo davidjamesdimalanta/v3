@@ -22,7 +22,7 @@ export default function Footer() {
   const { playButtonHover } = useSoundEffects();
 
   return (
-    <footer className="p-4 pb-16 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill">
+    <footer className="p-4 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill">
       <div className="inline-flex flex-wrap text-button text-[#2C4E47] tracking-wide uppercase">
         <span>Powered by matcha pandan.&nbsp;</span>
         <span className="inline-flex whitespace-nowrap">Built with&nbsp;<TextLoop
@@ -68,6 +68,9 @@ export default function Footer() {
       <div className="flex flex-wrap gutter-sm">
         <Link href="/" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           HOME
+        </Link>
+        <Link href="/about" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
+          ABOUT
         </Link>
         <Link href="https://www.linkedin.com/in/daviddimalanta/" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           LINKEDIN
