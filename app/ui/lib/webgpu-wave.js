@@ -390,8 +390,23 @@ export class WaveRenderer {
     try {
       this.device.queue.writeBuffer(this.uniformBuffer, 0, this.uniformData);
 
-      // Create render pass
-      const textureView = this.context.getCurrentTexture().createView();
+      // Validate texture before creating render pass
+      let texture;
+      try {
+        texture = this.context.getCurrentTexture();
+      } catch {
+        // Texture unavailable — skip this frame
+        this.animationFrameId = requestAnimationFrame(this.render.bind(this));
+        return;
+      }
+
+      if (!texture || texture.width === 0 || texture.height === 0) {
+        // Invalid texture dimensions — skip this frame
+        this.animationFrameId = requestAnimationFrame(this.render.bind(this));
+        return;
+      }
+
+      const textureView = texture.createView();
 
       const commandEncoder = this.device.createCommandEncoder();
       const renderPass = commandEncoder.beginRenderPass({
@@ -410,9 +425,11 @@ export class WaveRenderer {
 
       this.device.queue.submit([commandEncoder.finish()]);
     } catch {
-      // Device lost or context invalid — stop the loop.
-      // Recovery is handled by the device.lost promise handler.
+      // Device lost or context invalid — trigger fallback to Canvas 2D
       this.animationFrameId = null;
+      if (this._onNeedsRecovery) {
+        this._onNeedsRecovery();
+      }
       return;
     }
 
@@ -424,12 +441,38 @@ export class WaveRenderer {
       return;
     }
     if (!this.initialized) return;
+
+    // Pause rendering when tab is hidden to avoid texture invalidation errors
+    this._boundVisibilityHandler = () => {
+      if (document.hidden) {
+        if (this.animationFrameId !== null) {
+          cancelAnimationFrame(this.animationFrameId);
+          this.animationFrameId = null;
+        }
+      } else {
+        // Resume after a short delay to let the GPU context stabilize
+        if (this.animationFrameId === null && this.initialized && !this.destroyed) {
+          setTimeout(() => {
+            if (!this.destroyed && this.initialized && this.animationFrameId === null) {
+              this.animationFrameId = requestAnimationFrame(this.render.bind(this));
+            }
+          }, 100);
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', this._boundVisibilityHandler);
+
     this.animationFrameId = requestAnimationFrame(this.render.bind(this));
   }
 
   destroy() {
     this.destroyed = true;
     this._onNeedsRecovery = null;
+
+    if (this._boundVisibilityHandler) {
+      document.removeEventListener('visibilitychange', this._boundVisibilityHandler);
+      this._boundVisibilityHandler = null;
+    }
 
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
