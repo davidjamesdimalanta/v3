@@ -161,7 +161,7 @@ export default function ProjectPage() {
             sideOffset="1"
           />
           {" "}
-          discussed the different barriers to access they experienced when finding a washroom. Influenced by our
+          discussed the different barriers to access they experienced when finding a washroom. Our
           {" "}
           <DefinitionCard
             trigger="design goals"
@@ -190,7 +190,7 @@ export default function ProjectPage() {
             side="bottom"
             width="w-120"
             sideOffset="1"
-          />, the project aimed to tackle the three critical issues in washroom finding:</>
+          /> influenced the project, tackling three critical issues in washroom finding:</>
 
         ]}
       />
@@ -364,15 +364,15 @@ export default function ProjectPage() {
         text={[
           <div key="access" className="flex flex-col mb-2">
             <strong>Access is Multidimensional</strong>
-            <span className="text-[#2C4E47]">This project taught me that access doesn&apos;t just mean physical, but also emotional and political barriers people face.</span>
+            <span className="text-[#2C4E47]">This project taught me that access doesn&apos;t just mean <strong className="text-600">physical</strong>, but also <strong className="text-600">emotional</strong> and <strong className="text-600">political</strong> barriers people face.</span>
           </div>,
           <div key="restraint" className="flex flex-col mb-2">
             <strong>The Power of Restraint</strong>
-            <span className="text-[#2C4E47]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers show restraint—providing exactly what they need, when they need it, while respecting their choice to participate or not.</span>
+            <span className="text-[#2C4E47]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
           </div>,
           <div key="details" className="flex flex-col mb-2">
             <strong>Details Can Distract</strong>
-            <span className="text-[#2C4E47]">Different prototype fidelities serve their purposes and all are equally needed in the design process. Doing UXR without one or the other can compromise your designs further down the line.</span>
+            <span className="text-[#2C4E47]">Different prototype fidelities serve their purposes and all are equally needed in the design process. While lower fidelity prototypes surface more foundational issues, <strong className="text-600">higher fidelities help QA the micro-interactions that make a design cohesive</strong>. Doing UXR without one or the other can compromise your designs further down the line.</span>
           </div>,
         ]}
       />

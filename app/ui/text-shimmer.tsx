@@ -94,7 +94,7 @@ function TextShimmerComponent({
           "--base-color": colors.baseColor,
           "--gradient-color": colors.gradientColor,
           fontFamily: "var(--font-aspekta), sans-serif",
-          paddingRight: "0.05em",
+          paddingRight: "0.1em",
           backgroundImage: `linear-gradient(
             90deg,
             var(--base-color) calc(50% - var(--spread)),

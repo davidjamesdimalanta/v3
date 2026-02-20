@@ -59,6 +59,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${newRodinPro.variable} ${aspekta.variable}`}>
       <body className="relative antialiased">
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        {/* <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script> */}
         <SpeedInsights />
         <Analytics/>
         <FontLoadingMonitor />

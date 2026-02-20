@@ -57,7 +57,7 @@ export default function Nav() {
           <Button
             text={"About"}
             href="/about"
-            soundEffect="hover"
+            soundEffect="navigateProject"
           />
           <Button
             text={"Contact"}

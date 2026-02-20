@@ -415,6 +415,63 @@ span {
     @apply font-extrabold;
 }
 
+/* FONT WEIGHTS - ASPEKTA */
+@utility text-50 {
+    font-weight: 50;
+}
+
+@utility text-100 {
+    font-weight: 100;
+}
+
+@utility text-150 {
+    font-weight: 150;
+}
+
+@utility text-200 {
+    font-weight: 200;
+}
+
+@utility text-250 {
+    font-weight: 250;
+}
+
+@utility text-350 {
+    font-weight: 350;
+}
+
+@utility text-450 {
+    font-weight: 450;
+}
+
+@utility text-550 {
+    font-weight: 550;
+}
+
+@utility text-650 {
+    font-weight: 650;
+}
+
+@utility text-750 {
+    font-weight: 750;
+}
+
+@utility text-850 {
+    font-weight: 850;
+}
+
+@utility text-900 {
+    font-weight: 900;
+}
+
+@utility text-950 {
+    font-weight: 950;
+}
+
+@utility text-1000 {
+    font-weight: 1000;
+}
+
 /* ===================================
    FADE-UP ANIMATION UTILITIES
    =================================== */

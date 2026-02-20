@@ -142,7 +142,7 @@ export default function DefinitionCard({
       <HoverCard>
         <HoverCardTrigger asChild>
           <i
-            className={cn("pr-[2px] cursor-pointer", triggerClassName)}
+            className={cn("cursor-pointer text-550", triggerClassName)}
             {...triggerProps}
           >
             <TextShimmer variant={shimmerVariant} as="span">

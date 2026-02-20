@@ -46,17 +46,27 @@ export default function AboutLanding() {
               },
             }}
           >
-            <div className="flex flex-col gutter-xs">
+            <div className="flex flex-col gutter-base">
+
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
               A bit about me.
             </span>
+
             <span className="text-p pt-4">
             The persistent & pragmatic problem solver? The crazy ideas guy? I&apos;m still crafting my narrative, but for now, here&apos;s who I am.
             </span>
+
             <span className="text-p">
-            David is a product designer with background in web development. Experienced in
-            wireframes, prototyping, & cross-functional collaboration experience. Am currently
-            exploring motion design, accessibility design, and human-AI interaction.
+            David is a product designer with background in web development, and is experienced in
+            wireframes, prototyping, & cross-functional collaboration experience.
+            </span>
+
+            <span className="text-p">
+            Am currently exploring motion design, accessibility design, and human-AI interaction.
+            </span>
+
+            <span className="text-p">
+              Outside of work, I love handheld consoles (I&apos;m stuck in 2009), finding cafes around the city, and going to the gym.
             </span>
             </div>
               <div className="relative">
