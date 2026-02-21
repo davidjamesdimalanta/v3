@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>v3 Portfolio — Design System</title>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    /* ─── FONTS ─────────────────────────────────────────── */
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-100.woff2') format('woff2'); font-weight: 100; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-200.woff2') format('woff2'); font-weight: 200; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-300.woff2') format('woff2'); font-weight: 300; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-400.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-500.woff2') format('woff2'); font-weight: 500; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-600.woff2') format('woff2'); font-weight: 600; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-700.woff2') format('woff2'); font-weight: 700; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-800.woff2') format('woff2'); font-weight: 800; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-900.woff2') format('woff2'); font-weight: 900; }
+    @font-face { font-family: 'Aspekta'; src: url('/fonts/Aspekta/Aspekta-1000.woff2') format('woff2'); font-weight: 1000; }
+    @font-face { font-family: 'NewRodinPro'; src: url('/fonts/New Rodin Pro/NewRodin Pro L.woff2') format('woff2'); font-weight: 300; }
+    @font-face { font-family: 'NewRodinPro'; src: url('/fonts/New Rodin Pro/NewRodin Pro M.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'NewRodinPro'; src: url('/fonts/New Rodin Pro/NewRodin Pro DB.woff2') format('woff2'); font-weight: 500; }
+    @font-face { font-family: 'NewRodinPro'; src: url('/fonts/New Rodin Pro/NewRodin Pro B.woff2') format('woff2'); font-weight: 600; }
+
+    /* ─── DESIGN TOKENS ─────────────────────────────────── */
+    :root {
+      --bg-color: rgb(237, 236, 234);
+      --text-color: rgb(59, 45, 28);
+      --figma-brown: rgb(58, 31, 30);
+      --color-cream: #ECEAE9;
+      --color-green-muted: #2C4E47;
+      --color-green-sage: #427067;
+      --color-teal-dusty: #799A92;
+      --color-brown-warm: #7C514A;
+      --color-tan-light: #9B907A;
+      --color-taupe-warm: #9F807B;
+      --color-gray-warm: #D6CAC8;
+      --color-gray-light: #D5CFC6;
+      --color-mint-subtle: #D0EFDE;
+      --color-neutral-disabled: #bebebe;
+      --shadow-sm: 0 0 4px rgba(0,0,0,0.05);
+      --shadow-bd: 0 0 4px 2px rgba(155,144,122,0.3);
+      --shadow-bd-active: 0 0 8px 2px rgba(155,144,122,1.0);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Aspekta', sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 48px 48px 80px;
+      width: 1440px;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .ds-page { display: flex; flex-direction: column; gap: 80px; }
+    .section { display: flex; flex-direction: column; gap: 32px; }
+    .section-header {
+      display: flex; flex-direction: column; gap: 6px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-gray-warm);
+    }
+    .section-label {
+      font-family: 'Aspekta', sans-serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--color-teal-dusty);
+    }
+    .section-title {
+      font-family: 'Aspekta', sans-serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--text-color);
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .col { display: flex; flex-direction: column; gap: 8px; }
+    .token-label {
+      font-size: 11px; font-weight: 500;
+      color: var(--color-teal-dusty);
+      font-family: 'Aspekta', monospace;
+      letter-spacing: 0.04em;
+    }
+    .token-value {
+      font-size: 10px; font-weight: 400;
+      color: var(--color-neutral-disabled);
+      font-family: monospace;
+    }
+
+    /* ─── COVER ──────────────────────────────────────────── */
+    .cover {
+      background: var(--figma-brown);
+      border-radius: 8px;
+      padding: 56px 64px;
+      display: flex; flex-direction: column; gap: 12px;
+      color: var(--bg-color);
+    }
+    .cover-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .cover-title {
+      font-size: 56px; font-weight: 700; line-height: 1.05;
+    }
+    .cover-subtitle {
+      font-size: 18px; font-weight: 300; opacity: 0.6; margin-top: 4px;
+    }
+    .cover-meta {
+      font-size: 12px; font-weight: 400; opacity: 0.4; margin-top: 16px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── COLOR SWATCHES ─────────────────────────────────── */
+    .swatch-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+    .swatch {
+      display: flex; flex-direction: column; gap: 8px;
+      width: 120px;
+    }
+    .swatch-box {
+      width: 120px; height: 80px;
+      border-radius: 8px;
+      border: 1px solid rgba(59,45,28,0.08);
+    }
+    .swatch-name { font-size: 12px; font-weight: 600; color: var(--text-color); }
+    .swatch-hex  { font-size: 11px; font-weight: 400; color: var(--color-teal-dusty); font-family: monospace; }
+    .swatch-use  { font-size: 10px; font-weight: 400; color: var(--color-neutral-disabled); line-height: 1.4; }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────────────── */
+    .type-row {
+      display: flex; align-items: baseline; gap: 32px;
+      padding: 20px 0; border-bottom: 1px solid var(--color-gray-light);
+    }
+    .type-meta { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 2px; }
+    .type-sample { flex: 1; color: var(--text-color); }
+    .type-h1  { font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem); line-height: 1.05; font-weight: 700; }
+    .type-h2  { font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem); line-height: 1.1;  font-weight: 700; }
+    .type-h3  { font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem); line-height: 1.2; font-weight: 600; }
+    .type-h4  { font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem); line-height: 1.2; font-weight: 600; }
+    .type-h5  { font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem); line-height: 1.2; font-weight: 500; }
+    .type-h6  { font-size: clamp(1.05rem, 0.99rem + 0.23vw, 1.2rem); line-height: 1.2; font-weight: 500; }
+    .type-p   { font-size: clamp(1rem, 0.9rem + 0.19vw, 1.125rem); line-height: 1.4; font-weight: 400; }
+    .type-sm  { font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem); line-height: 1.5; font-weight: 400; }
+    .type-xs  { font-size: clamp(0.6075rem, 0.58rem + 0.11vw, 0.69438rem); line-height: 1.5; font-weight: 400; }
+    .type-btn { font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem); line-height: 1.5; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    /* ─── FONT WEIGHTS ───────────────────────────────────── */
+    .weight-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+    .weight-card {
+      padding: 16px 20px; border-radius: 8px;
+      border: 1px solid var(--color-gray-warm);
+      width: 160px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .weight-sample {
+      font-size: 22px; line-height: 1.2;
+      color: var(--text-color);
+    }
+    .weight-meta { font-size: 10px; color: var(--color-teal-dusty); font-family: monospace; }
+
+    /* ─── SPACING ────────────────────────────────────────── */
+    .spacing-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 0; border-bottom: 1px solid var(--color-gray-light);
+    }
+    .spacing-bar {
+      height: 16px;
+      background: var(--color-green-muted);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .spacing-info { display: flex; flex-direction: column; gap: 2px; }
+    .spacing-name { font-size: 12px; font-weight: 600; color: var(--text-color); }
+    .spacing-val  { font-size: 11px; color: var(--color-teal-dusty); font-family: monospace; }
+
+    /* ─── SHADOW UTILITIES ───────────────────────────────── */
+    .effect-card {
+      padding: 24px; border-radius: 8px;
+      display: flex; flex-direction: column; gap: 8px;
+      background: var(--color-cream);
+      min-width: 200px;
+    }
+    .effect-name  { font-size: 12px; font-weight: 600; color: var(--text-color); }
+    .effect-value { font-size: 10px; color: var(--color-teal-dusty); font-family: monospace; line-height: 1.6; }
+
+    /* ─── BORDER RADIUS ──────────────────────────────────── */
+    .radius-grid { display: flex; gap: 24px; flex-wrap: wrap; }
+    .radius-card {
+      display: flex; flex-direction: column; gap: 10px; align-items: center;
+    }
+    .radius-box {
+      width: 80px; height: 80px;
+      background: var(--color-cream);
+      border: 1.5px solid var(--color-gray-warm);
+    }
+
+    /* ─── COMPONENTS ─────────────────────────────────────── */
+
+    /* Button */
+    .ds-button {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-family: 'Aspekta', sans-serif;
+      font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      backdrop-filter: blur(48px);
+      box-shadow: var(--shadow-bd);
+      color: var(--text-color);
+      background: transparent;
+      transition: all 150ms ease;
+    }
+    .ds-button-icon {
+      width: 32px; height: 32px;
+      border-radius: 9999px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(48px);
+      box-shadow: var(--shadow-bd);
+      background: transparent;
+      border: none; cursor: pointer;
+      color: var(--text-color);
+    }
+    .ds-button-active {
+      backdrop-filter: blur(72px);
+      box-shadow: var(--shadow-bd-active);
+    }
+
+    /* SkillTag */
+    .ds-skilltag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      border: 1px solid var(--figma-brown);
+      color: var(--figma-brown);
+      font-family: 'Aspekta', sans-serif;
+      font-size: clamp(0.6075rem, 0.58rem + 0.11vw, 0.69438rem);
+      font-weight: 500;
+    }
+
+    /* Nav */
+    .ds-nav {
+      position: relative;
+      background: transparent;
+      backdrop-filter: blur(48px);
+      box-shadow: var(--shadow-bd);
+      border-radius: 8px;
+      padding: 16px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%;
+    }
+    .ds-nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Aspekta', sans-serif;
+      font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
+      font-weight: 500;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+    .ds-nav-logo-icon {
+      width: 30px; height: 24px;
+      background: var(--figma-brown);
+      border-radius: 4px;
+    }
+    .ds-nav-actions { display: flex; gap: 16px; align-items: center; }
+
+    /* Project Card */
+    .ds-project-card {
+      border-radius: 8px;
+      backdrop-filter: blur(48px);
+      box-shadow: var(--shadow-bd);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      width: 560px;
+    }
+    .ds-card-media {
+      aspect-ratio: 16/9;
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-gray-warm);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ds-card-media-label {
+      font-size: 12px; color: var(--color-neutral-disabled);
+      font-family: monospace;
+    }
+    .ds-card-body {
+      padding: 16px;
+      display: flex; gap: 16px; justify-content: space-between; align-items: flex-start;
+    }
+    .ds-card-title {
+      font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
+      font-weight: 400; line-height: 1;
+      color: var(--text-color);
+    }
+    .ds-card-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+
+    /* Footer */
+    .ds-footer {
+      padding: 16px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-radius: 8px;
+      border: 1px solid var(--color-gray-warm);
+      width: 100%;
+    }
+    .ds-footer-left {
+      font-family: 'Aspekta', sans-serif;
+      font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--color-green-muted);
+      font-weight: 400;
+    }
+    .ds-footer-links { display: flex; gap: 16px; }
+    .ds-footer-link {
+      font-family: 'Aspekta', sans-serif;
+      font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+      font-weight: 400;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--color-green-muted);
+      text-decoration: none;
+    }
+
+    /* Z-index */
+    .zindex-grid { display: flex; gap: 16px; }
+    .zindex-card {
+      padding: 14px 20px; border-radius: 8px;
+      border: 1px solid var(--color-gray-warm);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .zindex-val { font-size: 20px; font-weight: 700; color: var(--text-color); }
+    .zindex-use { font-size: 11px; color: var(--color-teal-dusty); }
+
+    /* Animation */
+    .anim-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .anim-chip {
+      padding: 8px 16px; border-radius: 9999px;
+      border: 1px solid var(--color-gray-warm);
+      font-size: 12px; font-weight: 500;
+      color: var(--text-color);
+      font-family: monospace;
+    }
+
+    /* Section divider */
+    hr.ds-divider {
+      border: none;
+      border-top: 1px solid var(--color-gray-warm);
+    }
+  </style>
+</head>
+<body>
+<div class="ds-page">
+
+  <!-- ═══════════════════════════════ COVER ══════════════════════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Design System · v3</div>
+    <div class="cover-title">David Dimalanta<br>Portfolio Tokens</div>
+    <div class="cover-subtitle">All design tokens, typography, components & patterns</div>
+    <div class="cover-meta">Next.js 15 · Tailwind CSS v4 · Aspekta · New Rodin Pro · 2025</div>
+  </div>
+
+  <!-- ═══════════════════════════════ COLORS ═════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">01 — Foundation</div>
+      <div class="section-title">Color Tokens</div>
+    </div>
+
+    <div class="col">
+      <div class="token-label">Core CSS Variables</div>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-box" style="background:rgb(237,236,234);"></div>
+          <div class="swatch-name">--bg-color</div>
+          <div class="swatch-hex">rgb(237,236,234)</div>
+          <div class="swatch-use">Page background, canvas</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:rgb(59,45,28);"></div>
+          <div class="swatch-name">--text-color</div>
+          <div class="swatch-hex">rgb(59,45,28)</div>
+          <div class="swatch-use">Default body text</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:rgb(58,31,30);"></div>
+          <div class="swatch-name">--figma-brown</div>
+          <div class="swatch-hex">rgb(58,31,30)</div>
+          <div class="swatch-use">Dark accent, buttons, borders</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="token-label">Palette</div>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-box" style="background:#ECEAE9;"></div>
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#ECEAE9</div>
+          <div class="swatch-use">Cards, modals, surfaces</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#2C4E47;"></div>
+          <div class="swatch-name">Muted Green</div>
+          <div class="swatch-hex">#2C4E47</div>
+          <div class="swatch-use">Nav links, footer text</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#427067;"></div>
+          <div class="swatch-name">Sage Green</div>
+          <div class="swatch-hex">#427067</div>
+          <div class="swatch-use">Labels, secondary text</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#799A92;"></div>
+          <div class="swatch-name">Dusty Teal</div>
+          <div class="swatch-hex">#799A92</div>
+          <div class="swatch-use">Token labels, metadata</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#7C514A;"></div>
+          <div class="swatch-name">Warm Brown</div>
+          <div class="swatch-hex">#7C514A</div>
+          <div class="swatch-use">Body copy accents</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#9B907A;"></div>
+          <div class="swatch-name">Light Tan</div>
+          <div class="swatch-hex">#9B907A</div>
+          <div class="swatch-use">bd-text shadow color</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#9F807B;"></div>
+          <div class="swatch-name">Warm Taupe</div>
+          <div class="swatch-hex">#9F807B</div>
+          <div class="swatch-use">Gradient text endpoint</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#D6CAC8;"></div>
+          <div class="swatch-name">Warm Gray</div>
+          <div class="swatch-hex">#D6CAC8</div>
+          <div class="swatch-use">Borders, dividers</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#D5CFC6;"></div>
+          <div class="swatch-name">Light Gray</div>
+          <div class="swatch-hex">#D5CFC6</div>
+          <div class="swatch-use">Subtle dividers, nav borders</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#D0EFDE;"></div>
+          <div class="swatch-name">Subtle Mint</div>
+          <div class="swatch-hex">#D0EFDE</div>
+          <div class="swatch-use">Accent backgrounds</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#bebebe;"></div>
+          <div class="swatch-name">Neutral Disabled</div>
+          <div class="swatch-hex">#bebebe</div>
+          <div class="swatch-use">Disabled / inactive text</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="token-label">Shadow Colors</div>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-box" style="background:rgba(155,144,122,0.3); border:1px solid var(--color-gray-warm);"></div>
+          <div class="swatch-name">Shadow Default</div>
+          <div class="swatch-hex">rgba(155,144,122,0.3)</div>
+          <div class="swatch-use">bd utility</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:rgba(155,144,122,1.0);"></div>
+          <div class="swatch-name">Shadow Active</div>
+          <div class="swatch-hex">rgba(155,144,122,1.0)</div>
+          <div class="swatch-use">bd-active utility</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:rgba(0,0,0,0.8);"></div>
+          <div class="swatch-name">Overlay Dark</div>
+          <div class="swatch-hex">rgba(0,0,0,0.8)</div>
+          <div class="swatch-use">404 overlay background</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ TYPOGRAPHY ══════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">02 — Foundation</div>
+      <div class="section-title">Typography Scale</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-h1</div>
+        <div class="token-value">clamp(2.61rem → 2.99rem)</div>
+        <div class="token-value">line-height: 1.05</div>
+      </div>
+      <div class="type-sample type-h1" style="font-family:'Aspekta',sans-serif;">The quick fox</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-h2</div>
+        <div class="token-value">clamp(2.18rem → 2.49rem)</div>
+        <div class="token-value">line-height: 1.1</div>
+      </div>
+      <div class="type-sample type-h2" style="font-family:'Aspekta',sans-serif;">The quick fox</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-h3</div>
+        <div class="token-value">clamp(1.81rem → 2.07rem)</div>
+        <div class="token-value">line-height: 1.2</div>
+      </div>
+      <div class="type-sample type-h3" style="font-family:'Aspekta',sans-serif;">The quick brown fox</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-h4</div>
+        <div class="token-value">clamp(1.51rem → 1.73rem)</div>
+        <div class="token-value">line-height: 1.2</div>
+      </div>
+      <div class="type-sample type-h4" style="font-family:'Aspekta',sans-serif;">The quick brown fox jumps</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-h5</div>
+        <div class="token-value">clamp(1.26rem → 1.44rem)</div>
+        <div class="token-value">line-height: 1.2</div>
+      </div>
+      <div class="type-sample type-h5" style="font-family:'Aspekta',sans-serif;">The quick brown fox jumps over</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-h6</div>
+        <div class="token-value">clamp(1.05rem → 1.20rem)</div>
+        <div class="token-value">line-height: 1.2</div>
+      </div>
+      <div class="type-sample type-h6" style="font-family:'Aspekta',sans-serif;">The quick brown fox jumps over the lazy dog</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-p</div>
+        <div class="token-value">clamp(1.00rem → 1.13rem)</div>
+        <div class="token-value">line-height: 1.4</div>
+      </div>
+      <div class="type-sample type-p" style="font-family:'Aspekta',sans-serif;">The quick brown fox jumps over the lazy dog. A body copy paragraph with comfortable reading line-height.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-sm</div>
+        <div class="token-value">clamp(0.73rem → 0.83rem)</div>
+        <div class="token-value">line-height: 1.5</div>
+      </div>
+      <div class="type-sample type-sm" style="font-family:'Aspekta',sans-serif;">Secondary text, captions, metadata, tags</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-xs</div>
+        <div class="token-value">clamp(0.61rem → 0.69rem)</div>
+        <div class="token-value">line-height: 1.5</div>
+      </div>
+      <div class="type-sample type-xs" style="font-family:'Aspekta',sans-serif;">Micro text — token labels, overlines, skill tag text</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="token-label">text-button</div>
+        <div class="token-value">clamp(0.73rem → 0.83rem)</div>
+        <div class="token-value">weight: 400 · uppercase</div>
+      </div>
+      <div class="type-sample type-btn" style="font-family:'Aspekta',sans-serif;">Button label · About · CV · Contact</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ FONT WEIGHTS ═════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">03 — Foundation</div>
+      <div class="section-title">Font Weights — Aspekta</div>
+    </div>
+    <div class="weight-grid">
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:100;">Aspekta</div>
+        <div class="weight-meta">text-100 · 100</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:200;">Aspekta</div>
+        <div class="weight-meta">text-200 · 200</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:300;">Aspekta</div>
+        <div class="weight-meta">text-300 · 300</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:400;">Aspekta</div>
+        <div class="weight-meta">text-400 · 400 (body)</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:500;">Aspekta</div>
+        <div class="weight-meta">text-500 · 500</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:600;">Aspekta</div>
+        <div class="weight-meta">text-600 · 600</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:700;">Aspekta</div>
+        <div class="weight-meta">text-700 · 700</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:800;">Aspekta</div>
+        <div class="weight-meta">text-800 · 800</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:900;">Aspekta</div>
+        <div class="weight-meta">text-900 · 900</div>
+      </div>
+      <div class="weight-card">
+        <div class="weight-sample" style="font-family:'Aspekta',sans-serif;font-weight:1000;">Aspekta</div>
+        <div class="weight-meta">text-1000 · 1000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SPACING ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">04 — Foundation</div>
+      <div class="section-title">Spacing — Gutter Tokens</div>
+    </div>
+
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:8px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-xs</div><div class="spacing-val">gap-2 · 8px</div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:16px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-sm</div><div class="spacing-val">gap-4 · 16px</div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:24px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-base</div><div class="spacing-val">24px</div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:32px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-md</div><div class="spacing-val">32px</div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:40px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-lg</div><div class="spacing-val">40px</div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:64px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-xl</div><div class="spacing-val">64px</div></div>
+    </div>
+    <div class="spacing-row">
+      <div class="spacing-bar" style="width:96px;"></div>
+      <div class="spacing-info"><div class="spacing-name">gutter-2xl</div><div class="spacing-val">96px</div></div>
+    </div>
+
+    <div class="col" style="margin-top:8px;">
+      <div class="token-label">Page Padding</div>
+      <div class="spacing-row" style="border:none;">
+        <div class="spacing-bar" style="width:64px; background:var(--color-green-sage);"></div>
+        <div class="spacing-info">
+          <div class="spacing-name">padding-page (top)</div>
+          <div class="spacing-val">64px top · 12px sides (mobile) · 20px sides (md+)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ BORDER RADIUS ══════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">05 — Foundation</div>
+      <div class="section-title">Border Radius</div>
+    </div>
+    <div class="radius-grid">
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:0;"></div>
+        <div class="token-label">None · 0</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:4px;"></div>
+        <div class="token-label">rounded-sm · 4px</div>
+        <div class="token-value">Icons, small chips</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:8px;"></div>
+        <div class="token-label">rounded · 8px</div>
+        <div class="token-value">Cards, modals, nav</div>
+      </div>
+      <div class="radius-card">
+        <div class="radius-box" style="border-radius:9999px; width:80px; height:40px;"></div>
+        <div class="token-label">rounded-full · 9999px</div>
+        <div class="token-value">Buttons, SkillTag, icon buttons</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ EFFECTS & SHADOWS ══════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">06 — Foundation</div>
+      <div class="section-title">Effects — Glass Morphism</div>
+    </div>
+    <div class="row">
+      <div class="effect-card" style="box-shadow:var(--shadow-bd); backdrop-filter:blur(48px);">
+        <div class="effect-name">bd (default)</div>
+        <div class="effect-value">backdrop-blur-xl (48px)<br>shadow: 0 0 4px 2px rgba(155,144,122,0.3)</div>
+      </div>
+      <div class="effect-card" style="box-shadow:var(--shadow-bd-active); backdrop-filter:blur(72px);">
+        <div class="effect-name">bd-active (hover)</div>
+        <div class="effect-value">backdrop-blur-2xl (72px)<br>shadow: 0 0 8px 2px rgba(155,144,122,1.0)</div>
+      </div>
+      <div class="effect-card" style="text-shadow: 1px 1px 4px #9B907A;">
+        <div class="effect-name">bd-text</div>
+        <div class="effect-value">text-shadow: #9B907A<br>text-shadow-sm: 0 0 4px rgba(0,0,0,0.05)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ Z-INDEX SCALE ══════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">07 — Foundation</div>
+      <div class="section-title">Z-Index Scale</div>
+    </div>
+    <div class="zindex-grid">
+      <div class="zindex-card">
+        <div class="zindex-val">10</div>
+        <div class="zindex-use">z-10 · Dropdown overlays</div>
+      </div>
+      <div class="zindex-card">
+        <div class="zindex-val">50</div>
+        <div class="zindex-use">z-50 · Modals, popovers</div>
+      </div>
+      <div class="zindex-card">
+        <div class="zindex-val">60</div>
+        <div class="zindex-use">z-60 · Nav / sticky header</div>
+      </div>
+      <div class="zindex-card">
+        <div class="zindex-val">9999</div>
+        <div class="zindex-use">z-[9999] · 404 full-screen overlay</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ ANIMATION TOKENS ═══════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">08 — Motion</div>
+      <div class="section-title">Animation Utilities</div>
+    </div>
+    <div class="col">
+      <div class="token-label">Duration: 150ms · Easing: ease-out (in) / ease-in (out)</div>
+      <div class="anim-grid">
+        <div class="anim-chip">animate-in</div>
+        <div class="anim-chip">animate-out</div>
+        <div class="anim-chip">fade-in-0</div>
+        <div class="anim-chip">fade-out-0</div>
+        <div class="anim-chip">zoom-in-95</div>
+        <div class="anim-chip">zoom-out-95</div>
+        <div class="anim-chip">slide-in-from-top-2</div>
+        <div class="anim-chip">slide-in-from-bottom-2</div>
+        <div class="anim-chip">slide-in-from-left-2</div>
+        <div class="anim-chip">slide-in-from-right-2</div>
+        <div class="anim-chip">vinyl-spinning · 3s linear ∞</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="token-label">Scroll Fade-up — cubic-bezier(0.44, 0.17, 0.76, 0.47)</div>
+      <div class="anim-grid">
+        <div class="anim-chip">.fade-up-hidden · opacity:0, translateY(1rem)</div>
+        <div class="anim-chip">.fade-up-visible · opacity:1, translateY(0)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ COMPONENT: BUTTON ═══════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">09 — Components</div>
+      <div class="section-title">Button</div>
+    </div>
+    <div class="col">
+      <div class="token-label">Default · Pill · Glass Morphism</div>
+      <div class="row" style="align-items:center;">
+        <button class="ds-button">About</button>
+        <button class="ds-button">Contact</button>
+        <button class="ds-button">CV</button>
+        <button class="ds-button ds-button-active">Hover State</button>
+        <button class="ds-button-icon">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M10.74 0.74L0.74 10.74M0.74 0.74L10.74 10.74" stroke="currentColor" stroke-width="1.48" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="token-label">Anatomy</div>
+      <div class="row">
+        <div class="col">
+          <div class="token-value">padding: 12px 24px (text) · 32×32px (icon)</div>
+          <div class="token-value">border-radius: 9999px (rounded-full)</div>
+          <div class="token-value">font: text-button · weight 400 · uppercase</div>
+          <div class="token-value">backdrop-filter: blur(48px) → blur(72px) on hover</div>
+          <div class="token-value">transition: all 150ms ease</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ COMPONENT: SKILLTAG ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">10 — Components</div>
+      <div class="section-title">SkillTag</div>
+    </div>
+    <div class="row">
+      <span class="ds-skilltag">Figma</span>
+      <span class="ds-skilltag">Next.js</span>
+      <span class="ds-skilltag">User Research</span>
+      <span class="ds-skilltag">WebGPU</span>
+      <span class="ds-skilltag">Tailwind CSS</span>
+      <span class="ds-skilltag">Motion Design</span>
+    </div>
+    <div class="col">
+      <div class="token-label">Anatomy</div>
+      <div class="token-value">padding: 4px 12px · border-radius: 9999px · border: 1px solid --figma-brown</div>
+      <div class="token-value">font: text-xs · weight 500 · color: --figma-brown</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ COMPONENT: NAV ════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">11 — Components</div>
+      <div class="section-title">Navigation</div>
+    </div>
+    <div class="ds-nav">
+      <div class="ds-nav-logo">
+        <div class="ds-nav-logo-icon"></div>
+        <span>David Dimalanta</span>
+      </div>
+      <div class="ds-nav-actions">
+        <button class="ds-button">About</button>
+        <button class="ds-button">Contact</button>
+        <button class="ds-button">CV</button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="token-label">Anatomy</div>
+      <div class="token-value">position: fixed top · z-60 · py-[20px] px-4 md:px-8</div>
+      <div class="token-value">logo: text-h5 · weight 500 · 30×24px icon</div>
+      <div class="token-value">actions: 3 × Button components with gap-4</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ COMPONENT: PROJECT CARD ═══════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">12 — Components</div>
+      <div class="section-title">FeaturedProject Card</div>
+    </div>
+    <div class="row">
+      <div class="ds-project-card">
+        <div class="ds-card-media">
+          <span class="ds-card-media-label">16:9 video / thumbnail</span>
+        </div>
+        <div class="ds-card-body">
+          <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
+            <div class="ds-card-title">Goable</div>
+            <div style="font-size:14px; color:var(--color-teal-dusty);">Mobile app for goal tracking</div>
+          </div>
+          <div class="ds-card-tags">
+            <span class="ds-skilltag">UX Research</span>
+            <span class="ds-skilltag">Figma</span>
+            <span class="ds-skilltag">Next.js</span>
+          </div>
+        </div>
+      </div>
+      <div class="ds-project-card ds-button-active">
+        <div class="ds-card-media" style="background:var(--color-cream);">
+          <span class="ds-card-media-label">Hover state — bd-active</span>
+        </div>
+        <div class="ds-card-body">
+          <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
+            <div class="ds-card-title">iHub</div>
+            <div style="font-size:14px; color:var(--color-teal-dusty);">Innovation platform redesign</div>
+          </div>
+          <div class="ds-card-tags">
+            <span class="ds-skilltag">Design Systems</span>
+            <span class="ds-skilltag">React</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="token-label">Anatomy</div>
+      <div class="token-value">default: bd · hover: bd-active · transition: all 150ms</div>
+      <div class="token-value">media: aspect-video (16:9) · overflow hidden</div>
+      <div class="token-value">body: p-4 · flex row (md+) · gutter-xs to gutter-base</div>
+      <div class="token-value">title: text-h4 · weight 400 · leading-none</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ COMPONENT: FOOTER ════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">13 — Components</div>
+      <div class="section-title">Footer</div>
+    </div>
+    <div class="ds-footer">
+      <div class="ds-footer-left">Powered by matcha pandan. Built with Next.js</div>
+      <div class="ds-footer-links">
+        <a class="ds-footer-link" href="#">HOME</a>
+        <a class="ds-footer-link" href="#">ABOUT</a>
+        <a class="ds-footer-link" href="#">LINKEDIN</a>
+        <a class="ds-footer-link" href="#">GITHUB</a>
+        <a class="ds-footer-link" href="#">CONTACT</a>
+        <a class="ds-footer-link" href="#">CV</a>
+      </div>
+    </div>
+    <div class="col">
+      <div class="token-label">Anatomy</div>
+      <div class="token-value">p-4 md:p-8 · flex row (md+) · justify-between</div>
+      <div class="token-value">font: text-button · color: Muted Green #2C4E47 · uppercase</div>
+      <div class="token-value">left: TextLoop animation cycling tech stack names</div>
+      <div class="token-value">right: 6 nav links · gutter-sm</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ SIZING UTILITIES ═══════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">14 — Utilities</div>
+      <div class="section-title">Sizing Utilities (Figma-style)</div>
+    </div>
+    <div class="row">
+      <div class="zindex-card">
+        <div class="zindex-val" style="font-size:14px; font-family:monospace;">w-fill</div>
+        <div class="zindex-use">width: 100% — fills container</div>
+      </div>
+      <div class="zindex-card">
+        <div class="zindex-val" style="font-size:14px; font-family:monospace;">w-hug</div>
+        <div class="zindex-use">width: fit-content — hugs content</div>
+      </div>
+      <div class="zindex-card">
+        <div class="zindex-val" style="font-size:14px; font-family:monospace;">h-fill</div>
+        <div class="zindex-use">height: 100% — fills container</div>
+      </div>
+      <div class="zindex-card">
+        <div class="zindex-val" style="font-size:14px; font-family:monospace;">h-hug</div>
+        <div class="zindex-use">height: fit-content — hugs content</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end ds-page -->
+</body>
+</html>

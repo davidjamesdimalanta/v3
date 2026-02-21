@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-web": "^0.58.1",
@@ -32,6 +34,8 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^10.2.10",
+    "@storybook/nextjs": "^10.2.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^25.0.3",
     "@types/react": "19.2.7",
@@ -39,6 +43,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
     "shadcn": "^3.7.0",
+    "storybook": "^10.2.10",
     "tailwindcss": "^4",
     "typescript": "5.9.3"
   }
