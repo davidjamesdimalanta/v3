@@ -45,6 +45,7 @@ export default function Nav() {
             width={30}
             height={24}
             style={{ objectFit: 'contain' }}
+            priority
           />
           <span className="hidden md:block">David Dimalanta</span>
           </div>

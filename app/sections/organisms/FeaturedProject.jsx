@@ -152,6 +152,7 @@ export default function FeaturedProject({
               src={thumbnail}
               alt={imageAlt || title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover"
             />
           </div>
@@ -180,7 +181,7 @@ export default function FeaturedProject({
         <div className="flex flex-col flex-1 h-hug lg:h-fill items-start gap-2">
           <h3 className="text-h4 text-400 leading-none">{title}</h3>
           {description && (
-            <p className="text-base text-(text--figma-brown) leading-none">
+            <p className="text-base text-(--text-color) leading-none">
               {description}
             </p>
           )}

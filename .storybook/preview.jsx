@@ -1,12 +1,12 @@
 import '../app/globals.css';
-import { aspekta, inter, newRodinPro } from '../app/fonts';
+import { aspekta, inter } from '../app/fonts';
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
   decorators: [
     (Story) => (
       <div
-        className={`${aspekta.variable} ${inter.variable} ${newRodinPro.variable}`}
+        className={`${aspekta.variable} ${inter.variable}`}
         style={{ backgroundColor: 'var(--bg-color)', minHeight: '100vh', padding: '2rem' }}
       >
         <Story />

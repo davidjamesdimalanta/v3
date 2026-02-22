@@ -1,6 +1,5 @@
 import "./globals.css";
-import { inter, newRodinPro, aspekta } from "./fonts";
-import FontLoadingMonitor from "./components/FontLoadingMonitor";
+import { inter, aspekta } from "./fonts";
 import SiteShell from "./ui/SiteShell";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -57,14 +56,13 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${newRodinPro.variable} ${aspekta.variable}`}>
+    <html lang="en" className={`${inter.variable} ${aspekta.variable}`}>
       <body className="relative antialiased">
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         {/* <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script> */}
         <SpeedInsights />
         <Analytics/>
-        <FontLoadingMonitor />
-        <SiteShell>{children}</SiteShell>
+<SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
