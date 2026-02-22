@@ -26,13 +26,13 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
         }
         // Otherwise wrap in <p>
         return (
-          <p key={index} className="text-p text-400 text-[#7C514A]">
+          <p key={index} className="text-p text-400 text-[#2C4E47]">
             {paragraph}
           </p>
         );
       });
     }
-    return <p className="text-p text-400 text-[#7C514A]">{textContent}</p>;
+    return <p className="text-p text-400 text-[#2C4E47]">{textContent}</p>;
   };
 
   return (

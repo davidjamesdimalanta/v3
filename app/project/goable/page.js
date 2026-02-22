@@ -269,7 +269,7 @@ export default function ProjectPage() {
        <CaseStudyTextBlock
         sectionHeading="Iterations"
         title="Less is More"
-        text="Participants spent a lot of time worrying about which filters to pick. Ommiting the least popular search filters lets users focus on washroom amenities that differentiate washrooms."
+        text="Participants spent a lot of time worrying about which filters to pick. Ommiting the least popular search filters lets users focus on amenities that differentiate washrooms."
       />
 
       <CaseStudyMediaBlock
@@ -363,16 +363,16 @@ export default function ProjectPage() {
         title="Final thoughts and learnings"
         text={[
           <div key="access" className="flex flex-col mb-2">
-            <strong>Access is Multidimensional</strong>
-            <span className="text-[#2C4E47]">This project taught me that access doesn&apos;t just mean <strong className="text-600">physical</strong>, but also <strong className="text-600">emotional</strong> and <strong className="text-600">political</strong> barriers people face.</span>
+            <strong className="text-p text-700 text-[#3b2d1c]">Access is Multidimensional</strong>
+            <span className="text-p text-400 text-[#2C4E47]">This project taught me that access doesn&apos;t just mean <strong className="text-600">physical</strong>, but also <strong className="text-600">emotional</strong> and <strong className="text-600">political</strong> barriers people face.</span>
           </div>,
           <div key="restraint" className="flex flex-col mb-2">
-            <strong>The Power of Restraint</strong>
-            <span className="text-[#2C4E47]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
+            <strong className="text-p text-700 text-[#3b2d1c]">The Power of Restraint</strong>
+            <span className="text-p text-400 text-[#2C4E47]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
           </div>,
           <div key="details" className="flex flex-col mb-2">
-            <strong>Details Can Distract</strong>
-            <span className="text-[#2C4E47]">Different prototype fidelities serve their purposes and all are equally needed in the design process. While lower fidelity prototypes surface more foundational issues, <strong className="text-600">higher fidelities help QA the micro-interactions that make a design cohesive</strong>. Doing UXR without one or the other can compromise your designs further down the line.</span>
+            <strong className="text-p text-700 text-[#3b2d1c]">Details Can Distract</strong>
+            <span className="text-p text-400 text-[#2C4E47]">Different prototype fidelities serve their purposes and all are equally needed in the design process. While lower fidelity prototypes surface more foundational issues, <strong className="text-600">higher fidelities help QA the micro-interactions that make a design cohesive</strong>. Doing UXR without one or the other can compromise your designs further down the line.</span>
           </div>,
         ]}
       />

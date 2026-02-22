@@ -57,7 +57,7 @@ export default function AboutLanding() {
             </span>
 
             <span className="text-p">
-            David is a product designer with background in web development, and is experienced in
+            David is a product designer with a background in web development, and is experienced in
             wireframes, prototyping, & cross-functional collaboration experience.
             </span>
 
