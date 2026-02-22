@@ -113,7 +113,6 @@ export const aspekta = localFont({
   ],
   variable: '--font-aspekta',
   display: 'swap',
-  preload: true,
   adjustFontFallback: 'Arial',
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
 });
