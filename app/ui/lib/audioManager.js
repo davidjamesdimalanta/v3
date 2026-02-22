@@ -65,18 +65,22 @@ class AudioManager {
       this.hoverAudio = new Audio(SOUND_PATHS.HOVER);
       this.hoverAudio.volume = SOUND_VOLUMES.HOVER;
       this.hoverAudio.preload = 'auto';
+      this.hoverAudio.load();
 
       this.buttonHoverAudio = new Audio(SOUND_PATHS.BUTTON_HOVER);
       this.buttonHoverAudio.volume = SOUND_VOLUMES.BUTTON_HOVER;
       this.buttonHoverAudio.preload = 'auto';
+      this.buttonHoverAudio.load();
 
       this.navigateHomeAudio = new Audio(SOUND_PATHS.NAVIGATE_HOME);
       this.navigateHomeAudio.volume = SOUND_VOLUMES.NAVIGATE_HOME;
       this.navigateHomeAudio.preload = 'auto';
+      this.navigateHomeAudio.load();
 
       this.navigateProjectAudio = new Audio(SOUND_PATHS.NAVIGATE_PROJECT);
       this.navigateProjectAudio.volume = SOUND_VOLUMES.NAVIGATE_PROJECT;
       this.navigateProjectAudio.preload = 'auto';
+      this.navigateProjectAudio.load();
 
       this.initialized = true;
       return true;
