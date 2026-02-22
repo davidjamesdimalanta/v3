@@ -23,20 +23,30 @@ export default function SmoothScroll() {
     window.lenis = lenis;
 
     // Use requestAnimationFrame to continuously update the scroll
+    let rafId;
+
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    // Optional: Log scroll events for debugging
-    lenis.on('scroll', (e) => {
-      // console.log(e);
-    });
+    // Pause RAF loop when tab is hidden, resume when visible
+    function onVisibilityChange() {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        rafId = requestAnimationFrame(raf);
+      }
+    }
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     // Cleanup on unmount
     return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       delete window.lenis;
       lenis.destroy();
     };
