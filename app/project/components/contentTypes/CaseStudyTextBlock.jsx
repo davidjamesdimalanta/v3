@@ -39,7 +39,7 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
     <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 ${className}`}>
       {/* Optional Section Heading */}
       {sectionHeading && (
-        <span className="text-sm uppercase tracking-wide text-[#799A92]">
+        <span className="text-small uppercase tracking-wide text-[#799A92]">
           {sectionHeading}
         </span>
       )}

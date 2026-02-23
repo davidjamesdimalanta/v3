@@ -266,67 +266,67 @@ body {
    =================================== */
 
 /**
- * Responsive text utilities using CSS clamp()
- * Scales smoothly from mobile (14px base) to desktop (16px base)
+ * Fluid type scale: 17px base, minor third (×1.2) mobile, major third (×1.25) desktop.
+ * Viewport range: 375px → 1280px. All rem relative to 16px html root.
  */
 
-@utility text-h1 {
+@utility text-tiny {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem);
-  line-height: 1.05;
+  font-size: clamp(0.68rem, 0.7618rem + -0.1023vw, 0.7378rem);
+  line-height: 1.5;
 }
 
-@utility text-h2 {
+@utility text-small {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem);
-  line-height: 1.1;
+  font-size: clamp(0.85rem, 0.9001rem + -0.0626vw, 0.8854rem);
+  line-height: 1.5;
 }
 
-@utility text-h3 {
+@utility text-p {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem);
-  line-height: 1.2;
+  font-size: 1.0625rem;
+  line-height: 1.4;
 }
 
-@utility text-h4 {
+@utility text-h6 {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
+  font-size: clamp(1.275rem, 1.253rem + 0.0939vw, 1.3281rem);
   line-height: 1.2;
 }
 
 @utility text-h5 {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
+  font-size: clamp(1.53rem, 1.4761rem + 0.2301vw, 1.6602rem);
   line-height: 1.2;
 }
 
-@utility text-h6 {
+@utility text-h4 {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(1.05rem, 0.99rem + 0.23vw, 1.2rem);
+  font-size: clamp(1.836rem, 1.7369rem + 0.4229vw, 2.0752rem);
   line-height: 1.2;
 }
 
-@utility text-p {
+@utility text-h3 {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(1rem, 0.9rem + 0.19vw, 1.125rem);
-  line-height: 1.4;
+  font-size: clamp(2.2032rem, 2.0413rem + 0.6909vw, 2.594rem);
+  line-height: 1.2;
 }
 
-@utility text-sm {
+@utility text-h2 {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
-  line-height: 1.5;
+  font-size: clamp(2.6438rem, 2.3958rem + 1.0584vw, 3.2425rem);
+  line-height: 1.1;
 }
 
-@utility text-xs {
+@utility text-h1 {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(0.6075rem, 0.58rem + 0.11vw, 0.69438rem);
-  line-height: 1.5;
+  font-size: clamp(3.1726rem, 2.8078rem + 1.5567vw, 4.0531rem);
+  line-height: 1.05;
 }
 
 @utility text-button {
   font-family: var(--font-aspekta), sans-serif;
-  font-size: clamp(0.72938rem, 0.69rem + 0.15vw, 0.83313rem);
+  font-size: clamp(0.85rem, 0.9001rem + -0.0626vw, 0.8854rem);
   line-height: 1.5;
   font-weight: 400;
 }

@@ -19,13 +19,13 @@ export default function ParticipantDemographics() {
       </div>
 
       {/* Participant Breakdown */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-small">
         {interviewParticipants.map((participant, index) => (
           <div key={index} className="flex items-center gap-2">
             <span className="bd px-3 py-1 rounded-full text-button text-400">
               {participant.count}
             </span>
-            <span className="text-sm opacity-60 flex-1">
+            <span className="text-small opacity-60 flex-1">
               {participant.label}
             </span>
           </div>

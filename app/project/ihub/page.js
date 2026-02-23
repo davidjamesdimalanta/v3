@@ -300,13 +300,13 @@ export default function ProjectPage() {
                   <div className="mb-3">
                     Using custom JavaScript, each resource dynamically updates the browser URL with a unique identifier:
                   </div>
-                  <div className="mb-2 font-mono text-sm opacity-80">
+                  <div className="mb-2 font-mono text-small opacity-80">
                     FCO.ca/toolkit#curate-connections
                   </div>
-                  <div className="mb-2 font-mono text-sm opacity-80">
+                  <div className="mb-2 font-mono text-small opacity-80">
                     FCO.ca/toolkit#foster-flexibility
                   </div>
-                  <div className="mb-3 font-mono text-sm opacity-80">
+                  <div className="mb-3 font-mono text-small opacity-80">
                     FCO.ca/toolkit#valeri-persona
                   </div>
                   <div>
@@ -411,7 +411,7 @@ export default function ProjectPage() {
         {/* Navigation to Next Project - Inside Case Study Section */}
         {nextProject && (
           <div className="max-w-lg mx-auto text-center pt-16">
-            <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>
+            <span className="text-tiny text-400 opacity-60 block mb-2">Next Project</span>
             <Link
               href={`/project/${nextProject.slug}`}
               className="group text-h5 hover:bd-text transition-all duration-150 inline-block"

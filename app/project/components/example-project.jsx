@@ -169,22 +169,22 @@ export default function ExampleProject() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
               <div className="flex flex-col gutter-xs">
                 <span className="text-h1 text-600">40%</span>
-                <span className="text-sm text-400 opacity-60">Metric improvement</span>
+                <span className="text-small text-400 opacity-60">Metric improvement</span>
               </div>
               <div className="flex flex-col gutter-xs">
                 <span className="text-h1 text-600">2.5x</span>
-                <span className="text-sm text-400 opacity-60">User engagement</span>
+                <span className="text-small text-400 opacity-60">User engagement</span>
               </div>
               <div className="flex flex-col gutter-xs">
                 <span className="text-h1 text-600">95%</span>
-                <span className="text-sm text-400 opacity-60">Satisfaction rate</span>
+                <span className="text-small text-400 opacity-60">Satisfaction rate</span>
               </div>
             </div>
           </ProjectSection>
 
           {/* Navigation to Next Project */}
           <ProjectSection className="pt-8 pb-16">
-            <span className="text-xs text-400 opacity-60">Next Project</span>
+            <span className="text-tiny text-400 opacity-60">Next Project</span>
             <Link
               href="/project/next-project"
               className="group text-h5 text-600 hover:bd-text transition-all duration-150 w-hug"

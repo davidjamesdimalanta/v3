@@ -34,7 +34,7 @@ export default function ContentBlock({
       {media?.src && <MediaBlock {...media} thumbnail={thumbnail} isFirstVideo={isFirstVideo} priority={priority} />}
 
       {/* Optional Caption (separate from media caption) */}
-      {caption && <p className="text-xs text-400 opacity-60">{caption}</p>}
+      {caption && <p className="text-tiny text-400 opacity-60">{caption}</p>}
     </section>
   );
 }

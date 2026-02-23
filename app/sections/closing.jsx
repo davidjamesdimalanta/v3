@@ -11,7 +11,7 @@ export default function Closing() {
         {/* Currently Up to and Contact*/}
         <div className="flex flex-col md:flex-row md:justify-between gutter-sm md:gutter-md">
             <div
-              className="w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-sm"
+              className="w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-small"
             >
                 <div className="flex flex-col">
                     <span className=" text-[#799A92] uppercase tracking-wide">Currently: </span>

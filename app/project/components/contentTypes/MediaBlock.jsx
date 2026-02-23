@@ -404,14 +404,14 @@ export default function MediaBlock({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-sm opacity-40">
+            <span className="text-small opacity-40">
               {type === "lottie" ? "Lottie" : type === "video" ? "Video" : "Image"}
             </span>
           </div>
         )}
       </div>
       {caption && (
-        <p className="text-sm text-400 opacity-60 text-center">{caption}</p>
+        <p className="text-small text-400 opacity-60 text-center">{caption}</p>
       )}
     </div>
   );

@@ -98,7 +98,7 @@ export default function VinylSection() {
       </div>
 
       <div className="flex flex-col gutter-xs">
-        <span className="text-[#799A92] uppercase tracking-wide text-sm">
+        <span className="text-[#799A92] uppercase tracking-wide text-small">
           Now Playing:
         </span>
         <TextScramble
@@ -124,13 +124,13 @@ export default function VinylSection() {
             <div className="flex gap-3">
               <button
                 onClick={handleEnableSound}
-                className="flex-1 px-4 py-2 rounded-sm bg-[#3A1F1E] text-[#ECEAE9] text-sm cursor-pointer hover:opacity-80 transition-opacity"
+                className="flex-1 px-4 py-2 rounded-sm bg-[#3A1F1E] text-[#ECEAE9] text-small cursor-pointer hover:opacity-80 transition-opacity"
               >
                 Enable Sound
               </button>
               <button
                 onClick={() => setShowSoundModal(false)}
-                className="flex-1 px-4 py-2 rounded-sm border border-[#D6CAC8] text-sm cursor-pointer hover:bg-[#D6CAC8] transition-colors"
+                className="flex-1 px-4 py-2 rounded-sm border border-[#D6CAC8] text-small cursor-pointer hover:bg-[#D6CAC8] transition-colors"
               >
                 Not now
               </button>

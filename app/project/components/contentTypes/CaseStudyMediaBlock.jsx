@@ -533,7 +533,7 @@ export default function CaseStudyMediaBlock({
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <span className="text-sm opacity-40">
+                <span className="text-small opacity-40">
                   {type === "lottie" ? "Lottie" : type === "video" ? "Video" : "Image"}
                 </span>
               </div>
@@ -545,7 +545,7 @@ export default function CaseStudyMediaBlock({
       {/* Caption */}
       {caption && (
         <figcaption
-          className="mb-3 mt-3 max-w-prose text-center text-sm"
+          className="mb-3 mt-3 max-w-prose text-center text-small"
           style={{ color: 'var(--fg-color)' }}
         >
           {caption}

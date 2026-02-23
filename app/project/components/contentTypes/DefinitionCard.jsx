@@ -120,14 +120,14 @@ export default function DefinitionCard({
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "text-sm opacity-60 hover:bd-text transition-all duration-150",
+                "text-small opacity-60 hover:bd-text transition-all duration-150",
                 !isDesktop && "underline underline-offset-2" // Underline on mobile
               )}
             >
               {caption.text}
             </a>
           ) : (
-            <p className="text-sm opacity-60">
+            <p className="text-small opacity-60">
               {caption.text}
             </p>
           )}

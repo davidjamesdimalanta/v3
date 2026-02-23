@@ -110,7 +110,7 @@ export default function ProjectPage() {
         {/* Navigation to Next Project */}
         {nextProject && (
           <div className="max-w-lg mx-auto text-center pt-16">
-            <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>
+            <span className="text-tiny text-400 opacity-60 block mb-2">Next Project</span>
             <Link
               href={`/project/${nextProject.slug}`}
               className="group text-h5 hover:bd-text transition-all duration-150 inline-block"

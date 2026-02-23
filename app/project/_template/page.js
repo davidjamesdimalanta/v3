@@ -88,11 +88,11 @@ export default function ProjectPage() {
         {/* Add any custom JSX here */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white/5 p-4 rounded-lg">
-            <h4 className="text-sm text-500 mb-2">Metric 1</h4>
+            <h4 className="text-small text-500 mb-2">Metric 1</h4>
             <p className="text-h1 text-600">+42%</p>
           </div>
           <div className="bg-white/5 p-4 rounded-lg">
-            <h4 className="text-sm text-500 mb-2">Metric 2</h4>
+            <h4 className="text-small text-500 mb-2">Metric 2</h4>
             <p className="text-h1 text-600">2.5x</p>
           </div>
         </div>

@@ -35,7 +35,7 @@ export default function SkillTag({ skill, category = 'tools' }) {
         inline-block w-hug h-hug
         px-3 py-1
         rounded-full
-        text-xs text-500
+        text-tiny text-500
         ${getCategoryStyles(category)}
       `}
     >

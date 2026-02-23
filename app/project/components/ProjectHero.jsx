@@ -65,7 +65,7 @@ export default function ProjectHero({
           {/* Awards Section */}
           {awards.length > 0 && (
             <div className="flex flex-col gutter-sm pt-4">
-              <h2 className="text-sm text-500 opacity-60">Recognition</h2>
+              <h2 className="text-small text-500 opacity-60">Recognition</h2>
               <div className="flex flex-col gutter-xs">
                 {awards.map((award, index) => (
                   <a
@@ -87,28 +87,28 @@ export default function ProjectHero({
           {/* Project Details */}
           {Object.keys(details).length > 0 && (
             <div className="flex flex-col gutter-xs py-4">
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-2 gap-4 text-small">
                 {details.role && (
                   <div className="flex flex-col gutter-xs">
-                    <span className="text-xs text-[#427067]">Role</span>
+                    <span className="text-tiny text-[#427067]">Role</span>
                     <span>{details.role}</span>
                   </div>
                 )}
                 {details.timeline && (
                   <div className="flex flex-col gutter-xs">
-                    <span className="text-xs text-[#427067]">Timeline</span>
+                    <span className="text-tiny text-[#427067]">Timeline</span>
                     <span>{details.timeline}</span>
                   </div>
                 )}
                 {details.team && (
                   <div className="flex flex-col gutter-xs">
-                    <span className="text-xs text-[#427067]">Team</span>
+                    <span className="text-tiny text-[#427067]">Team</span>
                     <span>{details.team}</span>
                   </div>
                 )}
                 {details.year && (
                   <div className="flex flex-col gutter-xs">
-                    <span className="text-xs text-[#427067]">Year</span>
+                    <span className="text-tiny text-[#427067]">Year</span>
                     <span>{details.year}</span>
                   </div>
                 )}
