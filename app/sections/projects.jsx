@@ -79,7 +79,7 @@ export default function Projects() {
 
     return (
         <div ref={ref} className="w-full h-hug flex flex-col gutter-sm p-6 md:p-8">
-            <h1 className="text-button text-[#799A92] uppercase">Selected Works</h1>
+            <h1 className="text-button text-[var(--text-color-60)] uppercase">Selected Works</h1>
             {isInView ? (
               <AnimatedGroup
                 preset="fade"

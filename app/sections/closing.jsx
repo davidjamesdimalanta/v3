@@ -14,7 +14,7 @@ export default function Closing() {
               className="w-hug flex-2 flex flex-col md:flex-row gutter-sm *:text-sm"
             >
                 <div className="flex flex-col">
-                    <span className=" text-[#799A92] uppercase tracking-wide">Currently: </span>
+                    <span className="text-[var(--text-color-60)] uppercase tracking-wide">Currently: </span>
                     <div>
                         <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150" onMouseEnter={playButtonHover}>
                             <span className="md:hidden text-p">MI @ UofT </span>

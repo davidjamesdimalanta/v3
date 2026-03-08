@@ -30,7 +30,7 @@ export default function Nav() {
       }}
     >
         <Link
-        className={`text-h5 text-500 ${getAnimationClass('nav-logo-name')}`}
+        className={`text-h5 text-500 text-[var(--text-color-80)] ${getAnimationClass('nav-logo-name')}`}
         style={{
           ...getAnimationStyle('nav-logo-name'),
           fontFamily: 'var(--aspekta), sans-serif'
