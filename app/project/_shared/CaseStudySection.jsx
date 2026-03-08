@@ -57,7 +57,7 @@ export default function CaseStudySection({ children, title, theme, className = "
       <div className="mx-auto px-4 md:px-8 py-16 lg:py-24">
         {/* Optional section title */}
         {title && (
-          <h2 className="text-h3 text-center mb-12 lg:mb-16">
+          <h2 className="text-h3 text-center mb-12 lg:mb-16 text-[var(--text-color-100)]">
             {title}
           </h2>
         )}
