@@ -7,6 +7,9 @@
     --bg-color: rgb(237, 236, 234);
     --text-color: rgb(59, 45, 28);
     --figma-brown: rgb(58, 31, 30);
+    --text-color-100: rgb(90, 54, 51);
+    --text-color-80: rgb(119, 90, 88);
+    --text-color-60: rgb(149, 127, 124);
 }
 
 /* THEME OVERRIDES */
