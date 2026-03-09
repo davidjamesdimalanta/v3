@@ -26,27 +26,27 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
         }
         // Otherwise wrap in <p>
         return (
-          <p key={index} className="text-p text-400 text-[#2C4E47]">
+          <p key={index} className="text-p text-400 text-[var(--text-color-80)]">
             {paragraph}
           </p>
         );
       });
     }
-    return <p className="text-p text-400 text-[#2C4E47]">{textContent}</p>;
+    return <p className="text-p text-400 text-[var(--text-color-80)]">{textContent}</p>;
   };
 
   return (
     <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 ${className}`}>
       {/* Optional Section Heading */}
       {sectionHeading && (
-        <span className="text-sm uppercase tracking-wide text-[#799A92]">
+        <span className="text-sm uppercase tracking-wide text-[var(--text-color-60)]">
           {sectionHeading}
         </span>
       )}
 
       {/* Optional Title */}
       {title && (
-        <h3 className="text-h5 text-600">
+        <h3 className="text-h5 text-600 text-[var(--text-color-100)]">
           {typeof title === "string" ? title : <>{title}</>}
         </h3>
       )}
