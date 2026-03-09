@@ -8,8 +8,8 @@ import ProjectContent from "../components/ProjectContent";
 /**
  * Shared layout wrapper for all project pages
  *
- * This component provides the consistent 2-column layout structure
- * (ProjectHero + ProjectContent) while allowing unique content per project
+ * This component provides the consistent stacked layout structure
+ * (ProjectHero full-width header + ProjectContent below) while allowing unique content per project
  *
  * @param {Object} projectData - Project metadata (title, links, awards, description, details)
  * @param {React.ReactNode} children - Unique project content (rendered inside ProjectContent)
@@ -31,10 +31,10 @@ export default function ProjectLayout({ projectData, children }) {
   return (
     <div className={`relative w-full min-h-screen transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
 
-      {/* Two-column layout: Sticky left metadata, scrollable right content */}
-      <div className="flex flex-col lg:flex-row lg:gutter-lg">
+      {/* Stacked layout: Full-width hero above content */}
+      <div className="flex flex-col">
 
-        {/* LEFT COLUMN - Project Metadata (Sticky on desktop) */}
+        {/* Hero — full-width header with title/links + meta/description */}
         <ProjectHero
           name={projectData.name}
           title={projectData.title}
@@ -42,11 +42,10 @@ export default function ProjectLayout({ projectData, children }) {
           awards={projectData.awards}
           description={projectData.description}
           details={projectData.details}
-          skills={projectData.skills || []}
           onClose={handleClose}
         />
 
-        {/* RIGHT COLUMN - Project Content (Scrollable) */}
+        {/* Content — media/video blocks below hero */}
         <ProjectContent>
           {children}
         </ProjectContent>
