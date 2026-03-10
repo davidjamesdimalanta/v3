@@ -10,6 +10,7 @@ import { CaseStudySectionBlock, CaseStudySectionBlockFixed as CaseStudySectionBl
 import CaseStudyHighlightsBlock from "../components/contentTypes/CaseStudyHighlightsBlock";
 import DefinitionCard from "../components/contentTypes/DefinitionCard";
 import ParticipantDemographics from "../components/contentTypes/ParticipantDemographics";
+import IterationCard from "../components/contentTypes/IterationCard";
 import { TextShimmer } from "../../ui/text-shimmer";
 import { projectData } from "./data";
 import { getNextProject } from "../projects";
@@ -258,6 +259,21 @@ export default function ProjectPage() {
       </CaseStudySectionBlock>
 
 
+      {/* Addition 1: Scoping Error + User Tension — process correction aside */}
+      {/* Visual choice: left-border callout in the project accent color.
+          Signals "deliberate aside" without a title that would make it feel like a feature.
+          No sectionHeading label — this is a correction mid-story, not a new section. */}
+      <div className="max-w-lg mx-auto px-8 w-full">
+        <div className="flex flex-col gap-3 border-l-2 border-[#799A92] pl-5">
+          <p className="text-p text-400 text-[var(--text-color-80)]">
+            Our original scope was too broad — we designed for anyone who&apos;d ever struggled to find a washroom. After our first interviews, we caught the error: that&apos;s everyone, and you can&apos;t design for everyone. We rescoped to users with mobility impairments and urgent medical needs, rewrote our screener, and restarted recruitment. The tighter scope is what made the design decisions defensible.
+          </p>
+          <p className="text-p text-400 text-[var(--text-color-80)]">
+            Even within that narrower group, we disagreed on who to optimize for — a wheelchair-dependent caregiver has completely different needs than a university student with IBS. Rather than picking one, we asked what both actually want at the end of the interaction: to feel confident they&apos;re going to the right place, fast. Every feature we built traces back to that. Personalization through onboarding handles the rest.
+          </p>
+        </div>
+      </div>
+
       <CaseStudyTextBlock
         sectionHeading="Initial Designs"
         title="Personalizing the search"
@@ -312,10 +328,15 @@ export default function ProjectPage() {
         size="small"
       />
 
-       <CaseStudyTextBlock
+      {/* Addition 2: Iteration Cards — three-part evidence structure (what happened → quote → what changed).
+          Quote is visually subordinate (left-border blockquote, italic, muted color) — it's proof,
+          not the headline. All three cards are structurally identical for fast scanning. */}
+      <IterationCard
         sectionHeading="Iterations"
-        title="Less is More"
-        text="Participants spent a lot of time worrying about which filters to pick. Ommiting the least popular search filters lets users focus on amenities that differentiate washrooms."
+        title="Filter Reduction"
+        whatHappened="Participants froze during onboarding when presented with the full filter list. They didn't know how many to select, whether choices would conflict, or what the defaults meant."
+        quote="I don't know how many of these I should be toggling."
+        whatChanged="Cut the least-used filters entirely. The ones that remained are the ones that actually differentiate washrooms for our users. Fewer options, faster decisions, less second-guessing."
       />
 
       <CaseStudyMediaBlock
@@ -324,9 +345,11 @@ export default function ProjectPage() {
         size="medium"
       />
 
-      <CaseStudyTextBlock
+      <IterationCard
         title="Progressive Disclosure"
-        text="Users often felt that our designs were screaming at them. In order to convey the same amount of information, I put the most important information on the listing page, while putting the community-based, time-stamped reports, behind a visually striking tab."
+        whatHappened="On the listing screen, participants didn't know where to look. Washroom tag colors had no clear meaning, their order wasn't intuitive, and the &ldquo;Great&rdquo; rating label pulled attention without explaining anything."
+        quote="I don't know what I'm supposed to be reading first."
+        whatChanged="Restructured the information hierarchy — decision-critical details lead, community reports sit behind a clearly labeled tab. Removed the &ldquo;Great&rdquo; label entirely — it added visual weight without helping anyone decide anything."
       />
 
       <CaseStudyMediaBlock
@@ -335,9 +358,11 @@ export default function ProjectPage() {
         size="medium"
       />
 
-      <CaseStudyTextBlock
-        title="Focusing on friction instead of incentives."
-        text="Users described that sometimes, no amount of incentive will get them to leave a review. GoAble reduces this friction with quick-select, pre-loaded options, and three-tap reporting, in order to make the reviewing process equally as easy as skipping it."
+      <IterationCard
+        title="Frictionless Review"
+        whatHappened="After completing the navigation flow, participants were shown the review prompt. Nobody said it was hard — they just weren't going to do it."
+        quote="It looks good but I don't really think I would leave a review that often."
+        whatChanged="Stopped trying to incentivize reviews and focused on reducing the cost of leaving one. Quick-select options, pre-loaded responses, three taps to submit or skip. The bar for contributing had to be lower than the bar for ignoring it."
       />
 
       <CaseStudyMediaBlock
@@ -402,9 +427,17 @@ export default function ProjectPage() {
             <strong className="text-p text-700 text-(--text-color-100)">The Power of Restraint</strong>
             <span className="text-p text-400 text-(--text-color-80)">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
           </div>,
-          <div key="details" className="flex flex-col mb-2">
-            <strong className="text-p text-700 text-(--text-color-100)">Details Can Distract</strong>
-            <span className="text-p text-400 text-(--text-color-80)">Different prototype fidelities serve their purposes and all are equally needed in the design process. While lower fidelity prototypes surface more foundational issues, <strong className="text-600">higher fidelities help QA the micro-interactions that make a design cohesive</strong>. Doing UXR without one or the other can compromise your designs further down the line.</span>
+          {/* Addition 3: Replaced "Details Can Distract" with fidelity-as-diagnostic-tool lesson.
+              Visual treatment: subtle left border accent on the two closing reflections to give them
+              slightly more weight than body copy — matching the site's existing border-as-callout language
+              without introducing a new pattern. */}
+          <div key="fidelity" className="flex flex-col gap-1 mb-2 border-l-2 border-[#799A92] pl-4">
+            <strong className="text-p text-700 text-[var(--text-color-100)]">Fidelity is a QA Tool, Not Just a Presentation Tool</strong>
+            <span className="text-p text-400 text-[var(--text-color-80)]">I built the mid-fi prototype with Figma Variables specifically to stress-test interactions before committing to high-fidelity. That&apos;s where I caught the tag color ambiguity — users had no way to distinguish washroom states at a glance, and it would have been expensive to fix later. The mid-fi wasn&apos;t a stepping stone to the real prototype. <strong className="text-600">It was its own diagnostic tool.</strong></span>
+          </div>,
+          <div key="wayfinding" className="flex flex-col gap-1 mb-2 border-l-2 border-[#799A92] pl-4">
+            <strong className="text-p text-700 text-[var(--text-color-100)]">What&apos;s Next</strong>
+            <span className="text-p text-400 text-[var(--text-color-80)]">The feature I&apos;d build next is in-building wayfinding. We cut it due to time, not lack of evidence — it was the one thing our research surfaced that <strong className="text-600">no existing tool handles at all</strong>.</span>
           </div>,
         ]}
       />
