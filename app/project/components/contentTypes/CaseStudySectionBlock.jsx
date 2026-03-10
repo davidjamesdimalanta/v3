@@ -63,7 +63,7 @@ export function CaseStudySectionBlock({
             setActiveIndex(i);
           }, 50);
         },
-        { threshold: 1.0 }
+        { threshold: 0.8 }
       );
 
       observer.observe(el);
