@@ -6,7 +6,7 @@ import ContentBlock from "../components/contentTypes/ContentBlock";
 import CaseStudySection from "../_shared/CaseStudySection";
 import CaseStudyTextBlock from "../components/contentTypes/CaseStudyTextBlock";
 import CaseStudyMediaBlock from "../components/contentTypes/CaseStudyMediaBlock";
-import CaseStudySectionBlock from "../components/contentTypes/CaseStudySectionBlock";
+import { CaseStudySectionBlock, CaseStudySectionBlockFixed as CaseStudySectionBlockScroll } from "../components/contentTypes/CaseStudySectionBlock";
 import CaseStudyHighlightsBlock from "../components/contentTypes/CaseStudyHighlightsBlock";
 import DefinitionCard from "../components/contentTypes/DefinitionCard";
 import ParticipantDemographics from "../components/contentTypes/ParticipantDemographics";
@@ -106,41 +106,8 @@ export default function ProjectPage() {
       {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
       <CaseStudySection title="" theme={projectData.caseStudy}>
 
-      <CaseStudySectionBlock
-        sectionHeading="Final Designs"
-        title="Three core flows, built for real people."
-        description="GoAble's final screens address accessibility at every step — from personalized onboarding, to granular washroom details, to community-driven verification. Each flow was iterated across multiple rounds of user testing."
-      >
-        <CaseStudyMediaBlock
-          type="video"
-          src="https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p"
-          thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
-          size="medium"
-          aspectRatio="video"
-          caption="Personalized onboarding & search"
-          className="max-w-full pt-0 pb-4"
-        />
-        <CaseStudyMediaBlock
-          type="video"
-          src="https://stream.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8.m3u8?min_resolution=1080p"
-          thumbnail="https://image.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8/thumbnail.png?width=1919&height=1080&time=0"
-          size="medium"
-          aspectRatio="video"
-          caption="Community-driven status updates"
-          className="max-w-full pt-0 pb-4"
-        />
-        <CaseStudyMediaBlock
-          type="video"
-          src="https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p"
-          thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
-          size="medium"
-          aspectRatio="video"
-          caption="Three-tap review & verification"
-          className="max-w-full pt-0 pb-4"
-        />
-      </CaseStudySectionBlock>
 
-      <CaseStudySectionBlock
+      <CaseStudySectionBlockScroll
         sectionHeading="The Problem"
         title="Current washroom listings lack accessibility-related information."
         description={[
@@ -174,6 +141,53 @@ export default function ProjectPage() {
           caption: "For example: here is an actual washroom listing on the UofT campus",
         }}
       />
+
+      <CaseStudySectionBlock
+        sectionHeading="Solutions"
+        textStates={[
+          {
+            title: "Personalized onboarding & search.",
+            description: "Since the accessibility label didn't always cater to people's needs, GoAble asks users about them during onboarding — then filters results to match their profile.",
+          },
+          {
+            title: "Community-driven status updates.",
+            description: "Washroom details pages show real-time availability, community sentiment, and granular amenity info so users can make informed decisions before they arrive.",
+          },
+          {
+            title: "Three-tap review & verification.",
+            description: "Quick-select, pre-loaded options reduce friction to near zero — making it just as easy to leave a review as it is to skip it.",
+          },
+        ]}
+      >
+        <CaseStudyMediaBlock
+          type="video"
+          src="https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p"
+          thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
+          size="medium"
+          aspectRatio="video"
+          caption="Personalized onboarding & search"
+          className="max-w-full pt-0 pb-4"
+        />
+        <CaseStudyMediaBlock
+          type="video"
+          src="https://stream.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8.m3u8?min_resolution=1080p"
+          thumbnail="https://image.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8/thumbnail.png?width=1919&height=1080&time=0"
+          size="medium"
+          aspectRatio="video"
+          caption="Community-driven status updates"
+          className="max-w-full pt-0 pb-4"
+        />
+        <CaseStudyMediaBlock
+          type="video"
+          src="https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p"
+          thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
+          size="medium"
+          aspectRatio="video"
+          caption="Three-tap review & verification"
+          className="max-w-full pt-0 pb-4"
+        />
+      </CaseStudySectionBlock>
+
 
       <CaseStudySectionBlock
         sectionHeading="Discovery"
