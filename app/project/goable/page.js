@@ -427,10 +427,6 @@ export default function ProjectPage() {
             <strong className="text-p text-700 text-(--text-color-100)">The Power of Restraint</strong>
             <span className="text-p text-400 text-(--text-color-80)">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
           </div>,
-          {/* Addition 3: Replaced "Details Can Distract" with fidelity-as-diagnostic-tool lesson.
-              Visual treatment: subtle left border accent on the two closing reflections to give them
-              slightly more weight than body copy — matching the site's existing border-as-callout language
-              without introducing a new pattern. */}
           <div key="fidelity" className="flex flex-col gap-1 mb-2 border-l-2 border-[#799A92] pl-4">
             <strong className="text-p text-700 text-[var(--text-color-100)]">Fidelity is a QA Tool, Not Just a Presentation Tool</strong>
             <span className="text-p text-400 text-[var(--text-color-80)]">I built the mid-fi prototype with Figma Variables specifically to stress-test interactions before committing to high-fidelity. That&apos;s where I caught the tag color ambiguity — users had no way to distinguish washroom states at a glance, and it would have been expensive to fix later. The mid-fi wasn&apos;t a stepping stone to the real prototype. <strong className="text-600">It was its own diagnostic tool.</strong></span>

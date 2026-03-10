@@ -25,6 +25,7 @@ export const projectData = {
 
   description: [
     "GoAble informs users about washroom access and amenities in real-time, with a focus on personalization, community engagement, and trustworthiness.",
+    "I led the development of the design system and the interactive prototypes, using Figma Variables to flesh out interaction insights in our initial designs."
   ],
 
   // Project details displayed in a grid
