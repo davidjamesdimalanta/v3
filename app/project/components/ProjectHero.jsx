@@ -26,10 +26,10 @@ export default function ProjectHero({
       />
 
       {/* Two-column row: title/links left, meta/description right */}
-      <div className="flex flex-col md:flex-row gutter-lg pt-4">
+      <div className="flex flex-col md:flex-row gutter-base md:gutter-lg pt-4">
 
         {/* LEFT: Title + links + awards */}
-        <div className="flex flex-col gutter-base flex-1">
+        <div className="flex flex-col gutter-base flex-1 lg:basis-[720px]">
           <div className="flex flex-col gutter-xs">
             <h1 className="text-h3 md:text-h1 text-400">{name}</h1>
             <h6 className="text-h6 text-400 text-[#427067]">{title}</h6>
@@ -75,9 +75,16 @@ export default function ProjectHero({
         </div>
 
         {/* RIGHT: Details grid + description */}
-        <div className="flex flex-col gutter-base flex-1">
-          {Object.keys(details).length > 0 && (
-            <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="flex flex-col lg:flex-row gutter-base lg:gutter-lg flex-1 max-w-full lg:max-w-[min(75vw,120vh)] lg:basis-[75vw]">
+          {description.length > 0 && (
+            <div className="flex flex-col gutter-xs text-p flex-1 lg:flex-2">
+              {description.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          )}
+                    {Object.keys(details).length > 0 && (
+            <div className="grid grid-cols-2 gap-4 text-sm flex-1">
               {details.role && (
                 <div className="flex flex-col gutter-xs">
                   <span className="text-xs text-[#427067]">Role</span>
@@ -102,14 +109,6 @@ export default function ProjectHero({
                   <span>{details.year}</span>
                 </div>
               )}
-            </div>
-          )}
-
-          {description.length > 0 && (
-            <div className="flex flex-col gutter-xs text-p">
-              {description.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
             </div>
           )}
         </div>

@@ -54,7 +54,7 @@ export default function ProjectPage() {
           isFirstVideo={true}
           priority
         />
-
+{/* 
         <ContentBlock
           media={{
             type: "video",
@@ -73,7 +73,7 @@ export default function ProjectPage() {
             caption: ""
           }}
           thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
-        />
+        /> */}
 {/* 
         <ContentBlock
           media={{
@@ -115,7 +115,7 @@ export default function ProjectPage() {
           type="video"
           src="https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p"
           thumbnail="https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0"
-          size="small"
+          size="medium"
           aspectRatio="video"
           caption="Personalized onboarding & search"
           className="max-w-full pt-0 pb-4"
@@ -124,7 +124,7 @@ export default function ProjectPage() {
           type="video"
           src="https://stream.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8.m3u8?min_resolution=1080p"
           thumbnail="https://image.mux.com/oOx1pDiKIfK9QgQsHyi7Eij1LJf1XzKoQBJsqvJwMb8/thumbnail.png?width=1919&height=1080&time=0"
-          size="small"
+          size="medium"
           aspectRatio="video"
           caption="Community-driven status updates"
           className="max-w-full pt-0 pb-4"
@@ -133,7 +133,7 @@ export default function ProjectPage() {
           type="video"
           src="https://stream.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg.m3u8?min_resolution=1080p"
           thumbnail="https://image.mux.com/e01ssPxTDTbOC1jnh0166CK8pq4jsYmPvktPZmwKR022Zg/thumbnail.png?width=1919&height=1080&time=0"
-          size="small"
+          size="medium"
           aspectRatio="video"
           caption="Three-tap review & verification"
           className="max-w-full pt-0 pb-4"
@@ -175,10 +175,10 @@ export default function ProjectPage() {
         }}
       />
 
-      <CaseStudyTextBlock
+      <CaseStudySectionBlock
         sectionHeading="Discovery"
         title="Washroom access is different for everyone."
-        text={[
+        description={[
           <>
           <DefinitionCard
             trigger="Our participants"
@@ -225,25 +225,23 @@ export default function ProjectPage() {
             width="w-120"
             sideOffset="1"
           /> influenced the project, tackling three critical issues in washroom finding:</>
-
         ]}
-      />
-
-      <CaseStudyMediaBlock
-        type="image"
-        src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
-        size="medium"
-        bgColor={"#00"}
-        className="hidden md:block"
-      />
-
-      <CaseStudyMediaBlock
-        type="image"
-        src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
-        size="small"
-        bgColor={"#00"}
-        className="md:hidden"
-      />
+      >
+        <CaseStudyMediaBlock
+          type="image"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
+          size="medium"
+          bgColor={"#00"}
+          className="hidden md:block max-w-full pt-0 pb-4"
+        />
+        <CaseStudyMediaBlock
+          type="image"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
+          size="small"
+          bgColor={"#00"}
+          className="md:hidden max-w-full pt-0 pb-4"
+        />
+      </CaseStudySectionBlock>
 
 
       <CaseStudyTextBlock
@@ -383,16 +381,16 @@ export default function ProjectPage() {
         title="Final thoughts and learnings"
         text={[
           <div key="access" className="flex flex-col mb-2">
-            <strong className="text-p text-700 text-[var(--text-color-100)]">Access is Multidimensional</strong>
-            <span className="text-p text-400 text-[var(--text-color-80)]">This project taught me that access doesn&apos;t just mean <strong className="text-600">physical</strong>, but also <strong className="text-600">emotional</strong> and <strong className="text-600">political</strong> barriers people face.</span>
+            <strong className="text-p text-700 text-(--text-color-100)">Access is Multidimensional</strong>
+            <span className="text-p text-400 text-(--text-color-80)">This project taught me that access doesn&apos;t just mean <strong className="text-600">physical</strong>, but also <strong className="text-600">emotional</strong> and <strong className="text-600">political</strong> barriers people face.</span>
           </div>,
           <div key="restraint" className="flex flex-col mb-2">
-            <strong className="text-p text-700 text-[var(--text-color-100)]">The Power of Restraint</strong>
-            <span className="text-p text-400 text-[var(--text-color-80)]">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
+            <strong className="text-p text-700 text-(--text-color-100)">The Power of Restraint</strong>
+            <span className="text-p text-400 text-(--text-color-80)">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
           </div>,
           <div key="details" className="flex flex-col mb-2">
-            <strong className="text-p text-700 text-[var(--text-color-100)]">Details Can Distract</strong>
-            <span className="text-p text-400 text-[var(--text-color-80)]">Different prototype fidelities serve their purposes and all are equally needed in the design process. While lower fidelity prototypes surface more foundational issues, <strong className="text-600">higher fidelities help QA the micro-interactions that make a design cohesive</strong>. Doing UXR without one or the other can compromise your designs further down the line.</span>
+            <strong className="text-p text-700 text-(--text-color-100)">Details Can Distract</strong>
+            <span className="text-p text-400 text-(--text-color-80)">Different prototype fidelities serve their purposes and all are equally needed in the design process. While lower fidelity prototypes surface more foundational issues, <strong className="text-600">higher fidelities help QA the micro-interactions that make a design cohesive</strong>. Doing UXR without one or the other can compromise your designs further down the line.</span>
           </div>,
         ]}
       />

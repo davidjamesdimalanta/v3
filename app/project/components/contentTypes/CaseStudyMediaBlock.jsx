@@ -443,7 +443,7 @@ export default function CaseStudyMediaBlock({
   return (
     <figure
       id={id}
-      className={`mx-auto flex flex-col items-center justify-center pt-8 pb-20 w-full ${currentSize.maxWidth} ${className}`}
+      className={`mx-auto flex flex-col items-center justify-center pt-8 w-full ${currentSize.maxWidth} ${className}`}
       style={{
         '--bg-color': backgroundColor,
         '--fg-color': foregroundColor,

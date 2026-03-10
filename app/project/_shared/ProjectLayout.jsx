@@ -29,7 +29,7 @@ export default function ProjectLayout({ projectData, children }) {
   };
 
   return (
-    <div className={`relative w-full min-h-screen transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
+    <div className={`relative transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
 
       {/* Stacked layout: Full-width hero above content */}
       <div className="flex flex-col">
@@ -46,7 +46,8 @@ export default function ProjectLayout({ projectData, children }) {
         />
 
         {/* Content — media/video blocks below hero */}
-        <ProjectContent>
+        <ProjectContent
+        >
           {children}
         </ProjectContent>
       </div>
