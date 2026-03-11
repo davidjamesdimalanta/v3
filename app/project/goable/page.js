@@ -14,6 +14,7 @@ import { TextShimmer } from "../../ui/text-shimmer";
 import { projectData } from "./data";
 import { getNextProject } from "../projects";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
+import CaseStudyNavigation from "../_shared/CaseStudyNavigation";
 
 /**
  * Project Content Page Template
@@ -38,6 +39,16 @@ export default function ProjectPage() {
   // Replace 'your-project-slug' with your actual project slug
   const currentSlug = "goable";
   const nextProject = getNextProject(currentSlug);
+
+  const sections = [
+    { id: "problem", heading: "Problem" },
+    { id: "solutions", heading: "Solutions" },
+    { id: "discovery", heading: "Discovery" },
+    { id: "initial-designs", heading: "Initial Designs" },
+    { id: "iterations", heading: "Iterations" },
+    { id: "final-designs", heading: "Final Designs" },
+    { id: "closing", heading: "Closing" },
+  ];
 
   return (
     <>
@@ -112,12 +123,15 @@ export default function ProjectPage() {
         /> */}
       </ProjectLayout>
 
+      <CaseStudyNavigation sections={sections} />
+
       {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
       <CaseStudySection title="" theme={projectData.caseStudy}>
 
 
       <CaseStudyTextBlock
-        className="pt-36"
+        id="problem"
+        className="pt-64"
         sectionHeading="The Problem"
         title="Current washroom listings lack accessibility-related information."
         text={[
@@ -147,7 +161,7 @@ export default function ProjectPage() {
       />
 
       <CaseStudyTextBlock
-        className="pb-36"
+        className="pb-64"
         sectionHeading="The Challenge"
         text={[
           <>
@@ -156,6 +170,7 @@ export default function ProjectPage() {
         ]}
       />
 
+      <div id="solutions">
       <CaseStudySectionBlock
         sectionHeading="Solutions"
         className="py-16"
@@ -203,161 +218,81 @@ export default function ProjectPage() {
           className="max-w-full pt-0 pb-4"
         />
       </CaseStudySectionBlock>
+      </div>
 
 
-      {/* <CaseStudySectionBlockFixed
-        sectionHeading="Discovery"
-        title="Surfacing barriers in washrooms across Toronto"
-        description={[
-          <>
-          <DefinitionCard
-            trigger="Secondary research"
-            shimmerVariant="brown"
-            triggerProps={{ onMouseEnter: playButtonHover }}
-            content={<ParticipantDemographics />}
-            caption={{
-              text: "",
-              link: ""
-            }}
-            side="right"
-            mobileWidth="w-80"
-            desktopWidth="w-120"
-            sideOffset="1"
-          />
-          {" "}
-          revealed the different barriers to access they experienced when finding a washroom. It influenced our
-          {" "}
-          <DefinitionCard
-            trigger="design goals"
-            shimmerVariant="brown"
-            triggerProps={{ onMouseEnter: playButtonHover }}
-            content={
-              <>
-                <div className="mb-3">
-                  <i className="opacity-60">Design focuses led by our primary research:</i>
-                </div>
-                <div className="mb-2">
-                  If washroom access is different for everyone, how might we <i><strong>personalize</strong></i> the washroom finding experience?
-                </div>
-                <div className="mb-2">
-                  If washroom listing is sparse, then <i><strong>what amenities do people care about most</strong></i>, and what design principles help communicate them effectively?
-                </div>
-                <div>
-                  If sources of truth are rare, then how might we convey <i><strong>trustworthy and relevant</strong></i> washroom info?
-                </div>
-              </>
-            }
-            caption={{
-              text: "",
-              link: ""
-            }}
-            side="right"
-            width="w-120"
-            sideOffset="1"
-          />, tackling three critical issues in washroom finding:</>
-        ]}
-      >
-        <CaseStudyMediaBlock
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
-          size="medium"
-          bgColor={"#00"}
-          className="hidden md:block max-w-full pt-0 pb-4"
-        />
-        <CaseStudyMediaBlock
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
-          size="small"
-          bgColor={"#00"}
-          className="md:hidden max-w-full pt-0 pb-4"
-        />
-      </CaseStudySectionBlockFixed> */}
-<div className="flex flex-col gutter-sm">
-<CaseStudyTextBlock
-        className="pt-64"
-        sectionHeading="Discovery"
-        title="Surfacing barriers in washrooms across Toronto"
-        text={[
-          <>
-          <DefinitionCard
-            trigger="Secondary research"
-            shimmerVariant="brown"
-            triggerProps={{ onMouseEnter: playButtonHover }}
-            content={<ParticipantDemographics />}
-            caption={{
-              text: "",
-              link: ""
-            }}
-            side="right"
-            mobileWidth="w-80"
-            desktopWidth="w-120"
-            sideOffset="1"
-          />
-          {" "}
-          revealed the different barriers to access they experienced when finding a washroom. It influenced our
-          {" "}
-          <DefinitionCard
-            trigger="design goals"
-            shimmerVariant="brown"
-            triggerProps={{ onMouseEnter: playButtonHover }}
-            content={
-              <>
-                <div className="mb-3">
-                  <i className="opacity-60">Design focuses led by our primary research:</i>
-                </div>
-                <div className="mb-2">
-                  If washroom access is different for everyone, how might we <i><strong>personalize</strong></i> the washroom finding experience?
-                </div>
-                <div className="mb-2">
-                  If washroom listing is sparse, then <i><strong>what amenities do people care about most</strong></i>, and what design principles help communicate them effectively?
-                </div>
-                <div>
-                  If sources of truth are rare, then how might we convey <i><strong>trustworthy and relevant</strong></i> washroom info?
-                </div>
-              </>
-            }
-            caption={{
-              text: "",
-              link: ""
-            }}
-            side="right"
-            width="w-120"
-            sideOffset="1"
-          />, tackling three critical issues in washroom finding:</>
-        ]}
-      />
-<CaseStudyMediaBlock
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
-          size="medium"
-          bgColor={"#00"}
-          className="hidden md:block pt-0 pb-4"
-        />
-        <CaseStudyMediaBlock
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
-          size="small"
-          bgColor={"#00"}
-          className="md:hidden pt-0 pb-4"
-        />
-</div>
+      <div id="discovery" className="flex flex-col gutter-sm">
+      <CaseStudyTextBlock
+              className="pt-64"
+              sectionHeading="Discovery"
+              title="Surfacing barriers in washrooms across Toronto"
+              text={[
+                <>
+                <DefinitionCard
+                  trigger="Secondary research"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={<ParticipantDemographics />}
+                  caption={{
+                    text: "",
+                    link: ""
+                  }}
+                  side="right"
+                  mobileWidth="w-80"
+                  desktopWidth="w-120"
+                  sideOffset="1"
+                />
+                {" "}
+                revealed the different barriers to access they experienced when finding a washroom. It influenced our
+                {" "}
+                <DefinitionCard
+                  trigger="design goals"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-3">
+                        <i className="opacity-60">Design focuses led by our primary research:</i>
+                      </div>
+                      <div className="mb-2">
+                        If washroom access is different for everyone, how might we <i><strong>personalize</strong></i> the washroom finding experience?
+                      </div>
+                      <div className="mb-2">
+                        If washroom listing is sparse, then <i><strong>what amenities do people care about most</strong></i>, and what design principles help communicate them effectively?
+                      </div>
+                      <div>
+                        If sources of truth are rare, then how might we convey <i><strong>trustworthy and relevant</strong></i> washroom info?
+                      </div>
+                    </>
+                  }
+                  caption={{
+                    text: "",
+                    link: ""
+                  }}
+                  side="right"
+                  width="w-120"
+                  sideOffset="1"
+                />, tackling three critical issues in washroom finding:</>
+              ]}
+            />
+      <CaseStudyMediaBlock
+                type="image"
+                src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
+                size="medium"
+                bgColor={"#00"}
+                className="hidden md:block pt-0 pb-4"
+              />
+              <CaseStudyMediaBlock
+                type="image"
+                src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
+                size="small"
+                bgColor={"#00"}
+                className="md:hidden pt-0 pb-4"
+              />
+      </div>
 
 
-      {/* <CaseStudyTextBlock
-        className="border-l-2 border-[#799A92] pl-5"
-        text={[
-          "Our original scope was too broad — we designed for anyone who\u2019d ever struggled to find a washroom. After our first interviews, we caught the error: that\u2019s everyone, and you can\u2019t design for everyone. We rescoped to users with mobility impairments and urgent medical needs, rewrote our screener, and restarted recruitment. The tighter scope is what made the design decisions defensible.",
-          "Even within that narrower group, we disagreed on who to optimize for — a wheelchair-dependent caregiver has completely different needs than a university student with IBS. Rather than picking one, we asked what both actually want at the end of the interaction: to feel confident they\u2019re going to the right place, fast. Every feature we built traces back to that. Personalization through onboarding handles the rest.",
-        ]}
-      /> */}
-
-      {/* Addition 1: Scoping Error + User Tension — process correction aside */}
-      {/* Visual choice: left-border callout in the project accent color.
-          Signals "deliberate aside" without a title that would make it feel like a feature.
-          No sectionHeading label — this is a correction mid-story, not a new section. */}
-
-
-      <div className="flex flex-col gutter-base">
+      <div id="initial-designs" className="flex flex-col gutter-base">
         <CaseStudyTextBlock
           sectionHeading="Initial Designs"
           title="Personalizing the search"
@@ -483,7 +418,7 @@ export default function ProjectPage() {
       </div>
 
       {/* Iterations — three-part evidence structure (what happened → quote → what changed). */}
-
+      <div id="iterations" className="flex flex-col gap-24">
       <CaseStudySectionBlockFixed
         sectionHeading="Iterations"
         title="Filter Reduction"
@@ -544,11 +479,15 @@ export default function ProjectPage() {
           className="pt-0!"
         />
       </CaseStudySectionBlockFixed>
+      </div>
 
+      <div id="final-designs">
       <CaseStudyHighlightsBlock
         sectionHeading="Final Designs"
-        title="Three core flows, built for real people."
-        description="GoAble's final screens address accessibility at every step — from personalized onboarding, to granular washroom details, to community-driven verification. Each flow was iterated on across multiple rounds of user testing."
+        title="Making accessibility personal"
+        description={[
+          <span key={1}>GoAble filters washrooms by <strong>your needs</strong>, surfaces <strong>granular details</strong> before you arrive, and uses <strong>crowdsourced reviews</strong> to keep information honest and reduce the stress of finding a suitable washroom in public.</span>
+        ]}
         videos={[
           {
             src: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
@@ -567,29 +506,11 @@ export default function ProjectPage() {
           },
         ]}
       />
-{/* 
-      <CaseStudyTextBlock
-        sectionHeading="Note: Prototypes"
-        title="Prototypes that reveal valuable insights."
-        text={[
-          <>
-          Our low-fidelity prototypes exposed foundational flaws in Goable&apos;s layout early on that were symptomatic of an ill-defined user workflow/journey.
-          </>,
-          <>
-          Our higher-fidelity iterations surfaced more micro-level interaction insights, such as issues with filter toggles and map icon clarity in our second round of testing.
-          </>
-        ]}
-      /> */}
 
-      {/* <CaseStudyMediaBlock
-        type="video"
-        src="https://stream.mux.com/XU4Ly1w1M6d4pmZOKZDIbBdYchQz8njlM008npcId02NQ.m3u8?min_resolution=1080p"
-        size="medium"
-        thumbnail="https://image.mux.com/XU4Ly1w1M6d4pmZOKZDIbBdYchQz8njlM008npcId02NQ/thumbnail.png?width=1919&height=1080&time=0"
-        caption= "Our prototype saves button states, locations, and map views to simulate a production-ready experience."
-      /> */}
+      </div>
 
       <CaseStudyTextBlock
+        id="closing"
         sectionHeading="Closing"
         title="Final thoughts and learnings"
         text={[
@@ -601,13 +522,13 @@ export default function ProjectPage() {
             <strong className="text-p text-700 text-(--text-color-100)">The Power of Restraint</strong>
             <span className="text-p text-400 text-(--text-color-80)">Instead of maximizing a design through incentives or by providing all options, I learned that people appreciate when designers <strong className="text-600">show restraint</strong>—providing exactly <strong className="text-600">what they need</strong>, <strong className="text-600">when</strong> they need it, while respecting their choice <strong className="text-600">to participate or not</strong>.</span>
           </div>,
-          <div key="fidelity" className="flex flex-col gap-1 mb-2 border-l-2 border-[#799A92] pl-4">
+          <div key="fidelity" className="flex flex-col mb-2">
             <strong className="text-p text-700 text-(--text-color-100)">Fidelity is a QA Tool, Not Just a Presentation Tool</strong>
-            <span className="text-p text-400 text-(--text-color-80)">I built the mid-fi prototype with Figma Variables specifically to stress-test interactions before committing to high-fidelity. That&apos;s where I caught the tag color ambiguity — users had no way to distinguish washroom states at a glance, and it would have been expensive to fix later. The mid-fi wasn&apos;t a stepping stone to the real prototype. <strong className="text-600">It was its own diagnostic tool.</strong></span>
+            <span className="text-p text-400 text-(--text-color-80)">I built the mid-fi prototype with Figma Variables specifically to stress-test interactions before committing to high-fidelity. That&apos;s where I caught the tag color ambiguity issue where users had no way to distinguish washroom states at a glance, and it would have been expensive to fix later. The mid-fi acted as <strong className="text-600">a diagnostic tool.</strong></span>
           </div>,
-          <div key="wayfinding" className="flex flex-col gap-1 mb-2 border-l-2 border-[#799A92] pl-4">
+          <div key="wayfinding" className="flex flex-col mb-2">
             <strong className="text-p text-700 text-(--text-color-100)">What&apos;s Next</strong>
-            <span className="text-p text-400 text-(--text-color-80)">The feature I&apos;d build next is in-building wayfinding. We cut it due to time, not lack of evidence — it was the one thing our research surfaced that <strong className="text-600">no existing tool handles at all</strong>.</span>
+            <span className="text-p text-400 text-(--text-color-80)">The feature I&apos;d build next is in-building wayfinding. We cut it due to time, but it was the one thing our research surfaced that <strong className="text-600">no existing tool handles at all</strong>.</span>
           </div>,
         ]}
       />

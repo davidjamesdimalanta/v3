@@ -11,6 +11,7 @@ import { TextShimmer } from "../../ui/text-shimmer";
 import { projectData } from "./data";
 import { getNextProject } from "../projects";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
+import CaseStudyNavigation from "../_shared/CaseStudyNavigation";
 
 /**
  * Project Content Page Template
@@ -35,6 +36,11 @@ export default function ProjectPage() {
   // Replace 'your-project-slug' with your actual project slug
   const currentSlug = "ihub";
   const nextProject = getNextProject(currentSlug);
+
+  const sections = [
+    { id: "ihub-website", heading: "iHub Website" },
+    { id: "technical-docs", heading: "Technical Documentation" },
+  ];
 
   return (
     <>
@@ -113,6 +119,8 @@ export default function ProjectPage() {
 
       </ProjectLayout>
 
+      <CaseStudyNavigation sections={sections} />
+
       {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
       <CaseStudySection title="" theme={projectData.caseStudy}>
 
@@ -121,6 +129,7 @@ export default function ProjectPage() {
         {/* ============================================ */}
 
         <CaseStudyTextBlock
+          id="ihub-website"
           sectionHeading="Ihub Website"
           title="Custom code for a system that limits design."
           text={[
@@ -354,7 +363,8 @@ export default function ProjectPage() {
         />  */}
 
 
-        <CaseStudyTextBlock 
+        <CaseStudyTextBlock
+          id="technical-docs"
           sectionHeading="Technical Documentation"
           title="Future-proofing with visuals"
           text={[ 
