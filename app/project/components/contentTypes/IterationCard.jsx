@@ -26,29 +26,29 @@ export default function IterationCard({
   return (
     <div className={`max-w-lg mx-auto flex flex-col gap-3 ${className}`}>
       {sectionHeading && (
-        <span className="text-sm uppercase tracking-wide text-[var(--text-color-60)]">
+        <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
           {sectionHeading}
         </span>
       )}
 
       {title && (
-        <h3 className="text-h5 text-600 text-[var(--text-color-100)]">{title}</h3>
+        <h3 className="text-h5 text-600 text-(--text-color-100)">{title}</h3>
       )}
 
       {whatHappened && (
-        <p className="text-p text-400 text-[var(--text-color-80)]">{whatHappened}</p>
+        <p className="text-p text-400 text-(--text-color-80)">{whatHappened}</p>
       )}
 
       {quote && (
         <blockquote className="border-l-2 border-[#799A92] pl-4 my-1">
-          <p className="text-p text-400 italic text-[var(--text-color-60)]">
+          <p className="text-p text-400 italic text-(--text-color-60)">
             &ldquo;{quote}&rdquo;
           </p>
         </blockquote>
       )}
 
       {whatChanged && (
-        <p className="text-p text-400 text-[var(--text-color-80)]">{whatChanged}</p>
+        <p className="text-p text-400 text-(--text-color-80)">{whatChanged}</p>
       )}
     </div>
   );

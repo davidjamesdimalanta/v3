@@ -472,7 +472,7 @@ export default function CaseStudyMediaBlock({
           />
 
           {/* Absolute positioned media container */}
-          <div className="absolute inset-0 backdrop-blur-md">
+          <div className="absolute inset-0">
             {type === "lottie" && src ? (
               <canvas
                 ref={lottieRef}

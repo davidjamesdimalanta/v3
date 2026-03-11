@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import CaseStudyMediaBlock from "./CaseStudyMediaBlock";
+import { renderDescription } from "./renderDescription";
 
 /**
  * Case Study Section Block Component
@@ -31,71 +32,73 @@ export function CaseStudySectionBlock({
   media,
   mediaCaption,
   children,
+  dark = false,
   className = "",
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1 = down, -1 = up
   const prevIndexRef = useRef(0);
   const childRefs = useRef([]);
-  const debounceRef = useRef(null);
+  const rafRef = useRef(null);
 
   const childrenArray = React.Children.toArray(children);
   const hasTextStates = textStates && textStates.length > 0;
 
+  const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
+  const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
+  const descColor    = dark ? "text-(--text-lightcolor-80)" : "text-(--text-color-80)";
+  const bgClass      = dark ? "bg-[#141509]" : "";
+
   useEffect(() => {
     if (!hasTextStates || childrenArray.length === 0) return;
 
-    const observers = [];
+    const TARGET_Y = window.innerHeight * 0.45;
 
-    childRefs.current.forEach((el, i) => {
-      if (!el) return;
+    function pickWinner() {
+      let bestIndex = 0;
+      let bestDistance = Infinity;
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting) return;
-
-          clearTimeout(debounceRef.current);
-          debounceRef.current = setTimeout(() => {
-            const prev = prevIndexRef.current;
-            const newDirection = i >= prev ? 1 : -1;
-            prevIndexRef.current = i;
-            setDirection(newDirection);
-            setActiveIndex(i);
-          }, 50);
-        },
-        { threshold: 0.8 }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach((o) => o.disconnect());
-      clearTimeout(debounceRef.current);
-    };
-  }, [hasTextStates, childrenArray.length]);
-
-  const renderDescription = (desc) => {
-    if (Array.isArray(desc)) {
-      return desc.map((paragraph, index) => {
-        if (
-          typeof paragraph === "object" &&
-          paragraph?.props?.className?.includes("flex")
-        ) {
-          return React.cloneElement(paragraph, { key: index });
+      childRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.abs(centerY - TARGET_Y);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestIndex = i;
         }
-        return (
-          <p key={index} className="text-p text-400 text-(--text-color-80)">
-            {paragraph}
-          </p>
-        );
+      });
+
+      const prev = prevIndexRef.current;
+      if (bestIndex !== prev) {
+        const newDirection = bestIndex > prev ? 1 : -1;
+        prevIndexRef.current = bestIndex;
+        setDirection(newDirection);
+        setActiveIndex(bestIndex);
+      }
+    }
+
+    function onScroll() {
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        pickWinner();
       });
     }
-    return (
-      <p className="text-p text-400 text-(--text-color-80)">{desc}</p>
-    );
-  };
+
+    // Seed initial state without waiting for a scroll event
+    pickWinner();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [hasTextStates, childrenArray.length]);
 
   const variants = {
     initial: (dir) => ({ y: dir * 20, opacity: 0 }),
@@ -105,14 +108,49 @@ export function CaseStudySectionBlock({
 
   const currentState = hasTextStates ? textStates[activeIndex] ?? textStates[0] : null;
 
+  const rightColumnContent = (() => {
+    if (!children) return media?.src ? <CaseStudyMediaBlock {...media} /> : null;
+    if (!hasTextStates) return children;
+    return childrenArray.map((child, i) => {
+      const state = textStates[i] ?? textStates[0];
+      return (
+        <motion.div
+          key={i}
+          ref={(el) => { childRefs.current[i] = el; }}
+          animate={{ opacity: i === activeIndex ? 1 : 0.5 }}
+          transition={{ duration: 0.3 }}
+          className="max-lg:opacity-100!"
+        >
+          {/* Mobile-only inline text above each child */}
+          <div className="flex flex-col gap-2 mb-0 lg:hidden">
+            {i === 0 && sectionHeading && (
+              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
+                {sectionHeading}
+              </span>
+            )}
+            {state?.title && (
+              <h3 className={`text-h5 text-600 ${titleColor}`}>{state.title}</h3>
+            )}
+            {state?.description && (
+              <div className="flex flex-col gap-2">
+                {renderDescription(state.description, descColor)}
+              </div>
+            )}
+          </div>
+          {child}
+        </motion.div>
+      );
+    });
+  })();
+
   return (
-    <div className={`flex flex-col lg:flex-row lg:gutter-lg px-8 ${className}`}>
+    <div className={`flex flex-col lg:flex-row lg:gutter-lg px-4 md:px-8 ${bgClass} ${className}`}>
       {/* LEFT — sticky text column */}
-      <aside className="flex-1 lg:basis-[720px] lg:sticky lg:top-0 lg:self-start flex flex-col gap-2 py-8">
+      <aside className={`${hasTextStates ? 'hidden lg:flex' : 'flex'} flex-1 lg:basis-[720px] lg:sticky lg:top-[45dvh] lg:self-start flex-col gap-2 py-0`}>
         {hasTextStates ? (
           <>
             {sectionHeading && (
-              <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
                 {sectionHeading}
               </span>
             )}
@@ -124,17 +162,17 @@ export function CaseStudySectionBlock({
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                transition={{ duration: 0.3 }}
                 className="flex flex-col gap-2"
               >
                 {currentState.title && (
-                  <h3 className="text-h5 text-600 text-(--text-color-100)">
+                  <h3 className={`text-h5 text-600 ${titleColor}`}>
                     {currentState.title}
                   </h3>
                 )}
                 {currentState.description && (
                   <div className="flex flex-col gap-2">
-                    {renderDescription(currentState.description)}
+                    {renderDescription(currentState.description, descColor)}
                   </div>
                 )}
               </motion.div>
@@ -143,18 +181,18 @@ export function CaseStudySectionBlock({
         ) : (
           <>
             {sectionHeading && (
-              <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
                 {sectionHeading}
               </span>
             )}
             {title && (
-              <h3 className="text-h5 text-600 text-(--text-color-100)">
+              <h3 className={`text-h5 text-600 ${titleColor}`}>
                 {title}
               </h3>
             )}
             {description && (
               <div className="flex flex-col gap-2">
-                {renderDescription(description)}
+                {renderDescription(description, descColor)}
               </div>
             )}
           </>
@@ -163,46 +201,20 @@ export function CaseStudySectionBlock({
 
       {/* RIGHT — media column */}
       <div className="flex-1 lg:max-w-[min(75vw,120vh)] lg:flex-1 lg:basis-[75vw]">
-        <div className="flex flex-col gutter-2xl">
+        <div className="flex flex-col gutter-lg">
           {mediaTitle && (
-            <h4 className="text-h6 text-500 text-(--text-color-100)">
+            <h4 className={`text-h6 text-500 ${titleColor}`}>
               {mediaTitle}
             </h4>
           )}
           {mediaDescription && (
-            <p className="text-p text-400 text-(--text-color-80)">
+            <p className={`text-p text-400 ${descColor}`}>
               {mediaDescription}
             </p>
           )}
-          {children ? (
-            hasTextStates ? (
-              childrenArray.map((child, i) => (
-                <motion.div
-                  key={i}
-                  ref={(el) => { childRefs.current[i] = el; }}
-                  animate={{ opacity: i === activeIndex ? 1 : 0.5 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                >
-                  {child}
-                </motion.div>
-              ))
-            ) : (
-              children
-            )
-          ) : media?.src && (
-            <CaseStudyMediaBlock
-              type={media.type}
-              src={media.src}
-              alt={media.alt}
-              aspectRatio={media.aspectRatio}
-              size={media.size}
-              thumbnail={media.thumbnail}
-              caption={media.caption}
-              priority={media.priority}
-            />
-          )}
+          {rightColumnContent}
           {mediaCaption && (
-            <p className="text-small text-400 text-(--text-color-60) text-center">
+            <p className={`text-small text-400 ${headingColor} text-center`}>
               {mediaCaption}
             </p>
           )}
@@ -227,46 +239,31 @@ export function CaseStudySectionBlockFixed({
   media,
   mediaCaption,
   children,
+  dark = false,
   className = "",
 }) {
-  const renderDescription = (desc) => {
-    if (Array.isArray(desc)) {
-      return desc.map((paragraph, index) => {
-        if (
-          typeof paragraph === "object" &&
-          paragraph?.props?.className?.includes("flex")
-        ) {
-          return React.cloneElement(paragraph, { key: index });
-        }
-        return (
-          <p key={index} className="text-p text-400 text-(--text-color-80)">
-            {paragraph}
-          </p>
-        );
-      });
-    }
-    return (
-      <p className="text-p text-400 text-(--text-color-80)">{desc}</p>
-    );
-  };
+  const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
+  const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
+  const descColor    = dark ? "text-(--text-lightcolor-80)" : "text-(--text-color-80)";
+  const bgClass      = dark ? "bg-[#141509]" : "";
 
   return (
-    <div className={`flex flex-col lg:flex-row lg:gutter-lg px-8 ${className}`}>
+    <div className={`flex flex-col lg:flex-row lg:items-center lg:gutter-lg px-4 md:px-8 ${bgClass} ${className}`}>
       {/* LEFT — scrolling text column (no sticky) */}
       <aside className="flex-1 lg:basis-[720px] flex flex-col gap-2 py-8">
         {sectionHeading && (
-          <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+          <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
             {sectionHeading}
           </span>
         )}
         {title && (
-          <h3 className="text-h5 text-600 text-(--text-color-100)">
+          <h3 className={`text-h5 text-600 ${titleColor}`}>
             {title}
           </h3>
         )}
         {description && (
           <div className="flex flex-col gap-2">
-            {renderDescription(description)}
+            {renderDescription(description, descColor)}
           </div>
         )}
       </aside>
@@ -275,29 +272,20 @@ export function CaseStudySectionBlockFixed({
       <div className="flex-1 lg:max-w-[min(75vw,120vh)] lg:flex-1 lg:basis-[75vw]">
         <div className="flex flex-col gap-4">
           {mediaTitle && (
-            <h4 className="text-h6 text-500 text-(--text-color-100)">
+            <h4 className={`text-h6 text-500 ${titleColor}`}>
               {mediaTitle}
             </h4>
           )}
           {mediaDescription && (
-            <p className="text-p text-400 text-(--text-color-80)">
+            <p className={`text-p text-400 ${descColor}`}>
               {mediaDescription}
             </p>
           )}
           {children ? children : media?.src && (
-            <CaseStudyMediaBlock
-              type={media.type}
-              src={media.src}
-              alt={media.alt}
-              aspectRatio={media.aspectRatio}
-              size={media.size}
-              thumbnail={media.thumbnail}
-              caption={media.caption}
-              priority={media.priority}
-            />
+            <CaseStudyMediaBlock {...media} />
           )}
           {mediaCaption && (
-            <p className="text-small text-400 text-(--text-color-60) text-center">
+            <p className={`text-small text-400 ${headingColor} text-center`}>
               {mediaCaption}
             </p>
           )}

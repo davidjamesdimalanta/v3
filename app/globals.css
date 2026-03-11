@@ -10,6 +10,9 @@
     --text-color-100: rgb(90, 54, 51);
     --text-color-80: rgb(119, 90, 88);
     --text-color-60: rgb(149, 127, 124);
+    --text-lightcolor-100: rgb(255, 255, 255);
+    --text-lightcolor-80: rgb(208, 208, 206);
+    --text-lightcolor-60: rgb(161, 161, 157);
 }
 
 /* THEME OVERRIDES */
@@ -337,6 +340,11 @@ body {
 /* RESPONSIVE PADDING */
 @utility padding-page {
     @apply p-[64px_12px_12px_12px] md:p-[64px_20px_20px_20px];
+}
+
+/* GUTTER CLASSES */
+@utility gutter-4xl {
+  @apply gap-[240px];
 }
 
 /* GUTTER CLASSES */
