@@ -29,8 +29,7 @@ export const projectData = {
       // "Replace this with your project description. Explain the challenge, your role, and the approach you took to solve the problem.",
       // "Add multiple paragraphs to provide context about the project's goals, constraints, and your design process.",
       // "Highlight key insights, decisions, and outcomes that demonstrate your impact on the project.",
-      "As the iHub website is built on a dated and uncustomizable website builder, I use HTML, CSS, Javascript, and Wordpress to develop our custom designs for the website and other faculty projects across the three UofT campuses.",
-      "I also take part in developing and maintaining the design system, working with design tokens, icon and component libraries, auditing mobile responsiveness of webpages, and documenting the custom-coded implementations for future designers/non-developers.",
+      "I use HTML, CSS, Javascript, and Wordpress to develop our custom designs for the website and other faculty projects across the three UofT campuses.",
       "My work results in projects that are 1:1 with the design team's expectations, designer-friendly coding documentation, and a developer-ready design system."
     ],
   
@@ -54,7 +53,7 @@ export const projectData = {
 
     // Case study section theme colors
     caseStudy: {
-      bgColor: "##000000",  // Background color for media matting effect
+      bgColor: "#1a1a1a",  // Background color for media matting effect
       fgColor: "#799A92",  // Text/caption color
     },
   };

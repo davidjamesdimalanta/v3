@@ -6,6 +6,8 @@ import ContentBlock from "../components/contentTypes/ContentBlock";
 import CaseStudySection from "../_shared/CaseStudySection";
 import CaseStudyTextBlock from "../components/contentTypes/CaseStudyTextBlock";
 import CaseStudyMediaBlock from "../components/contentTypes/CaseStudyMediaBlock";
+import { CaseStudySectionBlock, CaseStudySectionBlockFixed } from "../components/contentTypes/CaseStudySectionBlock";
+import CaseStudyHighlightsBlock from "../components/contentTypes/CaseStudyHighlightsBlock";
 import DefinitionCard from "../components/contentTypes/DefinitionCard";
 import { TextShimmer } from "../../ui/text-shimmer";
 import { projectData } from "./data";
@@ -13,40 +15,27 @@ import { getNextProject } from "../projects";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import CaseStudyNavigation from "../_shared/CaseStudyNavigation";
 
-/**
- * Project Content Page Template
- *
- * This is where you build your unique case study content
- * You have two patterns available:
- *
- * 1. ContentBlock (Recommended) - All-in-one component with optional fields
- *    <ContentBlock title="..." text="..." media={{...}} />
- *
- * 2. Composition Pattern - Mix and match components
- *    <ProjectSection title="...">
- *      <MediaBlock type="image" src="..." />
- *    </ProjectSection>
- */
-
 export default function ProjectPage() {
-  // Sound effects
   const { playHover, playButtonHover } = useSoundEffects();
 
-  // Get the slug of the current project from the URL
-  // Replace 'your-project-slug' with your actual project slug
   const currentSlug = "ihub";
   const nextProject = getNextProject(currentSlug);
 
   const sections = [
-    { id: "ihub-website", heading: "iHub Website" },
-    { id: "technical-docs", heading: "Technical Documentation" },
+    { id: "problem",       heading: "Problem" },
+    { id: "solutions",     heading: "Solutions" },
+    { id: "discovery",     heading: "Discovery" },
+    { id: "ihub-website",  heading: "iHub Website" },
+    { id: "fco-toolkit",   heading: "FCO Toolkit" },
+    { id: "iterations",    heading: "Iterations" },
+    { id: "final-designs", heading: "Final Designs" },
+    { id: "closing",       heading: "Closing" },
   ];
 
   return (
     <>
-      {/* ProjectLayout: Contains high-level project overview (constrained to 75vw) */}
       <ProjectLayout projectData={projectData}>
-        <ContentBlock 
+        <ContentBlock
           media={{
             type: "image",
             src: "https://cdn.sanity.io/images/iy4m4myd/production/06f5335aa8fe0b070994ddf56c66c3b44414bce2-3200x1800.png",
@@ -55,8 +44,6 @@ export default function ProjectPage() {
           }}
         />
         <ContentBlock
-          // title="iHub Website Design & Development"
-          // text="The Innovation Hub (iHub) is UofT's student design research agency, dedicated to improving student life across all three campuses. As a web designer on the UX team, I helped redesign the website that showcases 50+ research projects and their findings to campus stakeholders."
           media={{
             type: "video",
             src: "https://stream.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc.m3u8?min_resolution=1080p",
@@ -66,359 +53,508 @@ export default function ProjectPage() {
           thumbnail="https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0"
           isFirstVideo={true}
         />
-
-        
-        <div className="flex flex-col gap-4">
-          <ContentBlock
-            title="Project 2: Family Care Office Website"
-            // text="UofT's Family Care Office wanted a campus-wide resource for educators supporting student-parents. Limited to a single WordPress page, it conflicted with the design team's multi-page design. To solve this, we created a single-page app that pushes each resource's slug to the URL dynamically, giving every resource a shareable link despite the technical constraint."
-            media={{
-              type: "video",
-              src: "https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p",
-              aspectRatio: "video",
-              caption: "",
-            }}
-            thumbnail="https://image.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8/thumbnail.png?width=1919&height=1080&time=0"
-          />
-          <ContentBlock
-            title=""
-            text=""
-            media={{
-              type: "video",
-              src: "https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p",
-              aspectRatio: "video",
-              caption: "",
-            }}
-            thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
-          />
-        </div>
-
-{/* 
-        <div className="flex flex-col gap-4">
-          <ContentBlock
-            title="Technical Documentation"
-            // text="Part of my role is to develop documentation for all my work that is reproducible and easy to follow by non-developers on the team. This entails custom Wordpress blocks with contained logic, visual documentation in Figma for new designers unfamiliar with the website builder, and walkthrough videos. I also am tasked with maintaining their internal design system components for any components I've developed."
-            media={{
-              type: "image",
-              src: "/assets/images/ihub/design_system.png",
-              aspectRatio: "video",
-              caption: "Though confidential, I am able to discuss more about their design system verbally upon request.",
-            }}
-          />
-          <ContentBlock
-            title=""
-            text=""
-            media={{
-              type: "image",
-              src: "/assets/images/ihub/technical_documentation.png",
-              aspectRatio: "video",
-              caption: "By incorporating visuals in our documentation, designers are able to resolve common issues and make changes to any custom component without the technical expertise.",
-            }}
-          />
-        </div> */}
-
+        <ContentBlock
+          media={{
+            type: "video",
+            src: "https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p",
+            aspectRatio: "video",
+            caption: "",
+          }}
+          thumbnail="https://image.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8/thumbnail.png?width=1919&height=1080&time=0"
+        />
+        <ContentBlock
+          media={{
+            type: "video",
+            src: "https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p",
+            aspectRatio: "video",
+            caption: "",
+          }}
+          thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
+        />
       </ProjectLayout>
 
       <CaseStudyNavigation sections={sections} />
 
-      {/* CaseStudySection: Full-width detailed process (outside ProjectLayout) */}
       <CaseStudySection title="" theme={projectData.caseStudy}>
 
-        {/* ============================================ */}
-        {/* PROJECT 1: Website Responsive Design */}
-        {/* ============================================ */}
-
+        {/* ─── PROBLEM ─── */}
         <CaseStudyTextBlock
-          id="ihub-website"
-          sectionHeading="Ihub Website"
-          title="Custom code for a system that limits design."
+          id="problem"
+          className="pt-64"
+          sectionHeading="The Problem"
+          title="Two projects. One constraint: designers who can't write code."
           text={[
             <>
-              I came onto the design team as a product design intern, but 
-              quickly became the SME for their web tech stack. 
+              The iHub website runs on{" "}
+              <DefinitionCard
+                trigger="Beaver Builder"
+                shimmerVariant="brown"
+                triggerProps={{ onMouseEnter: playButtonHover }}
+                content={
+                  <>
+                    <div className="mb-2">
+                      <strong>What Beaver Builder can&apos;t do natively:</strong>
+                    </div>
+                    <div className="mb-2">• Custom responsive breakpoints beyond its presets</div>
+                    <div className="mb-2">• Encapsulated component logic (all widgets are stateless)</div>
+                    <div className="mb-2">• Fluid typography that scales with viewport width</div>
+                    <div>• Shareable deep-links within a single-page architecture</div>
+                  </>
+                }
+                side="bottom"
+                width="w-80"
+                sideOffset="1"
+              />
+              , a drag-and-drop WordPress builder that limits what designers can ship without a developer request. My job was to push past those limits — and make the solutions accessible to the next designer on the team.
             </>,
             <>
-              In design sprints, I represented technical feasibility and responsive design.
+              The FCO Toolkit presented a different constraint: a{" "}
+              <DefinitionCard
+                trigger="26-page research report"
+                shimmerVariant="brown"
+                triggerProps={{ onMouseEnter: playButtonHover }}
+                content={
+                  <>
+                    <div className="mb-2">
+                      <strong>Research scope:</strong>
+                    </div>
+                    <div className="mb-2">• 31 student parents across 6 group sessions and 2 interviews</div>
+                    <div className="mb-2">• 12 participants in 3 co-creation sessions</div>
+                    <div className="mb-2">• 5 detailed personas developed</div>
+                    <div className="mb-2">• 10 design principles with 50+ implementation ideas</div>
+                  </>
+                }
+                caption={{
+                  text: "View full report (PDF)",
+                  link: "https://ose.utoronto.ca/wp-content/uploads/Family-Care-Office-Report-April-2024.pdf"
+                }}
+                side="bottom"
+                width="w-80"
+                sideOffset="1"
+              />
+              {" "}worth of insights that needed to live inside a single WordPress page — with shareable URLs for each resource.
             </>,
           ]}
         />
 
-        <CaseStudyMediaBlock
-          type="video"
-          src="https://stream.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc.m3u8?min_resolution=1080p"
-          size="medium"
-          caption=""
-          thumbnail="https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0"
-        />
-
         <CaseStudyTextBlock
-          title="Designer-friendly code."
+          className="pb-64"
+          sectionHeading="The Challenge"
           text={[
             <>
-              Knowing that future Innovation Hub team members would be designers and researchers—not 
-              developers—I built the components using custom Beaver Builder blocks with encapsulated logic.
-              
-            </>,
-            <>
-              All designers had to do is drag and drop.
+              How do you build a site for people who can&apos;t write code? And how do you make <strong>one page feel like many pages?</strong>
             </>
           ]}
         />
 
-        <CaseStudyMediaBlock 
-          type="video"
-          src="/assets/videos/ihub/contained-logic.mp4"
-          size="medium"
-          caption="Saved components are not native to the builder, and must be pre-built"
-        />
-
-        <CaseStudyTextBlock
-          title="Responsive design"
-          text={[
-            <>
-              I defined responsive breakpoints with the designers, 
-              creating the design system and mobile prototypes in Figma. 
-              
-            </>,
-            <>
-              For mobile users, we focused on spacing because of the 
-              limited amount of space on a mobile device.
-            </>,
-            <>
-            As the developer, it was a challenge 
-            to convert static typescales with responsive ones.
-          </>,
-          ]}
-        />
-
-        <CaseStudyMediaBlock 
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/fbfb2ca718c25b149bd787e115df3d3daa067d90-3734x1800.png"
-          size="medium"
-          caption="Working on the &quot;Our Work&quot; page, designing responsively from the start."
-        />
-
-        {/* ============================================ */}
-        {/* PROJECT 2: FCO (Family Care Office) Project */}
-        {/* ============================================ */}
-        
-        {/* <CaseStudyTextBlock
-          sectionHeading="FCO Website"
-          title="Student parents face impossible choices every day."
-          text={[
-            <>At UofT, hundreds of students balance{" "}
-            <DefinitionCard
-              trigger="family responsibilities"
-              shimmerVariant="green"
-              triggerProps={{ onMouseEnter: playButtonHover }}
-              content={
-                <>
-                  <div className="mb-2">
-                    <strong>Student parents face unique barriers:</strong>
-                  </div>
-                  <div className="mb-2">
-                    • Finding childcare during evening events
-                  </div>
-                  <div className="mb-2">
-                    • Choosing between sick children and academic deadlines
-                  </div>
-                  <div className="mb-2">
-                    • Feeling isolated from campus communities
-                  </div>
-                  <div>
-                    • Worrying about being judged by peers and professors
-                  </div>
-                </>
-              }
-              side="bottom"
-              width="w-80"
-              sideOffset="1"
+        {/* ─── SOLUTIONS ─── */}
+        <div id="solutions">
+          <CaseStudySectionBlock
+            sectionHeading="Solutions"
+            className="py-16"
+            dark
+            textStates={[
+              {
+                title: "Encapsulated Beaver Builder blocks.",
+                description: "Custom blocks where all responsive logic lives inside the component itself — so designers drag, drop, and never touch code.",
+              },
+              {
+                title: "URL hash routing.",
+                description: "One WordPress page that behaves like many. Each resource gets its own shareable, bookmarkable URL — without leaving the page.",
+              },
+              {
+                title: "Three-layer documentation.",
+                description: "Technical docs, Figma annotations, and walkthrough videos — designed for a team that turns over every year.",
+              },
+            ]}
+          >
+            <CaseStudyMediaBlock
+              type="video"
+              src="https://stream.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc.m3u8?min_resolution=1080p"
+              thumbnail="https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0"
+              size="medium"
+              aspectRatio="video"
+              caption="iHub website — custom Beaver Builder blocks"
+              className="max-w-full pt-0 pb-4"
             />
-            {" "}with academic demands, often feeling like they must choose between being a good parent and being a good student.</>,
-            <>The Innovation Hub spent months listening to their stories. What they learned filled a 26-page report—rich with insights, but not easy for busy staff and faculty to use. My role was to transform this research into something practical: a web resource that could help professors, event organizers, and student leaders understand and support student parents across campus.</>,
-          ]}
-        /> */}
-
-        {/* <CaseStudyMediaBlock
-          type="video"
-          src="https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p"
-          aspectRatio="video"
-          caption=""
-          thumbnail="https://image.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8/thumbnail.png?width=1919&height=1080&time=0"
-        />
-
-        <CaseStudyMediaBlock
-          type="video"
-          src="https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p"
-          aspectRatio="video"
-          caption=""
-          thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
-        /> */}
-
-        {/* <CaseStudyTextBlock
-          title="When stakeholder needs collide with technical reality"
-          text={[
-            <>The Innovation Hub&apos;s research team spent months speaking with{" "}
-            <DefinitionCard
-              trigger="student parents at UofT"
-              shimmerVariant="green"
-              triggerProps={{ onMouseEnter: playButtonHover }}
-              content={
-                <>
-                  <div className="mb-2">
-                    <strong>Research Scope:</strong>
-                  </div>
-                  <div className="mb-2">
-                    • 31 student parents in 6 group sessions and 2 interviews
-                  </div>
-                  <div className="mb-2">
-                    • 12 participants in 3 co-creation sessions
-                  </div>
-                  <div className="mb-2">
-                    • 5 detailed personas developed
-                  </div>
-                  <div>
-                    • 10 design principles with 50+ implementation ideas
-                  </div>
-                </>
-              }
-              caption={{
-                text: "View full report (PDF)",
-                link: "https://ose.utoronto.ca/wp-content/uploads/Family-Care-Office-Report-April-2024.pdf"
-              }}
-              side="bottom"
-              width="w-80"
-              sideOffset="1"
+            <CaseStudyMediaBlock
+              type="video"
+              src="https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p"
+              thumbnail="https://image.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8/thumbnail.png?width=1919&height=1080&time=0"
+              size="medium"
+              aspectRatio="video"
+              caption="FCO Toolkit — URL hash routing"
+              className="max-w-full pt-0 pb-4"
             />
-            , uncovering how they navigate impossible choices between family responsibilities and academic demands. The findings were rich—but they lived in a 26-page report that staff and faculty wouldn&apos;t realistically engage with.</>,
-            <>The Family Care Office wanted to transform these insights into a practical toolkit. The design team created a beautiful multi-page experience with separate sections for personas, design principles, and implementation strategies—each needing its own shareable URL so the office could send targeted resources to specific stakeholders.</>,
-            <>But there was a problem: WordPress governance at UofT restricted the Family Care Office to a single page. No subpages, no additional URLs. The design vision and technical reality seemed fundamentally incompatible.</>,
-          ]}
-        />
-
-        <CaseStudyTextBlock
-          title="Client-side routing: Satisfying both design and technical constraints"
-          text={[
-            <>I realized we could achieve the design team&apos;s multi-resource experience while respecting the single-page constraint by implementing{" "}
-            <DefinitionCard
-              trigger="URL hash routing"
-              shimmerVariant="green"
-              triggerProps={{ onMouseEnter: playButtonHover }}
-              content={
-                <>
-                  <div className="mb-3">
-                    Using custom JavaScript, each resource dynamically updates the browser URL with a unique identifier:
-                  </div>
-                  <div className="mb-2 font-mono text-sm opacity-80">
-                    FCO.ca/toolkit#curate-connections
-                  </div>
-                  <div className="mb-2 font-mono text-sm opacity-80">
-                    FCO.ca/toolkit#foster-flexibility
-                  </div>
-                  <div className="mb-3 font-mono text-sm opacity-80">
-                    FCO.ca/toolkit#valeri-persona
-                  </div>
-                  <div>
-                    WordPress sees one page. Users experience many. Each resource gets a shareable link for targeted communication—exactly what stakeholders needed.
-                  </div>
-                </>
-              }
-              side="bottom"
-              width="w-96"
-              sideOffset="1"
+            <CaseStudyMediaBlock
+              type="image"
+              src="https://cdn.sanity.io/images/iy4m4myd/production/f5f3ef414e484fe39ef0afc5b469cda62bee787a-3734x1800.png"
+              size="medium"
+              caption="Three-layer documentation system"
+              className="max-w-full pt-0 pb-4"
             />
-            . When users navigate between resources, the URL updates automatically to reflect their current location—giving every resource a unique, shareable link.</>,
-            <>This approach satisfied everyone: the design team got their multi-resource experience with individual URLs, the Family Care Office stayed within WordPress governance, and stakeholders could bookmark and share specific personas or principles with their teams. As a bonus, the single-page architecture meant no page reloads—creating a smoother user experience than a traditional multi-page site.</>,
-            <><strong>[YOUR INPUT NEEDED: Did you consider alternative technical approaches? Why was URL hash routing the best choice? Add 1-2 sentences about the decision-making process or trade-offs considered.]</strong></>,
-          ]}
-        /> */}
+          </CaseStudySectionBlock>
+        </div>
 
-        {/* ============================================
-        {/* PROJECT 3: Designing for Handoff */}
-        {/* ============================================ */}
-        
-{/* 
-        <CaseStudyTextBlock
-          sectionHeading="Technical Documentation"
-          title="Three-layer documentation system for long-term sustainability"
-          text={[
-            <>Creating the toolkit was only half the challenge. The other half was ensuring that{" "}
-            <DefinitionCard
-              trigger="future team members"
-              shimmerVariant="green"
-              triggerProps={{ onMouseEnter: playButtonHover }}
-              content={
-                <>
-                  Innovation Hub team members rotate annually. Future designers and researchers would need to maintain and update the toolkit without my technical expertise. This meant documentation couldn&apos;t just explain <i>what</i> I built—it needed to teach <i>how</i> to use and maintain it.
-                </>
-              }
-              side="bottom"
-              width="w-80"
-              sideOffset="1"
+        {/* ─── DISCOVERY ─── */}
+        <div id="discovery" className="flex flex-col gutter-sm">
+          <CaseStudyTextBlock
+            className="pt-64"
+            sectionHeading="Discovery"
+            title="I came as an intern. I became the web tech SME."
+            text={[
+              <>
+                I joined the iHub design team as a product design intern, but quickly became the subject matter expert for their web tech stack — representing technical feasibility in design sprints and translating designer intentions into working code.
+              </>,
+              <>
+                To make good decisions, I needed to understand what the{" "}
+                <DefinitionCard
+                  trigger="builder could and couldn't do"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-2">
+                        <strong>Native Beaver Builder limits:</strong>
+                      </div>
+                      <div className="mb-2">• No custom responsive breakpoints</div>
+                      <div className="mb-2">• No encapsulated widget logic — all state is global</div>
+                      <div className="mb-2">• Typography doesn&apos;t scale fluidly with viewport</div>
+                      <div>• No URL-based navigation within a single page</div>
+                    </>
+                  }
+                  side="bottom"
+                  width="w-80"
+                  sideOffset="1"
+                />
+                {" "}— and what gaps I needed to fill with custom code.
+              </>,
+              <>
+                On the FCO side, the research team had spent{" "}
+                <DefinitionCard
+                  trigger="months of fieldwork with student parents"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-2">
+                        <strong>Research scope:</strong>
+                      </div>
+                      <div className="mb-2">• 31 student parents across 6 group sessions + 2 interviews</div>
+                      <div className="mb-2">• 12 participants in 3 co-creation sessions</div>
+                      <div className="mb-2">• 5 detailed personas developed</div>
+                      <div>• 10 design principles, 50+ implementation ideas</div>
+                    </>
+                  }
+                  side="bottom"
+                  width="w-80"
+                  sideOffset="1"
+                />
+                {" "}gathering insights that needed to reach busy staff and faculty — not sit in a PDF.
+              </>,
+            ]}
+          />
+          <CaseStudyMediaBlock
+            type="image"
+            src="https://cdn.sanity.io/images/iy4m4myd/production/06f5335aa8fe0b070994ddf56c66c3b44414bce2-3200x1800.png"
+            size="medium"
+            className="pt-0 pb-4"
+          />
+        </div>
+
+        {/* ─── IHUB WEBSITE ─── */}
+        <div id="ihub-website" className="flex flex-col gutter-base">
+          <CaseStudyTextBlock
+            sectionHeading="iHub Website"
+            title="Encapsulated logic for a system that limits design."
+            text={[
+              <>
+                Beaver Builder widgets are stateless by default — every style decision has to be re-made each time a designer drops one in. I built custom blocks where{" "}
+                <DefinitionCard
+                  trigger="all logic is self-contained"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-2">
+                        <strong>What &ldquo;encapsulated&rdquo; means in practice:</strong>
+                      </div>
+                      <div className="mb-2">
+                        Each block carries its own responsive rules, typographic scale, and spacing — no external config required.
+                      </div>
+                      <div>
+                        A designer drops the block in, fills in the content fields, and the output is pixel-perfect on every screen size. No dev request needed.
+                      </div>
+                    </>
+                  }
+                  side="bottom"
+                  width="w-80"
+                  sideOffset="1"
+                />
+                : drag, fill, done. No developer requests, no broken layouts on mobile.
+              </>,
+            ]}
+          />
+          <CaseStudyMediaBlock
+            type="video"
+            src="/assets/videos/ihub/contained-logic.mp4"
+            size="medium"
+            caption="Saved components are not native to the builder — they must be pre-built with encapsulated logic"
+            className="pt-0 pb-4"
+          />
+
+          <CaseStudyTextBlock
+            title="Defining responsive design."
+            text={[
+              <>
+                I partnered with the design team to define responsive breakpoints and built the mobile-first prototypes in Figma — then translated static type scales into fluid ones using{" "}
+                <DefinitionCard
+                  trigger="responsive breakpoints"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-2">
+                        <strong>Fluid typography in Beaver Builder:</strong>
+                      </div>
+                      <div className="mb-2">
+                        Static px values break on edge-case viewport widths. I replaced them with <code className="text-small bg-black/10 px-1 rounded">clamp()</code> values that scale smoothly between mobile and desktop.
+                      </div>
+                      <div>
+                        Example: <code className="text-small bg-black/10 px-1 rounded">clamp(1rem, 2.5vw, 1.5rem)</code> — scales from 16px to 24px across the viewport range.
+                      </div>
+                    </>
+                  }
+                  side="bottom"
+                  width="w-80"
+                  sideOffset="1"
+                />
+                {" "}with <code className="text-small">clamp()</code>-based type that scales smoothly across all screen widths.
+              </>,
+            ]}
+          />
+          <CaseStudyMediaBlock
+            type="image"
+            src="https://cdn.sanity.io/images/iy4m4myd/production/fbfb2ca718c25b149bd787e115df3d3daa067d90-3734x1800.png"
+            size="medium"
+            caption="Working on the &ldquo;Our Work&rdquo; page — designing responsively from the start"
+            className="pt-0 pb-4"
+          />
+        </div>
+
+        {/* ─── FCO TOOLKIT ─── */}
+        <div id="fco-toolkit" className="flex flex-col gutter-base">
+          <CaseStudyTextBlock
+            sectionHeading="FCO Toolkit"
+            title="A 26-page report. One WordPress page. Many stakeholders."
+            text={[
+              <>
+                The Family Care Office wanted to turn a rich research report into a practical web toolkit — with separate resources for personas, design principles, and implementation strategies, each with its own{" "}
+                <DefinitionCard
+                  trigger="shareable URL"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-2">
+                        <strong>Why individual URLs matter:</strong>
+                      </div>
+                      <div className="mb-2">
+                        The FCO needed to send targeted resources to specific stakeholders — e.g., a specific persona to a professor, a design principle to an event organizer.
+                      </div>
+                      <div>
+                        Without unique URLs, they&apos;d have to say &ldquo;go to the page, then scroll to find it.&rdquo; With URLs, they paste a link and it opens exactly right.
+                      </div>
+                    </>
+                  }
+                  side="bottom"
+                  width="w-80"
+                  sideOffset="1"
+                />
+                {" "}so they could send targeted resources to specific audiences.
+              </>,
+              <>
+                But WordPress governance restricted them to a single page. The design vision and the technical constraint seemed incompatible.
+              </>,
+            ]}
+          />
+
+          <CaseStudyTextBlock
+            title="WordPress sees one page. Users experience many."
+            text={[
+              <>
+                I implemented{" "}
+                <DefinitionCard
+                  trigger="URL hash routing"
+                  shimmerVariant="brown"
+                  triggerProps={{ onMouseEnter: playButtonHover }}
+                  content={
+                    <>
+                      <div className="mb-3">
+                        Custom JavaScript updates the browser URL as users navigate between resources:
+                      </div>
+                      <div className="mb-2 font-mono text-small opacity-80">
+                        FCO.ca/toolkit#curate-connections
+                      </div>
+                      <div className="mb-2 font-mono text-small opacity-80">
+                        FCO.ca/toolkit#foster-flexibility
+                      </div>
+                      <div className="mb-3 font-mono text-small opacity-80">
+                        FCO.ca/toolkit#valeri-persona
+                      </div>
+                      <div>
+                        WordPress sees one page. Users experience many. Each resource gets a shareable link — no page reloads, no broken governance rules.
+                      </div>
+                    </>
+                  }
+                  side="bottom"
+                  width="w-96"
+                  sideOffset="1"
+                />
+                {" "}using custom JavaScript. When a user navigates to a persona or design principle, the URL updates to reflect exactly where they are — giving every resource a shareable, bookmarkable link without violating the single-page constraint.
+              </>,
+              <>
+                As a bonus: no page reloads means a faster, smoother experience than a traditional multi-page site.
+              </>,
+            ]}
+          />
+          <CaseStudyMediaBlock
+            type="video"
+            src="https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p"
+            thumbnail="https://image.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8/thumbnail.png?width=1919&height=1080&time=0"
+            size="medium"
+            caption="FCO Toolkit — navigating between resources"
+            className="pt-0 pb-4"
+          />
+          <CaseStudyMediaBlock
+            type="video"
+            src="https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p"
+            thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
+            size="medium"
+            caption="FCO Toolkit — persona deep-links"
+            className="pt-0 pb-4"
+          />
+        </div>
+
+        {/* ─── ITERATIONS ─── */}
+        <div id="iterations" className="flex flex-col gap-24">
+          <CaseStudySectionBlockFixed
+            sectionHeading="Iterations"
+            title="Component Adoption"
+            description={[
+              "After the initial handoff, team members were still filing dev requests for changes they could make themselves — they didn't know the blocks were configurable.",
+              <div key="quote-1" className="flex flex-col">
+                <blockquote className="border-l-2 border-[#427067] pl-4 my-1">
+                  <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;I didn&apos;t realize I could do that myself.&rdquo;</p>
+                </blockquote>
+              </div>,
+              "So I added walkthrough videos to the documentation — short screen recordings showing exactly how to edit each block type. Dev requests dropped to near zero.",
+            ]}
+          >
+            <CaseStudyMediaBlock
+              type="image"
+              src="https://cdn.sanity.io/images/iy4m4myd/production/a7ab016e4654b5542e78ca836736d578c15ea19b-3734x1800.png"
+              size="medium"
+              className="pt-0!"
             />
-            {" "}could maintain and update it without my technical background.</>,
-            <>I designed a three-layer documentation system: <strong>(1) Technical documentation</strong> for developers who might extend the system, <strong>(2) Visual documentation in Figma</strong> with annotated screenshots for common tasks and troubleshooting, and <strong>(3) Walkthrough videos</strong> demonstrating complete workflows with voiceover explaining the reasoning behind each step.</>,
-            <>I also contributed all custom components to Innovation Hub&apos;s internal design system, with usage guidelines and code patterns that could be reused across future projects. This project taught me that documentation is a design challenge—you&apos;re designing for future users you&apos;ll never meet.</>,
-          ]}
-        />  */}
+          </CaseStudySectionBlockFixed>
 
+          <CaseStudySectionBlockFixed
+            title="Responsive Typography"
+            description={[
+              "During review, designers flagged that type sizes felt off on tablet — correct on desktop and mobile, but awkward in between.",
+              <div key="quote-2" className="flex flex-col">
+                <blockquote className="border-l-2 border-[#427067] pl-4 my-1">
+                  <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;The sizes look right on desktop but something feels off on iPad.&rdquo;</p>
+                </blockquote>
+              </div>,
+              "I replaced the two-breakpoint step function with clamp()-based fluid typography that scales continuously across the full viewport range. I also added a Figma annotation layer so designers could see the live range at any width.",
+            ]}
+          >
+            <CaseStudyMediaBlock
+              type="image"
+              src="https://cdn.sanity.io/images/iy4m4myd/production/fbfb2ca718c25b149bd787e115df3d3daa067d90-3734x1800.png"
+              size="medium"
+              className="pt-0!"
+            />
+          </CaseStudySectionBlockFixed>
 
+          <CaseStudySectionBlockFixed
+            title="FCO Navigation"
+            description={[
+              "In usability sessions, users navigated into a persona or principle but lost track of where they were relative to the rest of the toolkit.",
+              <div key="quote-3" className="flex flex-col">
+                <blockquote className="border-l-2 border-[#427067] pl-4 my-1">
+                  <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;I found the persona I wanted, but I&apos;m not sure how to get back to the main list.&rdquo;</p>
+                </blockquote>
+              </div>,
+              "I added a persistent breadcrumb that updates in sync with the URL hash — always showing the current section and linking back to the top-level view. Users always knew where they were and how to get back.",
+            ]}
+          >
+            <CaseStudyMediaBlock
+              type="video"
+              src="https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p"
+              thumbnail="https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0"
+              size="medium"
+              className="pt-0!"
+            />
+          </CaseStudySectionBlockFixed>
+        </div>
+
+        {/* ─── FINAL DESIGNS ─── */}
+        <div id="final-designs">
+          <CaseStudyHighlightsBlock
+            sectionHeading="Final Designs"
+            title="Systems built to last"
+            description={[
+              <span key={1}>Custom Beaver Builder blocks let designers make site changes <strong>without filing a developer request</strong>. URL hash routing gave the FCO Toolkit <strong>shareable, bookmarkable resources</strong> within a single WordPress page. Three-layer documentation ensures the systems survive <strong>annual team turnover</strong>.</span>
+            ]}
+            videos={[
+              {
+                src: "https://stream.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc.m3u8?min_resolution=1080p",
+                thumbnail: "https://image.mux.com/bPIec3TV01aK6WZfXShcT02300f1tcio6003DIDC7ZrcTRc/thumbnail.png?width=1919&height=1080&time=0",
+                caption: "iHub website — custom blocks"
+              },
+              {
+                src: "https://stream.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8.m3u8?min_resolution=1080p",
+                thumbnail: "https://image.mux.com/WnDKo02gp2bjmvqa9DZ8brJMWLDJWB1Y01n9PLf02wRDk8/thumbnail.png?width=1919&height=1080&time=0",
+                caption: "FCO Toolkit — hash routing"
+              },
+              {
+                src: "https://stream.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY.m3u8?min_resolution=1080p",
+                thumbnail: "https://image.mux.com/UHLgTU7Nm3IOBwVuX2w8diEX6wU8GNVSmj8kYnYFVwY/thumbnail.png?width=1919&height=1080&time=0",
+                caption: "FCO Toolkit — deep-links"
+              },
+            ]}
+          />
+        </div>
+
+        {/* ─── CLOSING ─── */}
         <CaseStudyTextBlock
-          id="technical-docs"
-          sectionHeading="Technical Documentation"
-          title="Future-proofing with visuals"
-          text={[ 
-            <>
-              In discussions with the design team, we found that documentation works best when paired with walkthrough visuals.
-            </>,
-            <>
-            By incorporating visuals in our documentation, designers are able to resolve common issues and make changes to any custom component without the technical expertise.
-          </>,
-          ]}
-        />
-        <CaseStudyMediaBlock
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/f5f3ef414e484fe39ef0afc5b469cda62bee787a-3734x1800.png"
-          size="medium"
-        />
-
-        <CaseStudyMediaBlock
-          type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/a7ab016e4654b5542e78ca836736d578c15ea19b-3734x1800.png"
-          size="medium"
-          caption=""
-        />
-
-{/* 
-        <CaseStudyTextBlock
-          sectionHeading="Outcomes"
-          title="What this project taught me"
+          id="closing"
+          sectionHeading="Closing"
+          title="Final thoughts and learnings"
           text={[
             <div key="constraints" className="flex flex-col mb-2">
-              <strong>Constraints can be creative catalysts</strong>
-              <span className="text-[#2C4E47]">When I first learned about the single-page limitation, I saw it as a frustrating obstacle. But working through the constraint led to a solution (URL hash routing) that actually improved the user experience with seamless transitions between resources. This project taught me to view technical constraints as design opportunities, not just problems to solve.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Constraints Are Creative Catalysts</strong>
+              <span className="text-p text-400 text-(--text-color-80)">The single-page limitation felt like a blocker — but working through it produced a solution that was <strong className="text-600">better than a multi-page site</strong>: faster transitions, no reloads, and clean shareable URLs. The constraint pointed to the right answer.</span>
             </div>,
             <div key="technical" className="flex flex-col mb-2">
-              <strong>Technical knowledge expands design possibilities</strong>
-              <span className="text-[#2C4E47]">My background in web development helped me see a solution that a designer-only team might not have considered. But more importantly, understanding technical possibilities early in the design process meant I could propose solutions that were both user-friendly and technically feasible—rather than designing ideal experiences and hoping they could be built.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Technical Knowledge Expands Design Possibilities</strong>
+              <span className="text-p text-400 text-(--text-color-80)">Knowing what Beaver Builder <em>couldn&apos;t</em> do let me propose solutions early in the design process — not as a developer handing back a revised spec, but as a collaborator who <strong className="text-600">shaped the design from the start</strong>.</span>
             </div>,
             <div key="sustainability" className="flex flex-col mb-2">
-              <strong>Sustainability requires intentional design</strong>
-              <span className="text-[#2C4E47]">Before this project, I thought of documentation as an afterthought—something you do when the &quot;real work&quot; is finished. But designing for handoff taught me that creating maintainable systems is just as important as the initial build. The three-layer documentation approach, custom WordPress blocks, and design system contributions were all intentional design decisions aimed at future maintainers—they were part of the project&apos;s core value, not extra tasks.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Sustainability Requires Intentional Design</strong>
+              <span className="text-p text-400 text-(--text-color-80)">Documentation isn&apos;t an afterthought. The three-layer system — technical docs, Figma annotations, walkthrough videos — was designed for the next designer I&apos;ll never meet. <strong className="text-600">Handoff is part of the design.</strong></span>
             </div>,
             <div key="research" className="flex flex-col mb-2">
-              <strong>Research translation is design work</strong>
-              <span className="text-[#2C4E47]">Converting a 26-page research report into a web experience required design decisions at every level: information architecture, content hierarchy, navigation patterns, and interaction design. I learned that &quot;putting content online&quot; is actually a sophisticated design challenge—it&apos;s about understanding user intent, creating intuitive pathways through information, and making complex insights actionable.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Research Translation Is Design Work</strong>
+              <span className="text-p text-400 text-(--text-color-80)">Converting a 26-page report into a navigable web resource required every design skill I had: information architecture, content hierarchy, interaction design, and performance. <strong className="text-600">&ldquo;Putting content online&rdquo; is never just putting content online.</strong></span>
             </div>,
-          />
-          ]} */}
-
-        <CaseStudyTextBlock
-          text="This case study is currently a work in progress. Reach out if you're curious about it :)"
+          ]}
         />
 
-
-        {/* Navigation to Next Project - Inside Case Study Section */}
+        {/* Navigation to Next Project */}
         {nextProject && (
           <div className="max-w-lg mx-auto text-center pt-16">
             <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>

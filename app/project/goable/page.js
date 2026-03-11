@@ -429,14 +429,15 @@ export default function ProjectPage() {
               <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;I don&apos;t know how many of these I should be toggling.&rdquo;</p>
             </blockquote>
           </div>,
-          "So I cut the least-used filters entirely. The ones that remained are the ones that actually differentiate washrooms for our users. Fewer options, faster decisions, less second-guessing.",
+          <span key="filter-reduction-conclusion"><strong>So I cut the least-used filters entirely.</strong> The ones that remained are the ones that actually differentiate washrooms for our users.</span>,
         ]}
       >
         <CaseStudyMediaBlock
           type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/414c95bfd0b674f67fff9f211a09ebec86c64450-3734x1800.png"
-          size="medium"
-          className="pt-0!"
+          // src="https://cdn.sanity.io/images/iy4m4myd/production/414c95bfd0b674f67fff9f211a09ebec86c64450-3734x1800.png"
+          src="/assets/images/goAble/Before&After_Onboarding_new.png"
+          size="large"
+          className="pt-0! bg-none"
         />
       </CaseStudySectionBlockFixed>
 
@@ -449,13 +450,14 @@ export default function ProjectPage() {
               <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;I don&apos;t know what I&apos;m supposed to be reading first.&rdquo;</p>
             </blockquote>
           </div>,
-          "Restructured the information hierarchy \u2014 decision-critical details lead, community reports sit behind a clearly labeled tab. Removed the \u201cGreat\u201d label entirely \u2014 it added visual weight without helping anyone decide anything.",
+          <span key="progressive-disclosure-conclusion"><strong>So I put the most important stuff at the front.</strong> Relevant amenity offerings are displayed first, then community reports sit behind a clearly labeled tab. Removed the rating label as users called it visual noise.</span>,
         ]}
       >
         <CaseStudyMediaBlock
           type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/fad969c057cb189a0fa9c45824ece8ffb6eda3c0-3734x1800.png"
-          size="medium"
+          // src="https://cdn.sanity.io/images/iy4m4myd/production/fad969c057cb189a0fa9c45824ece8ffb6eda3c0-3734x1800.png"
+          src="/assets/images/goAble/Before&Information_Page_New.png"
+          size="large"
           className="pt-0!"
         />
       </CaseStudySectionBlockFixed>
@@ -469,13 +471,14 @@ export default function ProjectPage() {
               <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;It looks good but I don&apos;t really think I would leave a review that often.&rdquo;</p>
             </blockquote>
           </div>,
-          "Stopped trying to incentivize reviews and focused on reducing the cost of leaving one. Quick-select options, pre-loaded responses, three taps to submit or skip. The bar for contributing had to be lower than the bar for ignoring it.",
+          <span key="Frictionless-review-conclusion">So I stopped trying to incentivize reviews and <strong>focused on reducing the cost of leaving one</strong>. Quick-select options and pre-loaded responses designed lower the bar to report than the bar for ignoring it.</span>,
         ]}
       >
         <CaseStudyMediaBlock
           type="image"
-          src="https://cdn.sanity.io/images/iy4m4myd/production/88f3523caf9f1931a3d7f82dda374a137b6963a3-3734x1800.png"
-          size="medium"
+          // src="https://cdn.sanity.io/images/iy4m4myd/production/88f3523caf9f1931a3d7f82dda374a137b6963a3-3734x1800.png"
+          src="/assets/images/goAble/Before&After_Reviews_new.png"
+          size="large"
           className="pt-0!"
         />
       </CaseStudySectionBlockFixed>

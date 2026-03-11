@@ -112,7 +112,7 @@ export default function CaseStudyMediaBlock({
     },
     large: {
       maxWidth: "max-w-[1664px]",      // Current width
-      aspectRatio: null,               // Use aspectRatio prop
+      aspectRatio: "1867/1194",               // Use aspectRatio prop
       innerMargin: "px-4 md:px-8",     // Responsive padding (16px mobile, 32px desktop)
     },
   };
@@ -495,7 +495,8 @@ export default function CaseStudyMediaBlock({
                       fill
                       priority={priority}
                       sizes={imageSizes}
-                      className="object-cover"
+                      draggable={false}
+                      className="object-cover select-none"
                     />
                   </div>
                 )}
@@ -529,7 +530,8 @@ export default function CaseStudyMediaBlock({
                 fill
                 priority={priority}
                 sizes={imageSizes}
-                className="object-cover"
+                draggable={false}
+                className="object-cover select-none"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
