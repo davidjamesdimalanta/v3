@@ -99,7 +99,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
   if (sections.length === 0) return null;
 
   return (
-    <nav className="sticky top-0 z-60 w-full backdrop-blur-xl bg-[#EDECEA] border-b border-[#D5CFC6] hidden lg:block">
+    <nav className="sticky top-0 z-60 w-full border-b border-[#D5CFC6] hidden lg:block" style={{ backgroundColor: 'rgba(237, 236, 234, 0.72)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
       <div className="mx-auto px-4 md:px-8 py-4">
         <ul className="flex flex-wrap justify-center items-center gap-6">
           {sections.map(({ id, heading }) => (

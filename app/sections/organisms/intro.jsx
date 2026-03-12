@@ -8,7 +8,7 @@ export default function Intro() {
     <div className="w-full flex flex-col gutter-md">
         <div className="grid grid-cols-1 md:grid-cols-4 gutter-sm md:gutter-base lg:gutter-base w-full">
             <span className="text-h2 text-500 md:text-h2 lg:text-h1 md:col-span-4">
-                I design products. I ship them too.
+                I design products. i build them too.
             </span>
             <div className="col-span-2">
                 <Closing />

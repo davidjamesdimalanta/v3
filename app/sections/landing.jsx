@@ -17,7 +17,7 @@ export default function Landing() {
         {prefersReducedMotion ? (
           <>
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              I design products. I ship them too.
+              I design products. i build them too.
             </span>
             <div className="md:w-1/2">
               <Closing />
@@ -39,7 +39,7 @@ export default function Landing() {
             }}
           >
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              I design products. I ship them too.
+              I design products. i build them too.
             </span>
             <div className="md:w-1/2">
               <Closing />
