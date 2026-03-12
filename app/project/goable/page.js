@@ -292,7 +292,8 @@ export default function ProjectPage() {
       </div>
 
 
-      <div id="initial-designs" className="flex flex-col gutter-base">
+      <div id="initial-designs" className="flex flex-col gutter-lg bg-[#C4D3CF] py-16">
+      <div className="flex flex-col gutter-base">
         <CaseStudyTextBlock
           sectionHeading="Initial Designs"
           title="Personalizing the search"
@@ -413,8 +414,9 @@ export default function ProjectPage() {
           type="video"
           src="/assets/videos/goAble/review-prototype.webm"
           size="small"
-          className="pt-0! pb-8 lg:pb-48"
+          className="pt-0!"
         />
+      </div>
       </div>
 
       {/* Iterations — three-part evidence structure (what happened → quote → what changed). */}
