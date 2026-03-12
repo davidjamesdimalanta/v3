@@ -273,116 +273,122 @@ export default function ProjectPage() {
         </div>
 
         {/* ─── INITIAL DESIGNS ─── */}
-        <div id="initial-designs" className="flex flex-col gutter-base">
-          <CaseStudyTextBlock
-            sectionHeading="Initial Designs"
-            title="Questions, not answers."
-            text={[
-              <>
-                The core of Socratic.ai is a{" "}
-                <DefinitionCard
-                  trigger="Socratic questioning model"
-                  shimmerVariant="brown"
-                  triggerProps={{ onMouseEnter: playButtonHover }}
-                  content={
-                    <>
-                      <div className="mb-2">
-                        <strong>How Socratic questioning works for essays:</strong>
-                      </div>
-                      <div className="mb-2">Instead of asking &ldquo;write me an essay about X,&rdquo; the AI asks: &ldquo;What specifically changed for you because of that experience?&rdquo;</div>
-                      <div className="mb-2">Each question surfaces a layer of the writer&apos;s authentic voice that a generic prompt would smooth over.</div>
-                      <div>The essay that emerges is genuinely the writer&apos;s — the AI shaped the thinking process, not the output.</div>
-                    </>
-                  }
-                  side="bottom"
-                  width="w-90"
-                  sideOffset="1"
-                />
-                : instead of writing for users, the AI asks targeted questions that help them articulate what&apos;s already there. The output is authentically theirs because the thinking was theirs.
-              </>,
-            ]}
-          />
-          <CaseStudyMediaBlock
-            type="video"
-            src="https://stream.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo.m3u8?min_resolution=1080p"
-            thumbnail="https://image.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo/thumbnail.png?width=1919&height=1080&time=0"
-            size="small"
-            aspectRatio="video"
-            caption="Socratic questioning in action"
-            className="pt-0 pb-4"
-          />
+        <div id="initial-designs" className="flex flex-col gutter-lg">
+          <div className="flex flex-col">
+            <CaseStudyTextBlock
+              sectionHeading="Initial Designs"
+              title="Questions, not answers."
+              text={[
+                <>
+                  The core of Socratic.ai is a{" "}
+                  <DefinitionCard
+                    trigger="Socratic questioning model"
+                    shimmerVariant="brown"
+                    triggerProps={{ onMouseEnter: playButtonHover }}
+                    content={
+                      <>
+                        <div className="mb-2">
+                          <strong>How Socratic questioning works for essays:</strong>
+                        </div>
+                        <div className="mb-2">Instead of asking &ldquo;write me an essay about X,&rdquo; the AI asks: &ldquo;What specifically changed for you because of that experience?&rdquo;</div>
+                        <div className="mb-2">Each question surfaces a layer of the writer&apos;s authentic voice that a generic prompt would smooth over.</div>
+                        <div>The essay that emerges is genuinely the writer&apos;s — the AI shaped the thinking process, not the output.</div>
+                      </>
+                    }
+                    side="bottom"
+                    width="w-90"
+                    sideOffset="1"
+                  />
+                  : instead of writing for users, the AI asks targeted questions that help them articulate what&apos;s already there. The output is authentically theirs because the thinking was theirs.
+                </>,
+              ]}
+            />
+            <CaseStudyMediaBlock
+              type="video"
+              src="https://stream.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo.m3u8?min_resolution=1080p"
+              thumbnail="https://image.mux.com/PDr5r6Fw2mYePBA9MtNNP02nkfb3mqSz3bOYFjEQDjwo/thumbnail.png?width=1919&height=1080&time=0"
+              size="small"
+              aspectRatio="video"
+              caption="Socratic questioning in action"
+              className="pt-0 pb-4"
+            />
+          </div>
 
-          <CaseStudyTextBlock
-            title="From thread to canvas."
-            text={[
-              <>
-                We replaced the chat thread with a{" "}
-                <DefinitionCard
-                  trigger="vector canvas"
-                  shimmerVariant="brown"
-                  triggerProps={{ onMouseEnter: playButtonHover }}
-                  content={
-                    <>
-                      <div className="mb-2">
-                        <i>What a canvas affords that a thread doesn&apos;t:</i>
-                      </div>
-                      <div className="mb-2"><strong>Place</strong>: Put ideas where they belong, not where they arrived</div>
-                      <div className="mb-2"><strong>Compare</strong>: Hold two drafts side by side at the same time</div>
-                      <div className="mb-2"><strong>Group</strong>: Cluster related ideas spatially</div>
-                      <div><strong>Navigate</strong>: Zoom out to see the whole, zoom in to edit a part</div>
-                    </>
-                  }
-                  side="bottom"
-                  width="w-90"
-                  sideOffset="1"
-                />
-                {" "}that lets users place, compare, group, and navigate their ideas the way writing actually works — non-linearly, spatially, iteratively.
-              </>,
-            ]}
-          />
-          <CaseStudyMediaBlock
-            type="image"
-            src="https://cdn.sanity.io/images/iy4m4myd/production/9b61285d1d9d73ac27dc06a4db2f4912b91b7c39-1803x983.png"
-            size="small"
-            caption="Canvas interface — spatial organization of AI insights and drafts"
-            className="pt-0 pb-4"
-          />
+          <div className="flex flex-col">
+            <CaseStudyTextBlock
+              title="From thread to canvas."
+              text={[
+                <>
+                  We replaced the chat thread with a{" "}
+                  <DefinitionCard
+                    trigger="vector canvas"
+                    shimmerVariant="brown"
+                    triggerProps={{ onMouseEnter: playButtonHover }}
+                    content={
+                      <>
+                        <div className="mb-2">
+                          <i>What a canvas affords that a thread doesn&apos;t:</i>
+                        </div>
+                        <div className="mb-2"><strong>Place</strong>: Put ideas where they belong, not where they arrived</div>
+                        <div className="mb-2"><strong>Compare</strong>: Hold two drafts side by side at the same time</div>
+                        <div className="mb-2"><strong>Group</strong>: Cluster related ideas spatially</div>
+                        <div><strong>Navigate</strong>: Zoom out to see the whole, zoom in to edit a part</div>
+                      </>
+                    }
+                    side="bottom"
+                    width="w-90"
+                    sideOffset="1"
+                  />
+                  {" "}that lets users place, compare, group, and navigate their ideas the way writing actually works — non-linearly, spatially, iteratively.
+                </>,
+              ]}
+            />
+            <CaseStudyMediaBlock
+              type="image"
+              src="https://cdn.sanity.io/images/iy4m4myd/production/9b61285d1d9d73ac27dc06a4db2f4912b91b7c39-1803x983.png"
+              size="small"
+              caption="Canvas interface — spatial organization of AI insights and drafts"
+              className="pt-0 pb-4"
+            />
+          </div>
 
-          <CaseStudyTextBlock
-            title="Surfacing what the prompt doesn't say."
-            text={[
-              <>
-                Scholarship prompts are designed to be open-ended — but{" "}
-                <DefinitionCard
-                  trigger="winning scholarship essays"
-                  shimmerVariant="brown"
-                  triggerProps={{ onMouseEnter: playButtonHover }}
-                  content={
-                    <>
-                      <div className="mb-2">
-                        <strong>What strong scholarship essays signal:</strong>
-                      </div>
-                      <div className="mb-2">• Specific, concrete detail — not abstract claims about character</div>
-                      <div className="mb-2">• A clear through-line connecting experience to impact to future direction</div>
-                      <div className="mb-2">• Evidence of reflection, not just recounting</div>
-                      <div>• Alignment with the committee&apos;s stated values — often buried in the mission statement, not the prompt</div>
-                    </>
-                  }
-                  side="bottom"
-                  width="w-90"
-                  sideOffset="1"
-                />
-                {" "}carry hidden criteria that committees never write down. Socratic.ai surfaces those criteria during the questioning process — so users write toward them without being told what to say.
-              </>,
-            ]}
-          />
-          <CaseStudyMediaBlock
-            type="image"
-            src="https://cdn.sanity.io/images/iy4m4myd/production/fb22b5dad342c2282ecb24dc8a93b72720928a2b-1980x1080.png"
-            size="small"
-            caption="Hidden criteria surfaced from the scholarship prompt"
-            className="pt-0 pb-4"
-          />
+          <div className="flex flex-col">
+            <CaseStudyTextBlock
+              title="Surfacing what the prompt doesn't say."
+              text={[
+                <>
+                  Scholarship prompts are designed to be open-ended — but{" "}
+                  <DefinitionCard
+                    trigger="winning scholarship essays"
+                    shimmerVariant="brown"
+                    triggerProps={{ onMouseEnter: playButtonHover }}
+                    content={
+                      <>
+                        <div className="mb-2">
+                          <strong>What strong scholarship essays signal:</strong>
+                        </div>
+                        <div className="mb-2">• Specific, concrete detail — not abstract claims about character</div>
+                        <div className="mb-2">• A clear through-line connecting experience to impact to future direction</div>
+                        <div className="mb-2">• Evidence of reflection, not just recounting</div>
+                        <div>• Alignment with the committee&apos;s stated values — often buried in the mission statement, not the prompt</div>
+                      </>
+                    }
+                    side="bottom"
+                    width="w-90"
+                    sideOffset="1"
+                  />
+                  {" "}carry hidden criteria that committees never write down. Socratic.ai surfaces those criteria during the questioning process — so users write toward them without being told what to say.
+                </>,
+              ]}
+            />
+            <CaseStudyMediaBlock
+              type="image"
+              src="https://cdn.sanity.io/images/iy4m4myd/production/fb22b5dad342c2282ecb24dc8a93b72720928a2b-1980x1080.png"
+              size="small"
+              caption="Hidden criteria surfaced from the scholarship prompt"
+              className="pt-0 pb-4"
+            />
+          </div>
         </div>
 
         {/* ─── PM PROCESS ─── */}
