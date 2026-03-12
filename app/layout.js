@@ -32,9 +32,12 @@ export const metadata = {
     images: ['/assets/images/web-preview/preview_.png'],
   },
   icons: {
-    icon: '/assets/icon/tabicon.png',
-    shortcut: '/assets/icon/tabicon.png',
-    apple: '/assets/icon/tabicon.png',
+    icon: [
+      { url: '/assets/icon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/assets/icon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: '/assets/icon/favicon-32x32.png',
+    apple: '/assets/icon/apple-touch-icon.png',
   },
   appleWebApp: {
     capable: true,
