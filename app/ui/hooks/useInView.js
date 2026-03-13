@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from 'react';
  * @param {string} options.rootMargin - Root margin for early/late triggering
  * @param {boolean} options.once - If true, stays in view after first intersection (default: true)
  */
-export function useInView({ threshold = 0.1, rootMargin = '0px', once = true } = {}) {
+export function useInView({ threshold = 1.0, rootMargin = '0px', once = true } = {}) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
 

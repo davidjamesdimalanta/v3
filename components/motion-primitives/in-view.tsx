@@ -15,11 +15,11 @@ export function InView({
   children,
   className,
   variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0 },
   },
-  transition = { duration: 0.4, ease: 'easeOut' },
-  viewOptions = { once: true, margin: '0px 0px -100px 0px' },
+  transition = { duration: 0.3, ease: 'easeOut' },
+  viewOptions = { once: true, margin: '0px 0px -350px 0px' },
 }: InViewProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, viewOptions);
