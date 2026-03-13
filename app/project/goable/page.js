@@ -15,6 +15,7 @@ import { projectData } from "./data";
 import { getNextProject } from "../projects";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import CaseStudyNavigation from "../_shared/CaseStudyNavigation";
+import CaseStudyPersonas from "../components/contentTypes/CaseStudyPersonas";
 
 /**
  * Project Content Page Template
@@ -44,6 +45,7 @@ export default function ProjectPage() {
     { id: "problem", heading: "Problem" },
     { id: "solutions", heading: "Solutions" },
     { id: "discovery", heading: "Discovery" },
+    { id: "personas", heading: "Personas" },
     { id: "initial-designs", heading: "Initial Designs" },
     { id: "iterations", heading: "Iterations" },
     { id: "final-designs", heading: "Final Designs" },
@@ -223,7 +225,6 @@ export default function ProjectPage() {
 
       <div id="discovery" className="flex flex-col gutter-sm py-64">
       <CaseStudyTextBlock
-              className="border-l-2 border-[#799A92] pl-4"
               sectionHeading="Discovery"
               title="Surfacing barriers in washrooms across Toronto"
               text={[
@@ -346,6 +347,9 @@ export default function ProjectPage() {
             />
       </div>
 
+      <CaseStudyPersonas 
+      
+      />
 
       <div id="initial-designs" className="flex flex-col gutter-xl bg-[#C4D3CF] py-16">
       <div className="flex flex-col gutter-base">
