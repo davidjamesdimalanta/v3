@@ -1,4 +1,5 @@
 import React from 'react';
+import { InView } from '@/components/motion-primitives/in-view';
 
 /**
  * Case Study Text Block Component
@@ -36,23 +37,25 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
   };
 
   return (
-    <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 px-4 ${className}`}>
-      {/* Optional Section Heading */}
-      {sectionHeading && (
-        <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
-          {sectionHeading}
-        </span>
-      )}
+    <InView>
+      <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 px-4 ${className}`}>
+        {/* Optional Section Heading */}
+        {sectionHeading && (
+          <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+            {sectionHeading}
+          </span>
+        )}
 
-      {/* Optional Title */}
-      {title && (
-        <h3 className="text-h5 text-600 text-(--text-color-100)">
-          {typeof title === "string" ? title : <>{title}</>}
-        </h3>
-      )}
+        {/* Optional Title */}
+        {title && (
+          <h3 className="text-h5 text-600 text-(--text-color-100)">
+            {typeof title === "string" ? title : <>{title}</>}
+          </h3>
+        )}
 
-      {/* Text Content */}
-      {text && renderText(text)}
-    </div>
+        {/* Text Content */}
+        {text && renderText(text)}
+      </div>
+    </InView>
   );
 }
