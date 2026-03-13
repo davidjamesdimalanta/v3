@@ -42,8 +42,7 @@ export default function ProjectPage() {
   const nextProject = getNextProject(currentSlug);
 
   const sections = [
-    { id: "problem", heading: "Problem" },
-    { id: "solutions", heading: "Solutions" },
+    { id: "problem", heading: "Overview" },
     { id: "discovery", heading: "Discovery" },
     { id: "personas", heading: "Personas" },
     { id: "initial-designs", heading: "Initial Designs" },
