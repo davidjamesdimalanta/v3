@@ -177,11 +177,7 @@ export default function ProjectPage() {
               },
               {
                 title: "Canvas-based spatial interface.",
-                description: "Writing is non-linear. The canvas lets users place, compare, group, and navigate multiple drafts at once — the way thinking actually works.",
-              },
-              {
-                title: "Cross-functional team in 7 days.",
-                description: "One ML engineer, two developers, one UX researcher. Notion kanban, 3-day sprints, Discord standups, when2meet for in-person sessions.",
+                description: "Writing is non-linear. The canvas lets users place, compare, group, and navigate multiple drafts at once, the way thinking actually works.",
               },
             ]}
           >
@@ -199,13 +195,6 @@ export default function ProjectPage() {
               src="https://cdn.sanity.io/images/iy4m4myd/production/9b61285d1d9d73ac27dc06a4db2f4912b91b7c39-1803x983.png"
               size="medium"
               caption="Canvas-based spatial interface"
-              className="max-w-full pt-0 pb-4"
-            />
-            <CaseStudyMediaBlock
-              type="image"
-              src="https://cdn.sanity.io/images/iy4m4myd/production/58bf804f5281efdff99301a485dd73a761e03ef6-1803x1125.png"
-              size="medium"
-              caption="Cross-functional team coordination"
               className="max-w-full pt-0 pb-4"
             />
           </CaseStudySectionBlock>
@@ -492,20 +481,20 @@ export default function ProjectPage() {
           title="Final thoughts and learnings"
           text={[
             <div key="constraints" className="flex flex-col mb-2">
-              <strong className="text-p text-700 text-(--text-color-100)">Constraints Accelerate Decisions</strong>
-              <span className="text-p text-400 text-(--text-color-80)">Seven days forced a discipline I haven&apos;t replicated with more time: every decision had to be <strong className="text-600">justified immediately</strong>. There was no room to explore for exploration&apos;s sake. The constraint made the design sharper.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Constraints made the decisions easier</strong>
+              <span className="text-p text-400 text-(--text-color-80)">I expected seven days to feel limiting. Instead, it removed a lot of the noise. Every decision had to be <strong className="text-600">justified right away</strong>, so there was no time to second-guess or over-explore. The design ended up sharper than it probably would have been with more runway.</span>
             </div>,
             <div key="mental" className="flex flex-col mb-2">
-              <strong className="text-p text-700 text-(--text-color-100)">Mental Models Are the Real Design Surface</strong>
-              <span className="text-p text-400 text-(--text-color-80)">The problem wasn&apos;t &ldquo;AI outputs are bad.&rdquo; The problem was that <strong className="text-600">the interface didn&apos;t match how writing actually happens</strong>. Once I framed it as a mental model problem, the canvas solution was obvious.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">The interface was the real problem, not the AI</strong>
+              <span className="text-p text-400 text-(--text-color-80)">I went in thinking the issue was output quality. It wasn&apos;t. It was that <strong className="text-600">chat threads don&apos;t match how writing actually happens</strong>. Reframing it as a mental model problem changed everything about how we approached the solution.</span>
             </div>,
             <div key="transparency" className="flex flex-col mb-2">
-              <strong className="text-p text-700 text-(--text-color-100)">Transparency Builds Trust in AI</strong>
-              <span className="text-p text-400 text-(--text-color-80)">Users didn&apos;t distrust the AI&apos;s outputs — they distrusted the process. Making the reasoning visible didn&apos;t just improve comprehension; it made users <strong className="text-600">willing to engage more deeply</strong> with what the AI was asking them.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Showing the reasoning changed how people used the AI</strong>
+              <span className="text-p text-400 text-(--text-color-80)">Users weren&apos;t skeptical of the outputs as much as they were skeptical of the process. Once they could see why the AI was asking a question, they <strong className="text-600">engaged with it more seriously</strong> instead of just answering to get past it.</span>
             </div>,
             <div key="pm" className="flex flex-col mb-2">
-              <strong className="text-p text-700 text-(--text-color-100)">Good PM Is Invisible</strong>
-              <span className="text-p text-400 text-(--text-color-80)">When coordination works, the team doesn&apos;t notice the coordination. My job was to <strong className="text-600">remove blockers before the team hit them</strong> — writing requirements, making scope calls, and keeping async communication tight enough that everyone could work in parallel without waiting.</span>
+              <strong className="text-p text-700 text-(--text-color-100)">Being a good PM meant staying out of the way</strong>
+              <span className="text-p text-400 text-(--text-color-80)">I thought my job was coordination. It turned out to be <strong className="text-600">removing blockers before the team hit them</strong>. Writing clear requirements, making scope calls early, and keeping async communication tight meant people could keep working without waiting on me.</span>
             </div>,
           ]}
         />
