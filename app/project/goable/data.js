@@ -48,7 +48,7 @@ export const projectData = {
 
   // Case study section theme colors
   caseStudy: {
-    bgColor: "#f5f5f5",  // Background color for media matting effect
+    bgColor: "#EDECEA",  // Background color for media matting effect
     fgColor: "#799A92",  // Text/caption color
   },
 };

@@ -164,7 +164,7 @@ export default function CaseStudyPersonas() {
       <CaseStudyTextBlock
         sectionHeading="Personas"
         title="Two people, two kinds of blocked."
-        text={<>Two things kept coming up in the research: people couldn&apos;t find <strong className="text-600">the specific details they needed</strong>, and even when they could, they <strong className="text-600">didn&apos;t trust them</strong>. These personas put a face to both of those problems, and shaped everything that came next.</>}
+        text={<>Two things kept coming up in the research: people <strong className="text-600">couldn&apos;t find the specific details</strong> they needed, and even when they could, they <strong className="text-600">didn&apos;t trust them</strong>. These personas put a face to both of those problems, and shaped everything that came next.</>}
       />
 
       <div ref={groupRef} className="flex flex-col items-center gap-3">
