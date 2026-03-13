@@ -459,10 +459,10 @@ export default function CaseStudyMediaBlock({
 
       {/* Rounded container with background color */}
       <div
-        className="relative w-full overflow-hidden transition-all"
+        className="relative w-full overflow-hidden transition-[box-shadow,opacity] duration-300"
         style={{ backgroundColor: 'var(--bg-color)' }}
       >
-        <div className="relative">
+        <div className="relative overflow-hidden">
           {/* Aspect ratio spacer with responsive margins */}
           <div
             className={currentSize.innerMargin}

@@ -17,7 +17,7 @@ export default function Button({ text, icon, href, className = "", target, rel, 
   const baseStyles = isIconOnly
     ? "flex items-center justify-center w-8 h-8 rounded-full cursor-pointer"
     : "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center uppercase";
-  const variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active transition-all duration-150";
+  const variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active hover-surface";
 
   const iconElement = icon === 'close' ? <CloseIcon /> : null;
   const content = isIconOnly ? iconElement : text;

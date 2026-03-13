@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { TextScramble } from "@/components/motion-primitives/text-scramble";
 import { vinylRecords } from "../about-data";
 import VinylCard from "./vinyl-card";
@@ -113,31 +114,39 @@ export default function VinylSection() {
 
       <audio ref={audioRef} loop hidden />
 
-      {showSoundModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setShowSoundModal(false)}
-          />
-          <div className="relative rounded-sm px-6 py-5 shadow-md bg-[#ECEAE9] border border-[#D6CAC8] text-[#3A1F1E] w-72 flex flex-col gap-4">
-            <p className="text-p">Enable sound to play music?</p>
-            <div className="flex gap-3">
-              <button
-                onClick={handleEnableSound}
-                className="flex-1 px-4 py-2 rounded-sm bg-[#3A1F1E] text-[#ECEAE9] text-sm cursor-pointer hover:opacity-80 transition-opacity"
-              >
-                Enable Sound
-              </button>
-              <button
-                onClick={() => setShowSoundModal(false)}
-                className="flex-1 px-4 py-2 rounded-sm border border-[#D6CAC8] text-sm cursor-pointer hover:bg-[#D6CAC8] transition-colors"
-              >
-                Not now
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showSoundModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setShowSoundModal(false)}
+            />
+            <motion.div
+              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_rgba(214,202,200,0.6),0_4px_12px_rgba(155,144,122,0.2),0_12px_32px_rgba(155,144,122,0.1)] bg-[#ECEAE9] text-[var(--figma-brown)] w-72 flex flex-col gap-4"
+              initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -4, filter: 'blur(4px)' }}
+              transition={{ type: 'spring', duration: 0.45, bounce: 0 }}
+            >
+              <p className="text-p">Enable sound to play music?</p>
+              <div className="flex gap-3">
+                <button onClick={handleEnableSound} className="flex-1 px-4 py-2 rounded-lg bg-(--figma-brown) text-[#ECEAE9] text-sm cursor-pointer hover:opacity-80 transition-opacity">
+                  Enable Sound
+                </button>
+                <button onClick={() => setShowSoundModal(false)} className="flex-1 px-4 py-2 rounded-lg border border-[#D6CAC8] text-sm cursor-pointer hover:bg-[#D6CAC8] transition-colors">
+                  Not now
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

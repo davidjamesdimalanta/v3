@@ -25,6 +25,7 @@ export type AnimatedGroupProps = {
   preset?: PresetType;
   as?: React.ElementType;
   asChild?: React.ElementType;
+  animate?: string;
 };
 
 const defaultContainerVariants: Variants = {
@@ -111,6 +112,7 @@ function AnimatedGroup({
   preset,
   as = 'div',
   asChild = 'div',
+  animate = 'visible',
 }: AnimatedGroupProps) {
   const selectedVariants = {
     item: addDefaultVariants(preset ? presetVariants[preset] : {}),
@@ -133,7 +135,7 @@ function AnimatedGroup({
   return (
     <MotionComponent
       initial='hidden'
-      animate='visible'
+      animate={animate}
       variants={containerVariants}
       className={className}
     >

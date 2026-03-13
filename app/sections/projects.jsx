@@ -11,6 +11,7 @@ import { useInView } from "../ui/hooks/useInView";
 import { useMediaQuery } from "../ui/hooks/useMediaQuery";
 import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
 import { Cursor } from "@/components/motion-primitives/cursor";
+import { motion } from "motion/react";
 
 export default function Projects() {
     // Sound effects
@@ -66,11 +67,18 @@ export default function Projects() {
             }}
             transition={{ ease: 'easeInOut', duration: 0.15 }}
           >
-            <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--bg-color)] shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap">
+            <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--bg-color)] shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
               {project.type} · {project.year}
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
-                <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.5M10.5 3.5V9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <motion.span
+                className="shrink-0 flex items-center"
+                initial={{ opacity: 0, scale: 0.7, filter: 'blur(2px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                transition={{ delay: 0.08, duration: 0.15, ease: 'easeOut' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.5M10.5 3.5V9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.span>
             </div>
           </Cursor>
         )}
@@ -79,33 +87,32 @@ export default function Projects() {
 
     return (
         <div ref={ref} className="w-full h-hug flex flex-col gutter-sm p-6 md:p-8">
-            <h1 className="text-button text-[var(--text-color-60)] uppercase">Selected Works</h1>
-            {isInView ? (
-              <AnimatedGroup
-                preset="fade"
-                className="grid grid-cols-1 md:grid-cols-2 gutter-base w-full"
-                variants={{
-                  container: {
-                    visible: {
-                      transition: {
-                        staggerChildren: 0.05,
-                        duration: 0.05,
-                      },
+            <h1
+              className={`text-button text-[var(--text-color-60)] uppercase fade-up-hidden ${isInView ? 'fade-up-visible' : ''}`}
+              style={{ transitionDuration: '0.4s', transitionDelay: '0s' }}
+            >
+              Selected Works
+            </h1>
+            <AnimatedGroup
+              preset="fade"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="grid grid-cols-1 md:grid-cols-2 gutter-base w-full"
+              variants={{
+                container: {
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.1,
                     },
                   },
-                }}
-              >
-                {projectCards}
-              </AnimatedGroup>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gutter-base w-full">
-                {projects.map((project) => (
-                  <div key={project.slug} className="invisible">
-                    <FeaturedProject {...project} autoplay={false} />
-                  </div>
-                ))}
-              </div>
-            )}
+                },
+                item: {
+                  hidden: { opacity: 0, y: 12, filter: 'blur(4px)' },
+                  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } },
+                },
+              }}
+            >
+              {projectCards}
+            </AnimatedGroup>
         </div>
     );
 }

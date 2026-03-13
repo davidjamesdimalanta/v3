@@ -25,6 +25,10 @@ export default function Nav() {
       className="fixed top-0 left-0 right-0 z-50 py-[20px] px-4 md:px-8 flex justify-between items-center w-full"
       style={{
         opacity: navbarOpacity,
+        // transition: 'none' is intentional — navbarOpacity jumps to 0 on project pages
+        // via a synchronous effect, not scroll. Adding a CSS transition would cause a
+        // visible ghost nav bar during route changes. The wave-driven entrance animation
+        // handles initial nav reveal separately via useWaveCompleteAnimation.
         transition: 'none',
         pointerEvents: navbarOpacity === 0 ? 'none' : 'auto'
       }}

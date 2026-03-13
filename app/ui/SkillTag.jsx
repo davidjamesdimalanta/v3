@@ -13,18 +13,18 @@ export default function SkillTag({ skill, category = 'tools' }) {
   const getCategoryStyles = (category) => {
     switch (category) {
       case 'design':
-        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]';
+        return 'bd-tag text-[#3A1F1E]';
 
       case 'dev':
-        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]'; 
+        return 'bd-tag text-[#3A1F1E]'; 
 
       case 'specialized':
-        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]'; 
+        return 'bd-tag text-[#3A1F1E]'; 
 
       case 'tools':
 
       default:
-        return 'border border-1 border-[#3A1F1E] text-[#3A1F1E]';   
+        return 'bd-tag text-[#3A1F1E]';   
       }
   };
 

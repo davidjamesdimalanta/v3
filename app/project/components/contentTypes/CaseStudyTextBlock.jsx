@@ -37,7 +37,13 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
   };
 
   return (
-    <InView>
+    <InView
+      variants={{
+        hidden: { opacity: 0, y: 8, filter: 'blur(4px)' },
+        visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+      }}
+      transition={{ type: 'spring', duration: 0.45, bounce: 0 }}
+    >
       <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 px-4 ${className}`}>
         {/* Optional Section Heading */}
         {sectionHeading && (

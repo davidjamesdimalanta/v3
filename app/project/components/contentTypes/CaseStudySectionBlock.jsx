@@ -118,7 +118,7 @@ export function CaseStudySectionBlock({
           key={i}
           ref={(el) => { childRefs.current[i] = el; }}
           animate={{ opacity: i === activeIndex ? 1 : 0.5 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           className="max-lg:opacity-100!"
         >
           {/* Mobile-only inline text above each child */}
@@ -162,7 +162,7 @@ export function CaseStudySectionBlock({
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                 className="flex flex-col gap-2"
               >
                 {currentState.title && (

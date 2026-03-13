@@ -134,12 +134,12 @@ export default function FeaturedProject({
   return (
     <div
       ref={containerRef}
-      className="bd hover:bd-active transition-all duration-150 overflow-hidden w-fill h-full flex flex-col"
+      className="bd-card hover:bd-active hover-surface rounded-2xl overflow-hidden w-fill h-full flex flex-col p-2"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Video Container */}
-      <div className="relative aspect-video overflow-hidden bg-#ffffff">
+      <div className="relative aspect-video rounded-xl overflow-hidden bg-#ffffff img-depth">
         {/* Thumbnail - shown while video loads */}
         {thumbnail && (
           <div
@@ -176,7 +176,7 @@ export default function FeaturedProject({
       </div>
 
       {/* Content Container */}
-      <div className="p-4 flex flex-col md:flex-row xl:flex-row gutter-xs md:gutter-base flex-1">
+      <div className="px-2 pb-2 pt-3 flex flex-col md:flex-row xl:flex-row gutter-xs md:gutter-base flex-1">
         {/* Header with title and year */}
         <div className="flex flex-col flex-1 h-hug lg:h-fill items-start gap-2">
           <h3 className="text-h4 text-400 leading-none">{title}</h3>

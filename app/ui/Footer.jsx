@@ -43,10 +43,10 @@ export default function Footer() {
               filter: 'blur(0px)',
             },
             exit: {
-              y: -20,
-              rotateX: -90,
+              y: -12,
+              rotateX: -60,
               opacity: 0,
-              filter: 'blur(4px)',
+              filter: 'blur(2px)',
             },
           }}
         >

@@ -112,6 +112,9 @@ body {
     background-color: var(--bg-color);
     font-family: var(--font-aspekta), sans-serif;
     transition: padding-right 0.15s ease; /* Smooth padding transition for drawer */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-wrap: pretty;
 }
 
 
@@ -136,12 +139,56 @@ body {
   }
 }
 
+@property --bd-shadow-alpha {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.3;
+}
+
 @utility bd {
-    @apply backdrop-blur-xl shadow-[0_0_4px_2px_rgba(155,144,122,0.3)];
+  backdrop-filter: blur(1rem);
+  box-shadow: 0 0 4px 2px rgba(155, 144, 122, var(--bd-shadow-alpha));
+  transition: --bd-shadow-alpha 200ms ease-out;
 }
 
 @utility bd-active {
-    @apply backdrop-blur-2xl shadow-[0_0_8px_2px_rgba(155,144,122,1.0)];
+  backdrop-filter: blur(2rem);
+  box-shadow: 0 0 8px 2px rgba(155, 144, 122, var(--bd-shadow-alpha));
+  --bd-shadow-alpha: 1.0;
+}
+
+/* Targeted transition utility — replaces transition-all for interactive surfaces */
+@utility hover-surface {
+    transition-property: box-shadow, backdrop-filter, opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+}
+
+/* Tabular numbers — use on year spans, numeric displays */
+@utility tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Layered tag shadow — replaces hard borders on pill tags */
+@utility bd-tag {
+    box-shadow:
+        0 0 0 1px rgba(58, 31, 30, 0.12),
+        0 1px 2px rgba(58, 31, 30, 0.06),
+        0 2px 4px rgba(155, 144, 122, 0.08);
+}
+
+/* Layered card shadow — for elevated card surfaces */
+@utility bd-card {
+    box-shadow:
+        0 0 0 1px rgba(155, 144, 122, 0.15),
+        0 2px 8px rgba(155, 144, 122, 0.2),
+        0 8px 32px rgba(155, 144, 122, 0.12);
+}
+
+/* Image depth — subtle inner outline to separate image from background */
+@utility img-depth {
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    outline-offset: -1px;
 }
 
 /* GRADIENT TEXT UTILITIES
@@ -257,8 +304,15 @@ body {
   }
 }
 
+@keyframes vinyl-spinup {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 @utility vinyl-spinning {
-  animation: vinyl-spin 3s linear infinite;
+  animation:
+    vinyl-spinup 2s cubic-bezier(0, 0, 0.58, 1) 1,
+    vinyl-spin 3s linear 2s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -280,23 +334,27 @@ body {
   font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(2.6125rem, 2.45rem + 0.58vw, 2.98625rem);
   line-height: 1.05;
+  text-wrap: balance;
 }
 
 @utility text-h2 {
   font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(2.1775rem, 2.05rem + 0.48vw, 2.48813rem);
   line-height: 1.1;
+  text-wrap: balance;
 }
 
 @utility text-h3 {
   font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.81438rem, 1.71rem + 0.39vw, 2.07375rem);
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 @utility text-h4 {
   font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.51188rem, 1.43rem + 0.32vw, 1.72813rem);
+  text-wrap: balance;
   line-height: 1.2;
 }
 
@@ -304,6 +362,7 @@ body {
   font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1.26rem, 1.19rem + 0.27vw, 1.44rem);
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 @utility text-h6 {
@@ -316,6 +375,7 @@ body {
   font-family: var(--font-aspekta), sans-serif;
   font-size: clamp(1rem, 0.9rem + 0.19vw, 1.125rem);
   line-height: 1.4;
+  text-wrap: pretty;
 }
 
 @utility text-sm {
@@ -486,6 +546,7 @@ body {
 .fade-up-hidden {
   opacity: 0;
   transform: translateY(1rem); /* 16px upward offset */
+  will-change: transform, opacity;
   transition-property: opacity, transform;
   transition-timing-function: cubic-bezier(0.44, 0.17, 0.76, 0.47);
   /* Duration and delay are set inline via React style prop */
@@ -498,6 +559,7 @@ body {
 .fade-up-visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
   transition-property: opacity, transform;
   transition-timing-function: cubic-bezier(0.44, 0.17, 0.76, 0.47);
   /* Duration and delay are set inline via React style prop */

@@ -221,9 +221,9 @@ export default function ProjectPage() {
       </div>
 
 
-      <div id="discovery" className="flex flex-col gutter-sm">
+      <div id="discovery" className="flex flex-col gutter-sm py-64">
       <CaseStudyTextBlock
-              className="pt-64"
+              className="border-l-2 border-[#799A92] pl-4"
               sectionHeading="Discovery"
               title="Surfacing barriers in washrooms across Toronto"
               text={[
@@ -278,7 +278,7 @@ export default function ProjectPage() {
       <CaseStudyTextBlock
               text={[
                 <>
-                  Participants faced three recurring barriers:{" "}
+                  {" "}
                   <DefinitionCard
                     trigger="Over-generalization"
                     shimmerVariant="brown"
@@ -295,10 +295,11 @@ export default function ProjectPage() {
                         </p>
                       </div>
                     }
-                    side="bottom"
+                    side="right"
                     width="w-80"
                     sideOffset="1"
-                  />{", "}
+                  />{" of the accessibility label; "}
+                  <br/><br/>
                   <DefinitionCard
                     trigger="Limited Information"
                     shimmerVariant="brown"
@@ -315,10 +316,11 @@ export default function ProjectPage() {
                         </p>
                       </div>
                     }
-                    side="bottom"
+                    side="right"
                     width="w-80"
                     sideOffset="1"
-                  />{", and "}
+                  />{" on washroom listings; and"}
+                  <br/><br/>
                   <DefinitionCard
                     trigger="Unreliable Sources"
                     shimmerVariant="brown"
@@ -335,17 +337,17 @@ export default function ProjectPage() {
                         </p>
                       </div>
                     }
-                    side="bottom"
+                    side="right"
                     width="w-80"
                     sideOffset="1"
-                  />.
+                  />{" of truth. "}
                 </>
               ]}
             />
       </div>
 
 
-      <div id="initial-designs" className="flex flex-col gutter-lg bg-[#C4D3CF] py-16">
+      <div id="initial-designs" className="flex flex-col gutter-xl bg-[#C4D3CF] py-16">
       <div className="flex flex-col gutter-base">
         <CaseStudyTextBlock
           sectionHeading="Initial Designs"
@@ -480,7 +482,7 @@ export default function ProjectPage() {
         description={[
           "Participants froze during onboarding when presented with the full filter list.",
           <div key="quote-1" className="flex flex-col">
-            <blockquote className="border-l-2 border-[#799A92] pl-4 my-1">
+            <blockquote className="my-1">
               <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;I don&apos;t know how many of these I should be toggling.&rdquo;</p>
             </blockquote>
           </div>,
@@ -501,7 +503,7 @@ export default function ProjectPage() {
         description={[
           "Participants didn't know where to look first, and felt some elements were fighting for their attention.",
           <div key="quote-2" className="flex flex-col">
-            <blockquote className="border-l-2 border-[#799A92] pl-4 my-1">
+            <blockquote className="my-1">
               <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;I don&apos;t know what I&apos;m supposed to be reading first.&rdquo;</p>
             </blockquote>
           </div>,
@@ -522,7 +524,7 @@ export default function ProjectPage() {
         description={[
           "Nobody said it was hard... they just weren\u2019t going to do it.",
           <div key="quote-3" className="flex flex-col">
-            <blockquote className="border-l-2 border-[#799A92] pl-4 my-1">
+            <blockquote className="my-1">
               <p className="text-p text-400 italic text-(--text-color-60)">&ldquo;It looks good but I don&apos;t really think I would leave a review that often.&rdquo;</p>
             </blockquote>
           </div>,
