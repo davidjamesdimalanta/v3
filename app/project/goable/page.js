@@ -351,7 +351,7 @@ export default function ProjectPage() {
       
       />
 
-      <div id="initial-designs" className="flex flex-col gutter-xl bg-[#C4D3CF] py-16">
+      <div id="initial-designs" className="flex flex-col gutter-xl bg-[#C4D3CF] py-16 px-4 md:px-8">
       <div className="flex flex-col gutter-base">
         <CaseStudyTextBlock
           sectionHeading="Initial Designs"

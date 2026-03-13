@@ -27,7 +27,7 @@ export default function CaseStudyHighlightsBlock({
   const bgClass      = dark ? "bg-[#141509]" : "";
 
   return (
-    <div className={`px-8 py-16 flex flex-col gutter-lg ${bgClass}`}>
+    <div className={`px-4 md:px-8 py-16 flex flex-col gutter-lg ${bgClass}`}>
       {/* Header text */}
       <div className="flex flex-col gutter-xs max-w-2xl">
         {sectionHeading && (
