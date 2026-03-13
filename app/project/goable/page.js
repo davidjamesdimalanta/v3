@@ -275,20 +275,73 @@ export default function ProjectPage() {
                 />, tackling three critical issues in washroom finding:</>
               ]}
             />
-      <CaseStudyMediaBlock
-                type="image"
-                src="https://cdn.sanity.io/images/iy4m4myd/production/a7cf75a0936db781d820f9277c1b5eae9aab97f0-4000x1992.png"
-                size="medium"
-                bgColor={"#00"}
-                className="hidden md:block pt-0 pb-4"
-              />
-              <CaseStudyMediaBlock
-                type="image"
-                src="https://cdn.sanity.io/images/iy4m4myd/production/42c7436fb36b835738c11ecdb1923c066fa556c5-2342x2342.png"
-                size="small"
-                bgColor={"#00"}
-                className="md:hidden pt-0 pb-4"
-              />
+      <CaseStudyTextBlock
+              text={[
+                <>
+                  Participants faced three recurring barriers:{" "}
+                  <DefinitionCard
+                    trigger="Over-generalization"
+                    shimmerVariant="brown"
+                    triggerProps={{ onMouseEnter: playButtonHover }}
+                    content={
+                      <div className="flex flex-col gap-3">
+                        <blockquote className="border-l-2 border-[#799A92] pl-4">
+                          <p className="text-p text-400 italic opacity-60">
+                            &ldquo;Most of them are just like a washroom with a handicapped sign, but there&apos;s no change table and everything that a handicapped person needs.&rdquo;
+                          </p>
+                        </blockquote>
+                        <p className="text-p text-600">
+                          The &ldquo;Accessibility&rdquo; label is vague and doesn&apos;t tell which amenities are offered.
+                        </p>
+                      </div>
+                    }
+                    side="bottom"
+                    width="w-80"
+                    sideOffset="1"
+                  />{", "}
+                  <DefinitionCard
+                    trigger="Limited Information"
+                    shimmerVariant="brown"
+                    triggerProps={{ onMouseEnter: playButtonHover }}
+                    content={
+                      <div className="flex flex-col gap-3">
+                        <blockquote className="border-l-2 border-[#799A92] pl-4">
+                          <p className="text-p text-400 italic opacity-60">
+                            &ldquo;Sometimes the stall is too small, you know, doors are too heavy or the layout makes it impossible to turn.&rdquo;
+                          </p>
+                        </blockquote>
+                        <p className="text-p text-600">
+                          Basic washroom details are missing&mdash;like stall count, space for strollers, or other amenities that enable access.
+                        </p>
+                      </div>
+                    }
+                    side="bottom"
+                    width="w-80"
+                    sideOffset="1"
+                  />{", and "}
+                  <DefinitionCard
+                    trigger="Unreliable Sources"
+                    shimmerVariant="brown"
+                    triggerProps={{ onMouseEnter: playButtonHover }}
+                    content={
+                      <div className="flex flex-col gap-3">
+                        <blockquote className="border-l-2 border-[#799A92] pl-4">
+                          <p className="text-p text-400 italic opacity-60">
+                            &ldquo;I don&apos;t even trust Maps that much anymore. So that&apos;s why I see three things that are nearby and I try each one.&rdquo;
+                          </p>
+                        </blockquote>
+                        <p className="text-p text-600">
+                          Information could be outdated or inaccurate, with no way to verify its currency or reliability.
+                        </p>
+                      </div>
+                    }
+                    side="bottom"
+                    width="w-80"
+                    sideOffset="1"
+                  />.
+                </>
+              ]}
+            />
       </div>
 
 
