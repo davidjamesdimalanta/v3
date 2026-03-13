@@ -70,7 +70,7 @@ export default function ProjectPage() {
         <ContentBlock
           media={{
             type: "image",
-            src: "/assets/images/goAble/Spread2.webp",
+            src: "https://cdn.sanity.io/images/iy4m4myd/production/24f606acee263a114d3267e6f26e72bfb70585e5-3838x2160.png?auto=format",
             aspectRatio: "video",
             caption: "",
           }}
@@ -495,8 +495,7 @@ export default function ProjectPage() {
       >
         <CaseStudyMediaBlock
           type="image"
-          // src="https://cdn.sanity.io/images/iy4m4myd/production/414c95bfd0b674f67fff9f211a09ebec86c64450-3734x1800.png"
-          src="/assets/images/goAble/Before&After_Onboarding_new.png"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/e49c96cc220a275c96f295a5dd60aa37788569de-1867x1194.png?auto=format"
           size="large"
           className="pt-0! bg-none"
         />
@@ -516,8 +515,7 @@ export default function ProjectPage() {
       >
         <CaseStudyMediaBlock
           type="image"
-          // src="https://cdn.sanity.io/images/iy4m4myd/production/fad969c057cb189a0fa9c45824ece8ffb6eda3c0-3734x1800.png"
-          src="/assets/images/goAble/Before&Information_Page_New.png"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/7096012b620a235cc823744f30387fa5f5d6e617-1867x1194.png?auto=format"
           size="large"
           className="pt-0!"
         />
@@ -537,8 +535,7 @@ export default function ProjectPage() {
       >
         <CaseStudyMediaBlock
           type="image"
-          // src="https://cdn.sanity.io/images/iy4m4myd/production/88f3523caf9f1931a3d7f82dda374a137b6963a3-3734x1800.png"
-          src="/assets/images/goAble/Before&After_Reviews_new.png"
+          src="https://cdn.sanity.io/images/iy4m4myd/production/1bcaa5e8c84c54cfd6fdca3cbdf122e07eb3f225-1867x1194.png?auto=format"
           size="large"
           className="pt-0!"
         />
@@ -547,6 +544,7 @@ export default function ProjectPage() {
 
       <div id="final-designs">
       <CaseStudyHighlightsBlock
+        dark
         sectionHeading="Final Designs"
         title="Making accessibility personal"
         description={[

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { motion, useReducedMotion, useInView } from "motion/react"
 import { AnimatedGroup } from "@/components/motion-primitives/animated-group"
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/app/ui/hover-card"
@@ -8,6 +9,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/app/ui/popover"
 import { cn } from "@/app/ui/lib/utils"
 import CaseStudyTextBlock from "./CaseStudyTextBlock"
 
+// Use **text** syntax to mark bold segments within strings
 const PERSONAS = [
   {
     id: "access-advocate",
@@ -15,12 +17,12 @@ const PERSONAS = [
     avatarSrc: "/assets/images/goAble/access-advocate.svg",
     avatarAlt: "Illustration of Access Advocate — a caregiver navigating washroom access for a dependent",
     traits: [
-      "Has a dependent who requires an adult-sized change table",
-      "Outspoken about physical and emotional barriers to washroom access",
-      "Every outing involves navigating multiple washrooms — each one a logistical decision",
+      "Has a dependent who requires an **adult-sized change table**",
+      "Outspoken about **physical and emotional barriers** to washroom access",
+      "Every outing involves **navigating multiple washrooms**, and each one a logistical decision",
     ],
     designConnection:
-      "The vagueness of \"accessible\" labels directly failed caregivers like this persona — and drove the personalized onboarding filters so users can specify exact needs like adult change table availability.",
+      "The vagueness of **\"accessible\" labels** directly failed caregivers like the access advocate, influencing the **personalized onboarding filters** so users can specify exact needs like adult change table availability.",
   },
   {
     id: "shy-pooper",
@@ -28,14 +30,22 @@ const PERSONAS = [
     avatarSrc: "/assets/images/goAble/shy-pooper.svg",
     avatarAlt: "Illustration of Shy Pooper — a person with IBS who scouts washrooms discreetly before committing",
     traits: [
-      "Lives with IBS and manages washroom anxiety privately",
-      "Scouts washrooms discreetly before committing — arrival anxiety is real",
-      "Won't enter if cleanliness is in doubt; smell is a dealbreaker",
-    ],
+      "Lives with **IBS** and manages **washroom anxiety** privately",
+      "Scouts washrooms **discreetly before committing**, arrival anxiety is real",
+      "Won't enter if **cleanliness is in doubt**; smell is a dealbreaker",
+    ], 
     designConnection:
-      "Unreliable sources and the absence of real-time cleanliness data were dealbreakers — and drove community-driven status updates and upfront amenity display.",
+      "**Unreliable sources** and the absence of **real-time cleanliness data** were dealbreakers to the shy pooper, driving the **community-driven status updates** and upfront amenity display.",
   },
 ]
+
+// Renders a string with **bold** markers as React nodes
+function BoldText({ text }) {
+  const parts = text.split(/\*\*(.*?)\*\*/g)
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <strong key={i} className="text-600">{part}</strong> : part
+  )
+}
 
 function PersonaCardContent({ persona }) {
   return (
@@ -46,13 +56,13 @@ function PersonaCardContent({ persona }) {
         {persona.traits.map((trait, i) => (
           <li key={i} className="text-small text-400 flex gap-2">
             <span className="opacity-50 shrink-0">—</span>
-            <span>{trait}</span>
+            <span><BoldText text={trait} /></span>
           </li>
         ))}
       </ul>
       <hr className="border-[#D6CAC8]" />
       {/* <p className="text-tiny uppercase tracking-wide opacity-60">Design connection</p> */}
-      <p className="text-small text-400 italic">{persona.designConnection}</p>
+      <p className="text-small text-400 italic"><BoldText text={persona.designConnection} /></p>
     </div>
   )
 }
@@ -87,12 +97,13 @@ function PersonaCard({ persona }) {
   const avatar = (
     <motion.div
       whileHover={jiggle}
-      className="cursor-pointer select-none w-[140px] h-[180px] sm:w-[160px] sm:h-[200px] flex items-end justify-center"
+      className="relative cursor-pointer select-none w-[140px] h-[180px] sm:w-[160px] sm:h-[200px]"
     >
-      <img
+      <Image
         src={persona.avatarSrc}
         alt={persona.avatarAlt}
-        className="w-full h-full object-contain"
+        fill
+        className="object-contain"
       />
     </motion.div>
   )
@@ -139,16 +150,24 @@ function PersonaCard({ persona }) {
 export default function CaseStudyPersonas() {
   const groupRef = useRef(null)
   const isInView = useInView(groupRef, { once: true, margin: "0px 0px -100px 0px" })
+  const [isDesktopHint, setIsDesktopHint] = useState(true)
+
+  useEffect(() => {
+    const check = () => setIsDesktopHint(window.innerWidth >= 810)
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
+  }, [])
 
   return (
     <div id="personas" className="flex flex-col gutter-lg py-64 px-4">
       <CaseStudyTextBlock
         sectionHeading="Personas"
         title="Two people, two kinds of blocked."
-        text="Two things kept coming up in the research: people couldn't find the specific details they needed, and even when they could, they didn't trust them. These personas put a face to both of those problems, and shaped everything that came next."
+        text={<>Two things kept coming up in the research: people couldn&apos;t find <strong className="text-600">the specific details they needed</strong>, and even when they could, they <strong className="text-600">didn&apos;t trust them</strong>. These personas put a face to both of those problems, and shaped everything that came next.</>}
       />
 
-      <div ref={groupRef} className="flex justify-center">
+      <div ref={groupRef} className="flex flex-col items-center gap-3">
         <AnimatedGroup
           preset="blur-slide"
           animate={isInView ? "visible" : "hidden"}
@@ -158,6 +177,9 @@ export default function CaseStudyPersonas() {
             <PersonaCard key={persona.id} persona={persona} />
           ))}
         </AnimatedGroup>
+        <p className="text-small text-400 italic opacity-50 text-center">
+          {isDesktopHint ? "Hover" : "Tap"} to learn more
+        </p>
       </div>
     </div>
   )

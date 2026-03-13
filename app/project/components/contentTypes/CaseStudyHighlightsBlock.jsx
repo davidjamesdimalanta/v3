@@ -19,18 +19,24 @@ export default function CaseStudyHighlightsBlock({
   title,
   description,
   videos = [],
+  dark = false,
 }) {
+  const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
+  const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
+  const descColor    = dark ? "text-(--text-lightcolor-80)" : "text-(--text-color-80)";
+  const bgClass      = dark ? "bg-[#141509]" : "";
+
   return (
-    <div className="px-8 py-16 flex flex-col gutter-lg">
+    <div className={`px-8 py-16 flex flex-col gutter-lg ${bgClass}`}>
       {/* Header text */}
       <div className="flex flex-col gutter-xs max-w-2xl">
         {sectionHeading && (
-          <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+          <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
             {sectionHeading}
           </span>
         )}
-        <h3 className="text-h3 text-600 text-(--text-color-100)">{title}</h3>
-        <p className="text-p text-400 text-(--text-color-80)">{description}</p>
+        <h3 className={`text-h3 text-600 ${titleColor}`}>{title}</h3>
+        <p className={`text-p text-400 ${descColor}`}>{description}</p>
       </div>
 
       {/* Video grid */}
