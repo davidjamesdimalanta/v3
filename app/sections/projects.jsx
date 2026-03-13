@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef } from "react";
 import Link from "next/link";
 import FeaturedProject from "./organisms/FeaturedProject";
 import { projectsRegistry } from "../project/projects";
@@ -22,6 +23,12 @@ export default function Projects() {
     const isTouchDevice = useMediaQuery("(hover: none) and (pointer: coarse)");
     const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
     const showCursor = !isTouchDevice && !prefersReducedMotion;
+    // Track which project card is hovered for the shared cursor
+    const [hoveredProject, setHoveredProject] = useState(null);
+    // Keep last hovered project so cursor content persists during exit animation
+    const lastHoveredRef = useRef(null);
+    if (hoveredProject) lastHoveredRef.current = hoveredProject;
+    const cursorProject = hoveredProject ?? lastHoveredRef.current;
 
     // Map registry to project data
     const projectDataMap = {
@@ -47,7 +54,12 @@ export default function Projects() {
     });
 
     const projectCards = projects.map((project, index) => (
-      <div key={project.slug} className="relative h-full">
+      <div
+        key={project.slug}
+        className="relative h-full"
+        onMouseEnter={() => setHoveredProject(project)}
+        onMouseLeave={() => setHoveredProject(null)}
+      >
         <Link
           href={`/project/${project.slug}`}
           className="block h-full"
@@ -56,32 +68,6 @@ export default function Projects() {
         >
           <FeaturedProject {...project} autoplay={index === 0} />
         </Link>
-        {showCursor && project.type && (
-          <Cursor
-            attachToParent
-            springConfig={{ bounce: 0.001 }}
-            variants={{
-              initial: { scale: 0.3, opacity: 0 },
-              animate: { scale: 1, opacity: 1 },
-              exit: { scale: 0.3, opacity: 0 },
-            }}
-            transition={{ ease: 'easeInOut', duration: 0.15 }}
-          >
-            <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--bg-color)] shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
-              {project.type} · {project.year}
-              <motion.span
-                className="shrink-0 flex items-center"
-                initial={{ opacity: 0, scale: 0.7, filter: 'blur(2px)' }}
-                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                transition={{ delay: 0.08, duration: 0.15, ease: 'easeOut' }}
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.5M10.5 3.5V9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </motion.span>
-            </div>
-          </Cursor>
-        )}
       </div>
     ));
 
@@ -113,6 +99,37 @@ export default function Projects() {
             >
               {projectCards}
             </AnimatedGroup>
+            {/* Single shared cursor rendered outside AnimatedGroup to avoid
+                transformed ancestor breaking position:fixed coordinate space */}
+            {showCursor && (
+              <Cursor
+                attachToParent={false}
+                springConfig={{ bounce: 0.001 }}
+                variants={{
+                  initial: { scale: 0.3, opacity: 0 },
+                  animate: { scale: 1, opacity: 1 },
+                  exit: { scale: 0.3, opacity: 0 },
+                }}
+                transition={{ ease: 'easeInOut', duration: 0.15 }}
+                isVisible={!!hoveredProject}
+              >
+                {cursorProject && (
+                  <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--bg-color)] shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
+                    {cursorProject.type} · {cursorProject.year}
+                    <motion.span
+                      className="shrink-0 flex items-center"
+                      initial={{ opacity: 0, scale: 0.7, filter: 'blur(2px)' }}
+                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                      transition={{ delay: 0.08, duration: 0.15, ease: 'easeOut' }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.5 10.5L10.5 3.5M10.5 3.5H4.5M10.5 3.5V9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </motion.span>
+                  </div>
+                )}
+              </Cursor>
+            )}
         </div>
     );
 }

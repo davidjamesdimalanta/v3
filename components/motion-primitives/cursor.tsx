@@ -16,6 +16,7 @@ export type CursorProps = {
   className?: string;
   springConfig?: SpringOptions;
   attachToParent?: boolean;
+  isVisible?: boolean;
   transition?: Transition;
   variants?: {
     initial: Variant;
@@ -30,6 +31,7 @@ export function Cursor({
   className,
   springConfig,
   attachToParent,
+  isVisible: isVisibleProp,
   variants,
   transition,
   onPositionChange,
@@ -37,7 +39,8 @@ export function Cursor({
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(!attachToParent);
+  const [isVisibleInternal, setIsVisible] = useState(!attachToParent);
+  const isVisible = isVisibleProp !== undefined ? isVisibleProp : isVisibleInternal;
   const [isRightHalf, setIsRightHalf] = useState(false);
 
   useEffect(() => {
