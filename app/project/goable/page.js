@@ -69,7 +69,7 @@ export default function ProjectPage() {
         <ContentBlock
           media={{
             type: "image",
-            src: "https://cdn.sanity.io/images/iy4m4myd/production/24f606acee263a114d3267e6f26e72bfb70585e5-3838x2160.png?auto=format",
+            src: "https://cdn.sanity.io/images/iy4m4myd/production/88ef02f303251165ac09e38b1dd7fd208ef83ea2-3838x2160.png",
             aspectRatio: "video",
             caption: "",
           }}
