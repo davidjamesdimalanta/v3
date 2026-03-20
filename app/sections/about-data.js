@@ -47,8 +47,8 @@ export const vinylRecords = [
     id: "tylerthecreator-areweskillfriends",
     artist: "Tyler the Creator",
     song: "ARE WE STILL FRIENDS?",
-    cover: "/assets/aboutme/vinyls/Tyler the Creator - ARE WE STILL FRIENDS?.webp",
-    audioSrc: "/assets/aboutme/songs/Tyler the Creator - ARE WE STILL FRIENDS?.mp3",
+    cover: "/assets/aboutme/vinyls/Tyler the Creator - ARE WE STILL FRIENDS_.webp",
+    audioSrc: "/assets/aboutme/songs/Tyler the Creator - ARE WE STILL FRIENDS_.mp3",
   },
   {
     id: "hyakkei-kagefumi",
