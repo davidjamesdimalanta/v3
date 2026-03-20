@@ -114,15 +114,28 @@ export function CaseStudySectionBlock({
     return childrenArray.map((child, i) => {
       const state = textStates[i] ?? textStates[0];
       return (
-        <motion.div
+        <motion.article
           key={i}
           ref={(el) => { childRefs.current[i] = el; }}
+          aria-label={state?.title}
           animate={{ opacity: i === activeIndex ? 1 : 0.5 }}
           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           className="max-lg:opacity-100!"
         >
-          {/* Mobile-only inline text above each child */}
-          <div className="flex flex-col gap-2 mb-0 lg:hidden">
+          {/* AT-only: heading then description, each a separate block */}
+          {state?.title && (
+            <h3 className="sr-only">{state.title}</h3>
+          )}
+          {state?.description && (
+            <p className="sr-only">
+              {Array.isArray(state.description)
+                ? state.description.join(" ")
+                : state.description}
+            </p>
+          )}
+
+          {/* Mobile-only visual text (hidden from AT to avoid double-reading) */}
+          <div aria-hidden="true" className="flex flex-col gap-2 mb-0 lg:hidden">
             {i === 0 && sectionHeading && (
               <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
                 {sectionHeading}
@@ -138,15 +151,18 @@ export function CaseStudySectionBlock({
             )}
           </div>
           {child}
-        </motion.div>
+        </motion.article>
       );
     });
   })();
 
   return (
     <div className={`flex flex-col lg:flex-row lg:gutter-lg px-4 md:px-8 ${bgClass} ${className}`}>
-      {/* LEFT — sticky text column */}
-      <aside className={`${hasTextStates ? 'hidden lg:flex' : 'flex'} flex-1 lg:basis-[720px] lg:sticky lg:top-[45dvh] lg:self-start flex-col gap-2 py-0`}>
+      {/* LEFT — sticky text column (aria-hidden when textStates: AT content lives in right column) */}
+      <aside
+        aria-hidden={hasTextStates ? "true" : undefined}
+        className={`${hasTextStates ? 'hidden lg:flex' : 'flex'} flex-1 lg:basis-[720px] lg:sticky lg:top-[45dvh] lg:self-start flex-col gap-2 py-0`}
+      >
         {hasTextStates ? (
           <>
             {sectionHeading && (
@@ -154,6 +170,7 @@ export function CaseStudySectionBlock({
                 {sectionHeading}
               </span>
             )}
+
             <AnimatePresence mode="popLayout" custom={direction} initial={false}>
               <motion.div
                 key={activeIndex}

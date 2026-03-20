@@ -44,11 +44,11 @@ export const vinylRecords = [
     audioSrc: "/assets/aboutme/songs/The Cure - Boys dont cry.mp3",
   },
   {
-    id: "tomokoaran-midnight",
-    artist: "Tomoko Aran",
-    song: "Midnight Pretenders",
-    cover: "/assets/aboutme/vinyls/Tomoko Aran - Midnight Pretenders.webp",
-    audioSrc: "/assets/aboutme/songs/Tomoko Aran - Midnight Pretenders.mp3",
+    id: "tylerthecreator-areweskillfriends",
+    artist: "Tyler the Creator",
+    song: "ARE WE STILL FRIENDS?",
+    cover: "/assets/aboutme/vinyls/Tyler the Creator - ARE WE STILL FRIENDS?.webp",
+    audioSrc: "/assets/aboutme/songs/Tyler the Creator - ARE WE STILL FRIENDS?.mp3",
   },
   {
     id: "hyakkei-kagefumi",
