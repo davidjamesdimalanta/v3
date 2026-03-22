@@ -222,7 +222,7 @@ export default function ProjectPage() {
       </div>
 
 
-      <div id="discovery" className="flex flex-col gutter-sm py-64">
+      <div id="discovery" className="flex flex-col gutter-sm py-48">
       <CaseStudyTextBlock
               sectionHeading="Discovery"
               title="Surfacing barriers in washrooms across Toronto"

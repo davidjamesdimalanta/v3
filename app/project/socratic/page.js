@@ -203,7 +203,7 @@ export default function ProjectPage() {
         {/* ─── DISCOVERY ─── */}
         <div id="discovery" className="flex flex-col gutter-sm">
           <CaseStudyTextBlock
-            className="py-64"
+            className="py-48"
             sectionHeading="Discovery"
             title="We asked 10 people on campus about their experience with chat-AI interfaces."
             text={[
