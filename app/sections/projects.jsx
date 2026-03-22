@@ -74,7 +74,7 @@ export default function Projects() {
     return (
         <div ref={ref} className="w-full h-hug flex flex-col gutter-sm p-6 md:p-8">
             <h1
-              className={`text-button text-[var(--text-color-60)] uppercase fade-up-hidden ${isInView ? 'fade-up-visible' : ''}`}
+              className={`text-button text-(--text-color-60) uppercase fade-up-hidden ${isInView ? 'fade-up-visible' : ''}`}
               style={{ transitionDuration: '0.4s', transitionDelay: '0s' }}
             >
               Selected Works
@@ -114,7 +114,7 @@ export default function Projects() {
                 isVisible={!!hoveredProject}
               >
                 {cursorProject && (
-                  <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--bg-color)] shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
+                  <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
                     {cursorProject.type} · {cursorProject.year}
                     <motion.span
                       className="shrink-0 flex items-center"
