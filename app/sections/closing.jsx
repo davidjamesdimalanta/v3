@@ -18,7 +18,7 @@ export default function Closing() {
                     <div>
                         <Link href={"https://ischool.utoronto.ca/master-of-information/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150" onMouseEnter={playButtonHover}>
                             <span className="md:hidden text-p">MI @ UofT </span>
-                            <span className="hidden md:inline text-p">MI Candidate @ UofT iSchool </span>
+                            <span className="hidden md:inline text-p">MI Candidate @ UofT iSchool</span>
                         </Link>
                         <span className="text-p">, </span>
                         <Link href={"https://blogs.studentlife.utoronto.ca/innovationhub/"} target="_blank" rel="noopener" className="hover:bd-text transition-all duration-150" onMouseEnter={playButtonHover}>
