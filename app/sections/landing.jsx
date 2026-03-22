@@ -18,7 +18,7 @@ const EXPLORING_APPS = [
     name: 'Paper',
     icon: '/assets/icon/homepage/Paper App Icon.png',
     videoSrc: '/assets/videos/homepage/paper-tryout-2.mp4',
-    description: 'Trying the new \"Figma\" killer to explore different themes for my portfolio.',
+    description: 'Trying the new \"Figma for Agents\" to explore different themes for my portfolio.',
   },
   // {
   //   name: 'Pencil',
