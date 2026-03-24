@@ -85,4 +85,32 @@ export const vinylRecords = [
     cover: "/assets/aboutme/vinyls/Pokemon - Eterna City (Night).webp",
     audioSrc: "/assets/aboutme/songs/Pokemon - Eterna City (Night).mp3",
   },
+  {
+    id: "fcuckers-ifyouwanna",
+    artist: "Fcuckers",
+    song: "if you wanna party, come over to my house",
+    cover: "/assets/aboutme/vinyls/Fcuckers - if you wanna party, come over to my house.webp",
+    audioSrc: "/assets/aboutme/songs/Fcuckers - if you wanna party, come over to my house.mp3",
+  },
+  {
+    id: "higherbrothers-popout",
+    artist: "HIGHER BROTHERS",
+    song: "Pop Out",
+    cover: "/assets/aboutme/vinyls/HIGHER BROTHERS - Pop Out.webp",
+    audioSrc: "/assets/aboutme/songs/HIGHER BROTHERS - Pop Out.mp3",
+  },
+  {
+    id: "sesoneon-thewave",
+    artist: "SE SO NEON",
+    song: "The Wave",
+    cover: "/assets/aboutme/vinyls/SE SO NEON - The Wave.webp",
+    audioSrc: "/assets/aboutme/songs/SE SO NEON - The Wave.mp3",
+  },
+  {
+    id: "titlefight-crescentshaped",
+    artist: "Title Fight",
+    song: "Crescent Shaped Depression",
+    cover: "/assets/aboutme/vinyls/Title Fight - Crescent Shaped Depression.webp",
+    audioSrc: "/assets/aboutme/songs/Title Fight - Crescent Shaped Depression.mp3",
+  },
 ];

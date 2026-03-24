@@ -57,16 +57,13 @@ export default function AboutLanding() {
             </span>
 
             <span className="text-p">
-            David is a product designer with a background in web development, and is experienced in
-            wireframes, prototyping, & cross-functional collaboration experience.
+            David is a product designer with a background in web development, doing his best work at the handoff. He is experienced in
+            interactive prototyping, code-collaborating, and cross-functional workflows.
             </span>
 
             <span className="text-p">
-            Am currently exploring motion design, accessibility design, and human-AI interaction.
-            </span>
+            Outside of work, I love handheld consoles (I&apos;m stuck in 2009), finding cafes around the city, and going to the gym.
 
-            <span className="text-p">
-              Outside of work, I love handheld consoles (I&apos;m stuck in 2009), finding cafes around the city, and going to the gym.
             </span>
             </div>
               <div className="relative">
