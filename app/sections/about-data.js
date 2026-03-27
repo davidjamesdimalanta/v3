@@ -37,25 +37,11 @@ export const vinylRecords = [
     audioSrc: "/assets/aboutme/songs/Simply Red - Holding Back the Years.mp3",
   },
   {
-    id: "thecure-boysdontcry",
-    artist: "The Cure",
-    song: "Boys Don't Cry",
-    cover: "/assets/aboutme/vinyls/The Cure - Boys dont cry.webp",
-    audioSrc: "/assets/aboutme/songs/The Cure - Boys dont cry.mp3",
-  },
-  {
     id: "tylerthecreator-areweskillfriends",
     artist: "Tyler the Creator",
     song: "ARE WE STILL FRIENDS?",
     cover: "/assets/aboutme/vinyls/Tyler the Creator - ARE WE STILL FRIENDS_.webp",
     audioSrc: "/assets/aboutme/songs/Tyler the Creator - ARE WE STILL FRIENDS_.mp3",
-  },
-  {
-    id: "hyakkei-kagefumi",
-    artist: "Hyakkei",
-    song: "Kagefumi",
-    cover: "/assets/aboutme/vinyls/Hyakkei - Kagefumi.webp",
-    audioSrc: "/assets/aboutme/songs/Hyakkei - Kagefumi.mp3",
   },
   {
     id: "macdemarco-preoccupied",
@@ -112,5 +98,19 @@ export const vinylRecords = [
     song: "Crescent Shaped Depression",
     cover: "/assets/aboutme/vinyls/Title Fight - Crescent Shaped Depression.webp",
     audioSrc: "/assets/aboutme/songs/Title Fight - Crescent Shaped Depression.mp3",
+  },
+  {
+    id: "bigbang-haruharu",
+    artist: "BIGBANG",
+    song: "Haru Haru",
+    cover: "/assets/aboutme/vinyls/BIGBANG - Haru Haru.webp",
+    audioSrc: "/assets/aboutme/songs/BIGBANG - Haru Haru.mp3",
+  },
+  {
+    id: "neckdeep-december",
+    artist: "Neck Deep",
+    song: "December",
+    cover: "/assets/aboutme/vinyls/Neck Deep - December.webp",
+    audioSrc: "/assets/aboutme/songs/Neck Deep - December.mp3",
   },
 ];

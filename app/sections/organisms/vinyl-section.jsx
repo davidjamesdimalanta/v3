@@ -81,22 +81,11 @@ export default function VinylSection() {
   }, []);
 
   return (
-    <div className="flex flex-col-reverse md:flex-col gutter-base">
+    <div className="flex flex-col gutter-base">
 
-      <span className="text-p text-300">
+      {/* <span className="text-p text-300">
         the sounds of my soul.
-      </span>
-
-      <div className="grid grid-cols-3 md:grid-cols-4 gutter-sm">
-        {vinylRecords.map((record) => (
-          <VinylCard
-            key={record.id}
-            record={record}
-            isActive={activeVinylId === record.id}
-            onSelect={handleSelect}
-          />
-        ))}
-      </div>
+      </span> */}
 
       <div className="flex flex-col gutter-xs">
         <span className="text-[#799A92] uppercase tracking-wide text-sm">
@@ -110,6 +99,17 @@ export default function VinylSection() {
         >
           {nowPlayingText}
         </TextScramble>
+      </div>
+
+      <div className="grid grid-cols-3 md:grid-cols-4 gutter-sm">
+        {vinylRecords.map((record) => (
+          <VinylCard
+            key={record.id}
+            record={record}
+            isActive={activeVinylId === record.id}
+            onSelect={handleSelect}
+          />
+        ))}
       </div>
 
       <audio ref={audioRef} loop hidden />
@@ -128,7 +128,7 @@ export default function VinylSection() {
               onClick={() => setShowSoundModal(false)}
             />
             <motion.div
-              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_rgba(214,202,200,0.6),0_4px_12px_rgba(155,144,122,0.2),0_12px_32px_rgba(155,144,122,0.1)] bg-[#ECEAE9] text-[var(--figma-brown)] w-72 flex flex-col gap-4"
+              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_rgba(214,202,200,0.6),0_4px_12px_rgba(155,144,122,0.2),0_12px_32px_rgba(155,144,122,0.1)] bg-[#ECEAE9] text-(--figma-brown) w-72 flex flex-col gap-4"
               initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -4, filter: 'blur(4px)' }}
