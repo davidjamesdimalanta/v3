@@ -53,7 +53,7 @@ export default function AppIconPopover({ name, icon, videoSrc, description }) {
         <div className="p-2 flex flex-col gutter-xs">
           <span className="text-small text-600">{name}</span>
           {description && (
-            <span className="text-small" style={{ color: 'var(--text-color-60, #9B907A)' }}>
+            <span className="text-small text-pretty" style={{ color: 'var(--text-color-60, #9B907A)' }}>
               {description}
             </span>
           )}

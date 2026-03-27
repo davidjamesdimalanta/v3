@@ -87,6 +87,19 @@ export default function VinylSection() {
         the sounds of my soul.
       </span> */}
 
+
+      <div className="grid grid-cols-3 md:grid-cols-4 gutter-sm">
+        {vinylRecords.map((record) => (
+          <VinylCard
+            key={record.id}
+            record={record}
+            isActive={activeVinylId === record.id}
+            onSelect={handleSelect}
+          />
+        ))}
+      </div>
+
+
       <div className="flex flex-col gutter-xs">
         <span className="text-[#799A92] uppercase tracking-wide text-sm">
           Now Playing:
@@ -99,17 +112,6 @@ export default function VinylSection() {
         >
           {nowPlayingText}
         </TextScramble>
-      </div>
-
-      <div className="grid grid-cols-3 md:grid-cols-4 gutter-sm">
-        {vinylRecords.map((record) => (
-          <VinylCard
-            key={record.id}
-            record={record}
-            isActive={activeVinylId === record.id}
-            onSelect={handleSelect}
-          />
-        ))}
       </div>
 
       <audio ref={audioRef} loop hidden />

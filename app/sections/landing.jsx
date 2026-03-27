@@ -20,6 +20,12 @@ const EXPLORING_APPS = [
     videoSrc: '/assets/videos/homepage/paper-tryout-2.mp4',
     description: 'Trying the new \"Figma for Agents\" to explore different themes for my portfolio.',
   },
+  {
+    name: 'Figma Make',
+    icon: '/assets/icon/homepage/figma make logo.webp',
+    videoSrc: '/assets/videos/homepage/figmamaketryout.mp4',
+    description: 'Using Figma Make to make a study buddy app and win a make-a-thon challenge.',
+  },
   // {
   //   name: 'Pencil',
   //   icon: '/assets/icon/homepage/pencil-app-icon.webp',
