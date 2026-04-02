@@ -1,63 +1,107 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import { initHls, attachTo, detachFrom } from './lib/hlsManager';
+import { useEffect, useRef, useState } from 'react';
+import { initHls, attachTo, detachFrom, featuredProjectsReady } from './lib/hlsManager';
 import { HoverCard, HoverCardTrigger, HoverCardVideoContent } from './hover-card';
 
-function HlsVideo({ src, className }) {
+function HlsVideo({ src, thumbnail }) {
   const videoRef = useRef(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !src) return;
 
-    if (src.endsWith('.m3u8')) {
+    let cleanedUp = false;
+
+    if (src.includes('.m3u8')) {
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari — native HLS
+        // Safari / native HLS — set src and wait for canplay before playing
         video.src = src;
         video.load();
+        const onCanPlay = () => {
+          if (!cleanedUp) {
+            setVideoReady(true);
+            video.play().catch(() => {});
+          }
+          video.removeEventListener('canplay', onCanPlay);
+        };
+        video.addEventListener('canplay', onCanPlay);
       } else {
-        // Chrome / Firefox — attach pre-buffered hls.js instance
+        // Chrome / Firefox — attach pre-buffered hls.js instance.
+        // attachTo already schedules play() on canplay internally; we only
+        // need to set videoReady here for the thumbnail fade.
+        const onCanPlay = () => {
+          if (!cleanedUp) setVideoReady(true);
+          video.removeEventListener('canplay', onCanPlay);
+        };
+        video.addEventListener('canplay', onCanPlay);
         attachTo(src, video);
       }
     } else {
+      // Plain mp4 / non-HLS
       video.src = src;
+      const onCanPlay = () => {
+        if (!cleanedUp) {
+          setVideoReady(true);
+          video.play().catch(() => {});
+        }
+        video.removeEventListener('canplay', onCanPlay);
+      };
+      video.addEventListener('canplay', onCanPlay);
     }
 
     return () => {
-      if (src.endsWith('.m3u8') && !video.canPlayType('application/vnd.apple.mpegurl')) {
+      cleanedUp = true;
+      if (src.includes('.m3u8') && !video.canPlayType('application/vnd.apple.mpegurl')) {
         detachFrom(src);
       }
     };
   }, [src]);
 
   return (
-    <video
-      ref={videoRef}
-      autoPlay
-      muted
-      loop
-      playsInline
-      className={className}
-    />
+    <div className="relative w-full h-full">
+      {/* Thumbnail shown until video is ready */}
+      {thumbnail && (
+        <div
+          className="absolute inset-0 z-10 transition-opacity duration-300"
+          style={{ opacity: videoReady ? 0 : 1, pointerEvents: 'none' }}
+        >
+          <Image
+            src={thumbnail}
+            alt=""
+            fill
+            sizes="360px"
+            className="object-cover"
+          />
+        </div>
+      )}
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        className="w-full h-full object-cover"
+      />
+    </div>
   );
 }
 
-export default function AppIconPopover({ name, icon, videoSrc, description }) {
-  // Init HLS during idle time — lower priority than featured projects
+export default function AppIconPopover({ name, icon, videoSrc, thumbnail, description }) {
+  // Init HLS only after all featured-project HLS instances have been
+  // registered — ensures featured cards buffer first.
   useEffect(() => {
-    if (!videoSrc || !videoSrc.endsWith('.m3u8')) return;
+    if (!videoSrc || !videoSrc.includes('.m3u8')) return;
 
-    const schedule = typeof requestIdleCallback !== 'undefined'
-      ? (fn) => requestIdleCallback(fn, { timeout: 2000 })
-      : (fn) => setTimeout(fn, 300);
+    let isMounted = true;
 
-    const id = schedule(() => initHls(videoSrc));
+    featuredProjectsReady.then(() => {
+      if (isMounted) initHls(videoSrc);
+    });
 
     return () => {
-      if (typeof cancelIdleCallback !== 'undefined') cancelIdleCallback(id);
-      else clearTimeout(id);
+      isMounted = false;
     };
   }, [videoSrc]);
 
@@ -93,7 +137,7 @@ export default function AppIconPopover({ name, icon, videoSrc, description }) {
           {videoSrc ? (
             <HlsVideo
               src={videoSrc}
-              className="w-full h-full object-cover"
+              thumbnail={thumbnail}
             />
           ) : (
             <div className="w-full h-full bg-[#D6CAC8]" />

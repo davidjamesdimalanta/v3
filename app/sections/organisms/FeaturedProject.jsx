@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SkillTag from "../../ui/SkillTag";
 import { useMediaQuery } from "../../ui/hooks/useMediaQuery";
-import { initHls, attachTo, detachFrom } from "../../ui/lib/hlsManager";
+import { initHls, registerFeaturedSrc, attachTo, detachFrom } from "../../ui/lib/hlsManager";
 
 const isMuxHLSVideo = (url) => {
   if (!url || typeof url !== "string") return false;
@@ -29,9 +29,12 @@ export default function FeaturedProject({
 
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
-  // Eagerly init HLS instance on mount — highest priority (featured projects load before popover apps)
+  // Register and eagerly init HLS instance on mount — highest priority
+  // (featured projects load before popover apps).
+  // registerFeaturedSrc must run before initHls so the seal count is accurate.
   useEffect(() => {
     if (!videoSrc || !isMuxHLSVideo(videoSrc)) return;
+    registerFeaturedSrc(videoSrc);
     initHls(videoSrc);
   }, [videoSrc]);
 
@@ -171,7 +174,7 @@ export default function FeaturedProject({
           )}
         </div>
 
-          
+
         {/* Skills Tags */}
         {skills.length > 0 && (
           <div className="h-hug flex flex-1 flex-wrap justify-start md:justify-end items-start gutter-xs mt-4 md:mt-0">
