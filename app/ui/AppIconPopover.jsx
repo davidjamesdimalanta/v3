@@ -42,6 +42,7 @@ export default function AppIconPopover({ name, icon, videoSrc, description }) {
               muted
               loop
               playsInline
+              preload="none"
               className="w-full h-full object-cover"
             />
           ) : (
