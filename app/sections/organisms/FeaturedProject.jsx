@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SkillTag from "../../ui/SkillTag";
 import { useMediaQuery } from "../../ui/hooks/useMediaQuery";
+import { initHls, attachTo, detachFrom } from "../../ui/lib/hlsManager";
 
 const isMuxHLSVideo = (url) => {
   if (!url || typeof url !== "string") return false;
@@ -22,14 +23,19 @@ export default function FeaturedProject({
   autoplay = false,
 }) {
   const videoRef = useRef(null);
-  const hlsRef = useRef(null);
   const containerRef = useRef(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
-  // HLS.js setup#427067
+  // Eagerly init HLS instance on mount — highest priority (featured projects load before popover apps)
+  useEffect(() => {
+    if (!videoSrc || !isMuxHLSVideo(videoSrc)) return;
+    initHls(videoSrc);
+  }, [videoSrc]);
+
+  // Attach HLS instance to video element once it's in the DOM
   useEffect(() => {
     if (!videoSrc || !isMuxHLSVideo(videoSrc)) return;
 
@@ -52,34 +58,12 @@ export default function FeaturedProject({
       };
     }
 
-    // Load HLS.js for other browsers
-    const loadHLS = async () => {
-      const Hls = (await import("hls.js")).default;
-      if (!Hls.isSupported()) return;
-
-      const hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: false,
-        backBufferLength: 90,
-        startLevel: -1,
-        capLevelToPlayerSize: false,
-        maxMaxBufferLength: 600,
-      });
-
-      hlsRef.current = hls;
-      hls.loadSource(videoSrc);
-      hls.attachMedia(videoElement);
-    };
-
-    loadHLS();
+    attachTo(videoSrc, videoElement);
 
     return () => {
       videoElement.removeEventListener("canplay", handleCanPlay);
       videoElement.removeEventListener("loadeddata", handleLoadedData);
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
-      }
+      detachFrom(videoSrc);
     };
   }, [videoSrc]);
 

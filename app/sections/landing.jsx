@@ -5,25 +5,27 @@ import AudioPermissionButton from "../ui/AudioPermissionButton";
 import AppIconPopover from "../ui/AppIconPopover";
 import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
 import { useWaveReady } from "../ui/hooks/useWaveReady";
-import { useVideoPreloader } from "../ui/hooks/useVideoPreloader";
 
 const EXPLORING_APPS = [
   {
     name: 'Stitch',
-    icon: '/assets/icon/homepage/stitch.png',
-    videoSrc: '/assets/videos/homepage/stich-tryout.mp4',
+    icon: 'https://cdn.sanity.io/images/iy4m4myd/production/897c378d3e28ae11a01402de604a2885fa420826-512x512.png',
+    videoSrc: 'https://stream.mux.com/qJGxPsYlJkO0275dkd5zCAQ8kXfXLl73MAkLuhxvsTG8.m3u8?min_resolution=720p',
+    thumbnail: 'https://image.mux.com/qJGxPsYlJkO0275dkd5zCAQ8kXfXLl73MAkLuhxvsTG8/thumbnail.png?width=214&height=121&time=5',
     description: 'Using Google\'s vibe-design app to get Nothing Phone\'s design style.',
   },
   {
     name: 'Paper',
-    icon: '/assets/icon/homepage/Paper App Icon.png',
-    videoSrc: '/assets/videos/homepage/paper-tryout-2.mp4',
+    icon: 'https://cdn.sanity.io/images/iy4m4myd/production/d9c4a5eea109d6bf65f64fecf8be707a958616f0-512x512.png',
+    videoSrc: 'https://stream.mux.com/01osz3h02MyrpkXmeDBvMlsqBANcvlRMlAMfRvg3Hk4vc.m3u8?min_resolution=720p',
+    thumbnail: 'https://image.mux.com/01osz3h02MyrpkXmeDBvMlsqBANcvlRMlAMfRvg3Hk4vc/thumbnail.png?width=214&height=121&time=5',
     description: 'Trying the new \"Figma for Agents\" to explore different themes for my portfolio.',
   },
   {
     name: 'Figma Make',
-    icon: '/assets/icon/homepage/figma make logo.webp',
-    videoSrc: '/assets/videos/homepage/figmamaketryout.mp4',
+    icon: 'https://cdn.sanity.io/images/iy4m4myd/production/a6786cced7c749dcac23d2ab60a6363783a0ec75-75x75.webp',
+    videoSrc: 'https://stream.mux.com/wtOuzS01hOLuru1Zv48K19PjeXpRFwn9RqbpLif1Iswk.m3u8?min_resolution=720p',
+    thumbnail: 'https://image.mux.com/wtOuzS01hOLuru1Zv48K19PjeXpRFwn9RqbpLif1Iswk/thumbnail.png?width=214&height=121&time=5',
     description: 'Using Figma Make to make a study buddy app and win a make-a-thon challenge.',
   },
   // {
@@ -49,7 +51,6 @@ export default function Landing() {
     playOnlyOnInitialLoad: true,
   });
 
-  useVideoPreloader(EXPLORING_APPS.map((a) => a.videoSrc));
 
   // Icons stagger individually — separate inner AnimatedGroup so each icon
   // gets its own motion child, not the whole row as one block
