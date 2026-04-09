@@ -66,7 +66,6 @@ export default function Footer() {
         </TextLoop></span>
       </div>
       <div className="flex flex-col items-end gutter-xs">
-        <span className="text-tiny text-[#9B907A] tracking-wide uppercase" aria-label="This website is agent-friendly">Agent-friendly</span>
         <div className="flex flex-wrap gutter-sm justify-end">
         <Link href="/" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           HOME
