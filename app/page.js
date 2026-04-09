@@ -4,10 +4,12 @@ import Projects from "./sections/projects";
 export default function Home() {
   return (
     <main>
-    <Landing />
-    <div id="projects">
+    <section data-label="hero" aria-label="Hero introduction">
+      <Landing />
+    </section>
+    <section id="projects" data-label="selected-work" aria-label="Selected work and case studies">
       <Projects />
-    </div>
+    </section>
     </main>
   );
 }

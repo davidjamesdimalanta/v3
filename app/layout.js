@@ -7,8 +7,24 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "David Dimalanta",
-  description: "Toronto-based Product Designer",
+  description: "Toronto-based Product Designer specializing in product design, UX, and UI. Based in Toronto, Canada. Previously at iHub, Socratic, and Goable.",
   metadataBase: new URL('https://daviddim.ca'),
+  keywords: [
+    "David Dimalanta",
+    "product designer",
+    "UX designer",
+    "UI designer",
+    "Toronto",
+    "portfolio",
+    "interaction design",
+    "design systems",
+    "web design",
+    "case study",
+    "University of Toronto",
+    "Next.js",
+    "Figma",
+  ],
+  authors: [{ name: "David Dimalanta", url: "https://daviddim.ca" }],
   openGraph: {
     title: "David Dimalanta",
     description: "Toronto-based Product Designer",

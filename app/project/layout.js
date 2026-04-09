@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 
 export default function ProjectLayout({ children }) {
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full min-h-screen" data-label="case-study">
       {children}
     </div>
   );

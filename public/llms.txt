@@ -1,0 +1,32 @@
+# David Dimalanta — Portfolio
+
+> Toronto-based Product Designer. Available for full-time roles.
+
+## About
+
+David Dimalanta is a product designer based in Toronto, Canada, with a background in interaction design, UI/UX, and frontend development. He studies at the University of Toronto. His work blends a strong foundation in math and code with a focus on clear, human-centred product experiences.
+
+- Email: david.dimalanta@mail.utoronto.ca
+- LinkedIn: https://www.linkedin.com/in/daviddimalanta/
+- GitHub: https://github.com/davidjamesdimalanta
+- CV: https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view
+
+## Case Studies
+
+### Goable — Unearthing Hidden Barriers in Accessible Washrooms
+URL: https://daviddim.ca/project/goable
+A research-driven project uncovering accessibility gaps in public washroom design through user interviews, field observation, and iterative prototyping.
+
+### Socratic — Tailor Your Scholarship Essays with Critical Thinkers
+URL: https://daviddim.ca/project/socratic
+An AI-assisted writing tool that helps students craft stronger scholarship essays by engaging with Socratic dialogue and critical thinking frameworks.
+
+### iHub — Web Developer of a Campus Design Agency
+URL: https://daviddim.ca/project/ihub
+Frontend development and design work for iHub, a student-run design agency at the University of Toronto.
+
+## Pages
+
+- Home: https://daviddim.ca
+- About: https://daviddim.ca/about
+- Sitemap: https://daviddim.ca/sitemap.xml

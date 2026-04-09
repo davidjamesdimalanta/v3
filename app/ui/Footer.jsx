@@ -22,7 +22,7 @@ export default function Footer() {
   const { playButtonHover } = useSoundEffects();
 
   return (
-    <footer className="p-4 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill">
+    <footer className="p-4 md:p-8 text-left flex flex-col md:flex-row gap-4 md:gap-0 justify-between w-fill" data-label="site-footer">
       <div className="inline-flex flex-wrap text-button text-[#2C4E47] tracking-wide uppercase">
         <span>Powered by matcha pandan.&nbsp;</span>
         <span className="inline-flex whitespace-nowrap">Built with&nbsp;<TextLoop
@@ -65,7 +65,9 @@ export default function Footer() {
           ))}
         </TextLoop></span>
       </div>
-      <div className="flex flex-wrap gutter-sm">
+      <div className="flex flex-col items-end gutter-xs">
+        <span className="text-tiny text-[#9B907A] tracking-wide uppercase" aria-label="This website is agent-friendly">Agent-friendly</span>
+        <div className="flex flex-wrap gutter-sm justify-end">
         <Link href="/" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           HOME
         </Link>
@@ -83,7 +85,8 @@ export default function Footer() {
       </Link>
       <Link href="https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-button text-[#2C4E47] hover:bd-text" onMouseEnter={playButtonHover}>
           CV
-      </Link>  
+      </Link>
+      </div>
       </div>
     </footer>
   );
