@@ -40,6 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+.agents
 .claude
 .playwright-mcp
 
@@ -48,3 +49,8 @@ FCO.md
 FCO.txt
 
 CLAUDE.md
+
+docs
+
+# git worktrees
+.worktrees
