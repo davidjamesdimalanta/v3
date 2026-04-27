@@ -1,16 +1,11 @@
-import Landing from "./sections/landing";
-import Projects from "./sections/projects";
+import HomepageHero from "./sections/HomepageHero";
 
 export default function Home() {
   return (
-    <main>
-    <section data-label="hero" aria-label="Hero introduction">
-      <Landing />
-    </section>
-    <section id="projects" data-label="selected-work" aria-label="Selected work and case studies">
-      <Projects />
-    </section>
+    <main className="flex flex-col items-center">
+      <section data-label="hero-and-work" aria-label="Hero introduction and selected work" className="w-full">
+        <HomepageHero />
+      </section>
     </main>
   );
 }
-
