@@ -21,15 +21,15 @@ export default function CaseStudyHighlightsBlock({
   videos = [],
   dark = false,
 }) {
-  const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
-  const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
-  const descColor    = dark ? "text-(--text-lightcolor-80)" : "text-(--text-color-80)";
-  const bgClass      = dark ? "bg-[#141509]" : "";
+  const headingColor = dark ? "text-(--schemes-inverse-on-surface) opacity-60" : "text-(--text-color-60)";
+  const titleColor   = dark ? "text-(--schemes-inverse-on-surface)" : "text-(--text-color-100)";
+  const descColor    = dark ? "text-(--schemes-inverse-on-surface) opacity-80" : "text-(--text-color-80)";
+  const bgClass      = dark ? "bg-(--schemes-inverse-surface)" : "";
 
   return (
-    <div className={`px-4 md:px-8 py-16 flex flex-col gutter-lg ${bgClass}`}>
+    <div className={`px-4 md:px-8 py-16 flex flex-col items-center gutter-lg ${bgClass}`}>
       {/* Header text */}
-      <div className="flex flex-col gutter-xs max-w-2xl">
+      <div className="flex flex-col gutter-xs max-w-[1200px] mx-auto">
         {sectionHeading && (
           <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
             {sectionHeading}
@@ -40,7 +40,7 @@ export default function CaseStudyHighlightsBlock({
       </div>
 
       {/* Video grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1200px]">
         {videos.map((video, i) => (
           <CaseStudyMediaBlock
             key={i}

@@ -103,17 +103,17 @@ export default function CaseStudyMediaBlock({
     small: {
       maxWidth: "max-w-lg",           // 512px (32rem), matches CaseStudyTextBlock
       aspectRatio: "1/1",              // Square
-      innerMargin: "px-4 md:px-8",     // Responsive padding (16px mobile, 32px desktop)
+      innerMargin: "px-4 md:px-5",     // Responsive padding
     },
     medium: {
       maxWidth: "max-w-[1290px]",      // 1290px
       aspectRatio: "1290/622",         // ~2.07:1 (from safe-area dimensions)
-      innerMargin: "px-4 md:px-8",     // Responsive padding (16px mobile, 32px desktop)
+      innerMargin: "px-4 md:px-5",     // Responsive padding
     },
     large: {
       maxWidth: "max-w-[1664px]",      // Current width
       aspectRatio: "1867/1194",               // Use aspectRatio prop
-      innerMargin: "px-4 md:px-8",     // Responsive padding (16px mobile, 32px desktop)
+      innerMargin: "px-4 md:px-5",     // Responsive padding
     },
   };
 
@@ -443,7 +443,7 @@ export default function CaseStudyMediaBlock({
   return (
     <figure
       id={id}
-      className={`mx-auto flex flex-col items-center justify-center pt-8 w-full ${currentSize.maxWidth} ${className}`}
+      className={`mx-auto flex flex-col items-center justify-center pt-8 md:pt-0 w-full ${currentSize.maxWidth} ${className}`}
       style={{
         '--bg-color': backgroundColor,
         '--fg-color': foregroundColor,

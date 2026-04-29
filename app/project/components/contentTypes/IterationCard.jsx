@@ -40,7 +40,7 @@ export default function IterationCard({
       )}
 
       {quote && (
-        <blockquote className="border-l-2 border-[#799A92] pl-4 my-1">
+        <blockquote className="border-l-2 border-(--schemes-tertiary) pl-4 my-1">
           <p className="text-p text-400 italic text-(--text-color-60)">
             &ldquo;{quote}&rdquo;
           </p>

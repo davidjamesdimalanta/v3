@@ -22,52 +22,71 @@ export default function CaseStudyNavigation({ sections = [] }) {
   const lenis = useLenis();
 
   useEffect(() => {
-    // Don't run if no sections
     if (sections.length === 0) return;
 
-    const observerOptions = {
-      root: null,
-      // Create hysteresis: sections must enter upper-middle 35% of viewport to become active
-      // This prevents rapid switching when sections are near boundaries
-      rootMargin: "-20% 0px -45% 0px",
-      // Use only 5 thresholds instead of 101 to reduce callback frequency by 95%
-      threshold: [0, 0.25, 0.5, 0.75, 1.0],
-    };
+    let rafId = null;
 
-    const observerCallback = (entries) => {
-      // Filter only intersecting entries (visible in viewport)
-      const intersectingEntries = entries.filter(entry => entry.isIntersecting);
+    const determineActiveSection = () => {
+      const activeZoneTop = window.innerHeight * 0.20;
+      const activeZoneBottom = window.innerHeight * 0.55;
+      const activeZoneCenter = (activeZoneTop + activeZoneBottom) / 2;
 
-      if (intersectingEntries.length === 0) return;
+      let bestSection = null;
+      let minDistance = Infinity;
 
-      // Find the section with highest intersectionRatio (most visible in active zone)
-      let mostVisible = intersectingEntries[0];
-      intersectingEntries.forEach((entry) => {
-        if (entry.intersectionRatio > mostVisible.intersectionRatio) {
-          mostVisible = entry;
+      sections.forEach(({ id }) => {
+        // Check for an explicit data-id marker first, fallback to the main container id
+        const element = document.querySelector(`[data-id="${id}"]`) || document.getElementById(id);
+        
+        if (!element) return;
+
+        const rect = element.getBoundingClientRect();
+        
+        // Calculate how much the element overlaps with the active zone
+        const overlapTop = Math.max(rect.top, activeZoneTop);
+        const overlapBottom = Math.min(rect.bottom, activeZoneBottom);
+        const overlap = Math.max(0, overlapBottom - overlapTop);
+        
+        if (overlap > 0) {
+          // If the element is intersecting the active zone, find its distance to the center
+          // We prioritize elements whose center is closest to the active zone center
+          const elementCenter = rect.top + (rect.height / 2);
+          const distance = Math.abs(elementCenter - activeZoneCenter);
+          
+          // Give a priority boost to elements that occupy a large portion of the zone
+          // or are fully contained within it
+          const adjustedDistance = distance - (overlap * 2);
+
+          if (adjustedDistance < minDistance) {
+            minDistance = adjustedDistance;
+            bestSection = id;
+          }
         }
       });
 
-      const newSection = mostVisible.target.id;
-
-      // Only update if different from current (prevents unnecessary re-renders)
-      if (newSection !== activeSection) {
-        setActiveSection(newSection);
+      if (bestSection && bestSection !== activeSection) {
+        setActiveSection(bestSection);
       }
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        determineActiveSection();
+      });
+    };
 
-    // Observe all sections
-    sections.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+    // Initial check
+    determineActiveSection();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, [sections, activeSection]);
 
@@ -99,7 +118,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
   if (sections.length === 0) return null;
 
   return (
-    <nav className="sticky top-0 z-60 w-full border-b border-[#D5CFC6] hidden lg:block" style={{ backgroundColor: 'rgba(237, 236, 234, 0.72)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
+    <nav className="sticky top-0 z-60 w-full border-b border-(--schemes-outline-variant) hidden lg:block" style={{ backgroundColor: 'color-mix(in oklch, var(--schemes-surface) 72%, transparent)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
       <div className="mx-auto px-4 md:px-8 py-4">
         <ul className="flex flex-wrap justify-center items-center gap-6">
           {sections.map(({ id, heading }) => (

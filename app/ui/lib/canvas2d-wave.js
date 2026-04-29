@@ -3,6 +3,8 @@
  * Mirrors the WebGPU wave effect *
  *********************************/
 
+import { readCssColor255 } from './cssColor.js';
+
 export class Canvas2DWaveRenderer {
   constructor(canvas, initialMode = 'design') {
     this.canvas = canvas;
@@ -20,21 +22,23 @@ export class Canvas2DWaveRenderer {
     this.waveOpacities = new Array(this.numWaves).fill(1.0);
     this.completionEventFired = false;
 
-    // Wave color modes
+    // Wave color modes — design mode pulls from MT --schemes-primary so the
+    // wave inherits theme/contrast changes from globals.css automatically.
+    // Fallback matches the resolved oklch() value of the light scheme primary.
     this.figGreen = { r: 17, g: 174, b: 92 };
-    this.figBlue = { r: 58, g: 44, b: 43 };
+    this.figBlue = readCssColor255('--schemes-primary') ?? { r: 144, g: 74, b: 72 };
 
     this.color = initialMode === 'dev' ? this.figGreen : this.figBlue;
 
     // Wave configs matching the WGSL shader parameters
     this.waves = [
-      { speed: 0.2, freq: 0.20, amp: 0.2,  offset: 0.9,  lineWidth: 0.1,  sharpness: 15, invert: false },
-      { speed: 0.4, freq: 0.40, amp: 0.15, offset: 0.9,  lineWidth: 0.1,  sharpness: 17, invert: false },
-      { speed: 0.3, freq: 0.60, amp: 0.15, offset: 0.9,  lineWidth: 0.05, sharpness: 23, invert: false },
-      { speed: 0.1, freq: 0.26, amp: 0.07, offset: 0.8,  lineWidth: 0.1,  sharpness: 17, invert: true  },
-      { speed: 0.3, freq: 0.36, amp: 0.07, offset: 0.8,  lineWidth: 0.1,  sharpness: 17, invert: true  },
-      { speed: 0.5, freq: 0.46, amp: 0.07, offset: 0.8,  lineWidth: 0.05, sharpness: 23, invert: true  },
-      { speed: 0.2, freq: 0.58, amp: 0.05, offset: 0.8,  lineWidth: 0.2,  sharpness: 15, invert: true  },
+      { speed: 0.2, freq: 0.20, amp: 0.2,  offset: 0.65,  lineWidth: 0.1,  sharpness: 15, invert: false },
+      { speed: 0.4, freq: 0.40, amp: 0.15, offset: 0.65,  lineWidth: 0.1,  sharpness: 17, invert: false },
+      { speed: 0.3, freq: 0.60, amp: 0.15, offset: 0.65,  lineWidth: 0.05, sharpness: 23, invert: false },
+      { speed: 0.1, freq: 0.26, amp: 0.07, offset: 0.35,  lineWidth: 0.1,  sharpness: 17, invert: true  },
+      { speed: 0.3, freq: 0.36, amp: 0.07, offset: 0.35,  lineWidth: 0.1,  sharpness: 17, invert: true  },
+      { speed: 0.5, freq: 0.46, amp: 0.07, offset: 0.35,  lineWidth: 0.05, sharpness: 23, invert: true  },
+      { speed: 0.2, freq: 0.58, amp: 0.05, offset: 0.35,  lineWidth: 0.2,  sharpness: 15, invert: true  },
     ];
   }
 
@@ -47,6 +51,9 @@ export class Canvas2DWaveRenderer {
 
   setColorMode(mode) {
     this.currentMode = mode;
+    // Re-read MT primary on every mode switch so theme changes (light/dark/HC)
+    // propagate without recreating the renderer.
+    this.figBlue = readCssColor255('--schemes-primary') ?? this.figBlue;
     this.color = mode === 'dev' ? this.figGreen : this.figBlue;
   }
 

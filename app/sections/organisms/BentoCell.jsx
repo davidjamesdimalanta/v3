@@ -85,17 +85,19 @@ export default function BentoCell({
   const isR2 = variant === "r2";
 
   // Shared outer button classes
+  // bd-card = layered card shadow (no backdrop-blur) — matches Figma "Surface/bd Default" drop shadow
+  // hover:bd-active = elevated shadow on interaction
   const baseClasses =
     "relative flex flex-col text-left cursor-pointer " +
-    "border border-[var(--schemes-outline-variant)] rounded-[24px] p-6 overflow-hidden " +
-    "bd hover:bd-active hover-surface " +
+    "border border-outline-variant rounded-[24px] p-6 overflow-hidden " +
+    "bd-card hover:bd-active hover-surface " +
     "focus-visible:outline-2 focus-visible:outline-[var(--schemes-primary)] focus-visible:outline-offset-2";
 
   if (isHero) {
     return (
       <button
         type="button"
-        className={`${baseClasses} flex-1 h-full bg-surface`}
+        className={`${baseClasses} w-full h-full bg-surface`}
         onClick={handleClick}
         onMouseEnter={playHover}
         aria-label={`View project: ${title}`}
@@ -125,9 +127,8 @@ export default function BentoCell({
             />
           )}
           {/* Scrim — bottom fade so text is legible */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--schemes-surface)] via-[var(--schemes-surface)]/60 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-(--schemes-surface) via-(--schemes-surface)/10 " />
         </div>
-
         {/* Category label — top-left */}
         <span className="relative z-10 t-label text-on-surface-variant">{category}</span>
 
@@ -140,27 +141,26 @@ export default function BentoCell({
     );
   }
 
-  // R1 — surface bg, image offset
+  // R1 — surface-container-highest bg (matches Figma DS top-right card tint)
   if (!isR2) {
     return (
       <button
         type="button"
-        className={`${baseClasses} flex-1 min-h-0 bg-surface`}
+        className={`${baseClasses} flex-1 min-h-0 w-full bg-surface-container-highest`}
         onClick={handleClick}
         onMouseEnter={playHover}
         aria-label={`View project: ${title}`}
       >
-        {/* Background image — full bleed, offset per Figma */}
         {thumbnail && (
-          <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
+          <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px] bg-surface-container-highest">
             <Image
               src={thumbnail}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover object-left-top"
+              className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--schemes-surface)] via-[var(--schemes-surface)]/70 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent from-66% to-(--schemes-surface-container-highest) to-86%" />
           </div>
         )}
 
@@ -174,7 +174,7 @@ export default function BentoCell({
   return (
     <button
       type="button"
-      className={`${baseClasses} flex-1 min-h-0 bg-surface-container`}
+      className={`${baseClasses} flex-1 min-h-0 w-full bg-surface-container`}
       onClick={handleClick}
       onMouseEnter={playHover}
       aria-label={`View project: ${title}`}
@@ -190,7 +190,7 @@ export default function BentoCell({
             className="object-cover"
           />
           {/* Figma gradient: transparent 66% -> surface-container 86% */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent from-[66%] to-[var(--schemes-surface-container)] to-[86%]" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent from-66% to-(--schemes-surface-container) to-86%" />
         </div>
       )}
 

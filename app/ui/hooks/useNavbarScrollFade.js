@@ -18,10 +18,6 @@ export function useNavbarScrollFade() {
     fadeEnd: 100,
     minOpacity: 0,
     maxOpacity: 1,
-    onPageChange: (pathname) => {
-      // Hide navbar completely on project pages
-      return pathname?.startsWith('/project') ? 0 : null;
-    }
   });
 
   return { navbarOpacity: opacity };

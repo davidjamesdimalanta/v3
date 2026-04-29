@@ -51,7 +51,7 @@ function PersonaCardContent({ persona }) {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-small text-600">{persona.name}</p>
-      <hr className="border-[#D6CAC8]" />
+      <hr className="border-(--schemes-outline-variant)" />
       <ul className="flex flex-col gap-2">
         {persona.traits.map((trait, i) => (
           <li key={i} className="text-small text-400 flex gap-2">
@@ -60,7 +60,7 @@ function PersonaCardContent({ persona }) {
           </li>
         ))}
       </ul>
-      <hr className="border-[#D6CAC8]" />
+      <hr className="border-(--schemes-outline-variant)" />
       {/* <p className="text-tiny uppercase tracking-wide opacity-60">Design connection</p> */}
       <p className="text-small text-400 italic"><BoldText text={persona.designConnection} /></p>
     </div>

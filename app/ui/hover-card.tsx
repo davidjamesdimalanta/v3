@@ -44,7 +44,7 @@ function HoverCardContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          "rounded-sm px-4 md:px-6 py-4 shadow-md bg-[#ECEAE9] border border-[#D6CAC8] text-p text-[#3A1F1E] data-[state=open]:animate-in data-[state=closed]:animate-out data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) transition-all duration-100",
+          "rounded-sm px-4 md:px-6 py-4 shadow-md bg-(--schemes-surface-container) border border-(--schemes-outline-variant) text-p text-(--schemes-on-surface) data-[state=open]:animate-in data-[state=closed]:animate-out data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) transition-all duration-100",
           className
         )}
         {...props}
@@ -66,7 +66,7 @@ function HoverCardVideoContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          "rounded-sm p-0 overflow-hidden shadow-md bg-[#ECEAE9] border border-[#D6CAC8] text-p text-[#3A1F1E] data-[state=open]:animate-in data-[state=closed]:animate-out data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) transition-all duration-100",
+          "rounded-sm p-0 overflow-hidden shadow-md bg-(--schemes-surface-container) border border-(--schemes-outline-variant) text-p text-(--schemes-on-surface) data-[state=open]:animate-in data-[state=closed]:animate-out data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 origin-(--radix-hover-card-content-transform-origin) transition-all duration-100",
           className
         )}
         {...props}

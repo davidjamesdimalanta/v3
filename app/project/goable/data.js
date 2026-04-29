@@ -3,7 +3,7 @@ export const projectData = {
   name: "GoAble",
 
   // Main project title (displayed prominently in the hero section)
-  title: "School Project: Redefining \"washroom access\"",
+  title: "Personalizing washroom access with convenience and community",
 
   // Project links (optional - can be empty array)
   // Example: links: [{ url: "https://example.com", label: "View Project" }]
@@ -12,8 +12,8 @@ export const projectData = {
   ],
 
   // Cover video and thumbnail for project card
-  coverVideo: "https://stream.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA.m3u8?min_resolution=1080p",
-  coverImage: "https://image.mux.com/6GaqiMIUzmLy6qAVvfD6BYjA3lG46OdDr602V5j01WcQA/thumbnail.png?width=1919&height=1080&time=0",
+  coverVideo: "https://stream.mux.com/FQHn7MDR7pH3xtZIwtP41yEiLAZlAc02xmX3eSR8dY7A.m3u8",
+  coverImage: "https://image.mux.com/FQHn7MDR7pH3xtZIwtP41yEiLAZlAc02xmX3eSR8dY7A/thumbnail.png?width=1919&height=1080&time=0",
 
   // Array of awards and recognition (optional - can be empty array)
   awards: [
@@ -28,7 +28,55 @@ export const projectData = {
     "I led the development of the design system and the interactive prototypes, using Figma Variables to flesh out interaction insights in our initial designs."
   ],
 
+  // ProjectDrawer — Problem / Solutions / Takeaways structure (Figma: drawer 838:536)
+  problem: {
+    title: "The Problem",
+    description:
+      "Whether it's Google Maps, or dedicated washroom finding apps like Toilet Finder, washroom listings on the current market lack sufficient washroom access information for people with diverse needs.",
+  },
+
+  solutions: {
+    title: "The Solution",
+    items: [
+      {
+        title: "Personalized onboarding & search.",
+        description:
+          "Since the accessibility label didn't always cater to people's needs, GoAble asks users about them during onboarding — then filters results to match their profile.",
+      },
+      {
+        title: "Community-driven status updates.",
+        description:
+          "Washroom details pages show real-time availability, community sentiment, and granular amenity info so users can make informed decisions before they arrive.",
+      },
+      {
+        title: "Three-tap review & verification.",
+        description:
+          "Quick-select, pre-loaded options reduce friction to near zero — making it just as easy to leave a review as it is to skip it.",
+      },
+    ],
+  },
+
+  takeaways: {
+    title: "Takeaways",
+    items: [
+      {
+        title: "Access is Multidimensional",
+        description: "This project taught me that access involves not just physical constraints, but also emotional and political barriers.",
+      },
+      {
+        title: "The Power of Restraint",
+        description: "Users appreciate restraint. Providing exactly what they need, while respecting their choice, is better than maximizing options.",
+      },
+      {
+        title: "Fidelity is a QA Tool",
+        description: "Building a mid-fi prototype with Figma Variables let me stress-test interactions and catch critical usability issues early.",
+      },
+    ],
+  },
+
   // Project details displayed in a grid
+  featuredCategory: "PRODUCT DESIGN",
+
   details: {
     type: "Concept",
     role: "Product Designer",

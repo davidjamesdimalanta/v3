@@ -46,8 +46,8 @@ export function CaseStudySectionBlock({
 
   const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
   const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
-  const descColor    = dark ? "text-(--text-lightcolor-80)" : "text-(--text-color-80)";
-  const bgClass      = dark ? "bg-[#141509]" : "";
+  const descColor    = dark ? "text-(--schemes-inverse-on-surface)" : "text-(--schemes-on-surface)";
+  const bgClass      = dark ? "bg-(--schemes-inverse-surface)" : "";
 
   useEffect(() => {
     if (!hasTextStates || childrenArray.length === 0) return;
@@ -157,8 +157,9 @@ export function CaseStudySectionBlock({
   })();
 
   return (
-    <div className={`flex flex-col lg:flex-row lg:gutter-lg px-4 md:px-8 ${bgClass} ${className}`}>
+    <div className={`flex flex-col lg:flex-row lg:gutter-lg px-4 xl:px-0 ${bgClass} ${className}`}>
       {/* LEFT — sticky text column (aria-hidden when textStates: AT content lives in right column) */}
+      <div className="w-full max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
       <aside
         aria-hidden={hasTextStates ? "true" : undefined}
         className={`${hasTextStates ? 'hidden lg:flex' : 'flex'} flex-1 lg:basis-[720px] lg:sticky lg:top-[45dvh] lg:self-start flex-col gap-2 py-0`}
@@ -237,6 +238,7 @@ export function CaseStudySectionBlock({
           )}
         </div>
       </div>
+      </div>
     </div>
   );
 }
@@ -261,11 +263,11 @@ export function CaseStudySectionBlockFixed({
 }) {
   const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
   const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
-  const descColor    = dark ? "text-(--text-lightcolor-80)" : "text-(--text-color-80)";
-  const bgClass      = dark ? "bg-[#141509]" : "";
+  const descColor    = dark ? "text-(--schemes-inverse-on-surface)" : "text-(--schemes-on-surface)";
+  const bgClass      = dark ? "bg-(--schemes-inverse-surface)" : "";
 
   return (
-    <div className={`flex flex-col lg:flex-row lg:items-center lg:gutter-lg px-4 md:px-8 ${bgClass} ${className}`}>
+    <div className={`flex flex-col lg:flex-row lg:items-center lg:gutter-lg px-4 xl:px-0 w-full max-w-[1200px] mx-auto ${bgClass} ${className}`}>
       {/* LEFT — scrolling text column (no sticky) */}
       <aside className="flex-1 lg:basis-[720px] flex flex-col gap-2 py-8">
         {sectionHeading && (

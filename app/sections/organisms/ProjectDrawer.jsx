@@ -1,14 +1,58 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Drawer } from "vaul";
 import Image from "next/image";
 import Button from "../../ui/Button";
-import SkillTag from "../../ui/SkillTag";
 
+/**
+ * Lock the body with custom inline styles while the drawer is open,
+ * and stop Lenis smooth-scroll so the drawer content can scroll natively.
+ */
+function useDrawerBodyLock(isOpen) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // --- Stop Lenis so it doesn't hijack scroll inside the drawer ---
+    const lenis = typeof window !== "undefined" ? window.lenis : null;
+    if (lenis) lenis.stop();
+
+    return () => {
+      // --- Restart Lenis when drawer closes ---
+      if (lenis) lenis.start();
+    };
+  }, [isOpen]);
+}
+
+/**
+ * ProjectDrawer — Figma node 838:536
+ * Vertically stacked: Header → Hero media → Problem → Solutions → Takeaways
+ * 1200px outer frame, 700px content column, scrollable body, primary CTA.
+ *
+ * IMPORTANT — Unmount lifecycle:
+ * We keep a ref to the last non-null `project` so the drawer content stays
+ * rendered during the 500 ms closing animation. Without this, the parent
+ * would set `project` to null the instant `open` becomes false, causing the
+ * drawer to flash blank before it slides out.
+ */
 export default function ProjectDrawer({ open, onOpenChange, project }) {
-  if (!project) return null;
+  useDrawerBodyLock(open);
 
-  const { slug, name, title, coverImage, details, skills = [] } = project;
+  // Stash the last valid project so content persists through close animation
+  const lastProjectRef = useRef(project);
+  if (project) {
+    lastProjectRef.current = project;
+  }
+
+  // Render data: use the live project while open, fall back to stashed
+  // version during the closing animation so content doesn't vanish.
+  const renderProject = project ?? lastProjectRef.current;
+
+  // If we've never had a project at all, nothing to render
+  if (!renderProject) return null;
+
+  const { slug, name, title, coverImage, problem, solutions, takeaways } =
+    renderProject;
 
   return (
     <Drawer.Root open={open} onOpenChange={onOpenChange}>
@@ -16,69 +60,99 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
         <Drawer.Overlay className="fixed inset-0 z-40 bg-black/40" />
         <Drawer.Content
           className="fixed bottom-0 left-0 right-0 z-50 bg-surface rounded-t-[24px] bd flex flex-col max-h-[90vh] outline-none"
-          aria-labelledby="drawer-title"
         >
-          {/* Handle */}
-          <div className="mx-auto mt-3 h-1 w-9 shrink-0 rounded-full bg-[var(--schemes-on-surface-variant)]/30" />
+          <Drawer.Title className="sr-only">{name}</Drawer.Title>
 
-          <Drawer.Title id="drawer-title" className="sr-only">
-            {name}
-          </Drawer.Title>
+          {/* Drawer cutoff bump — matches Figma 838:579 */}
+          <div className="mx-auto mt-4 h-1 w-9 shrink-0 rounded-full bg-on-surface-variant opacity-30" />
 
-          {/* Scrollable body */}
-          <div className="overflow-y-auto flex-1">
-            <div className="max-w-[1200px] mx-auto px-6 py-8">
-              {/* Two-col desktop / single-col mobile */}
-              <div className="flex flex-col md:flex-row gutter-base md:gutter-lg">
-                {/* Left — cover art */}
-                {coverImage && (
-                  <div className="flex-1 relative aspect-video md:aspect-auto md:min-h-[280px] rounded-[16px] overflow-hidden shrink-0">
+          {/* Scrollable body — outer 1200px frame, inner 700px column */}
+          <div className="flex-1 overflow-y-auto select-text min-h-0" data-vaul-no-drag data-lenis-prevent>
+            <div className="max-w-[1200px] mx-auto px-4 md:px-5 py-8 md:py-10">
+              <div className="max-w-[700px] w-full mx-auto flex flex-col gutter-lg">
+                {/* Header — title cluster + primary CTA */}
+                <header className="flex flex-col md:flex-row md:items-start gutter-base md:justify-between">
+                  <div className="flex flex-col gap-1 min-w-0 flex-1">
+                    <h2 className="t-h5 text-on-surface">
+                      {name}
+                    </h2>
+                    {title && <p className="t-sm text-on-surface-variant">{title}</p>}
+                  </div>
+                  <div className="shrink-0">
+                    <Button
+                      text="Full Case Study"
+                      href={`/project/${slug}`}
+                      variant="primary"
+                      soundEffect="navigateProject"
+                    />
+                  </div>
+                </header>
+              </div>
+
+              {/* Hero media (Matches text max-width 700px container) */}
+              {coverImage && (
+                <div className="max-w-[700px] w-full mx-auto mt-8 mb-8">
+                  <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
                     <Image
                       src={coverImage}
                       alt={`${name} cover`}
                       fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="(max-width: 768px) 100vw, 700px"
                       className="object-cover"
                     />
                   </div>
+                </div>
+              )}
+
+              <div className="max-w-[700px] w-full mx-auto flex flex-col gutter-xl">
+                {/* The Problem */}
+                {problem?.description && (
+                  <section className="flex flex-col gutter-xs">
+                    <h3 className="t-label text-on-surface-variant">{problem.title ?? "The Problem"}</h3>
+                    <p className="t-p text-on-surface">{problem.description}</p>
+                  </section>
                 )}
 
-                {/* Right — metadata */}
-                <div className="flex-1 flex flex-col gutter-base">
-                  {/* Meta line */}
-                  <span className="t-label text-on-surface-variant">
-                    {details?.type}
-                    {details?.year ? ` · ${details.year}` : ""}
-                  </span>
-
-                  {/* Title */}
-                  <div className="flex flex-col gap-1">
-                    <h2 id="drawer-title-visible" className="t-h3 text-on-surface">{name}</h2>
-                    {title && <p className="t-p text-on-surface-variant">{title}</p>}
-                  </div>
-
-                  {/* Skills */}
-                  {skills.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {skills.map((skill, i) => (
-                        <SkillTag key={i} skill={skill.name} category={skill.category} />
+                {/* The Solution(s) */}
+                {solutions?.items?.length > 0 && (
+                  <section className="flex flex-col gutter-xs">
+                    <h3 className="t-label text-on-surface-variant">{solutions.title ?? "The Solution"}</h3>
+                    <div className="flex flex-col gutter-sm">
+                      {solutions.items.map((sol, i) => (
+                        <article key={i} className="flex flex-col">
+                          <h4 className="t-p text-on-surface text-500">{sol.title}</h4>
+                          <p className="t-p text-on-surface-variant">{sol.description}</p>
+                          {sol.media && (
+                            <div className="relative w-full aspect-video rounded-[16px] overflow-hidden bg-surface-container mt-2">
+                              <Image
+                                src={sol.media}
+                                alt={sol.title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 700px"
+                                className="object-cover"
+                              />
+                            </div>
+                          )}
+                        </article>
                       ))}
                     </div>
-                  )}
+                  </section>
+                )}
 
-                  {/* CTAs */}
-                  <div className="flex flex-wrap gap-3 mt-auto pt-2">
-                    <Button
-                      text="View case study"
-                      href={`/project/${slug}`}
-                      soundEffect="navigateProject"
-                    />
-                    <Button
-                      text="Close"
-                      onClick={() => onOpenChange(false)}
-                    />
-                  </div>
-                </div>
+                {/* Takeaways */}
+                {takeaways?.items?.length > 0 && (
+                  <section className="flex flex-col gutter-xs">
+                    <h3 className="t-label text-on-surface-variant">{takeaways.title ?? "Takeaways"}</h3>
+                    <div className="flex flex-col gutter-sm">
+                      {takeaways.items.map((item, i) => (
+                        <div key={i} className="flex flex-col gap-1">
+                          <h4 className="t-p text-on-surface text-500">{item.title}</h4>
+                          <p className="t-p text-on-surface-variant">{item.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             </div>
           </div>

@@ -9,15 +9,43 @@ const CloseIcon = () => (
   </svg>
 );
 
-export default function Button({ text, icon, href, className = "", target, rel, soundEffect, ...props }) {
+export default function Button({
+  text,
+  icon,
+  href,
+  className = "",
+  target,
+  rel,
+  soundEffect,
+  variant = "glass",
+  size = "md",
+  ...props
+}) {
   // Sound effects (opt-in via soundEffect prop)
   const { playButtonHover, playNavigateHome, playNavigateProject } = useSoundEffects();
 
   const isIconOnly = icon && !text;
-  const baseStyles = isIconOnly
-    ? "flex items-center justify-center w-8 h-8 rounded-full cursor-pointer"
-    : "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center uppercase";
-  const variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active hover-surface";
+
+  // Ghost / primary variants delegate sizing + styling to the Figma DS
+  // btn-* utilities defined in globals.css, so the visual matches the
+  // material-theme components 1:1 (states, padding, radius, type).
+  const isDsVariant = variant === "ghost" || variant === "primary";
+
+  let baseStyles;
+  let variantStyles;
+
+  if (isIconOnly) {
+    baseStyles = "flex items-center justify-center w-8 h-8 rounded-full cursor-pointer";
+    variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active hover-surface";
+  } else if (isDsVariant) {
+    const sizeUtility = size === "sm" ? "btn-sm" : size === "lg" ? "btn-lg" : "btn-md";
+    const variantUtility = variant === "primary" ? "btn-primary" : "btn-ghost";
+    baseStyles = `btn-base ${sizeUtility}`;
+    variantStyles = `${variantUtility} hover-surface`;
+  } else {
+    baseStyles = "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center uppercase";
+    variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active hover-surface";
+  }
 
   const iconElement = icon === 'close' ? <CloseIcon /> : null;
   const content = isIconOnly ? iconElement : text;

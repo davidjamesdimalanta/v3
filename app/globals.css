@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 /* FONTS - Now handled by Next.js next/font */
+/* drawer-scroll-lock-v2 */
 
 /* VARIABLES */
 :root {
-    --bg-color: rgb(237, 236, 234);
-    --text-color: rgb(59, 45, 28);
-    --figma-brown: rgb(58, 31, 30);
-    --text-color-100: rgb(90, 54, 51);
-    --text-color-80: rgb(119, 90, 88);
-    --text-color-60: rgb(149, 127, 124);
-    --text-lightcolor-100: rgb(255, 255, 255);
-    --text-lightcolor-80: rgb(208, 208, 206);
-    --text-lightcolor-60: rgb(161, 161, 157);
+    /* Map legacy aliases to Figma DS Material Theme tokens
+       so the body and existing components inherit the new scheme automatically.
+       Authoritative values live in the [data-theme]/material-theme blocks below. */
+    --bg-color: var(--schemes-surface);
+    --text-color: var(--schemes-on-surface);
+    --figma-brown: var(--schemes-on-primary-container);
+    --text-color-100: var(--schemes-on-surface);
+    --text-color-80: var(--schemes-on-surface-variant);
+    --text-color-60: var(--schemes-outline);
+    --text-lightcolor-100: var(--schemes-inverse-on-surface);
+    --text-lightcolor-80: var(--schemes-on-surface-variant);
+    --text-lightcolor-60: var(--schemes-outline);
 }
 
 /* THEME OVERRIDES */
@@ -101,17 +105,48 @@
 }
 
 /* GENERAL */
+html {
+    scrollbar-gutter: stable; /* Reserve scrollbar gutter so layout never shifts when Vaul locks scroll */
+
+    /* ---- Scrollbar styling ---- */
+    /* Standard (Firefox + future browsers) */
+    scrollbar-color: var(--schemes-outline-variant) transparent;
+    scrollbar-width: thin;
+}
+
+/* Webkit scrollbar — track (container) is transparent; thumb uses outline-variant */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--schemes-outline-variant);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--schemes-outline);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
 body {
-    overflow-y: scroll;
-    overflow-x: none;
+    overflow-x: hidden;
     overscroll-behavior: contain !important;
-    scrollbar-gutter: stable; /* Prevent layout shift when scroll is locked */
     width: 100%;
     min-height: 100dvh;
     color: var(--text-color);
     background-color: var(--bg-color);
     font-family: var(--font-aspekta), sans-serif;
-    transition: padding-right 0.15s ease; /* Smooth padding transition for drawer */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-wrap: pretty;
@@ -1335,6 +1370,72 @@ body {
 @utility text-on-sage-green { color: var(--extended-colors-on-sage-green); }
 @utility text-on-sage-green-container { color: var(--extended-colors-on-sage-green-container); }
 
+@utility bg-inverse-surface { background-color: var(--schemes-inverse-surface); }
+@utility text-inverse-on-surface { color: var(--schemes-inverse-on-surface); }
+@utility bg-inverse-on-surface { background-color: var(--schemes-inverse-on-surface); }
+
 @utility border-outline { border-color: var(--schemes-outline); }
 @utility border-outline-variant { border-color: var(--schemes-outline-variant); }
+
+/* ===================================
+   VAUL DRAWER ANIMATIONS
+   Targets Radix Dialog data-state attributes used internally by Vaul.
+   Matches the 0.5s / cubic-bezier(0.32, 0.72, 0, 1) easing from Vaul's
+   TRANSITIONS constant so open and close feel consistent.
+   =================================== */
+
+/* ---- Drawer content keyframes ---- */
+@keyframes vaul-drawer-slide-up {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes vaul-drawer-slide-down {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+/* ---- Overlay keyframes ---- */
+@keyframes vaul-overlay-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vaul-overlay-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ---- Apply animations via data-state ---- */
+[data-vaul-drawer][data-state="open"] {
+  animation: vaul-drawer-slide-up 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-vaul-drawer][data-state="closed"] {
+  animation: vaul-drawer-slide-down 0.5s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+[data-vaul-overlay][data-state="open"] {
+  animation: vaul-overlay-fade-in 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-vaul-overlay][data-state="closed"] {
+  animation: vaul-overlay-fade-out 0.5s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Disable drawer motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-vaul-drawer],
+  [data-vaul-overlay] {
+    animation: none !important;
+  }
+}
 

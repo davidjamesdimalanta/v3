@@ -8,7 +8,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main>
-      <section data-label="about" aria-label="About David Dimalanta">
+      <section data-label="about" aria-label="About David Dimalanta" className="w-full max-w-[1200px] mx-auto">
         <AboutLanding />
       </section>
     </main>

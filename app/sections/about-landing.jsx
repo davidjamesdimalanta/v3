@@ -18,7 +18,7 @@ export default function AboutLanding() {
   return (
     <div
       id="about-landing"
-      className="relative flex flex-col justify-between w-full p-6 md:p-8 mt-40 pb-4"
+      className="relative flex flex-col justify-between w-full p-6 xl:px-0 mt-40 pb-4"
     >
       <AudioPermissionButton />
       <div className="w-full gutter-md">

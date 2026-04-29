@@ -342,7 +342,7 @@ export default function MediaBlock({
 
   return (
     <div className={`flex flex-col gutter-xs ${className}`}>
-      <div className={`w-full ${aspectClass} bg-[#F9F9F9] overflow-hidden relative`}>
+      <div className={`w-full ${aspectClass} bg-(--schemes-surface-container-low) overflow-hidden relative`}>
         {/* Thumbnail/Poster Image - shown while video loads */}
         {thumbnail && type === "video" && (
           <div

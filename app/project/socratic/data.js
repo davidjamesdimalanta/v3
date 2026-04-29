@@ -27,7 +27,55 @@ export const projectData = {
     "The result is a vector canvas-based platform powered by the claude API for multiple drafts organized visually, insight from scholarship winning drafts, and AI interaction that feels more like a conversation.",
 ],
 
+  // ProjectDrawer — Problem / Solutions / Takeaways structure (Figma: drawer 838:536)
+  problem: {
+    title: "The Problem",
+    description:
+      "Scholarship essays are scored against criteria students can't see. Most AI writing tools optimize for fluency, not the rubric — leaving applicants polishing the wrong things.",
+  },
+
+  solutions: {
+    title: "The Solution",
+    items: [
+      {
+        title: "Vector canvas for parallel drafts",
+        description:
+          "A spatial canvas lets writers compare multiple drafts side-by-side instead of editing a single doc into the ground.",
+      },
+      {
+        title: "Rubric-aware AI conversations",
+        description:
+          "The Claude-powered assistant references winning essay patterns and surfaces hidden judging criteria as the writer drafts.",
+      },
+      {
+        title: "Built in 7 days as a hackathon team",
+        description:
+          "Tight scope and a shared design system let two designers and three developers ship a working prototype in a week.",
+      },
+    ],
+  },
+
+  takeaways: {
+    title: "Takeaways",
+    items: [
+      {
+        title: "Spatial UX changed the writing flow",
+        description: "Comparing drafts visually surfaced structural decisions that linear editors hide.",
+      },
+      {
+        title: "AI as critic, not author",
+        description: "Framing the model as a Socratic interlocutor produced sharper essays than autocomplete-style suggestions.",
+      },
+      {
+        title: "Constraint-driven scope shipping",
+        description: "Designing to a 7-day window forced ruthless prioritization and a tighter MVP than a longer runway would have.",
+      },
+    ],
+  },
+
   // Project details displayed in a grid
+  featuredCategory: "AGENTIC WORKFLOWS",
+
   details: {
     type: "Hackathon",
     role: "Product Design, Project Management",

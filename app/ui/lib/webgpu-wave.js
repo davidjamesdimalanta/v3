@@ -2,6 +2,8 @@
  * WEBGPU WAVE RENDERER CLASS    *
  *********************************/
 
+import { readCssColor } from './cssColor.js';
+
 const WGSL_SHADER = /* wgsl */`
 
 struct Uniforms {
@@ -82,8 +84,8 @@ fn fragmentMain(@builtin(position) fragCoord: vec4f) -> @location(0) vec4f {
 
   var accumulatedColor = vec3f(0.0);
 
-  let offset1 = mix(0.9, 0.9, u.isMobile);
-  let offset2 = mix(0.8, 0.85, u.isMobile);
+  let offset1 = mix(0.65, 0.65, u.isMobile);
+  let offset2 = mix(0.35, 0.4, u.isMobile);
 
   accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2,  0.0, offset1, u.waveColor, 0.1,  15.0, false, u.waveOpacity0);
   accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, offset1, u.waveColor, 0.1,  17.0, false, u.waveOpacity1);
@@ -136,9 +138,11 @@ export class WaveRenderer {
     this.waveOpacities = new Array(this.numWaves).fill(1.0);
     this.completionEventFired = false;
 
-    // Wave color modes
+    // Wave color modes — design mode pulls from MT --schemes-primary so the
+    // wave inherits theme/contrast changes from globals.css automatically.
+    // Fallback matches the resolved oklch() value of the light scheme primary (#904a48).
     this.figGreen = { r: 0.067, g: 0.682, b: 0.361 };
-    this.figBlue = { r: 0.227, g: 0.172, b: 0.168 };
+    this.figBlue = readCssColor('--schemes-primary') ?? { r: 0.565, g: 0.290, b: 0.282 };
 
     // Uniform data (Float32Array matching the WGSL struct layout)
     this.uniformData = new Float32Array(UNIFORM_BUFFER_SIZE / 4);
@@ -294,6 +298,9 @@ export class WaveRenderer {
 
   setColorMode(mode) {
     this.currentMode = mode;
+    // Re-read MT primary on every mode switch so theme changes (light/dark/HC)
+    // propagate without recreating the renderer.
+    this.figBlue = readCssColor('--schemes-primary') ?? this.figBlue;
     const color = mode === 'dev' ? this.figGreen : this.figBlue;
     this.uniformData[4] = color.r;
     this.uniformData[5] = color.g;

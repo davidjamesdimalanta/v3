@@ -350,7 +350,7 @@ export default function ProjectPage() {
       
       />
 
-      <div id="initial-designs" className="flex flex-col gutter-xl bg-[#C4D3CF] py-16 px-4 md:px-8">
+      <div id="initial-designs" className="flex flex-col gutter-xl bg-(--schemes-surface-container-high) py-16 px-4 md:px-8">
       <div className="flex flex-col gutter-base">
         <CaseStudyTextBlock
           sectionHeading="Initial Designs"
@@ -387,7 +387,7 @@ export default function ProjectPage() {
           type="video"
           src="/assets/videos/goAble/onboarding-prototype.webm"
           size="small"
-          bgColor="#f9f9f9"
+          bgColor="var(--schemes-surface-container)"
           className="pt-0!"
         />
       </div>

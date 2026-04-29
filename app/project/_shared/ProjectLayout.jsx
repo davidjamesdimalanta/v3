@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import ProjectHero from "../components/ProjectHero";
 import ProjectContent from "../components/ProjectContent";
@@ -16,24 +14,11 @@ import ProjectContent from "../components/ProjectContent";
  * @param {React.ReactNode} children - Unique project content (rendered inside ProjectContent)
  */
 export default function ProjectLayout({ projectData, children }) {
-  const [isClosing, setIsClosing] = useState(false);
-  const router = useRouter();
-
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      router.push('/');
-      setTimeout(() => {
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }, 300);
-  };
-
   return (
     <motion.div
       className="relative"
       initial={{ opacity: 0, y: 8, filter: 'blur(2px)' }}
-      animate={{ opacity: isClosing ? 0 : 1, y: 0, filter: 'blur(0px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       transition={{ duration: 0.3, ease: 'easeIn' }}
     >
 
@@ -48,7 +33,6 @@ export default function ProjectLayout({ projectData, children }) {
           awards={projectData.awards}
           description={projectData.description}
           details={projectData.details}
-          onClose={handleClose}
         />
 
         {/* Content — media/video blocks below hero */}
@@ -60,3 +44,4 @@ export default function ProjectLayout({ projectData, children }) {
     </motion.div>
   );
 }
+

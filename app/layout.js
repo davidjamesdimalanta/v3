@@ -3,6 +3,7 @@ import { inter, aspekta } from "./fonts";
 import SiteShell from "./ui/SiteShell";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Toaster } from "@/app/ui/sonner"
 
 
 export const metadata = {
@@ -81,7 +82,8 @@ export default function RootLayout({ children }) {
         {/* <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script> */}
         <SpeedInsights />
         <Analytics/>
-<SiteShell>{children}</SiteShell>
+        <SiteShell>{children}</SiteShell>
+        <Toaster />
       </body>
     </html>
   );
