@@ -12,7 +12,7 @@ export const projectData = {
   ],
 
   // Cover video and thumbnail for project card
-  coverVideo: "https://stream.mux.com/FQHn7MDR7pH3xtZIwtP41yEiLAZlAc02xmX3eSR8dY7A.m3u8",
+  coverVideo: "https://stream.mux.com/FQHn7MDR7pH3xtZIwtP41yEiLAZlAc02xmX3eSR8dY7A.m3u8?min_resolution=1080p",
   coverImage: "https://image.mux.com/FQHn7MDR7pH3xtZIwtP41yEiLAZlAc02xmX3eSR8dY7A/thumbnail.png?width=1919&height=1080&time=0",
 
   // Array of awards and recognition (optional - can be empty array)
