@@ -7,6 +7,7 @@ import ProjectDrawer from "./organisms/ProjectDrawer";
 import { projectData as goableData } from "../project/goable/data";
 import { projectData as socraticData } from "../project/socratic/data";
 import { projectData as ihubData } from "../project/ihub/data";
+import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
 import { toast } from "sonner";
 
 const ITEM_VARIANTS = {
@@ -36,9 +37,9 @@ const RIGHT_COLUMN_VARIANTS = {
 };
 
 const CELLS = [
-  { variant: "hero", slug: "goable",   data: goableData   },
-  { variant: "r1",  slug: "socratic",  data: socraticData },
-  { variant: "r2",  slug: "ihub",      data: ihubData     },
+  { variant: "hero", slug: "goable",                data: goableData     },
+  { variant: "r1",  slug: "figma-ball-knowledge",   data: figmaBallData  },
+  { variant: "r2",  slug: "ihub",                   data: ihubData       },
 ];
 
 export default function BentoGrid({ animate = "visible", prefersReducedMotion = false }) {
@@ -77,10 +78,10 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
             <div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto">
             <BentoCell
               variant="r1"
-              category="AGENTIC WORKFLOWS"
-              title="Supercharging Figma with AI"
+              category={r1Cell.data.featuredCategory}
+              title={r1Cell.data.name}
               thumbnail="/assets/images/bento/Figma.png"
-              onOpen={handleComingSoon}
+              onOpen={() => setActiveSlug(r1Cell.slug)}
             />
             </div>
             <div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto">
@@ -116,10 +117,10 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
             <motion.div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto" variants={ITEM_VARIANTS}>
               <BentoCell
                 variant="r1"
-                category="AGENTIC WORKFLOWS"
-                title="Supercharging Figma with AI"
+                category={r1Cell.data.featuredCategory}
+                title={r1Cell.data.name}
                 thumbnail="/assets/images/bento/Figma.png"
-                onOpen={handleComingSoon}
+                onOpen={() => setActiveSlug(r1Cell.slug)}
               />
             </motion.div>
             <motion.div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto" variants={ITEM_VARIANTS}>

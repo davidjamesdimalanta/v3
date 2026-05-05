@@ -100,7 +100,7 @@ export default function Landing() {
         {prefersReducedMotion ? (
           <>
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              I design products. I build them too.
+              i design stuff. i build them too.
             </span>
             {bottomRow('visible')}
           </>
@@ -116,7 +116,7 @@ export default function Landing() {
             }}
           >
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              I design products. I build them too.
+              i design stuff. i build them too.
             </span>
             {bottomRow(isReady ? 'visible' : 'hidden')}
           </AnimatedGroup>

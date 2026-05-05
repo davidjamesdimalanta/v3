@@ -30,6 +30,11 @@ export const projectsRegistry = [
   {
     slug: 'ihub',
     title: 'Web Developer of a campus design agency.',
+    nextProject: 'figma-ball-knowledge'
+  },
+  {
+    slug: 'figma-ball-knowledge',
+    title: 'Supercharging Figma with AI',
     nextProject: 'goable'
   },
 ];

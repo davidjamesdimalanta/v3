@@ -66,9 +66,9 @@ export default function Nav() {
         >
           <Button
             text={"Work"}
-            href="/"
+            href="/work"
             variant="ghost"
-            soundEffect="navigateHome"
+            soundEffect="navigateProject"
           />
           <Button
             text={"About"}

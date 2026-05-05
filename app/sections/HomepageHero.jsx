@@ -18,7 +18,7 @@ function HeroHeading() {
   return (
     <div className="max-w-[1200px] w-full mx-auto px-4 md:px-5 pt-40 pb-6">
       <h1 className="t-h2 text-on-surface text-balance">
-        I design products. I build them too.
+        i design stuff. i build them too.
       </h1>
     </div>
   );

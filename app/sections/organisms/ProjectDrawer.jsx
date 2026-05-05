@@ -1,9 +1,77 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Drawer } from "vaul";
 import Image from "next/image";
 import Button from "../../ui/Button";
+
+const isMuxHLS = (url) =>
+  typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
+
+function DrawerVideo({ src, thumbnail, name }) {
+  const videoRef = useRef(null);
+  const hlsRef = useRef(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !src) return;
+
+    const onReady = () => {
+      setVideoLoaded(true);
+      el.play().catch(() => {});
+    };
+
+    el.addEventListener("canplay", onReady, { once: true });
+
+    if (el.canPlayType("application/vnd.apple.mpegurl")) {
+      el.src = src;
+      el.load();
+    } else {
+      import("hls.js").then(({ default: Hls }) => {
+        if (!Hls.isSupported()) return;
+        const hls = new Hls({ startLevel: -1, capLevelToPlayerSize: false });
+        hlsRef.current = hls;
+        hls.loadSource(src);
+        hls.attachMedia(el);
+      });
+    }
+
+    return () => {
+      el.removeEventListener("canplay", onReady);
+      el.pause();
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+        hlsRef.current = null;
+      }
+    };
+  }, [src]);
+
+  return (
+    <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
+      {thumbnail && (
+        <Image
+          src={thumbnail}
+          alt={`${name} cover`}
+          fill
+          sizes="(max-width: 768px) 100vw, 700px"
+          className={`object-cover transition-opacity duration-500 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+        />
+      )}
+      <video
+        ref={videoRef}
+        muted
+        playsInline
+        loop
+        preload="auto"
+        controls={false}
+        disablePictureInPicture
+        controlsList="nodownload nofullscreen noremoteplayback"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+}
 
 /**
  * Lock the body with custom inline styles while the drawer is open,
@@ -51,7 +119,7 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
   // If we've never had a project at all, nothing to render
   if (!renderProject) return null;
 
-  const { slug, name, title, coverImage, problem, solutions, takeaways } =
+  const { slug, name, title, coverVideo, coverImage, problem, solutions, takeaways } =
     renderProject;
 
   return (
@@ -90,17 +158,21 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
               </div>
 
               {/* Hero media (Matches text max-width 700px container) */}
-              {coverImage && (
+              {(coverVideo || coverImage) && (
                 <div className="max-w-[700px] w-full mx-auto mt-8 mb-8">
-                  <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
-                    <Image
-                      src={coverImage}
-                      alt={`${name} cover`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 700px"
-                      className="object-cover"
-                    />
-                  </div>
+                  {coverVideo && isMuxHLS(coverVideo) ? (
+                    <DrawerVideo src={coverVideo} thumbnail={coverImage} name={name} />
+                  ) : coverImage ? (
+                    <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
+                      <Image
+                        src={coverImage}
+                        alt={`${name} cover`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 700px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : null}
                 </div>
               )}
 
@@ -119,8 +191,8 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
                     <h3 className="t-label text-on-surface-variant">{solutions.title ?? "The Solution"}</h3>
                     <div className="flex flex-col gutter-sm">
                       {solutions.items.map((sol, i) => (
-                        <article key={i} className="flex flex-col">
-                          <h4 className="t-p text-on-surface text-500">{sol.title}</h4>
+                        <article key={i} className="flex flex-col gap-1">
+                          <h4 className="t-p text-on-surface text-600">{sol.title}</h4>
                           <p className="t-p text-on-surface-variant">{sol.description}</p>
                           {sol.media && (
                             <div className="relative w-full aspect-video rounded-[16px] overflow-hidden bg-surface-container mt-2">
@@ -146,7 +218,7 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
                     <div className="flex flex-col gutter-sm">
                       {takeaways.items.map((item, i) => (
                         <div key={i} className="flex flex-col gap-1">
-                          <h4 className="t-p text-on-surface text-500">{item.title}</h4>
+                          <h4 className="t-p text-on-surface text-600">{item.title}</h4>
                           <p className="t-p text-on-surface-variant">{item.description}</p>
                         </div>
                       ))}

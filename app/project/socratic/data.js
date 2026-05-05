@@ -74,7 +74,7 @@ export const projectData = {
   },
 
   // Project details displayed in a grid
-  featuredCategory: "AGENTIC WORKFLOWS",
+  featuredCategory: "HACKATHON",
 
   details: {
     type: "Hackathon",

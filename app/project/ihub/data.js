@@ -80,7 +80,7 @@ export const projectData = {
     },
   
     // Project details displayed in a grid
-    featuredCategory: "GAME DESIGN",
+    featuredCategory: "WEB DEVELOPMENT",
 
     details: {
       type: "Shipped",

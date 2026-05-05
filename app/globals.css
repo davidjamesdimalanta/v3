@@ -437,6 +437,32 @@ body {
     @apply p-[64px_12px_12px_12px] md:p-[64px_20px_20px_20px];
 }
 
+/* WORK PAGE GRID — CSS Grid Level 3 grid-lanes with @supports fallback */
+@utility work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+
+    @media (min-width: 768px) {
+        /* Fallback for all current browsers */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        align-items: stretch;
+    }
+}
+
+/* Progressive enhancement: grid-lanes when browser supports it */
+@supports (display: grid-lanes) {
+    @media (min-width: 768px) {
+        .work-grid {
+            display: grid-lanes;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+    }
+}
+
 /* GUTTER CLASSES */
 @utility gutter-4xl {
   @apply gap-[240px];

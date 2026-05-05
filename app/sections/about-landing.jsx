@@ -53,16 +53,15 @@ export default function AboutLanding() {
             </span>
 
             <span className="text-p pt-4">
-            The persistent & pragmatic problem solver? The crazy ideas guy? I&apos;m still crafting my narrative, but for now, here&apos;s who I am.
+            The persistent & pragmatic problem solver? The crazy ideas guy? I&apos;m still crafting my narrative, but for now, here&apos;s who I am:
             </span>
 
             <span className="text-p">
-            David is a product designer with a background in web development, doing his best work at the handoff. He is experienced in
-            interactive prototyping, code-collaborating, and cross-functional workflows.
+            I am an AI-native but human-first designer and builder, making my designs 1:1 with the code.
             </span>
 
             <span className="text-p">
-            Outside of work, I love handheld consoles (I&apos;m stuck in 2009), finding cafes around the city, and going to the gym.
+            Outside of work, I love handheld consoles, finding cafes around the city, and going to the gym.
 
             </span>
             </div>
