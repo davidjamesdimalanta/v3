@@ -130,7 +130,7 @@ export default function BentoCell({
           <div className="absolute inset-0 bg-linear-to-t from-(--schemes-surface) via-(--schemes-surface)/10 " />
         </div>
         {/* Category label — top-left */}
-        <span className="relative z-10 t-label text-on-surface-variant">{category}</span>
+        <span className="relative z-10 t-label text-(--schemes-tertiary)">{category}</span>
 
         {/* Title + subtitle — bottom */}
         <div className="relative z-10 mt-auto flex flex-col gap-1">
