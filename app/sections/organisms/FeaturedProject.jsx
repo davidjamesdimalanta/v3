@@ -70,6 +70,30 @@ export default function FeaturedProject({
     };
   }, [videoSrc]);
 
+  // Local/static video files.
+  useEffect(() => {
+    if (!videoSrc || isMuxHLSVideo(videoSrc)) return;
+
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const handleCanPlay = () => setVideoLoaded(true);
+    const handleLoadedData = () => setVideoLoaded(true);
+
+    videoElement.addEventListener("canplay", handleCanPlay);
+    videoElement.addEventListener("loadeddata", handleLoadedData);
+
+    videoElement.src = videoSrc;
+    videoElement.load();
+
+    return () => {
+      videoElement.removeEventListener("canplay", handleCanPlay);
+      videoElement.removeEventListener("loadeddata", handleLoadedData);
+      videoElement.removeAttribute("src");
+      videoElement.load();
+    };
+  }, [videoSrc]);
+
   // Autoplay: first card plays when in view via IntersectionObserver
   useEffect(() => {
     if (!autoplay || prefersReducedMotion || !videoRef.current) return;

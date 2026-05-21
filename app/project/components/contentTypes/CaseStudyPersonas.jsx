@@ -99,12 +99,20 @@ function PersonaCard({ persona }) {
       whileHover={jiggle}
       className="relative cursor-pointer select-none w-[140px] h-[180px] sm:w-[160px] sm:h-[200px]"
     >
-      <Image
-        src={persona.avatarSrc}
-        alt={persona.avatarAlt}
-        fill
-        className="object-contain"
-      />
+      {persona.avatarSrc ? (
+        <Image
+          src={persona.avatarSrc}
+          alt={persona.avatarAlt}
+          fill
+          className="object-contain"
+        />
+      ) : (
+        <div className="w-full h-full rounded-2xl border border-outline-variant bg-surface-container-high flex items-center justify-center px-4">
+          <span className="text-h6 text-600 text-center text-(--text-color-80)">
+            {persona.avatarLabel || persona.name}
+          </span>
+        </div>
+      )}
     </motion.div>
   )
 
@@ -147,7 +155,13 @@ function PersonaCard({ persona }) {
   )
 }
 
-export default function CaseStudyPersonas() {
+export default function CaseStudyPersonas({
+  personas = PERSONAS,
+  sectionHeading = "Personas",
+  title = "Two people, two kinds of blocked.",
+  text = <>Two things kept coming up in the research: people <strong className="text-600">couldn&apos;t find the specific details</strong> they needed, and even when they could, they <strong className="text-600">didn&apos;t trust them</strong>. These personas put a face to both of those problems, and shaped everything that came next.</>,
+  hint,
+}) {
   const groupRef = useRef(null)
   const isInView = useInView(groupRef, { once: true, margin: "0px 0px -100px 0px" })
   const [isDesktopHint, setIsDesktopHint] = useState(true)
@@ -162,9 +176,9 @@ export default function CaseStudyPersonas() {
   return (
     <div id="personas" className="flex flex-col gutter-lg py-64 px-4">
       <CaseStudyTextBlock
-        sectionHeading="Personas"
-        title="Two people, two kinds of blocked."
-        text={<>Two things kept coming up in the research: people <strong className="text-600">couldn&apos;t find the specific details</strong> they needed, and even when they could, they <strong className="text-600">didn&apos;t trust them</strong>. These personas put a face to both of those problems, and shaped everything that came next.</>}
+        sectionHeading={sectionHeading}
+        title={title}
+        text={text}
       />
 
       <div ref={groupRef} className="flex flex-col items-center gap-3">
@@ -173,12 +187,12 @@ export default function CaseStudyPersonas() {
           animate={isInView ? "visible" : "hidden"}
           className="flex flex-row gap-6 sm:gap-10 justify-center"
         >
-          {PERSONAS.map((persona) => (
+          {personas.map((persona) => (
             <PersonaCard key={persona.id} persona={persona} />
           ))}
         </AnimatedGroup>
         <p className="text-small text-400 italic opacity-50 text-center">
-          {isDesktopHint ? "Hover" : "Tap"} to learn more
+          {hint || `${isDesktopHint ? "Hover" : "Tap"} to learn more`}
         </p>
       </div>
     </div>

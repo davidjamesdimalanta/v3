@@ -1,7 +1,7 @@
 export default function sitemap() {
   const baseUrl = 'https://daviddim.ca';
 
-  const projects = ['goable', 'socratic', 'ihub'];
+  const projects = ['linklog', 'goable', 'socratic', 'ihub', 'figma-ball-knowledge'];
 
   const projectUrls = projects.map((slug) => ({
     url: `${baseUrl}/project/${slug}`,

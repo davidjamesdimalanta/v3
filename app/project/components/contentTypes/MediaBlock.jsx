@@ -205,6 +205,36 @@ export default function MediaBlock({
     };
   }, [type, src]);
 
+  // Regular video files (non-HLS)
+  useEffect(() => {
+    if (type !== "video" || !src || isMuxHLSVideo(src)) return;
+
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const handleCanPlay = () => setVideoLoaded(true);
+    const handleLoadedData = () => setVideoLoaded(true);
+    const handleVideoPlay = () => setIsPlaying(true);
+    const handleVideoPause = () => setIsPlaying(false);
+
+    videoElement.addEventListener('canplay', handleCanPlay);
+    videoElement.addEventListener('loadeddata', handleLoadedData);
+    videoElement.addEventListener('play', handleVideoPlay);
+    videoElement.addEventListener('pause', handleVideoPause);
+
+    videoElement.src = src;
+    videoElement.load();
+
+    return () => {
+      videoElement.removeEventListener('canplay', handleCanPlay);
+      videoElement.removeEventListener('loadeddata', handleLoadedData);
+      videoElement.removeEventListener('play', handleVideoPlay);
+      videoElement.removeEventListener('pause', handleVideoPause);
+      videoElement.removeAttribute('src');
+      videoElement.load();
+    };
+  }, [type, src]);
+
   // Intersection Observer for scroll-triggered video playback
   useEffect(() => {
     if (type !== "video" || !videoRef.current) return;

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import { initHls, registerFeaturedSrc, attachTo, detachFrom } from "../../ui/lib/hlsManager";
 import { useMediaQuery } from "../../ui/hooks/useMediaQuery";
+import { useIsDarkTheme } from "../../ui/hooks/useIsDarkTheme";
 
 const isMuxHLS = (url) =>
   typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
@@ -16,49 +17,74 @@ export default function BentoCell({
   subtitle,
   thumbnail,
   videoSrc,
+  darkVideoSrc,
   onOpen,
 }) {
   const { playHover, playNavigateProject } = useSoundEffects();
   const videoRef = useRef(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [loadedVideoSrc, setLoadedVideoSrc] = useState(null);
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const isDarkTheme = useIsDarkTheme();
+  const activeVideoSrc = isDarkTheme && darkVideoSrc ? darkVideoSrc : videoSrc;
+  const videoLoaded = Boolean(activeVideoSrc && loadedVideoSrc === activeVideoSrc);
 
   // HLS — register + init eagerly (only hero cell has video)
   useEffect(() => {
-    if (!videoSrc || !isMuxHLS(videoSrc)) return;
-    registerFeaturedSrc(videoSrc);
-    initHls(videoSrc);
-  }, [videoSrc]);
+    if (!activeVideoSrc || !isMuxHLS(activeVideoSrc)) return;
+    registerFeaturedSrc(activeVideoSrc);
+    initHls(activeVideoSrc);
+  }, [activeVideoSrc]);
 
   // Attach HLS to <video> element
   useEffect(() => {
-    if (!videoSrc || !isMuxHLS(videoSrc)) return;
+    if (!activeVideoSrc || !isMuxHLS(activeVideoSrc)) return;
     const el = videoRef.current;
     if (!el) return;
 
-    const onReady = () => setVideoLoaded(true);
+    const onReady = () => setLoadedVideoSrc(activeVideoSrc);
     el.addEventListener("canplay", onReady);
     el.addEventListener("loadeddata", onReady);
 
     if (el.canPlayType("application/vnd.apple.mpegurl")) {
-      el.src = videoSrc;
+      el.src = activeVideoSrc;
       el.load();
     } else {
-      attachTo(videoSrc, el);
+      attachTo(activeVideoSrc, el);
     }
 
     return () => {
       el.removeEventListener("canplay", onReady);
       el.removeEventListener("loadeddata", onReady);
       if (!el.canPlayType("application/vnd.apple.mpegurl")) {
-        detachFrom(videoSrc);
+        detachFrom(activeVideoSrc);
       }
     };
-  }, [videoSrc]);
+  }, [activeVideoSrc]);
+
+  // Local/static video files.
+  useEffect(() => {
+    if (!activeVideoSrc || isMuxHLS(activeVideoSrc)) return;
+    const el = videoRef.current;
+    if (!el) return;
+
+    const onReady = () => setLoadedVideoSrc(activeVideoSrc);
+    el.addEventListener("canplay", onReady);
+    el.addEventListener("loadeddata", onReady);
+
+    el.src = activeVideoSrc;
+    el.load();
+
+    return () => {
+      el.removeEventListener("canplay", onReady);
+      el.removeEventListener("loadeddata", onReady);
+      el.removeAttribute("src");
+      el.load();
+    };
+  }, [activeVideoSrc]);
 
   // Autoplay via IntersectionObserver once loaded
   useEffect(() => {
-    if (!videoSrc || !videoRef.current || !videoLoaded || prefersReducedMotion) return;
+    if (!activeVideoSrc || !videoRef.current || !videoLoaded || prefersReducedMotion) return;
     const el = videoRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -74,7 +100,7 @@ export default function BentoCell({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [videoSrc, videoLoaded, prefersReducedMotion]);
+  }, [activeVideoSrc, videoLoaded, prefersReducedMotion]);
 
   const handleClick = () => {
     playNavigateProject();
@@ -113,7 +139,7 @@ export default function BentoCell({
               className={`object-cover transition-opacity duration-500 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
             />
           )}
-          {videoSrc && (
+          {activeVideoSrc && (
             <video
               ref={videoRef}
               muted
