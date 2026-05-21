@@ -156,7 +156,7 @@ export default function BentoCell({
           <div className="absolute inset-0 bg-linear-to-t from-(--schemes-surface) via-(--schemes-surface)/10 " />
         </div>
         {/* Category label — top-left */}
-        <span className="relative z-10 t-label text-(--schemes-tertiary)">{category}</span>
+        <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
 
         {/* Title + subtitle — bottom */}
         <div className="relative z-10 mt-auto flex flex-col gap-1">
@@ -190,7 +190,7 @@ export default function BentoCell({
           </div>
         )}
 
-        <span className="relative z-10 t-label text-(--schemes-tertiary)">{category}</span>
+        <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
         <h2 className="relative z-10 mt-auto t-h5 text-on-surface">{title}</h2>
       </button>
     );
@@ -220,7 +220,7 @@ export default function BentoCell({
         </div>
       )}
 
-      <span className="relative z-10 t-label text-(--schemes-tertiary)">{category}</span>
+      <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
       <h2 className="relative z-10 mt-auto t-h5 text-on-surface">{title}</h2>
     </button>
   );

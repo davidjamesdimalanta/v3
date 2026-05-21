@@ -36,23 +36,13 @@ export const projectData = {
   },
 
   solutions: {
-    title: "The Solution",
+    title: "Our Solution",
     items: [
       {
-        title: "Personalized onboarding & search.",
+        title: "Personalizing accessibility",
         description:
-          "Since the accessibility label didn't always cater to people's needs, GoAble asks users about them during onboarding — then filters results to match their profile.",
-      },
-      {
-        title: "Community-driven status updates.",
-        description:
-          "Washroom details pages show real-time availability, community sentiment, and granular amenity info so users can make informed decisions before they arrive.",
-      },
-      {
-        title: "Three-tap review & verification.",
-        description:
-          "Quick-select, pre-loaded options reduce friction to near zero — making it just as easy to leave a review as it is to skip it.",
-      },
+          "The accessibility label doesn't always cater to people's needs, so GoAble asks users about them, then filters search results to match their profile. To convey trustworthy information, GoAble also features community tabs and real-time information updates.",
+      }
     ],
   },
 
