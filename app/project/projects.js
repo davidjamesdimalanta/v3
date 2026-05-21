@@ -18,6 +18,11 @@
  */
 export const projectsRegistry = [
   {
+    slug: 'linklog',
+    title: 'Closing the circle of care by digitizing the Link Worker workflow',
+    nextProject: 'goable'
+  },
+  {
     slug: 'goable',
     title: 'Unearthing Hidden Barriers in Accessible Washrooms',
     nextProject: 'socratic'
@@ -35,7 +40,7 @@ export const projectsRegistry = [
   {
     slug: 'figma-ball-knowledge',
     title: 'Supercharging Figma with AI',
-    nextProject: 'goable'
+    nextProject: 'linklog'
   },
 ];
 

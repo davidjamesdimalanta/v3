@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import FeaturedProject from "./organisms/FeaturedProject";
 import { projectsRegistry } from "../project/projects";
+import { projectData as linklogData } from "../project/linklog/data";
 import { projectData as goableData } from "../project/goable/data";
 import { projectData as ihubData } from "../project/ihub/data";
 import { projectData as socraticData } from "../project/socratic/data";
+import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
 import { useSoundEffects } from "../ui/hooks/useSoundEffects";
 import { useInView } from "../ui/hooks/useInView";
 import { useMediaQuery } from "../ui/hooks/useMediaQuery";
@@ -25,16 +27,15 @@ export default function Projects() {
     const showCursor = !isTouchDevice && !prefersReducedMotion;
     // Track which project card is hovered for the shared cursor
     const [hoveredProject, setHoveredProject] = useState(null);
-    // Keep last hovered project so cursor content persists during exit animation
-    const lastHoveredRef = useRef(null);
-    if (hoveredProject) lastHoveredRef.current = hoveredProject;
-    const cursorProject = hoveredProject ?? lastHoveredRef.current;
+    const cursorProject = hoveredProject;
 
     // Map registry to project data
     const projectDataMap = {
+      'linklog': linklogData,
       'goable': goableData,
       'ihub': ihubData,
       'socratic': socraticData,
+      'figma-ball-knowledge': figmaBallData,
     };
 
     const projects = projectsRegistry.map((project) => {

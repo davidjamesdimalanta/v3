@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
 import ProjectDrawer from "./organisms/ProjectDrawer";
+import { projectData as linklogData } from "../project/linklog/data";
 import { projectData as goableData } from "../project/goable/data";
 import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
 import { projectData as socraticData } from "../project/socratic/data";
@@ -20,6 +21,7 @@ const ITEM_VARIANTS = {
 };
 
 const PROJECTS = [
+  { slug: "linklog",             data: linklogData, offset: false },
   { slug: "goable",              data: goableData,   offset: false },
   { slug: "figma-ball-knowledge", data: figmaBallData, offset: false },
   { slug: "socratic",            data: socraticData, offset: false },
@@ -40,6 +42,7 @@ export default function WorkGrid({ animate = "visible", prefersReducedMotion = f
         subtitle={project.data.title}
         thumbnail={project.data.coverImage}
         videoSrc={project.data.coverVideo}
+        darkVideoSrc={project.data.coverVideoDark}
         onOpen={() => setActiveSlug(project.slug)}
       />
     );

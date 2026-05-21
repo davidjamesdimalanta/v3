@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Drawer } from "vaul";
 import Image from "next/image";
 import Button from "../../ui/Button";
+import { useIsDarkTheme } from "../../ui/hooks/useIsDarkTheme";
 
 const isMuxHLS = (url) =>
   typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
@@ -11,20 +12,24 @@ const isMuxHLS = (url) =>
 function DrawerVideo({ src, thumbnail, name }) {
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [loadedSrc, setLoadedSrc] = useState(null);
+  const videoLoaded = Boolean(src && loadedSrc === src);
 
   useEffect(() => {
     const el = videoRef.current;
     if (!el || !src) return;
 
     const onReady = () => {
-      setVideoLoaded(true);
+      setLoadedSrc(src);
       el.play().catch(() => {});
     };
 
     el.addEventListener("canplay", onReady, { once: true });
 
-    if (el.canPlayType("application/vnd.apple.mpegurl")) {
+    if (!isMuxHLS(src)) {
+      el.src = src;
+      el.load();
+    } else if (el.canPlayType("application/vnd.apple.mpegurl")) {
       el.src = src;
       el.load();
     } else {
@@ -40,6 +45,8 @@ function DrawerVideo({ src, thumbnail, name }) {
     return () => {
       el.removeEventListener("canplay", onReady);
       el.pause();
+      el.removeAttribute("src");
+      el.load();
       if (hlsRef.current) {
         hlsRef.current.destroy();
         hlsRef.current = null;
@@ -106,21 +113,15 @@ function useDrawerBodyLock(isOpen) {
 export default function ProjectDrawer({ open, onOpenChange, project }) {
   useDrawerBodyLock(open);
 
-  // Stash the last valid project so content persists through close animation
-  const lastProjectRef = useRef(project);
-  if (project) {
-    lastProjectRef.current = project;
-  }
-
-  // Render data: use the live project while open, fall back to stashed
-  // version during the closing animation so content doesn't vanish.
-  const renderProject = project ?? lastProjectRef.current;
+  const renderProject = project;
+  const isDarkTheme = useIsDarkTheme();
 
   // If we've never had a project at all, nothing to render
   if (!renderProject) return null;
 
-  const { slug, name, title, coverVideo, coverImage, problem, solutions, takeaways } =
+  const { slug, name, title, coverVideo, coverVideoDark, coverImage, problem, solutions, takeaways } =
     renderProject;
+  const activeCoverVideo = isDarkTheme && coverVideoDark ? coverVideoDark : coverVideo;
 
   return (
     <Drawer.Root open={open} onOpenChange={onOpenChange}>
@@ -158,10 +159,10 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
               </div>
 
               {/* Hero media (Matches text max-width 700px container) */}
-              {(coverVideo || coverImage) && (
+              {(activeCoverVideo || coverImage) && (
                 <div className="max-w-[700px] w-full mx-auto mt-8 mb-8">
-                  {coverVideo && isMuxHLS(coverVideo) ? (
-                    <DrawerVideo src={coverVideo} thumbnail={coverImage} name={name} />
+                  {activeCoverVideo ? (
+                    <DrawerVideo src={activeCoverVideo} thumbnail={coverImage} name={name} />
                   ) : coverImage ? (
                     <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
                       <Image

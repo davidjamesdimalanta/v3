@@ -4,8 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
 import ProjectDrawer from "./organisms/ProjectDrawer";
-import { projectData as goableData } from "../project/goable/data";
-import { projectData as socraticData } from "../project/socratic/data";
+import { projectData as linklogData } from "../project/linklog/data";
 import { projectData as ihubData } from "../project/ihub/data";
 import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
 import { toast } from "sonner";
@@ -37,7 +36,7 @@ const RIGHT_COLUMN_VARIANTS = {
 };
 
 const CELLS = [
-  { variant: "hero", slug: "goable",                data: goableData     },
+  { variant: "hero", slug: "linklog",               data: linklogData    },
   { variant: "r1",  slug: "figma-ball-knowledge",   data: figmaBallData  },
   { variant: "r2",  slug: "ihub",                   data: ihubData       },
 ];
@@ -71,6 +70,7 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
               subtitle={heroCell.data.title}
               thumbnail={heroCell.data.coverImage}
               videoSrc={heroCell.data.coverVideo}
+              darkVideoSrc={heroCell.data.coverVideoDark}
               onOpen={() => setActiveSlug(heroCell.slug)}
             />
           </div>
@@ -110,6 +110,7 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
               subtitle={heroCell.data.title}
               thumbnail={heroCell.data.coverImage}
               videoSrc={heroCell.data.coverVideo}
+              darkVideoSrc={heroCell.data.coverVideoDark}
               onOpen={() => setActiveSlug(heroCell.slug)}
             />
           </motion.div>
