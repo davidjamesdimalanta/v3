@@ -5,9 +5,8 @@ import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
 import ProjectDrawer from "./organisms/ProjectDrawer";
 import { projectData as linklogData } from "../project/linklog/data";
-import { projectData as ihubData } from "../project/ihub/data";
+import { projectData as goableData } from "../project/goable/data";
 import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
-import { toast } from "sonner";
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
@@ -38,8 +37,11 @@ const RIGHT_COLUMN_VARIANTS = {
 const CELLS = [
   { variant: "hero", slug: "linklog",               data: linklogData    },
   { variant: "r1",  slug: "figma-ball-knowledge",   data: figmaBallData  },
-  { variant: "r2",  slug: "ihub",                   data: ihubData       },
+  { variant: "r2",  slug: "goable",                 data: goableData     },
 ];
+
+const GOABLE_BENTO_IMAGE =
+  "https://cdn.sanity.io/images/iy4m4myd/production/4a073462f97b49f4528d514b5bae239373eaf5b0-2048x1508.png";
 
 export default function BentoGrid({ animate = "visible", prefersReducedMotion = false }) {
   const [activeSlug, setActiveSlug] = useState(null);
@@ -51,12 +53,6 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
   const heroCell = CELLS[0];
   const r1Cell = CELLS[1];
   const r2Cell = CELLS[2];
-
-  const handleComingSoon = () => {
-    toast("Coming soon", {
-      description: "This project is currently being documented.",
-    });
-  };
 
   return (
     <>
@@ -87,10 +83,10 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
             <div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto">
             <BentoCell
               variant="r2"
-              category="GAME DESIGN"
-              title="Making NDS Emulators fun"
-              thumbnail="/assets/images/bento/Pokemon.png"
-              onOpen={handleComingSoon}
+              category={r2Cell.data.featuredCategory}
+              title={r2Cell.data.name}
+              thumbnail={GOABLE_BENTO_IMAGE}
+              onOpen={() => setActiveSlug(r2Cell.slug)}
             />
             </div>
           </div>
@@ -127,10 +123,10 @@ export default function BentoGrid({ animate = "visible", prefersReducedMotion = 
             <motion.div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto" variants={ITEM_VARIANTS}>
               <BentoCell
                 variant="r2"
-                category="GAME DESIGN"
-                title="Making NDS Emulators fun"
-                thumbnail="/assets/images/bento/Pokemon.png"
-                onOpen={handleComingSoon}
+                category={r2Cell.data.featuredCategory}
+                title={r2Cell.data.name}
+                thumbnail={GOABLE_BENTO_IMAGE}
+                onOpen={() => setActiveSlug(r2Cell.slug)}
               />
             </motion.div>
           </motion.div>
