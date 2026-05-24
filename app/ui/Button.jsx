@@ -36,7 +36,7 @@ export default function Button({
 
   if (isIconOnly) {
     baseStyles = "flex items-center justify-center w-8 h-8 rounded-full cursor-pointer";
-    variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active hover-surface";
+    variantStyles = "bd text-button text-400 text-(--text-color-100) hover:bd-text hover:bd-active hover-surface";
   } else if (isDsVariant) {
     const sizeUtility = size === "sm" ? "btn-sm" : size === "lg" ? "btn-lg" : "btn-md";
     const variantUtility = variant === "primary" ? "btn-primary" : "btn-ghost";
@@ -44,7 +44,7 @@ export default function Button({
     variantStyles = `${variantUtility} hover-surface`;
   } else {
     baseStyles = "px-4 md:px-6 py-3 rounded-full cursor-pointer inline-block text-center uppercase";
-    variantStyles = "bd text-button text-400 text-[var(--text-color-100)] hover:bd-text hover:bd-active hover-surface";
+    variantStyles = "bd text-button text-400 text-(--text-color-100) hover:bd-text hover:bd-active hover-surface";
   }
 
   const iconElement = icon === 'close' ? <CloseIcon /> : null;

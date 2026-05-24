@@ -117,7 +117,7 @@ export default function BentoCell({
     "relative flex flex-col text-left cursor-pointer " +
     "border border-outline-variant rounded-[24px] p-6 overflow-hidden " +
     "bd-card hover:bd-active hover-surface " +
-    "focus-visible:outline-2 focus-visible:outline-[var(--schemes-primary)] focus-visible:outline-offset-2";
+    "focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2";
 
   if (isHero) {
     return (
@@ -159,7 +159,7 @@ export default function BentoCell({
         <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
 
         {/* Title + subtitle — bottom */}
-        <div className="relative z-10 mt-auto flex flex-col gap-1">
+        <div className="relative z-10 mt-auto flex flex-col gutter-xs">
           <h2 className="t-h4 text-on-surface">{title}</h2>
           {subtitle && <p className="t-p text-on-surface-variant">{subtitle}</p>}
         </div>

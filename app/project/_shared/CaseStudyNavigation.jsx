@@ -90,7 +90,8 @@ export default function CaseStudyNavigation({ sections = [] }) {
     };
   }, [sections, activeSection]);
 
-  const handleNavigationClick = (id) => {
+  const handleNavigationClick = (event, id) => {
+    event.preventDefault();
     const element = document.getElementById(id);
     if (element && lenis) {
       // Use Lenis for smooth scrolling with custom easing
@@ -118,14 +119,16 @@ export default function CaseStudyNavigation({ sections = [] }) {
   if (sections.length === 0) return null;
 
   return (
-    <nav className="sticky top-0 z-60 w-full border-b border-(--schemes-outline-variant) hidden lg:block" style={{ backgroundColor: 'color-mix(in oklch, var(--schemes-surface) 72%, transparent)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
+    <nav aria-label="Case study sections" className="sticky top-0 z-60 w-full border-b border-(--schemes-outline-variant) hidden lg:block" style={{ backgroundColor: 'color-mix(in oklch, var(--schemes-surface) 72%, transparent)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
       <div className="mx-auto px-4 md:px-8 py-4">
-        <ul className="flex flex-wrap justify-center items-center gap-6">
+        <ul className="flex flex-wrap justify-center items-center gutter-base">
           {sections.map(({ id, heading }) => (
             <li key={id}>
-              <button
-                onClick={() => handleNavigationClick(id)}
+              <a
+                href={`#${id}`}
+                onClick={(event) => handleNavigationClick(event, id)}
                 onMouseEnter={playButtonHover}
+                aria-current={activeSection === id ? "location" : undefined}
                 className={`
                   text-button uppercase tracking-wider
                   transition-all duration-300 ease-in-out
@@ -138,7 +141,7 @@ export default function CaseStudyNavigation({ sections = [] }) {
                 `}
               >
                 {heading}
-              </button>
+              </a>
             </li>
           ))}
         </ul>

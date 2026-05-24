@@ -166,7 +166,7 @@ export default function ExampleProject() {
               Share the outcomes. What metrics improved? What did users say?
               What did you learn from this project?
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gutter-sm py-4">
               <div className="flex flex-col gutter-xs">
                 <span className="text-h1 text-600">40%</span>
                 <span className="text-small text-400 opacity-60">Metric improvement</span>

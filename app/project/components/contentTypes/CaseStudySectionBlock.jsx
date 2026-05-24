@@ -26,6 +26,7 @@ export function CaseStudySectionBlock({
   sectionHeading,
   title,
   description,
+  descriptionNode,
   textStates,
   mediaTitle,
   mediaDescription,
@@ -124,7 +125,7 @@ export function CaseStudySectionBlock({
         >
           {/* AT-only: heading then description, each a separate block */}
           {state?.title && (
-            <h3 className="sr-only">{state.title}</h3>
+            <h2 className="sr-only">{state.title}</h2>
           )}
           {state?.description && (
             <p className="sr-only">
@@ -135,17 +136,21 @@ export function CaseStudySectionBlock({
           )}
 
           {/* Mobile-only visual text (hidden from AT to avoid double-reading) */}
-          <div aria-hidden="true" className="flex flex-col gap-2 mb-0 lg:hidden">
-            {i === 0 && sectionHeading && (
-              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
-                {sectionHeading}
-              </span>
-            )}
-            {state?.title && (
-              <h3 className={`text-h5 text-600 ${titleColor}`}>{state.title}</h3>
-            )}
+          <div aria-hidden="true" className="flex flex-col gutter-sm mb-0 lg:hidden">
+            {(i === 0 && sectionHeading) || state?.title ? (
+              <div className="flex flex-col gutter-xs">
+                {i === 0 && sectionHeading && (
+                  <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
+                    {sectionHeading}
+                  </span>
+                )}
+                {state?.title && (
+                  <h2 className={`text-h4 text-600 ${titleColor}`}>{state.title}</h2>
+                )}
+              </div>
+            ) : null}
             {state?.description && (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gutter-xs">
                 {renderDescription(state.description, descColor)}
               </div>
             )}
@@ -159,10 +164,10 @@ export function CaseStudySectionBlock({
   return (
     <div className={`flex flex-col lg:flex-row lg:gutter-lg px-4 xl:px-0 ${bgClass} ${className}`}>
       {/* LEFT — sticky text column (aria-hidden when textStates: AT content lives in right column) */}
-      <div className="w-full max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
+      <div className="w-full max-w-[1200px] mx-auto flex flex-col lg:flex-row gutter-md">
       <aside
         aria-hidden={hasTextStates ? "true" : undefined}
-        className={`${hasTextStates ? 'hidden lg:flex' : 'flex'} flex-1 lg:basis-[720px] lg:sticky lg:top-[45dvh] lg:self-start flex-col gap-2 py-0`}
+        className={`${hasTextStates ? 'hidden lg:flex gutter-xs' : 'flex gutter-sm'} flex-1 lg:basis-[720px] lg:sticky lg:top-[45dvh] lg:self-start flex-col py-0`}
       >
         {hasTextStates ? (
           <>
@@ -181,15 +186,15 @@ export function CaseStudySectionBlock({
                 animate="animate"
                 exit="exit"
                 transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                className="flex flex-col gap-2"
+                className="flex flex-col gutter-sm"
               >
                 {currentState.title && (
-                  <h3 className={`text-h5 text-600 ${titleColor}`}>
+                  <h2 className={`text-h4 text-600 ${titleColor}`}>
                     {currentState.title}
-                  </h3>
+                  </h2>
                 )}
                 {currentState.description && (
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gutter-xs">
                     {renderDescription(currentState.description, descColor)}
                   </div>
                 )}
@@ -198,19 +203,23 @@ export function CaseStudySectionBlock({
           </>
         ) : (
           <>
-            {sectionHeading && (
-              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
-                {sectionHeading}
-              </span>
+            {(sectionHeading || title) && (
+              <div className="flex flex-col gutter-xs">
+                {sectionHeading && (
+                  <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
+                    {sectionHeading}
+                  </span>
+                )}
+                {title && (
+                  <h2 className={`text-h4 text-600 ${titleColor}`}>
+                    {title}
+                  </h2>
+                )}
+              </div>
             )}
-            {title && (
-              <h3 className={`text-h5 text-600 ${titleColor}`}>
-                {title}
-              </h3>
-            )}
-            {description && (
-              <div className="flex flex-col gap-2">
-                {renderDescription(description, descColor)}
+            {(descriptionNode || description) && (
+              <div className="flex flex-col gutter-xs">
+                {descriptionNode || renderDescription(description, descColor)}
               </div>
             )}
           </>
@@ -253,6 +262,7 @@ export function CaseStudySectionBlockFixed({
   sectionHeading,
   title,
   description,
+  descriptionNode,
   mediaTitle,
   mediaDescription,
   media,
@@ -269,27 +279,31 @@ export function CaseStudySectionBlockFixed({
   return (
     <div className={`flex flex-col lg:flex-row lg:items-center lg:gutter-lg px-4 xl:px-0 w-full max-w-[1200px] mx-auto ${bgClass} ${className}`}>
       {/* LEFT — scrolling text column (no sticky) */}
-      <aside className="flex-1 lg:basis-[720px] flex flex-col gap-2 py-8">
-        {sectionHeading && (
-          <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
-            {sectionHeading}
-          </span>
+      <aside className="flex-1 lg:basis-[720px] flex flex-col gutter-sm py-8">
+        {(sectionHeading || title) && (
+          <div className="flex flex-col gutter-xs">
+            {sectionHeading && (
+              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
+                {sectionHeading}
+              </span>
+            )}
+            {title && (
+              <h2 className={`text-h4 text-600 ${titleColor}`}>
+                {title}
+              </h2>
+            )}
+          </div>
         )}
-        {title && (
-          <h3 className={`text-h5 text-600 ${titleColor}`}>
-            {title}
-          </h3>
-        )}
-        {description && (
-          <div className="flex flex-col gap-2">
-            {renderDescription(description, descColor)}
+        {(descriptionNode || description) && (
+          <div className="flex flex-col gutter-xs">
+            {descriptionNode || renderDescription(description, descColor)}
           </div>
         )}
       </aside>
 
       {/* RIGHT — media column */}
       <div className="flex-1 lg:max-w-[min(75vw,120vh)] lg:flex-1 lg:basis-[75vw]">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gutter-sm">
           {mediaTitle && (
             <h4 className={`text-h6 text-500 ${titleColor}`}>
               {mediaTitle}

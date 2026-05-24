@@ -189,7 +189,7 @@ export default function FeaturedProject({
       {/* Content Container */}
       <div className="px-2 pb-2 pt-3 flex flex-col md:flex-row xl:flex-row gutter-xs md:gutter-base flex-1">
         {/* Header with title and year */}
-        <div className="flex flex-col flex-1 h-hug lg:h-fill items-start gap-2">
+        <div className="flex flex-col flex-1 h-hug lg:h-fill items-start gutter-xs">
           <h3 className="text-h4 text-400 leading-none">{title}</h3>
           {description && (
             <p className="text-base text-(--text-color) leading-none">

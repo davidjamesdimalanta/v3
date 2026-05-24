@@ -53,7 +53,7 @@ export const AsHeading = {
 
 export const AllVariants = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div className="flex flex-col gutter-sm">
       <TextShimmer as="p" variant="brown" className="text-h3">
         Brown shimmer variant
       </TextShimmer>

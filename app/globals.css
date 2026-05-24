@@ -441,13 +441,13 @@ body {
 @utility work-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    @apply gutter-sm;
 
     @media (min-width: 768px) {
         /* Fallback for all current browsers */
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        @apply gutter-sm;
         align-items: stretch;
     }
 }
@@ -458,7 +458,7 @@ body {
         .work-grid {
             display: grid-lanes;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            @apply gutter-sm;
         }
     }
 }
@@ -1464,4 +1464,3 @@ body {
     animation: none !important;
   }
 }
-

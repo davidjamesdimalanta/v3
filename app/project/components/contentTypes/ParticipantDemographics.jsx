@@ -9,9 +9,9 @@ export default function ParticipantDemographics() {
   ];
 
   return (
-    <div className="flex flex-col gap-3 w-full">
+    <div className="flex flex-col gutter-xs w-full">
       {/* Interviews Section */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gutter-xs">
         <h3 className="text-h6 text-400">Interview Participants</h3>
         <p className="text-p opacity-60">
           10 participants, ages 23–51 years
@@ -19,9 +19,9 @@ export default function ParticipantDemographics() {
       </div>
 
       {/* Participant Breakdown */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gutter-sm text-sm">
         {interviewParticipants.map((participant, index) => (
-          <div key={index} className="flex items-center gap-2">
+          <div key={index} className="flex items-center gutter-xs">
             <span className="bd px-3 py-1 rounded-full text-button text-400">
               {participant.count}
             </span>
@@ -33,7 +33,7 @@ export default function ParticipantDemographics() {
       </div>
 
       {/* Survey Section */}
-      <div className="flex flex-col gap-2 pt-3">
+      <div className="flex flex-col gutter-xs pt-3">
         <h3 className="text-h6 text-400">Survey Respondents</h3>
         <p className="text-p opacity-60">
           56 respondents, ages 18–54 years

@@ -61,7 +61,7 @@ export default function Nav() {
 
         </Link>
         <div
-          className={`flex flex-row gap-2 md:gap-4 items-center ${getAnimationClass('nav-logo-name')}`}
+          className={`flex flex-row gutter-xs md:gutter-sm items-center ${getAnimationClass('nav-logo-name')}`}
           style={getAnimationStyle('nav-logo-name')}
         >
           <Button

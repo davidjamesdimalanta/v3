@@ -1,0 +1,316 @@
+---
+slug: linklog
+order: 1
+nextProject: goable
+name: LinkLog
+title: Closing the circle of care by digitizing the Link Worker workflow
+links:
+  - url: http://linklog-demo-alb-1724749606.ca-central-1.elb.amazonaws.com/
+    label: Live Demo
+  - url: https://tinyurl.com/LinkLogV3byTeam2
+    label: Figma Prototype
+  - url: /assets/linklog/final-presentation.pdf
+    label: Final Presentation
+coverVideo: https://cdn.sanity.io/files/iy4m4myd/production/b30859fdbdb4365cafaec627955ad7c418b3c95a.mov
+coverVideoDark: https://cdn.sanity.io/files/iy4m4myd/production/4826feb31bdd4450dc19a62f19deadbf451998ae.mov
+coverImage: https://cdn.sanity.io/images/iy4m4myd/production/43ba809e70315133281b75a5d5ac9d2661b12d90-2880x1620.png
+awards: []
+description:
+  - LinkLog digitizes referral follow up and year-end reporting workflows. For admin, it also acts as a dashboard aggregating de-identified report data.
+  - I led the service design and technical implementation, doing co-designs with OACAO and using AI to ship a working product in six days.
+problem:
+  title: The Problem
+  description: |
+    All 10 SALCs we talked to did their year-end reporting by hand, cross-referencing paper binders, Excel sheets, and SurveyMonkey forms.
+    This is time taken away from Social Prescribing work: client calls, follow-ups, and relationship-building.
+solutions:
+  title: Our Solution
+  items:
+    - title: One source of truth for client data
+      description: Link workers can import any client-tracking spreadsheet into a standardized Client Directory, ending the duplicate entry across local files, appendix forms, and SurveyMonkey.
+
+    - title: Auto-populated year-end reports
+      description: Form fields fill themselves from the Client Directory, so Link Workers go from reconstructing a year of work to reviewing it in minutes.
+
+    - title: Admin reporting dashboard
+      description: OACAO sees aggregated outcomes across every SALC on the platform; exportable as CSV, viewable as interactive charts, and ready for funding renewals.
+takeaways:
+  title: Takeaways
+  items:
+    - title: Start with one REALLY good solution
+      description: There were many areas of the Link Worker journey that could be improved on, but for six days, it was important to scope down and deliver one or two high quality features Link Workers would actually enjoy.
+    - title: AI can't make design decisions for me
+      description: I used Codex, Claude, and Gemini in this project, but building a solution for Link Workers would not have been possible without understanding what mattered the most through interviews and the co-design sessions.
+featuredCategory: SERVICE DESIGN
+details:
+  type: Concept
+  role: Service Designer + Builder
+  timeline: 6 days
+  team: 4 designers
+  year: "2026"
+skills:
+  - name: Service Design
+    category: design
+  - name: Service Blueprinting
+    category: design
+  - name: Co-Design
+    category: design
+  - name: Primary Research
+    category: design
+  - name: AI-Assisted Development
+    category: specialized
+  - name: Codex
+    category: tools
+  - name: Claude Code
+    category: tools
+  - name: Figma
+    category: tools
+  - name: AWS
+    category: dev
+caseStudy:
+  bgColor: var(--bg-color)
+  fgColor: var(--extended-colors-sage-green)
+nav:
+  - id: problem
+    heading: Overview
+  - id: discovery
+    heading: Discovery
+  - id: personas
+    heading: Who We're Designing For
+  - id: initial-designs
+    heading: Initial Designs
+  - id: iterations
+    heading: Co-Design
+  - id: final-designs
+    heading: Final Build
+  - id: closing
+    heading: Closing
+heroMedia:
+  - type: image
+    src: https://cdn.sanity.io/images/iy4m4myd/production/43ba809e70315133281b75a5d5ac9d2661b12d90-2880x1620.png
+    alt: LinkLog Making Reports Easy banner
+    aspectRatio: video
+    caption: ""
+    priority: true
+assets:
+  clientDirectory:
+    type: video
+    src: https://cdn.sanity.io/files/iy4m4myd/production/240fd56a94d21f804a5033309c41e5109d99536c.mp4
+    caption: Client Directory and follow-up queue
+  cttReport:
+    type: video
+    src: https://cdn.sanity.io/files/iy4m4myd/production/4c4e415bf34d4eefdbb37a5f291d8f02980dd683.mp4
+    caption: Auto-populated CTT review
+  oacaoDashboard:
+    type: video
+    src: https://cdn.sanity.io/files/iy4m4myd/production/1349be5789117ba5d1b006798f596e5c094832fd.mp4
+    caption: OACAO aggregate reporting dashboard
+  importMapping:
+    type: image
+    src: https://cdn.sanity.io/images/iy4m4myd/production/e49c96cc220a275c96f295a5dd60aa37788569de-1867x1194.png?auto=format
+    alt: Spreadsheet import mapping screen for LinkLog
+    caption: Placeholder - mapping each centre's existing spreadsheet into the Client Directory rather than forcing one format.
+  priorityCallListInitial:
+    type: image
+    src: https://cdn.sanity.io/images/iy4m4myd/production/0f09a4429794bbc6b41c480d6e08d7884933bbc3-795x528.png
+    alt: Initial LinkLog priority call list dashboard design
+    caption: Priority Call List concept for sorting follow-up work by urgency.
+definitions:
+  social-prescribing:
+    content: |
+      A structured way to route people from a clinical encounter to non-clinical community supports: housing, fitness, food security, and social connection. A **Link Worker** is the human bridge that makes the model work; remove them and it collapses into a referral list.
+    caption:
+      text: "Source: WHO Toolkit on Social Prescribing"
+      link: https://www.who.int/publications/i/item/9789290619765
+    side: bottom
+    width: w-96
+  phipa-pipeda:
+    content: |
+      Dealing with Personal Health Information informed decisions such as role-based access with Django and PostgreSQL, hosting on AWS Canada-Central-1 to keep data in Canada, and implementing safe-harbour techniques for encrypting and decrypting data.
+
+      Gemini Deep Research was our tool of choice for cross-referencing technical implementations with relevant policy obligations.
+    caption:
+      text: Sources; Ontario PHIPA and Office of the Privacy Commissioner of Canada PIPEDA guidance
+      link: https://www.ontario.ca/laws/statute/04p03
+    side: right
+    width: w-120
+  next-action-urgency:
+    content: |
+      The inherited problem-space work showed how hard it was to train intuition for who to call next, so we externalized that judgment into a sort order.
+
+      Overdue calls, upcoming check-ins, and incomplete outcomes rise before alphabetized client records.
+    side: right
+    width: w-96
+  view-of-data:
+    content: |
+      If the Client Directory already knows referrals, attendance, barriers, and outcomes, the year-end report should not ask for the same facts again.
+      Generate CTT pulls structured fields forward, then leaves room for the narrative pieces humans still need to write.
+    side: right
+    width: w-96
+  phipa-action:
+    content: |
+      The interface does not make privacy a policy paragraph after the fact. It makes privacy a permission boundary in the service itself.
+    side: left
+    width: w-80
+personas:
+  - id: link-worker
+    name: Brenda, Link Worker
+    avatarLabel: Link Worker
+    traits:
+      - Manages follow-up across **hundreds of clients** with local spreadsheets, paper notes, and memory
+      - Needs to know **who needs a call next** without rebuilding the whole client list
+      - Loses days at year-end reconstructing what happened across the programme
+    designConnection: Brenda shaped the Priority Call List and the read-only CTT review; the product had to surface the next best action without turning relationship work into another reporting burden.
+  - id: oacao-admin
+    name: OACAO Administrator
+    avatarLabel: OACAO Admin
+    traits:
+      - Needs aggregate outcomes across SALCs to support **funding renewal conversations**
+      - Cannot rely on raw local files when every centre tracks work differently
+      - Needs programme-wide visibility without exposing client identifiers across centres
+    designConnection: This role forced the service to split into two permission scopes; Link Workers manage identifiable client work locally, while OACAO reviews de-identified outcomes across the programme.
+scrollBlocks:
+  solutions:
+    sectionHeading: Solutions
+    dark: true
+    textStates:
+      - title: Replace the paper chase with a Client Directory.
+        description: LinkLog imports the spreadsheets Link Workers already keep, normalizes them into a standardized directory, and informs on who needs a follow-up next.
+      - title: Auto-populate the year-end report.
+        description: Form fields fill themselves from the Client Directory, turning a three-day event into a review-and-submit done in minutes.
+      - title: Give OACAO a programme-wide view.
+        description: OACAO sees aggregated outcomes across every SALC on the platform, de-identified and exportable as CSV to make funding conversations more informed.
+fixedBlocks:
+  import-onramp:
+    sectionHeading: Co-Design
+    title: LinkLog didn't work for all Link Workers
+    description: |
+      During co-design, we learned that every centre kept client data differently. The problem then was our import only worked if everyone already tracked data our way.
+
+      > "My sheet doesn't look anything like that. Would it still take mine?"
+
+      **So we made LinkLog accept all kinds of CSV/XLSX structures.** Now, link workers can upload their client sheet without having to worry if their workflow is compatible.
+highlights:
+  final-build:
+    sectionHeading: Final Build
+    title: A live product, not a slide deck.
+    description: LinkLog shipped as a hosted AWS demo in **ca-central-1**, with separate Link Worker and OACAO dashboards and a relational schema behind the Client Directory, CTT review, and programme-level reporting loop.
+    videos:
+      - type: video
+        src: https://cdn.sanity.io/files/iy4m4myd/production/240fd56a94d21f804a5033309c41e5109d99536c.mp4
+        thumbnail: https://cdn.sanity.io/images/iy4m4myd/production/43ba809e70315133281b75a5d5ac9d2661b12d90-2880x1620.png
+        caption: Client Directory and follow-up queue
+      - type: video
+        src: https://cdn.sanity.io/files/iy4m4myd/production/4c4e415bf34d4eefdbb37a5f291d8f02980dd683.mp4
+        thumbnail: https://cdn.sanity.io/images/iy4m4myd/production/43ba809e70315133281b75a5d5ac9d2661b12d90-2880x1620.png
+        caption: Auto-populated CTT review
+      - type: video
+        src: https://cdn.sanity.io/files/iy4m4myd/production/1349be5789117ba5d1b006798f596e5c094832fd.mp4
+        thumbnail: https://cdn.sanity.io/images/iy4m4myd/production/43ba809e70315133281b75a5d5ac9d2661b12d90-2880x1620.png
+        caption: OACAO aggregate reporting dashboard
+---
+
+<CaseText id="problem" className="pt-64" sectionHeading="The Problem" title="10 out of 10 SALCs compile their year-end report by hand.">
+Every Seniors Active Living Centre we interviewed told us the same thing: reporting to OACAO is a paper chase that runs once a year and eats days at a time. Meanwhile, the actual work of <Def definition="social-prescribing">Social Prescribing</Def> - calling clients, checking in, building trust - gets squeezed by the work of proving that work happened.
+</CaseText>
+
+<CaseText className="pb-64" sectionHeading="The Challenge">
+How do you give Link Workers more time to do the relational work that defines their role - **while making it easier, not harder, for OACAO to prove the programme deserves another year of funding?**
+</CaseText>
+
+<CaseScroll id="solutions" className="py-16" dark block="solutions">
+<CaseMedia size="medium" aspectRatio="video" caption="Normalizing imported CSV data into a structured Client Directory" className="max-w-full pt-0 pb-4" first asset="clientDirectory" />
+<CaseMedia size="medium" aspectRatio="video" caption="Auto-populating year-end reporting fields from existing client data" className="max-w-full pt-0 pb-4" asset="cttReport" />
+<CaseMedia size="medium" aspectRatio="video" caption="Reviewing programme-wide aggregate outcomes in the OACAO dashboard" className="max-w-full pt-0 pb-4" asset="oacaoDashboard" />
+</CaseScroll>
+
+<CaseGroup id="discovery" variant="discovery">
+<CaseText sectionHeading="Discovery" title="Ad-Hoc processes">
+Speaking to 10 SALCs in the winter, we learned that they each had their own workflow for client management, but OACAO's year-end report demanded info they didn't always have at hand.
+
+> "I don't know if you know all about the reporting process, but it's, it's like a three-day event to try and do the final report."
+
+Our goal then was to reduce the cost of reporting without making the everyday client relationship more bureaucratic.
+</CaseText>
+
+<CaseText
+sectionHeading="Constraint"
+title="The Backstage: Policy">
+With <Def definition="phipa-pipeda">PHIPA and PIPEDA</Def>, we were dealing with sensitive data, so the service had to make useful reporting possible without turning OACAO into the owner of identifiable client records.
+</CaseText>
+</CaseGroup>
+
+<CasePersonas
+  id="personas"
+  sectionHeading="Who We're Designing For"
+  title="Two roles, two permission scopes."
+  text="LinkLog only works if it respects the difference between the person doing the follow-up and the organization proving the programme's value. One needs client-level context. The other needs aggregate evidence."
+  spacingClassName="pt-8 pb-64"
+/>
+
+<CaseGroup id="initial-designs" variant="surfaceStack">
+<CaseGroup className="flex flex-col gutter-md">
+  <CaseText sectionHeading="Initial Designs" title="Priority Call List">
+  The dashboard started as a way to make follow-up visible. The important move was sorting the work by <Def definition="next-action-urgency">next-action urgency</Def> instead of making Link Workers scan every client and decide from scratch.
+  </CaseText>
+  <CaseMedia
+    size="large"
+    className="pt-0!"
+    first
+    asset="priorityCallListInitial"
+  />
+</CaseGroup>
+
+<CaseGroup className="flex flex-col gutter-md">
+  <CaseText title="Year-End Report Auto-Population">
+  The Common Tracking Tool stopped being a separate artifact and became a <Def definition="view-of-data">view of the data</Def>. That changed reporting from reconstruction to review.
+  </CaseText>
+  <CaseMedia
+    size="large"
+    aspectRatio="video"
+    caption="The Common Tracking Tool changes from a blank annual form into a review state generated from existing client records."
+    className="pt-0!"
+    asset="cttReport"
+  />
+</CaseGroup>
+
+<CaseGroup className="flex flex-col gutter-md">
+  <CaseText title="OACAO Reporting Dashboard">
+  OACAO needed a different product than the Link Worker. The dashboard aggregates outcomes across SALCs, exposes CSV export, and keeps raw identifiers out of the programme-wide view. That is <Def definition="phipa-action">PHIPA in action</Def>.
+  </CaseText>
+  <CaseMedia
+    size="large"
+    aspectRatio="video"
+    caption="The OACAO view aggregates programme outcomes across SALCs without exposing client identifiers."
+    className="pt-0!"
+    asset="oacaoDashboard"
+  />
+</CaseGroup>
+</CaseGroup>
+
+<CaseGroup id="iterations" variant="iterations">
+<CaseFixed block="import-onramp">
+<CaseMedia
+  size="large"
+  aspectRatio="video"
+  className="pt-0! bg-none"
+  asset="importMapping"
+/>
+</CaseFixed>
+</CaseGroup>
+
+<CaseHighlights id="final-designs" dark block="final-build" />
+
+<CaseText id="closing" sectionHeading="Closing" title="Final thoughts and learnings">
+**Service Blueprints Show You Where to Cut**
+The current-state blueprint surfaced that the most expensive part of the Link Worker's year wasn't doing the work - it was reconstructing it for OACAO at year-end. Once we saw that, every design decision served closing that gap.
+
+**80% Is Good Enough - If The 80% Closes The Loop**
+We chose end-to-end coverage at lower fidelity over one polished flow, because the question we were testing was whether the whole loop could close, not whether one screen looked perfect.
+
+**AI Is A Force Multiplier On Decisions, Not A Substitute For Them**
+Codex, Claude Code, and Gemini cut the build time from weeks to days - but they only mattered because the service blueprint, the interviews, and the co-design sessions had already told us what to build. AI didn't shorten the path to the decision; it shortened the path from the decision to a live product.
+
+**What's Next**
+Pilot in 2-3 SALCs before the next OACAO funding cycle, finalize the PHIPA-compliant data governance brief, and explore a Link Trainer track to scale onboarding without scaling our team.
+</CaseText>

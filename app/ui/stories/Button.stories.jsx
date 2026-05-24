@@ -52,7 +52,7 @@ export const WithSoundEffect = {
 
 export const AllVariants = {
   render: () => (
-    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+    <div className="flex flex-wrap items-center gutter-sm">
       <Button text="Plain button" />
       <Button text="Internal link" href="/about" />
       <Button text="External link" href="https://example.com" target="_blank" rel="noopener noreferrer" />

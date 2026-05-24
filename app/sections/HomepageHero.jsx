@@ -24,7 +24,7 @@ function HeroHeading() {
   );
 }
 
-export default function HomepageHero() {
+export default function HomepageHero({ projects = [] }) {
   const { isReady, prefersReducedMotion } = useWaveReady({ playOnlyOnInitialLoad: true });
   const animate = isReady ? "visible" : "hidden";
 
@@ -32,7 +32,7 @@ export default function HomepageHero() {
     return (
       <>
         <HeroHeading />
-        <BentoGrid animate="visible" prefersReducedMotion />
+        <BentoGrid projects={projects} animate="visible" prefersReducedMotion />
       </>
     );
   }
@@ -49,7 +49,7 @@ export default function HomepageHero() {
       }}
     >
       <HeroHeading />
-      <BentoGrid animate={animate} prefersReducedMotion={false} />
+      <BentoGrid projects={projects} animate={animate} prefersReducedMotion={false} />
     </AnimatedGroup>
   );
 }

@@ -119,7 +119,7 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
   // If we've never had a project at all, nothing to render
   if (!renderProject) return null;
 
-  const { slug, name, title, coverVideo, coverVideoDark, coverImage, problem, solutions, takeaways } =
+  const { slug, name, title, coverVideo, coverVideoDark, coverImage, problem, solutions, takeaways, comingSoon } =
     renderProject;
   const activeCoverVideo = isDarkTheme && coverVideoDark ? coverVideoDark : coverVideo;
 
@@ -141,19 +141,28 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
               <div className="max-w-[700px] w-full mx-auto flex flex-col gutter-lg">
                 {/* Header — title cluster + primary CTA */}
                 <header className="flex flex-col md:flex-row md:items-start gutter-base md:justify-between">
-                  <div className="flex flex-col gap-1 min-w-0 flex-1">
+                  <div className="flex flex-col min-w-0 flex-1">
                     <h2 className="t-h5 text-on-surface">
                       {name}
                     </h2>
                     {title && <p className="t-sm text-on-surface-variant">{title}</p>}
                   </div>
                   <div className="shrink-0">
-                    <Button
-                      text="Full Case Study"
-                      href={`/project/${slug}`}
-                      variant="primary"
-                      soundEffect="navigateProject"
-                    />
+                    {comingSoon ? (
+                      <Button
+                        text="Coming Soon"
+                        variant="primary"
+                        disabled
+                        aria-disabled="true"
+                      />
+                    ) : (
+                      <Button
+                        text="Full Case Study"
+                        href={`/project/${slug}`}
+                        variant="primary"
+                        soundEffect="navigateProject"
+                      />
+                    )}
                   </div>
                 </header>
               </div>
@@ -192,7 +201,7 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
                     <h3 className="t-label text-on-surface-variant">{solutions.title ?? "The Solution"}</h3>
                     <div className="flex flex-col gutter-sm">
                       {solutions.items.map((sol, i) => (
-                        <article key={i} className="flex flex-col gap-1">
+                        <article key={i} className="flex flex-col">
                           <h4 className="t-p text-on-surface text-600">{sol.title}</h4>
                           <p className="t-p text-on-surface-variant">{sol.description}</p>
                           {sol.media && (
@@ -218,7 +227,7 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
                     <h3 className="t-label text-on-surface-variant">{takeaways.title ?? "Takeaways"}</h3>
                     <div className="flex flex-col gutter-sm">
                       {takeaways.items.map((item, i) => (
-                        <div key={i} className="flex flex-col gap-1">
+                        <div key={i} className="flex flex-col">
                           <h4 className="t-p text-on-surface text-600">{item.title}</h4>
                           <p className="t-p text-on-surface-variant">{item.description}</p>
                         </div>

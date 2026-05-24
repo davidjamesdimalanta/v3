@@ -49,12 +49,12 @@ function BoldText({ text }) {
 
 function PersonaCardContent({ persona }) {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gutter-xs">
       <p className="text-small text-600">{persona.name}</p>
       <hr className="border-(--schemes-outline-variant)" />
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gutter-xs">
         {persona.traits.map((trait, i) => (
-          <li key={i} className="text-small text-400 flex gap-2">
+          <li key={i} className="text-small text-400 flex gutter-xs">
             <span className="opacity-50 shrink-0">—</span>
             <span><BoldText text={trait} /></span>
           </li>
@@ -97,7 +97,8 @@ function PersonaCard({ persona }) {
   const avatar = (
     <motion.div
       whileHover={jiggle}
-      className="relative cursor-pointer select-none w-[140px] h-[180px] sm:w-[160px] sm:h-[200px]"
+      className="relative select-none w-[140px] h-[180px] sm:w-[160px] sm:h-[200px]"
+      aria-hidden="true"
     >
       {persona.avatarSrc ? (
         <Image
@@ -120,9 +121,13 @@ function PersonaCard({ persona }) {
     return (
       <HoverCard>
         <HoverCardTrigger asChild>
-          <div className="cursor-pointer">
+          <button
+            type="button"
+            className="cursor-pointer appearance-none border-0 bg-transparent p-0 [font:inherit] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--schemes-primary)"
+            aria-label={`Learn more about ${persona.name}`}
+          >
             {avatar}
-          </div>
+          </button>
         </HoverCardTrigger>
         <HoverCardContent side="top" className="w-120" sideOffset={8}>
           <PersonaCardContent persona={persona} />
@@ -140,9 +145,14 @@ function PersonaCard({ persona }) {
       }}
     >
       <PopoverTrigger asChild>
-        <div ref={triggerRef} className="cursor-pointer">
+        <button
+          ref={triggerRef}
+          type="button"
+          className="cursor-pointer appearance-none border-0 bg-transparent p-0 [font:inherit] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--schemes-primary)"
+          aria-label={`Learn more about ${persona.name}`}
+        >
           {avatar}
-        </div>
+        </button>
       </PopoverTrigger>
       <PopoverContent
         side={popoverSide}
@@ -156,11 +166,13 @@ function PersonaCard({ persona }) {
 }
 
 export default function CaseStudyPersonas({
+  id = "personas",
   personas = PERSONAS,
   sectionHeading = "Personas",
   title = "Two people, two kinds of blocked.",
   text = <>Two things kept coming up in the research: people <strong className="text-600">couldn&apos;t find the specific details</strong> they needed, and even when they could, they <strong className="text-600">didn&apos;t trust them</strong>. These personas put a face to both of those problems, and shaped everything that came next.</>,
   hint,
+  spacingClassName = "py-64",
 }) {
   const groupRef = useRef(null)
   const isInView = useInView(groupRef, { once: true, margin: "0px 0px -100px 0px" })
@@ -174,18 +186,18 @@ export default function CaseStudyPersonas({
   }, [])
 
   return (
-    <div id="personas" className="flex flex-col gutter-lg py-64 px-4">
+    <div id={id} className={`flex flex-col gutter-lg ${spacingClassName} px-4`}>
       <CaseStudyTextBlock
         sectionHeading={sectionHeading}
         title={title}
         text={text}
       />
 
-      <div ref={groupRef} className="flex flex-col items-center gap-3">
+      <div ref={groupRef} className="flex flex-col items-center gutter-xs">
         <AnimatedGroup
           preset="blur-slide"
           animate={isInView ? "visible" : "hidden"}
-          className="flex flex-row gap-6 sm:gap-10 justify-center"
+          className="flex flex-row gutter-base sm:gutter-lg justify-center"
         >
           {personas.map((persona) => (
             <PersonaCard key={persona.id} persona={persona} />

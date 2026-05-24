@@ -9,7 +9,7 @@ import { useCaseStudyTheme } from "../../_shared/CaseStudyThemeContext";
 /**
  * Case Study Media Block Component
  *
- * Full-width media block with Daybreak Studio-inspired matting effect.
+ * Responsive media block with Daybreak Studio-inspired matting effect.
  * Features rounded corners, colored background, and internal padding.
  * Supports images, videos (Mux HLS), and Lottie animations.
  *
@@ -23,7 +23,7 @@ import { useCaseStudyTheme } from "../../_shared/CaseStudyThemeContext";
  * @param {string} bgColor - Optional background color override
  * @param {string} fgColor - Optional caption color override
  * @param {boolean} isFirstVideo - First video has 2-second delay
- * @param {string} size - Size variant: "small" (512px, 1:1), "medium" (1290px, 2.07:1), or "large" (1664px, flexible aspect)
+ * @param {string} size - Size variant: "small" (512px, 1:1), "medium" (1200px, 2.07:1), or "large" (1200px, flexible aspect)
  * @param {string} id - Optional ID for intersection observer tracking
  * @param {string} className - Additional custom classes
  */
@@ -32,6 +32,8 @@ const isMuxHLSVideo = (url) => {
   if (!url || typeof url !== 'string') return false;
   return url.includes('.m3u8') || url.includes('stream.mux.com');
 };
+
+const CASE_STUDY_MEDIA_MAX_WIDTH = "max-w-[1200px]";
 
 function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
   const handleTogglePlayback = () => {
@@ -106,12 +108,12 @@ export default function CaseStudyMediaBlock({
       innerMargin: "px-4 md:px-5",     // Responsive padding
     },
     medium: {
-      maxWidth: "max-w-[1290px]",      // 1290px
+      maxWidth: CASE_STUDY_MEDIA_MAX_WIDTH,      // Matches the shared case-study content width
       aspectRatio: "1290/622",         // ~2.07:1 (from safe-area dimensions)
       innerMargin: "px-4 md:px-5",     // Responsive padding
     },
     large: {
-      maxWidth: "max-w-[1664px]",      // Current width
+      maxWidth: CASE_STUDY_MEDIA_MAX_WIDTH,      // Matches the shared case-study content width
       aspectRatio: "1867/1194",               // Use aspectRatio prop
       innerMargin: "px-4 md:px-5",     // Responsive padding
     },
@@ -122,9 +124,9 @@ export default function CaseStudyMediaBlock({
   // Compute sizes hint for Next.js Image optimization based on size variant
   const imageSizes = {
     small: "(max-width: 512px) calc(100vw - 32px), 480px",
-    medium: "(max-width: 768px) calc(100vw - 32px), (max-width: 1290px) calc(100vw - 64px), 1226px",
-    large: "(max-width: 768px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px",
-  }[size] || "(max-width: 768px) calc(100vw - 32px), (max-width: 1664px) calc(100vw - 64px), 1600px";
+    medium: "(max-width: 768px) calc(100vw - 32px), (max-width: 1200px) calc(100vw - 64px), 1200px",
+    large: "(max-width: 768px) calc(100vw - 32px), (max-width: 1200px) calc(100vw - 64px), 1200px",
+  }[size] || "(max-width: 768px) calc(100vw - 32px), (max-width: 1200px) calc(100vw - 64px), 1200px";
 
   // Parse aspect ratio
   const getAspectRatio = () => {
@@ -547,8 +549,7 @@ export default function CaseStudyMediaBlock({
       {/* Caption */}
       {caption && (
         <figcaption
-          className="mb-3 mt-3 max-w-prose text-center text-sm"
-          style={{ color: 'var(--fg-color)' }}
+          className="mb-3 mt-3 max-w-prose text-center text-sm text-(--text-color-60)"
         >
           {caption}
         </figcaption>

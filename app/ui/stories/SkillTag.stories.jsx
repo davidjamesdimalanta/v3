@@ -43,7 +43,7 @@ export const Specialized = {
 
 export const AllCategories = {
   render: () => (
-    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+    <div className="flex flex-wrap gutter-xs">
       <SkillTag skill="Figma" category="design" />
       <SkillTag skill="Prototyping" category="design" />
       <SkillTag skill="React" category="dev" />

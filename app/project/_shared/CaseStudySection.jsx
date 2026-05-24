@@ -13,7 +13,7 @@ export default function CaseStudySection({ children, title, theme, className = "
         )}
 
         <CaseStudyThemeProvider theme={theme}>
-          <div className="flex flex-col gap-12 lg:gap-16">
+          <div className="flex flex-col gutter-lg lg:gutter-xl">
             {children}
           </div>
         </CaseStudyThemeProvider>

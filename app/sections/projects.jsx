@@ -3,20 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import FeaturedProject from "./organisms/FeaturedProject";
-import { projectsRegistry } from "../project/projects";
-import { projectData as linklogData } from "../project/linklog/data";
-import { projectData as goableData } from "../project/goable/data";
-import { projectData as ihubData } from "../project/ihub/data";
-import { projectData as socraticData } from "../project/socratic/data";
-import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
 import { useSoundEffects } from "../ui/hooks/useSoundEffects";
 import { useInView } from "../ui/hooks/useInView";
 import { useMediaQuery } from "../ui/hooks/useMediaQuery";
 import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
 import { Cursor } from "@/components/motion-primitives/cursor";
 import { motion } from "motion/react";
+import { toast } from "sonner";
 
-export default function Projects() {
+export default function Projects({ projects = [] }) {
     // Sound effects
     const { playHover, playNavigateProject } = useSoundEffects();
     // Scroll-triggered animation
@@ -29,19 +24,9 @@ export default function Projects() {
     const [hoveredProject, setHoveredProject] = useState(null);
     const cursorProject = hoveredProject;
 
-    // Map registry to project data
-    const projectDataMap = {
-      'linklog': linklogData,
-      'goable': goableData,
-      'ihub': ihubData,
-      'socratic': socraticData,
-      'figma-ball-knowledge': figmaBallData,
-    };
-
-    const projects = projectsRegistry.map((project) => {
-      const data = projectDataMap[project.slug];
+    const projectCardsData = projects.map((data) => {
       return {
-        slug: project.slug,
+        slug: data.slug,
         title: data.name,
         description: data.title,
         videoSrc: data.coverVideo,
@@ -50,11 +35,19 @@ export default function Projects() {
         tags: [data.details.role],
         skills: data.skills || [],
         year: data.details.year,
-        type: data.details.type
+        type: data.details.type,
+        comingSoon: data.comingSoon,
       };
     });
 
-    const projectCards = projects.map((project, index) => (
+    const handleComingSoon = (event) => {
+      event.preventDefault();
+      toast("Coming soon", {
+        description: "This project is currently being documented.",
+      });
+    };
+
+    const projectCards = projectCardsData.map((project, index) => (
       <div
         key={project.slug}
         className="relative h-full"
@@ -65,7 +58,8 @@ export default function Projects() {
           href={`/project/${project.slug}`}
           className="block h-full"
           onMouseEnter={playHover}
-          onClick={playNavigateProject}
+          onClick={project.comingSoon ? handleComingSoon : playNavigateProject}
+          aria-disabled={project.comingSoon ? "true" : undefined}
         >
           <FeaturedProject {...project} autoplay={index === 0} />
         </Link>
@@ -115,7 +109,7 @@ export default function Projects() {
                 isVisible={!!hoveredProject}
               >
                 {cursorProject && (
-                  <div className="flex items-center gap-2 px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
+                  <div className="flex items-center gutter-xs px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap tabular-nums">
                     {cursorProject.type} · {cursorProject.year}
                     <motion.span
                       className="shrink-0 flex items-center"

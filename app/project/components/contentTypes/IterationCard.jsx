@@ -24,32 +24,38 @@ export default function IterationCard({
   className = "",
 }) {
   return (
-    <div className={`max-w-lg mx-auto flex flex-col gap-3 ${className}`}>
-      {sectionHeading && (
-        <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
-          {sectionHeading}
-        </span>
+    <div className={`max-w-lg mx-auto flex flex-col gutter-sm ${className}`}>
+      {(sectionHeading || title) && (
+        <div className="flex flex-col gutter-xs">
+          {sectionHeading && (
+            <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+              {sectionHeading}
+            </span>
+          )}
+
+          {title && (
+            <h3 className="text-h5 text-600 text-(--text-color-100)">{title}</h3>
+          )}
+        </div>
       )}
 
-      {title && (
-        <h3 className="text-h5 text-600 text-(--text-color-100)">{title}</h3>
-      )}
+      <div className="flex flex-col gutter-xs">
+        {whatHappened && (
+          <p className="text-p text-400 text-(--text-color-80)">{whatHappened}</p>
+        )}
 
-      {whatHappened && (
-        <p className="text-p text-400 text-(--text-color-80)">{whatHappened}</p>
-      )}
+        {quote && (
+          <blockquote className="border-l-2 border-(--schemes-tertiary) pl-4 my-1">
+            <p className="text-p text-400 italic text-(--text-color-60)">
+              &ldquo;{quote}&rdquo;
+            </p>
+          </blockquote>
+        )}
 
-      {quote && (
-        <blockquote className="border-l-2 border-(--schemes-tertiary) pl-4 my-1">
-          <p className="text-p text-400 italic text-(--text-color-60)">
-            &ldquo;{quote}&rdquo;
-          </p>
-        </blockquote>
-      )}
-
-      {whatChanged && (
-        <p className="text-p text-400 text-(--text-color-80)">{whatChanged}</p>
-      )}
+        {whatChanged && (
+          <p className="text-p text-400 text-(--text-color-80)">{whatChanged}</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -45,19 +45,29 @@ export default function ProjectHero({
             <div className="flex flex-col gutter-sm">
               <h2 className="text-sm text-500 opacity-60">Recognition</h2>
               <div className="flex flex-col gutter-xs">
-                {awards.map((award, index) => (
-                  <a
-                    key={index}
-                    href={award.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center justify-between text-p text-400 hover:bd-text transition-all duration-150"
-                    onMouseEnter={playButtonHover}
-                  >
-                    <span>{award.name}</span>
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150">→</span>
-                  </a>
-                ))}
+                {awards.map((award, index) => {
+                  if (!award.url) {
+                    return (
+                      <p key={index} className="text-p text-400">
+                        {award.name}
+                      </p>
+                    );
+                  }
+
+                  return (
+                    <a
+                      key={index}
+                      href={award.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between text-p text-400 hover:bd-text transition-all duration-150"
+                      onMouseEnter={playButtonHover}
+                    >
+                      <span>{award.name}</span>
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150">→</span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -74,7 +84,7 @@ export default function ProjectHero({
           )}
 
                     {Object.keys(details).length > 0 && (
-            <div className="grid grid-cols-2 gap-4 text-sm flex-1">
+            <div className="grid grid-cols-2 gutter-sm text-sm flex-1">
               {details.role && (
                 <div className="flex flex-col gutter-xs">
                   <span className="text-xs text-(--schemes-tertiary)">Role</span>

@@ -18,6 +18,7 @@ export default function CaseStudyHighlightsBlock({
   sectionHeading,
   title,
   description,
+  descriptionNode,
   videos = [],
   dark = false,
 }) {
@@ -29,18 +30,26 @@ export default function CaseStudyHighlightsBlock({
   return (
     <div className={`px-4 md:px-8 py-16 flex flex-col items-center gutter-lg ${bgClass}`}>
       {/* Header text */}
-      <div className="flex flex-col gutter-xs max-w-[1200px] mx-auto">
-        {sectionHeading && (
-          <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
-            {sectionHeading}
-          </span>
+      <div className="flex flex-col gutter-sm max-w-[1200px] mx-auto">
+        {(sectionHeading || title) && (
+          <div className="flex flex-col gutter-xs">
+            {sectionHeading && (
+              <span className={`text-sm uppercase tracking-wide ${headingColor}`}>
+                {sectionHeading}
+              </span>
+            )}
+            {title && <h2 className={`text-h3 text-600 ${titleColor}`}>{title}</h2>}
+          </div>
         )}
-        <h3 className={`text-h3 text-600 ${titleColor}`}>{title}</h3>
-        <p className={`text-p text-400 ${descColor}`}>{description}</p>
+        {(descriptionNode || description) && (
+          <div className={`flex flex-col gutter-xs text-p text-400 ${descColor}`}>
+            {descriptionNode || description}
+          </div>
+        )}
       </div>
 
       {/* Video grid */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1200px]">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gutter-base max-w-[1200px]">
         {videos.map((video, i) => (
           <CaseStudyMediaBlock
             key={i}

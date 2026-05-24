@@ -41,6 +41,7 @@ import { TextShimmer } from "@/app/ui/text-shimmer"
  */
 export default function DefinitionCard({
   trigger,
+  triggerLabel,
   shimmerVariant = "blue",
   triggerClassName,
   triggerProps = {},
@@ -59,6 +60,8 @@ export default function DefinitionCard({
 
   // Determine which width to use based on props
   const effectiveWidth = isDesktop ? (desktopWidth || width) : (mobileWidth || width)
+  const triggerContent = typeof trigger === 'string' ? trigger : trigger
+  const accessibleTriggerLabel = triggerLabel || (typeof trigger === 'string' ? trigger : "definition")
 
   useEffect(() => {
     // Detect viewport width (810px breakpoint)
@@ -90,10 +93,10 @@ export default function DefinitionCard({
 
   // Shared content component
   const cardContent = (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gutter-xs">
       {/* Main content */}
       {content && (
-        <div className="text-p">
+        <div className="text-p [&_strong]:text-700 [&_strong]:text-(--text-color-100)">
           {content}
         </div>
       )}
@@ -141,14 +144,19 @@ export default function DefinitionCard({
     return (
       <HoverCard>
         <HoverCardTrigger asChild>
-          <i
-            className={cn("cursor-pointer text-550", triggerClassName)}
+          <button
+            type="button"
+            aria-label={`Show definition: ${accessibleTriggerLabel}`}
+            className={cn(
+              "inline cursor-pointer appearance-none border-0 bg-transparent p-0 text-left text-inherit text-500 italic underline-offset-2 font-[inherit] text-[length:inherit] leading-[inherit] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--schemes-primary)",
+              triggerClassName
+            )}
             {...triggerProps}
           >
             <TextShimmer variant={shimmerVariant} as="span">
-              {typeof trigger === 'string' ? trigger : String(trigger)}
+              {triggerContent}
             </TextShimmer>
-          </i>
+          </button>
         </HoverCardTrigger>
         <HoverCardContent
           className={effectiveWidth}
@@ -171,15 +179,20 @@ export default function DefinitionCard({
       }}
     >
       <PopoverTrigger asChild>
-        <i
+        <button
+          type="button"
           ref={triggerRef}
-          className={cn("pr-[2px] cursor-pointer", triggerClassName)}
+          aria-label={`Show definition: ${accessibleTriggerLabel}`}
+          className={cn(
+            "inline cursor-pointer appearance-none border-0 bg-transparent p-0 pr-[2px] text-left text-inherit text-500 italic underline-offset-2 font-[inherit] text-[length:inherit] leading-[inherit] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--schemes-primary)",
+            triggerClassName
+          )}
           {...triggerProps}
         >
           <TextShimmer variant={shimmerVariant} as="span">
-            {typeof trigger === 'string' ? trigger : String(trigger)}
+            {triggerContent}
           </TextShimmer>
-        </i>
+        </button>
       </PopoverTrigger>
       <PopoverContent
         className={cn(effectiveWidth, "max-w-[calc(100vw-2rem)]")}

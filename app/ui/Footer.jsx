@@ -37,7 +37,7 @@ export default function Footer() {
       >
         {/* Top row: brand + tagline (left) · CONNECT links (right) */}
         <div className="flex flex-col md:flex-row gutter-md md:gutter-md items-start">
-          <div className="flex-1 min-w-0 flex flex-col gap-3">
+          <div className="flex-1 min-w-0 flex flex-col gutter-xs">
             <h2 className="t-h3">David Dimalanta</h2>
             <div className="t-sm opacity-70 inline-flex flex-wrap">
               <span>Powered by matcha pandan.&nbsp;</span>
@@ -74,7 +74,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 shrink-0">
+          <div className="flex flex-col gutter-xs shrink-0">
             <span className="t-label opacity-60">CONNECT</span>
             {connectLinks.map((link) =>
               link.isCopy ? (
@@ -120,7 +120,7 @@ export default function Footer() {
         <div className="bg-inverse-on-surface opacity-20 h-px w-full" />
 
         {/* Bottom row: copyright + location */}
-        <div className="flex flex-col sm:flex-row justify-between gap-2">
+        <div className="flex flex-col sm:flex-row justify-between gutter-xs">
           <p className="t-xs opacity-60">© {new Date().getFullYear()} David Dimalanta</p>
           <p className="t-xs opacity-60">Toronto, ON</p>
         </div>

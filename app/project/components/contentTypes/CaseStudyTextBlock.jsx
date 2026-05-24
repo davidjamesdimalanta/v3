@@ -13,7 +13,7 @@ import { InView } from '@/components/motion-primitives/in-view';
  * @param {string} id - Optional ID for intersection observer tracking
  * @param {string} className - Additional custom classes
  */
-export default function CaseStudyTextBlock({ sectionHeading, title, text, id, className = "" }) {
+export default function CaseStudyTextBlock({ sectionHeading, title, text, id, className = "", children }) {
   // Helper function to render text (handles both string and array)
   const renderText = (textContent) => {
     if (Array.isArray(textContent)) {
@@ -36,6 +36,8 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
     return <p className="text-p text-400 text-(--text-color-80)">{textContent}</p>;
   };
 
+  const body = children ? children : text && renderText(text);
+
   return (
     <InView
       variants={{
@@ -44,23 +46,31 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
       }}
       transition={{ type: 'spring', duration: 0.45, bounce: 0 }}
     >
-      <div id={id} className={`max-w-lg mx-auto flex flex-col gap-2 px-4 ${className}`}>
-        {/* Optional Section Heading */}
-        {sectionHeading && (
-          <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
-            {sectionHeading}
-          </span>
-        )}
+      <div id={id} className={`max-w-lg mx-auto flex flex-col gutter-sm px-4 ${className}`}>
+        {(sectionHeading || title) && (
+          <div className="flex flex-col gutter-xs">
+            {/* Optional Section Heading */}
+            {sectionHeading && (
+              <span className="text-sm uppercase tracking-wide text-(--text-color-60)">
+                {sectionHeading}
+              </span>
+            )}
 
-        {/* Optional Title */}
-        {title && (
-          <h3 className="text-h5 text-600 text-(--text-color-100)">
-            {typeof title === "string" ? title : <>{title}</>}
-          </h3>
+            {/* Optional Title */}
+            {title && (
+              <h2 className="text-h4 text-600 text-(--text-color-100)">
+                {typeof title === "string" ? title : <>{title}</>}
+              </h2>
+            )}
+          </div>
         )}
 
         {/* Text Content */}
-        {text && renderText(text)}
+        {body && (
+          <div className="flex flex-col gutter-xs">
+            {body}
+          </div>
+        )}
       </div>
     </InView>
   );

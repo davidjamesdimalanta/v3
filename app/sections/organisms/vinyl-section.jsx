@@ -130,14 +130,14 @@ export default function VinylSection() {
               onClick={() => setShowSoundModal(false)}
             />
             <motion.div
-              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_rgba(214,202,200,0.6),0_4px_12px_rgba(155,144,122,0.2),0_12px_32px_rgba(155,144,122,0.1)] bg-[#ECEAE9] text-(--figma-brown) w-72 flex flex-col gap-4"
+              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_rgba(214,202,200,0.6),0_4px_12px_rgba(155,144,122,0.2),0_12px_32px_rgba(155,144,122,0.1)] bg-[#ECEAE9] text-(--figma-brown) w-72 flex flex-col gutter-sm"
               initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -4, filter: 'blur(4px)' }}
               transition={{ type: 'spring', duration: 0.45, bounce: 0 }}
             >
               <p className="text-p">Enable sound to play music?</p>
-              <div className="flex gap-3">
+              <div className="flex gutter-xs">
                 <button onClick={handleEnableSound} className="flex-1 px-4 py-2 rounded-lg bg-(--figma-brown) text-[#ECEAE9] text-sm cursor-pointer hover:opacity-80 transition-opacity">
                   Enable Sound
                 </button>

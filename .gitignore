@@ -43,12 +43,14 @@ next-env.d.ts
 .agents
 .claude
 .playwright-mcp
+.codex
 
 # FCO stuff
 FCO.md
 FCO.txt
 
 CLAUDE.md
+AGENTS.md
 
 docs
 

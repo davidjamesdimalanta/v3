@@ -28,7 +28,11 @@ export default function ContentBlock({
       {title && <h3 className="text-h5">{typeof title === 'string' ? title : <>{title}</>}</h3>}
 
       {/* Optional Text Content */}
-      {text && renderText(text)}
+      {text && (
+        <div className="flex flex-col gutter-xs">
+          {renderText(text)}
+        </div>
+      )}
 
       {/* Optional Media Block */}
       {media?.src && <MediaBlock {...media} thumbnail={thumbnail} isFirstVideo={isFirstVideo} priority={priority} />}

@@ -4,11 +4,6 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
 import ProjectDrawer from "./organisms/ProjectDrawer";
-import { projectData as linklogData } from "../project/linklog/data";
-import { projectData as goableData } from "../project/goable/data";
-import { projectData as figmaBallData } from "../project/figma-ball-knowledge/data";
-import { projectData as socraticData } from "../project/socratic/data";
-import { projectData as ihubData } from "../project/ihub/data";
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
@@ -20,34 +15,25 @@ const ITEM_VARIANTS = {
   },
 };
 
-const PROJECTS = [
-  { slug: "linklog",             data: linklogData, offset: false },
-  { slug: "goable",              data: goableData,   offset: false },
-  { slug: "figma-ball-knowledge", data: figmaBallData, offset: false },
-  { slug: "socratic",            data: socraticData, offset: false },
-  { slug: "ihub",                data: ihubData,     offset: false },
-];
-
-export default function WorkGrid({ animate = "visible", prefersReducedMotion = false }) {
+export default function WorkGrid({ projects = [], animate = "visible", prefersReducedMotion = false }) {
   const [activeSlug, setActiveSlug] = useState(null);
-  const activeProject = PROJECTS.find((p) => p.slug === activeSlug) ?? null;
-  const renderProject = activeProject ? { slug: activeProject.slug, ...activeProject.data } : null;
+  const renderProject = projects.find((project) => project.slug === activeSlug) ?? null;
 
-  const cards = PROJECTS.map((project) => {
+  const cards = projects.map((project) => {
     const card = (
       <BentoCell
         variant="hero"
-        category={project.data.featuredCategory}
-        title={project.data.name}
-        subtitle={project.data.title}
-        thumbnail={project.data.coverImage}
-        videoSrc={project.data.coverVideo}
-        darkVideoSrc={project.data.coverVideoDark}
+        category={project.featuredCategory}
+        title={project.name}
+        subtitle={project.title}
+        thumbnail={project.coverImage}
+        videoSrc={project.coverVideo}
+        darkVideoSrc={project.coverVideoDark}
         onOpen={() => setActiveSlug(project.slug)}
       />
     );
 
-    return { ...project, card };
+    return { slug: project.slug, offset: false, card };
   });
 
   if (prefersReducedMotion) {

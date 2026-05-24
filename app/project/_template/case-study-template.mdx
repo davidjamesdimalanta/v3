@@ -1,0 +1,58 @@
+---
+slug: your-project-slug
+order: 99
+nextProject: linklog
+name: Project Name
+title: One-line project title
+links:
+  - url: https://example.com
+    label: Live Project
+coverImage: /assets/example/cover.png
+description:
+  - First hero summary paragraph.
+  - Second hero summary paragraph.
+featuredCategory: PRODUCT DESIGN
+details:
+  type: Concept
+  role: Product Designer
+  timeline: 4 weeks
+  team: Solo
+  year: "2026"
+caseStudy:
+  bgColor: var(--bg-color)
+  fgColor: var(--schemes-tertiary)
+nav:
+  - id: problem
+    heading: Overview
+heroMedia:
+  - type: image
+    src: /assets/example/cover.png
+    alt: Describe what the image shows
+    aspectRatio: video
+assets:
+  demo:
+    type: video
+    src: /assets/example/demo.mp4
+    caption: Short caption for screen-reader and visual context
+definitions:
+  key-term:
+    content: |
+      Plain Markdown content for the popover.
+    side: bottom
+    width: w-80
+scrollBlocks:
+  solutions:
+    sectionHeading: Solutions
+    dark: true
+    textStates:
+      - title: First solution.
+        description: What this solution does.
+---
+
+<CaseText id="problem" className="pt-64" sectionHeading="The Problem" title="Human-readable title">
+Write normal Markdown prose here. Inline definitions use <Def definition="key-term">key term</Def>.
+</CaseText>
+
+<CaseScroll id="solutions" className="py-16" dark block="solutions">
+<CaseMedia size="medium" aspectRatio="video" className="max-w-full pt-0 pb-4" asset="demo" />
+</CaseScroll>
