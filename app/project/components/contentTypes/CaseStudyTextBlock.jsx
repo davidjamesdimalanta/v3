@@ -13,7 +13,16 @@ import { InView } from '@/components/motion-primitives/in-view';
  * @param {string} id - Optional ID for intersection observer tracking
  * @param {string} className - Additional custom classes
  */
-export default function CaseStudyTextBlock({ sectionHeading, title, text, id, className = "", children }) {
+export default function CaseStudyTextBlock({
+  sectionHeading,
+  title,
+  text,
+  id,
+  className = "",
+  stackClassName = "gutter-sm",
+  bodyClassName = "gutter-xs",
+  children,
+}) {
   // Helper function to render text (handles both string and array)
   const renderText = (textContent) => {
     if (Array.isArray(textContent)) {
@@ -46,7 +55,7 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
       }}
       transition={{ type: 'spring', duration: 0.45, bounce: 0 }}
     >
-      <div id={id} className={`max-w-lg mx-auto flex flex-col gutter-sm px-4 ${className}`}>
+      <div id={id} className={`max-w-lg mx-auto flex flex-col ${stackClassName} px-4 ${className}`}>
         {(sectionHeading || title) && (
           <div className="flex flex-col gutter-xs">
             {/* Optional Section Heading */}
@@ -67,7 +76,7 @@ export default function CaseStudyTextBlock({ sectionHeading, title, text, id, cl
 
         {/* Text Content */}
         {body && (
-          <div className="flex flex-col gutter-xs">
+          <div className={`flex flex-col ${bodyClassName}`}>
             {body}
           </div>
         )}

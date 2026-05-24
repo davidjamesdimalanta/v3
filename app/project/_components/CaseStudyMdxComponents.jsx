@@ -48,6 +48,9 @@ const markdownComponents = {
   p({ children }) {
     return <p className="text-p text-400 text-current">{children}</p>;
   },
+  h3({ children }) {
+    return <h3 className="text-h6 text-600 text-current">{children}</h3>;
+  },
   strong({ children }) {
     return <strong className="text-700 text-current">{children}</strong>;
   },
@@ -133,11 +136,30 @@ export function Def({ definition: definitionKey, children }) {
   );
 }
 
-export function CaseText({ id, sectionHeading, title, className = "", children }) {
+export function CaseText({ id, sectionHeading, title, className = "", stackClassName, bodyClassName, children }) {
+  const resolvedStackClassName = stackClassName || (id === "closing" ? "gutter-md" : undefined);
+  const resolvedBodyClassName = bodyClassName || (id === "closing" ? "gutter-base" : undefined);
+
   return (
-    <CaseStudyTextBlock id={id} sectionHeading={sectionHeading} title={title} className={className}>
+    <CaseStudyTextBlock
+      id={id}
+      sectionHeading={sectionHeading}
+      title={title}
+      className={className}
+      stackClassName={resolvedStackClassName}
+      bodyClassName={resolvedBodyClassName}
+    >
       {children}
     </CaseStudyTextBlock>
+  );
+}
+
+export function CaseThought({ title, children }) {
+  return (
+    <article className="flex flex-col gutter-xs">
+      {title && <h3 className="text-h6 text-600 text-(--text-color-100)">{title}</h3>}
+      {children}
+    </article>
   );
 }
 

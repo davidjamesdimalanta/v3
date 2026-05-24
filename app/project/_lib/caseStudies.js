@@ -21,6 +21,7 @@ const ALLOWED_MDX_COMPONENTS = new Set([
   "CasePersonas",
   "CaseHighlights",
   "CaseGroup",
+  "CaseThought",
   "Def",
 ]);
 

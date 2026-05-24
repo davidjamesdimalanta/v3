@@ -1,7 +1,7 @@
 "use client";
 
 import { TextLoop } from "@/components/motion-primitives/text-loop";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSoundEffects } from "./hooks/useSoundEffects";
 import { toast } from "sonner";
@@ -26,9 +26,57 @@ const connectLinks = [
   { label: "CV", href: "https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing", external: true },
 ];
 
+const themeChoices = [
+  { label: "Milk", theme: "light", ariaLabel: "Use Milk light theme" },
+  { label: "Mocha", theme: "dark", ariaLabel: "Use Mocha dark theme" },
+];
+
+function FooterLogo({ className = "" }) {
+  return (
+    <svg
+      width="30"
+      height="24"
+      viewBox="0 0 155 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      <path
+        d="M0 0H17.1667V17.0265H0V0ZM17.1667 0H34.3333V17.0265H17.1667V0ZM34.3333 0H51.5V17.0265H34.3333V0ZM51.5 0H68.6667V17.0265H51.5V0ZM68.6667 0H85.8333V17.0265H68.6667V0ZM85.8333 0H103V17.0265H85.8333V0ZM0 17.0265H17.1667V34.0531H0V17.0265ZM85.8333 17.0265H103V34.0531H85.8333V17.0265ZM0 34.0531H17.1667V51.0796H0V34.0531ZM85.8333 34.0531H103V51.0796H85.8333V34.0531ZM103 34.0531H120.167V51.0796H103V34.0531ZM120.167 34.0531H137.333V51.0796H120.167V34.0531ZM137.333 34.0531H154.5V51.0796H137.333V34.0531ZM0 51.0796H17.1667V68.1061H0V51.0796ZM137.333 51.0796H154.5V68.1061H137.333V51.0796ZM0 68.1061H17.1667V85.1327H0V68.1061ZM137.333 68.1061H154.5V85.1327H137.333V68.1061ZM0 85.1327H17.1667L17.1667 102.159H0V85.1327ZM137.333 85.1327H154.5V102.159H137.333L137.333 85.1327ZM0 102.159H17.1667L17.1667 119.186H0V102.159ZM17.1667 102.159H34.3333L34.3333 119.186H17.1667L17.1667 102.159ZM34.3333 102.159H51.5L51.5 119.186H34.3333L34.3333 102.159ZM51.5 102.159H68.6667L68.6667 119.186H51.5L51.5 102.159ZM68.6667 102.159H85.8334L85.8333 119.186H68.6667L68.6667 102.159ZM85.8334 102.159H103L103 119.186H85.8333L85.8334 102.159ZM103 102.159H120.167L120.167 119.186H103L103 102.159ZM120.167 102.159H137.333L137.333 119.186H120.167L120.167 102.159ZM137.333 102.159H154.5V119.186H137.333L137.333 102.159Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export default function Footer() {
   const [isPaused, setIsPaused] = useState(false);
+  const [activeTheme, setActiveTheme] = useState(null);
   const { playButtonHover } = useSoundEffects();
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const syncTheme = () => setActiveTheme(root.getAttribute("data-theme"));
+    const observer = new MutationObserver(syncTheme);
+
+    syncTheme();
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  function handleThemeChoice(theme) {
+    const root = document.documentElement;
+
+    root.classList.remove("dark", "light");
+    root.setAttribute("data-theme", theme);
+    setActiveTheme(theme);
+  }
 
   return (
     <footer className="px-4 md:px-5 pb-4 md:pb-5 w-full" data-label="site-footer">
@@ -38,6 +86,14 @@ export default function Footer() {
         {/* Top row: brand + tagline (left) · CONNECT links (right) */}
         <div className="flex flex-col md:flex-row gutter-md md:gutter-md items-start">
           <div className="flex-1 min-w-0 flex flex-col gutter-xs">
+            <Link
+              href="/"
+              aria-label="Go to home page"
+              className="w-hug rounded-sm transition-opacity duration-150 hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+              onMouseEnter={playButtonHover}
+            >
+              <FooterLogo className="block h-auto w-[30px]" />
+            </Link>
             <h2 className="t-h3">David Dimalanta</h2>
             <div className="t-sm opacity-70 inline-flex flex-wrap">
               <span>Powered by matcha pandan.&nbsp;</span>
@@ -123,6 +179,31 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between gutter-xs">
           <p className="t-xs opacity-60">© {new Date().getFullYear()} David Dimalanta</p>
           <p className="t-xs opacity-60">Toronto, ON</p>
+        </div>
+
+        <div
+          role="group"
+          className="t-sm w-hug max-w-full opacity-80"
+          aria-label="Choose a temporary session theme"
+        >
+          {themeChoices.map((choice, index) => (
+            <Fragment key={choice.theme}>
+              {index > 0 && <span> or </span>}
+              <button
+                type="button"
+                aria-label={choice.ariaLabel}
+                aria-pressed={activeTheme === choice.theme}
+                className={`-mx-3 inline-flex min-h-[44px] items-center justify-center rounded-sm px-3 underline decoration-current decoration-[0.08em] underline-offset-4 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${
+                  activeTheme === choice.theme ? "opacity-100" : "opacity-80 hover:opacity-100"
+                }`}
+                onClick={() => handleThemeChoice(choice.theme)}
+                onMouseEnter={playButtonHover}
+              >
+                {choice.label}
+              </button>
+            </Fragment>
+          ))}
+          <span> theme?</span>
         </div>
       </div>
     </footer>

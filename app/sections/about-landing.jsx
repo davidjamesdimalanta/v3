@@ -25,7 +25,7 @@ export default function AboutLanding() {
         {prefersReducedMotion ? (
           <>
             <span className="col-span-2 text-h2 text-500 md:text-h2 lg:text-h1">
-              A bit about me.
+              a bit about me.
             </span>
             <div className="col-span-2">
               <VinylSection />
@@ -49,7 +49,7 @@ export default function AboutLanding() {
             <div className="flex flex-col gutter-base">
 
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              A bit about me.
+              a bit about me.
             </span>
 
             <span className="text-p pt-4">

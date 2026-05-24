@@ -6,12 +6,16 @@ import {
   CasePersonas,
   CaseScroll,
   CaseText,
+  CaseThought,
   Def,
 } from "./app/project/_components/CaseStudyMdxComponents";
 
 const markdownComponents = {
   p({ children }) {
     return <p className="text-p text-400 text-(--text-color-80)">{children}</p>;
+  },
+  h3({ children }) {
+    return <h3 className="text-h6 text-600 text-(--text-color-100)">{children}</h3>;
   },
   strong({ children }) {
     return <strong className="text-700 text-(--text-color-100)">{children}</strong>;
@@ -20,10 +24,10 @@ const markdownComponents = {
     return <em className="italic">{children}</em>;
   },
   ul({ children }) {
-    return <ul className="flex flex-col gap-2 list-disc pl-5">{children}</ul>;
+    return <ul className="flex flex-col gutter-xs list-disc pl-5">{children}</ul>;
   },
   ol({ children }) {
-    return <ol className="flex flex-col gap-2 list-decimal pl-5">{children}</ol>;
+    return <ol className="flex flex-col gutter-xs list-decimal pl-5">{children}</ol>;
   },
   li({ children }) {
     return <li className="text-p text-400 text-(--text-color-80)">{children}</li>;
@@ -62,6 +66,7 @@ export const caseStudyMdxComponents = {
   CasePersonas,
   CaseHighlights,
   CaseGroup,
+  CaseThought,
 };
 
 export function useMDXComponents(components) {

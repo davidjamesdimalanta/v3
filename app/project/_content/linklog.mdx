@@ -147,11 +147,6 @@ definitions:
       Generate CTT pulls structured fields forward, then leaves room for the narrative pieces humans still need to write.
     side: right
     width: w-96
-  phipa-action:
-    content: |
-      The interface does not make privacy a policy paragraph after the fact. It makes privacy a permission boundary in the service itself.
-    side: left
-    width: w-80
 personas:
   - id: link-worker
     name: Brenda, Link Worker
@@ -276,7 +271,7 @@ With <Def definition="phipa-pipeda">PHIPA and PIPEDA</Def>, we were dealing with
 
 <CaseGroup className="flex flex-col gutter-md">
   <CaseText title="OACAO Reporting Dashboard">
-  OACAO needed a different product than the Link Worker. The dashboard aggregates outcomes across SALCs, exposes CSV export, and keeps raw identifiers out of the programme-wide view. That is <Def definition="phipa-action">PHIPA in action</Def>.
+  OACAO needed a different product than the Link Worker. The dashboard aggregates outcomes across SALCs, exposes CSV export, and keeps raw identifiers out of the programme-wide view.
   </CaseText>
   <CaseMedia
     size="large"
@@ -302,15 +297,15 @@ With <Def definition="phipa-pipeda">PHIPA and PIPEDA</Def>, we were dealing with
 <CaseHighlights id="final-designs" dark block="final-build" />
 
 <CaseText id="closing" sectionHeading="Closing" title="Final thoughts and learnings">
-**Service Blueprints Show You Where to Cut**
-The current-state blueprint surfaced that the most expensive part of the Link Worker's year wasn't doing the work - it was reconstructing it for OACAO at year-end. Once we saw that, every design decision served closing that gap.
+<CaseThought title="Start with one REALLY good solution">
+  There were many areas of the Link Worker journey that could be improved on, but for six days, it was important to scope down and deliver one or two high quality features Link Workers would actually enjoy.
+</CaseThought>
 
-**80% Is Good Enough - If The 80% Closes The Loop**
-We chose end-to-end coverage at lower fidelity over one polished flow, because the question we were testing was whether the whole loop could close, not whether one screen looked perfect.
+<CaseThought title="AI can't make design decisions for me">
+  I used Codex, Claude, and Gemini in this project, but building a solution for Link Workers would not have been possible without understanding what mattered the most through interviews and the co-design sessions.
+</CaseThought>
 
-**AI Is A Force Multiplier On Decisions, Not A Substitute For Them**
-Codex, Claude Code, and Gemini cut the build time from weeks to days - but they only mattered because the service blueprint, the interviews, and the co-design sessions had already told us what to build. AI didn't shorten the path to the decision; it shortened the path from the decision to a live product.
-
-**What's Next**
-Pilot in 2-3 SALCs before the next OACAO funding cycle, finalize the PHIPA-compliant data governance brief, and explore a Link Trainer track to scale onboarding without scaling our team.
+<CaseThought title="What's Next">
+  Pilot in 2-3 SALCs before the next OACAO funding cycle, finalize the PHIPA-compliant data governance brief, and explore a Link Trainer track to scale onboarding without scaling our team.
+</CaseThought>
 </CaseText>
