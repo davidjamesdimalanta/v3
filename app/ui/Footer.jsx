@@ -193,8 +193,8 @@ export default function Footer() {
                 type="button"
                 aria-label={choice.ariaLabel}
                 aria-pressed={activeTheme === choice.theme}
-                className={`-mx-3 inline-flex min-h-[44px] items-center justify-center rounded-sm px-3 underline decoration-current decoration-[0.08em] underline-offset-4 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${
-                  activeTheme === choice.theme ? "opacity-100" : "opacity-80 hover:opacity-100"
+                className={`-mx-3 inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-sm px-3 decoration-current decoration-[0.08em] underline-offset-4 transition-opacity duration-150 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${
+                  activeTheme === choice.theme ? "underline opacity-100" : "no-underline opacity-80 hover:opacity-100"
                 }`}
                 onClick={() => handleThemeChoice(choice.theme)}
                 onMouseEnter={playButtonHover}
