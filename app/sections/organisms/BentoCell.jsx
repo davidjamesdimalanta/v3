@@ -74,15 +74,18 @@ export default function BentoCell({
     const el = videoRef.current;
     if (!el) return;
 
-    const onReady = () => setLoadedVideoSrc(activeVideoSrc);
-    el.addEventListener("canplay", onReady);
-    el.addEventListener("loadeddata", onReady);
+    const markReady = () => setLoadedVideoSrc(activeVideoSrc);
+    el.addEventListener("canplay", markReady);
+    el.addEventListener("loadeddata", markReady);
 
     el.load();
+    if (el.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      markReady();
+    }
 
     return () => {
-      el.removeEventListener("canplay", onReady);
-      el.removeEventListener("loadeddata", onReady);
+      el.removeEventListener("canplay", markReady);
+      el.removeEventListener("loadeddata", markReady);
       el.removeAttribute("src");
       el.load();
     };

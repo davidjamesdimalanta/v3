@@ -77,18 +77,20 @@ export default function FeaturedProject({
     const videoElement = videoRef.current;
     if (!videoElement) return;
 
-    const handleCanPlay = () => setVideoLoaded(true);
-    const handleLoadedData = () => setVideoLoaded(true);
+    const markReady = () => setVideoLoaded(true);
 
-    videoElement.addEventListener("canplay", handleCanPlay);
-    videoElement.addEventListener("loadeddata", handleLoadedData);
+    videoElement.addEventListener("canplay", markReady);
+    videoElement.addEventListener("loadeddata", markReady);
 
     videoElement.src = videoSrc;
     videoElement.load();
+    if (videoElement.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      markReady();
+    }
 
     return () => {
-      videoElement.removeEventListener("canplay", handleCanPlay);
-      videoElement.removeEventListener("loadeddata", handleLoadedData);
+      videoElement.removeEventListener("canplay", markReady);
+      videoElement.removeEventListener("loadeddata", markReady);
       videoElement.removeAttribute("src");
       videoElement.load();
     };

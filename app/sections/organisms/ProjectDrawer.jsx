@@ -180,6 +180,7 @@ export default function ProjectDrawer({
   open,
   onOpenChange,
   onCloseAnimationEnd,
+  onNavigateAway,
   project,
 }) {
   useDrawerBodyLock(open);
@@ -198,7 +199,7 @@ export default function ProjectDrawer({
   const activeCoverImage = isDarkTheme && coverImageDark ? coverImageDark : coverImage;
   const handleFullCaseStudyClick = () => {
     playNavigateProject();
-    onOpenChange?.(false);
+    onNavigateAway?.();
   };
 
   return (

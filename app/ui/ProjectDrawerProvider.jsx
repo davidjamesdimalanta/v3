@@ -18,6 +18,11 @@ export function ProjectDrawerProvider({ children }) {
     setOpen(nextOpen);
   }, []);
 
+  const clearProject = useCallback(() => {
+    setOpen(false);
+    setProject(null);
+  }, []);
+
   const value = useMemo(() => ({
     openProject,
     isDrawerActive: open || Boolean(project),
@@ -30,6 +35,7 @@ export function ProjectDrawerProvider({ children }) {
         open={open}
         onOpenChange={handleOpenChange}
         onCloseAnimationEnd={() => setProject(null)}
+        onNavigateAway={clearProject}
         project={project}
       />
     </ProjectDrawerContext.Provider>
