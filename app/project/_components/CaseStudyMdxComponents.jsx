@@ -170,6 +170,7 @@ export function CaseMedia({
   alt,
   caption,
   thumbnail,
+  hevcSrc,
   size,
   aspectRatio,
   bgColor,
@@ -190,6 +191,7 @@ export function CaseMedia({
       alt={alt ?? media.alt}
       caption={caption ?? media.caption}
       thumbnail={thumbnail ?? media.thumbnail}
+      hevcSrc={hevcSrc ?? media.hevcSrc}
       size={size || media.size}
       aspectRatio={aspectRatio || media.aspectRatio}
       bgColor={bgColor || media.bgColor}

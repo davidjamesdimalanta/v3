@@ -55,6 +55,7 @@ export default function CaseStudyHighlightsBlock({
             key={i}
             type="video"
             src={video.src}
+            hevcSrc={video.hevcSrc}
             thumbnail={video.thumbnail}
             size="small"
             aspectRatio="video"

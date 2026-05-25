@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import ProjectHero from "../components/ProjectHero";
 import ProjectContent from "../components/ProjectContent";
 
@@ -15,12 +14,7 @@ import ProjectContent from "../components/ProjectContent";
  */
 export default function ProjectLayout({ projectData, children }) {
   return (
-    <motion.div
-      className="relative"
-      initial={{ opacity: 0, y: 8, filter: 'blur(2px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      transition={{ duration: 0.3, ease: 'easeIn' }}
-    >
+    <div className="relative">
 
       {/* Stacked layout: Full-width hero above content */}
       <div className="flex flex-col">
@@ -41,7 +35,6 @@ export default function ProjectLayout({ projectData, children }) {
           {children}
         </ProjectContent>
       </div>
-    </motion.div>
+    </div>
   );
 }
-

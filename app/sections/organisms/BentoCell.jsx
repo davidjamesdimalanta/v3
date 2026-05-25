@@ -16,8 +16,12 @@ export default function BentoCell({
   title,
   subtitle,
   thumbnail,
+  darkThumbnail,
   videoSrc,
+  hevcVideoSrc,
   darkVideoSrc,
+  darkHevcVideoSrc,
+  priority = false,
   paused = false,
   onOpen,
 }) {
@@ -27,6 +31,8 @@ export default function BentoCell({
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const isDarkTheme = useIsDarkTheme();
   const activeVideoSrc = isDarkTheme && darkVideoSrc ? darkVideoSrc : videoSrc;
+  const activeHevcVideoSrc = isDarkTheme && darkVideoSrc ? darkHevcVideoSrc : hevcVideoSrc;
+  const activeThumbnail = isDarkTheme && darkThumbnail ? darkThumbnail : thumbnail;
   const videoLoaded = Boolean(activeVideoSrc && loadedVideoSrc === activeVideoSrc);
 
   // HLS — register + init eagerly (only hero cell has video)
@@ -72,7 +78,6 @@ export default function BentoCell({
     el.addEventListener("canplay", onReady);
     el.addEventListener("loadeddata", onReady);
 
-    el.src = activeVideoSrc;
     el.load();
 
     return () => {
@@ -81,7 +86,7 @@ export default function BentoCell({
       el.removeAttribute("src");
       el.load();
     };
-  }, [activeVideoSrc]);
+  }, [activeVideoSrc, activeHevcVideoSrc]);
 
   // Autoplay via IntersectionObserver once loaded
   useEffect(() => {
@@ -136,12 +141,14 @@ export default function BentoCell({
       >
         {/* Background media — absolutely positioned, right-aligned */}
         <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
-          {thumbnail && (
+          {activeThumbnail && (
             <Image
-              src={thumbnail}
+              src={activeThumbnail}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 66vw"
+              loading={priority ? "eager" : "lazy"}
+              fetchPriority={priority ? "high" : undefined}
               className={`object-cover transition-opacity duration-500 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
             />
           )}
@@ -156,7 +163,14 @@ export default function BentoCell({
               disablePictureInPicture
               controlsList="nodownload nofullscreen noremoteplayback"
               className="w-full h-full object-cover"
-            />
+            >
+              {!isMuxHLS(activeVideoSrc) && (
+                <>
+                  <source src={activeVideoSrc} />
+                  {activeHevcVideoSrc && <source src={activeHevcVideoSrc} type='video/quicktime; codecs="hvc1"' />}
+                </>
+              )}
+            </video>
           )}
           {/* Scrim — bottom fade so text is legible */}
           <div className="absolute inset-0 bg-linear-to-t from-(--schemes-surface) via-(--schemes-surface)/10 " />
@@ -183,10 +197,10 @@ export default function BentoCell({
         onMouseEnter={playHover}
         aria-label={`View project: ${title}`}
       >
-        {thumbnail && (
+        {activeThumbnail && (
           <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px] bg-surface-container-highest">
             <Image
-              src={thumbnail}
+              src={activeThumbnail}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -212,10 +226,10 @@ export default function BentoCell({
       aria-label={`View project: ${title}`}
     >
       {/* Background image — full bleed cover */}
-      {thumbnail && (
+      {activeThumbnail && (
         <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
           <Image
-            src={thumbnail}
+            src={activeThumbnail}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"

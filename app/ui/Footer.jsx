@@ -172,15 +172,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Hairline divider — inverse-on-surface @ 20% per Figma */}
-        <div className="bg-inverse-on-surface opacity-20 h-px w-full" />
-
-        {/* Bottom row: copyright + location */}
-        <div className="flex flex-col sm:flex-row justify-between gutter-xs">
-          <p className="t-xs opacity-60">© {new Date().getFullYear()} David Dimalanta</p>
-          <p className="t-xs opacity-60">Toronto, ON</p>
-        </div>
-
         <div
           role="group"
           className="t-sm w-hug max-w-full opacity-80"

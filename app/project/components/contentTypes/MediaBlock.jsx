@@ -10,6 +10,14 @@ const isMuxHLSVideo = (url) => {
   return url.includes('.m3u8') || url.includes('stream.mux.com');
 };
 
+const getStaticVideoType = (url) => {
+  if (typeof url !== "string") return undefined;
+  if (url.includes(".webm")) return "video/webm";
+  if (url.includes(".mov")) return 'video/quicktime; codecs="hvc1"';
+  if (url.includes(".mp4")) return "video/mp4";
+  return undefined;
+};
+
 function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
   const handleTogglePlayback = () => {
     if (isPlaying) {
@@ -60,6 +68,7 @@ export default function MediaBlock({
   alt = "",
   caption,
   thumbnail, // Optional thumbnail/poster image (e.g., Mux thumbnail)
+  hevcSrc,
   aspectRatio = "video", // "video" (16:9), "square", "portrait", or custom class
   className = "",
   isFirstVideo = false, // First video has 2-second delay, others autoplay instantly
@@ -222,7 +231,6 @@ export default function MediaBlock({
     videoElement.addEventListener('play', handleVideoPlay);
     videoElement.addEventListener('pause', handleVideoPause);
 
-    videoElement.src = src;
     videoElement.load();
 
     return () => {
@@ -233,7 +241,7 @@ export default function MediaBlock({
       videoElement.removeAttribute('src');
       videoElement.load();
     };
-  }, [type, src]);
+  }, [type, src, hevcSrc]);
 
   // Intersection Observer for scroll-triggered video playback
   useEffect(() => {
@@ -411,6 +419,12 @@ export default function MediaBlock({
               onEnded={handleVideoEnded}
               className="w-full h-full object-cover"
             >
+              {!isMuxHLSVideo(src) && (
+                <>
+                  <source src={src} type={getStaticVideoType(src)} />
+                  {hevcSrc && <source src={hevcSrc} type={getStaticVideoType(hevcSrc)} />}
+                </>
+              )}
               Your browser does not support the video tag.
             </video>
 

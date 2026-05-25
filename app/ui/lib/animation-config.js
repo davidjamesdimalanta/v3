@@ -13,6 +13,16 @@ export const ANIMATION_CONFIG = {
     totalDuration: 3500, // 500 + (6 * 250) + 1500
   },
 
+  // Route view transitions
+  transitions: {
+    exitDuration: 200,
+    enterDuration: 320,
+    enterTranslateY: 8,
+    exitTranslateY: -4,
+    blur: 4,
+    easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+  },
+
   // Landing page element fade-up animations
   landing: {
     // Wait for WebGL to complete before starting

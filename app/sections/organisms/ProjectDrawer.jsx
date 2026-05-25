@@ -5,6 +5,7 @@ import { Drawer } from "vaul";
 import Image from "next/image";
 import Button from "../../ui/Button";
 import { useIsDarkTheme } from "../../ui/hooks/useIsDarkTheme";
+import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 const isMuxHLS = (url) =>
   typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
@@ -26,7 +27,7 @@ function getDrawerPlaybackSrc(src) {
   return url.toString();
 }
 
-function DrawerVideo({ src, thumbnail, name, active }) {
+function DrawerVideo({ src, hevcSrc, thumbnail, name, active }) {
   const videoRef = useRef(null);
   const [playbackSrc, setPlaybackSrc] = useState(null);
   const [loadedSrc, setLoadedSrc] = useState(null);
@@ -79,7 +80,6 @@ function DrawerVideo({ src, thumbnail, name, active }) {
     el.addEventListener("loadeddata", onReady);
 
     if (!isMuxHLS(playbackSrc)) {
-      el.src = playbackSrc;
       el.load();
     } else if (el.canPlayType("application/vnd.apple.mpegurl")) {
       el.src = playbackSrc;
@@ -112,7 +112,7 @@ function DrawerVideo({ src, thumbnail, name, active }) {
       el.load();
       hlsInstance?.destroy();
     };
-  }, [playbackSrc, active]);
+  }, [playbackSrc, hevcSrc, active]);
 
   return (
     <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
@@ -135,7 +135,14 @@ function DrawerVideo({ src, thumbnail, name, active }) {
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
         className="w-full h-full object-cover"
-      />
+      >
+        {playbackSrc && !isMuxHLS(playbackSrc) && (
+          <>
+            <source src={playbackSrc} />
+            {hevcSrc && <source src={hevcSrc} type='video/quicktime; codecs="hvc1"' />}
+          </>
+        )}
+      </video>
     </div>
   );
 }
@@ -169,18 +176,30 @@ function useDrawerBodyLock(isOpen) {
  * finished. Clearing it earlier unmounts the drawer before `data-state="closed"`
  * can animate.
  */
-export default function ProjectDrawer({ open, onOpenChange, onCloseAnimationEnd, project }) {
+export default function ProjectDrawer({
+  open,
+  onOpenChange,
+  onCloseAnimationEnd,
+  project,
+}) {
   useDrawerBodyLock(open);
 
   const renderProject = project;
   const isDarkTheme = useIsDarkTheme();
+  const { playNavigateProject } = useSoundEffects();
 
   // If we've never had a project at all, nothing to render
   if (!renderProject) return null;
 
-  const { slug, name, title, coverVideo, coverVideoDark, coverImage, problem, solutions, takeaways, comingSoon } =
+  const { slug, name, title, coverVideo, coverVideoHevc, coverVideoDark, coverVideoDarkHevc, coverImage, coverImageDark, problem, solutions, takeaways, comingSoon } =
     renderProject;
   const activeCoverVideo = isDarkTheme && coverVideoDark ? coverVideoDark : coverVideo;
+  const activeCoverVideoHevc = isDarkTheme && coverVideoDark ? coverVideoDarkHevc : coverVideoHevc;
+  const activeCoverImage = isDarkTheme && coverImageDark ? coverImageDark : coverImage;
+  const handleFullCaseStudyClick = () => {
+    playNavigateProject();
+    onOpenChange?.(false);
+  };
 
   return (
     <Drawer.Root
@@ -197,6 +216,9 @@ export default function ProjectDrawer({ open, onOpenChange, onCloseAnimationEnd,
           className="fixed bottom-0 left-0 right-0 z-50 bg-surface rounded-t-[24px] bd flex flex-col max-h-[90vh] outline-none"
         >
           <Drawer.Title className="sr-only">{name}</Drawer.Title>
+          <Drawer.Description className="sr-only">
+            Project preview for {name}
+          </Drawer.Description>
 
           {/* Drawer cutoff bump — matches Figma 838:579 */}
           <div className="mx-auto mt-4 h-1 w-9 shrink-0 rounded-full bg-on-surface-variant opacity-30" />
@@ -226,7 +248,8 @@ export default function ProjectDrawer({ open, onOpenChange, onCloseAnimationEnd,
                         text="Full Case Study"
                         href={`/project/${slug}`}
                         variant="primary"
-                        soundEffect="navigateProject"
+                        soundEffect="hover"
+                        onClick={handleFullCaseStudyClick}
                       />
                     )}
                   </div>
@@ -234,14 +257,20 @@ export default function ProjectDrawer({ open, onOpenChange, onCloseAnimationEnd,
               </div>
 
               {/* Hero media (Matches text max-width 700px container) */}
-              {(activeCoverVideo || coverImage) && (
+              {(activeCoverVideo || activeCoverImage) && (
                 <div className="max-w-[700px] w-full mx-auto mt-8 mb-8">
                   {activeCoverVideo ? (
-                    <DrawerVideo src={activeCoverVideo} thumbnail={coverImage} name={name} active={open} />
-                  ) : coverImage ? (
+                    <DrawerVideo
+                      src={activeCoverVideo}
+                      hevcSrc={activeCoverVideoHevc}
+                      thumbnail={activeCoverImage}
+                      name={name}
+                      active={open}
+                    />
+                  ) : activeCoverImage ? (
                     <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
                       <Image
-                        src={coverImage}
+                        src={activeCoverImage}
                         alt={`${name} cover`}
                         fill
                         sizes="(max-width: 768px) 100vw, 700px"

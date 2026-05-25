@@ -33,6 +33,14 @@ const isMuxHLSVideo = (url) => {
   return url.includes('.m3u8') || url.includes('stream.mux.com');
 };
 
+const getStaticVideoType = (url) => {
+  if (typeof url !== "string") return undefined;
+  if (url.includes(".webm")) return "video/webm";
+  if (url.includes(".mov")) return 'video/quicktime; codecs="hvc1"';
+  if (url.includes(".mp4")) return "video/mp4";
+  return undefined;
+};
+
 const CASE_STUDY_MEDIA_MAX_WIDTH = "max-w-[1200px]";
 
 function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
@@ -86,6 +94,7 @@ export default function CaseStudyMediaBlock({
   alt = "",
   caption,
   thumbnail,
+  hevcSrc,
   aspectRatio = "1000/750",  // Default to Daybreak's 4:3 ratio
   bgColor,  // Optional override
   fgColor,  // Optional override
@@ -245,7 +254,6 @@ export default function CaseStudyMediaBlock({
     videoElement.addEventListener('play', handleVideoPlay);
     videoElement.addEventListener('pause', handleVideoPause);
 
-    videoElement.src = src;
     videoElement.load();
 
     return () => {
@@ -254,7 +262,7 @@ export default function CaseStudyMediaBlock({
       videoElement.removeEventListener('play', handleVideoPlay);
       videoElement.removeEventListener('pause', handleVideoPause);
     };
-  }, [type, src]);
+  }, [type, src, hevcSrc]);
 
   // HLS.js integration (same as MediaBlock)
   useEffect(() => {
@@ -514,6 +522,12 @@ export default function CaseStudyMediaBlock({
                   onEnded={handleVideoEnded}
                   className="w-full h-full object-cover"
                 >
+                  {!isMuxHLSVideo(src) && (
+                    <>
+                      <source src={src} type={getStaticVideoType(src)} />
+                      {hevcSrc && <source src={hevcSrc} type={getStaticVideoType(hevcSrc)} />}
+                    </>
+                  )}
                   Your browser does not support the video tag.
                 </video>
 

@@ -1,12 +1,13 @@
 'use client'
 
-import { Component } from 'react'
+import { Component, ViewTransition } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion } from 'motion/react'
 import Nav from './nav'
 import SmoothScroll from './SmoothScroll'
 import WaveBackground from './WaveBackground'
 import Footer from './Footer'
+import { ProjectDrawerProvider } from './ProjectDrawerProvider'
 
 class WaveErrorBoundary extends Component {
   constructor(props) {
@@ -31,13 +32,14 @@ class WaveErrorBoundary extends Component {
 export default function SiteShell({ children }) {
   const pathname = usePathname()
   const isStudio = pathname.startsWith('/studio')
+  const isProjectRoute = pathname.startsWith('/project/')
 
   if (isStudio) {
     return children
   }
 
   return (
-    <>
+    <ProjectDrawerProvider>
       <SmoothScroll />
       <WaveErrorBoundary>
         <motion.div
@@ -49,8 +51,15 @@ export default function SiteShell({ children }) {
         </motion.div>
       </WaveErrorBoundary>
       <Nav />
-      {children}
+      <ViewTransition
+        key={pathname}
+        default="page-transition"
+        enter={isProjectRoute ? 'page-enter-none' : 'page-transition'}
+        exit="page-transition"
+      >
+        {children}
+      </ViewTransition>
       <Footer />
-    </>
+    </ProjectDrawerProvider>
   )
 }

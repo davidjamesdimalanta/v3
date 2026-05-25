@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
-import ProjectDrawer from "./organisms/ProjectDrawer";
+import { useProjectDrawer } from "../ui/ProjectDrawerProvider";
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
@@ -38,20 +37,12 @@ const CELL_CONFIG = [
 ];
 
 export default function BentoGrid({ projects = [], animate = "visible", prefersReducedMotion = false }) {
-  const [activeSlug, setActiveSlug] = useState(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const { openProject, isDrawerActive } = useProjectDrawer();
   const projectMap = new Map(projects.map((project) => [project.slug, project]));
   const cells = CELL_CONFIG.map((config) => ({
     ...config,
     data: projectMap.get(config.slug),
   })).filter((cell) => cell.data);
-  const activeProject = projectMap.get(activeSlug) ?? null;
-  const drawerActive = drawerOpen || Boolean(activeSlug);
-
-  const openProject = (slug) => {
-    setActiveSlug(slug);
-    setDrawerOpen(true);
-  };
 
   const heroCell = cells[0];
   const r1Cell = cells[1];
@@ -70,10 +61,14 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
               title={heroCell.data.name}
               subtitle={heroCell.data.title}
               thumbnail={heroCell.data.bento?.thumbnail || heroCell.data.coverImage}
+              darkThumbnail={heroCell.data.coverImageDark}
               videoSrc={heroCell.data.coverVideo}
+              hevcVideoSrc={heroCell.data.coverVideoHevc}
               darkVideoSrc={heroCell.data.coverVideoDark}
-              paused={drawerActive}
-              onOpen={() => openProject(heroCell.slug)}
+              darkHevcVideoSrc={heroCell.data.coverVideoDarkHevc}
+              priority
+              paused={isDrawerActive}
+              onOpen={() => openProject(heroCell.data)}
             />
           </div>
           <div className="flex flex-col gutter-sm flex-1 min-w-0">
@@ -83,7 +78,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
               category={r1Cell.data.featuredCategory}
               title={r1Cell.data.name}
               thumbnail={r1Cell.data.bento?.thumbnail || r1Cell.data.coverImage}
-              onOpen={() => openProject(r1Cell.slug)}
+              onOpen={() => openProject(r1Cell.data)}
             />
             </div>
             <div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto">
@@ -92,7 +87,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
               category={r2Cell.data.featuredCategory}
               title={r2Cell.data.name}
               thumbnail={r2Cell.data.bento?.thumbnail || r2Cell.data.coverImage}
-              onOpen={() => openProject(r2Cell.slug)}
+              onOpen={() => openProject(r2Cell.data)}
             />
             </div>
           </div>
@@ -111,10 +106,14 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
               title={heroCell.data.name}
               subtitle={heroCell.data.title}
               thumbnail={heroCell.data.bento?.thumbnail || heroCell.data.coverImage}
+              darkThumbnail={heroCell.data.coverImageDark}
               videoSrc={heroCell.data.coverVideo}
+              hevcVideoSrc={heroCell.data.coverVideoHevc}
               darkVideoSrc={heroCell.data.coverVideoDark}
-              paused={drawerActive}
-              onOpen={() => openProject(heroCell.slug)}
+              darkHevcVideoSrc={heroCell.data.coverVideoDarkHevc}
+              priority
+              paused={isDrawerActive}
+              onOpen={() => openProject(heroCell.data)}
             />
           </motion.div>
           <motion.div className="flex flex-col gutter-sm flex-1 min-w-0" variants={RIGHT_COLUMN_VARIANTS}>
@@ -124,7 +123,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
                 category={r1Cell.data.featuredCategory}
                 title={r1Cell.data.name}
                 thumbnail={r1Cell.data.bento?.thumbnail || r1Cell.data.coverImage}
-                onOpen={() => openProject(r1Cell.slug)}
+                onOpen={() => openProject(r1Cell.data)}
               />
             </motion.div>
             <motion.div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto" variants={ITEM_VARIANTS}>
@@ -133,19 +132,12 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
                 category={r2Cell.data.featuredCategory}
                 title={r2Cell.data.name}
                 thumbnail={r2Cell.data.bento?.thumbnail || r2Cell.data.coverImage}
-                onOpen={() => openProject(r2Cell.slug)}
+                onOpen={() => openProject(r2Cell.data)}
               />
             </motion.div>
           </motion.div>
         </motion.div>
       )}
-
-      <ProjectDrawer
-        open={drawerOpen}
-        onOpenChange={setDrawerOpen}
-        onCloseAnimationEnd={() => setActiveSlug(null)}
-        project={activeProject}
-      />
     </>
   );
 }

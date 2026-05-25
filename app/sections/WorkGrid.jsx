@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
-import ProjectDrawer from "./organisms/ProjectDrawer";
+import { useProjectDrawer } from "../ui/ProjectDrawerProvider";
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
@@ -16,17 +15,9 @@ const ITEM_VARIANTS = {
 };
 
 export default function WorkGrid({ projects = [], animate = "visible", prefersReducedMotion = false }) {
-  const [activeSlug, setActiveSlug] = useState(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const renderProject = projects.find((project) => project.slug === activeSlug) ?? null;
-  const drawerActive = drawerOpen || Boolean(activeSlug);
+  const { openProject, isDrawerActive } = useProjectDrawer();
 
-  const openProject = (slug) => {
-    setActiveSlug(slug);
-    setDrawerOpen(true);
-  };
-
-  const cards = projects.map((project) => {
+  const cards = projects.map((project, index) => {
     const card = (
       <BentoCell
         variant="hero"
@@ -34,10 +25,14 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
         title={project.name}
         subtitle={project.title}
         thumbnail={project.coverImage}
+        darkThumbnail={project.coverImageDark}
         videoSrc={project.coverVideo}
+        hevcVideoSrc={project.coverVideoHevc}
         darkVideoSrc={project.coverVideoDark}
-        paused={drawerActive}
-        onOpen={() => openProject(project.slug)}
+        darkHevcVideoSrc={project.coverVideoDarkHevc}
+        priority={index === 0}
+        paused={isDrawerActive}
+        onOpen={() => openProject(project)}
       />
     );
 
@@ -54,12 +49,6 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
             </div>
           ))}
         </div>
-        <ProjectDrawer
-          open={drawerOpen}
-          onOpenChange={setDrawerOpen}
-          onCloseAnimationEnd={() => setActiveSlug(null)}
-          project={renderProject}
-        />
       </>
     );
   }
@@ -82,13 +71,6 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
           </motion.div>
         ))}
       </motion.div>
-
-      <ProjectDrawer
-        open={drawerOpen}
-        onOpenChange={setDrawerOpen}
-        onCloseAnimationEnd={() => setActiveSlug(null)}
-        project={renderProject}
-      />
     </>
   );
 }
