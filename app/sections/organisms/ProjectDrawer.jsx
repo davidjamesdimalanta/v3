@@ -9,50 +9,110 @@ import { useIsDarkTheme } from "../../ui/hooks/useIsDarkTheme";
 const isMuxHLS = (url) =>
   typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
 
-function DrawerVideo({ src, thumbnail, name }) {
+const MOBILE_DRAWER_MEDIA_QUERY = "(max-width: 767px), (hover: none) and (pointer: coarse)";
+const DRAWER_VIDEO_PLAY_DELAY_MS = 500;
+
+const isMobileDrawerViewport = () =>
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia(MOBILE_DRAWER_MEDIA_QUERY).matches;
+
+function getDrawerPlaybackSrc(src) {
+  if (!isMuxHLS(src) || typeof window === "undefined" || !isMobileDrawerViewport()) return src;
+
+  const url = new URL(src);
+  url.searchParams.delete("min_resolution");
+  url.searchParams.set("max_resolution", "720p");
+  return url.toString();
+}
+
+function DrawerVideo({ src, thumbnail, name, active }) {
   const videoRef = useRef(null);
-  const hlsRef = useRef(null);
+  const [playbackSrc, setPlaybackSrc] = useState(null);
   const [loadedSrc, setLoadedSrc] = useState(null);
-  const videoLoaded = Boolean(src && loadedSrc === src);
+  const videoLoaded = Boolean(playbackSrc && loadedSrc === playbackSrc);
+
+  useEffect(() => {
+    if (!src) {
+      setPlaybackSrc(null);
+      return;
+    }
+
+    const mediaQuery =
+      typeof window !== "undefined" && typeof window.matchMedia === "function"
+        ? window.matchMedia(MOBILE_DRAWER_MEDIA_QUERY)
+        : null;
+    const updatePlaybackSrc = () => setPlaybackSrc(getDrawerPlaybackSrc(src));
+
+    updatePlaybackSrc();
+    if (!mediaQuery) return;
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updatePlaybackSrc);
+      return () => mediaQuery.removeEventListener("change", updatePlaybackSrc);
+    }
+
+    mediaQuery.addListener?.(updatePlaybackSrc);
+    return () => mediaQuery.removeListener?.(updatePlaybackSrc);
+  }, [src]);
 
   useEffect(() => {
     const el = videoRef.current;
-    if (!el || !src) return;
+    if (!el || !playbackSrc || !active) {
+      setLoadedSrc(null);
+      return;
+    }
+
+    let cancelled = false;
+    let hlsInstance = null;
+    const isMobile = isMobileDrawerViewport();
+    const playTimer = window.setTimeout(() => {
+      if (!cancelled) el.play().catch(() => {});
+    }, DRAWER_VIDEO_PLAY_DELAY_MS);
 
     const onReady = () => {
-      setLoadedSrc(src);
-      el.play().catch(() => {});
+      if (!cancelled) setLoadedSrc(playbackSrc);
     };
 
-    el.addEventListener("canplay", onReady, { once: true });
+    setLoadedSrc(null);
+    el.addEventListener("canplay", onReady);
+    el.addEventListener("loadeddata", onReady);
 
-    if (!isMuxHLS(src)) {
-      el.src = src;
+    if (!isMuxHLS(playbackSrc)) {
+      el.src = playbackSrc;
       el.load();
     } else if (el.canPlayType("application/vnd.apple.mpegurl")) {
-      el.src = src;
+      el.src = playbackSrc;
       el.load();
     } else {
       import("hls.js").then(({ default: Hls }) => {
-        if (!Hls.isSupported()) return;
-        const hls = new Hls({ startLevel: -1, capLevelToPlayerSize: false });
-        hlsRef.current = hls;
-        hls.loadSource(src);
-        hls.attachMedia(el);
+        if (cancelled || !Hls.isSupported()) return;
+
+        hlsInstance = new Hls({
+          autoStartLoad: true,
+          capLevelOnFPSDrop: true,
+          capLevelToPlayerSize: true,
+          enableWorker: true,
+          maxBufferLength: isMobile ? 6 : 10,
+          maxMaxBufferLength: isMobile ? 10 : 20,
+          startLevel: isMobile ? 0 : -1,
+        });
+        hlsInstance.loadSource(playbackSrc);
+        hlsInstance.attachMedia(el);
       });
     }
 
     return () => {
+      cancelled = true;
+      window.clearTimeout(playTimer);
       el.removeEventListener("canplay", onReady);
+      el.removeEventListener("loadeddata", onReady);
       el.pause();
       el.removeAttribute("src");
       el.load();
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
-      }
+      hlsInstance?.destroy();
     };
-  }, [src]);
+  }, [playbackSrc, active]);
 
   return (
     <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
@@ -70,7 +130,7 @@ function DrawerVideo({ src, thumbnail, name }) {
         muted
         playsInline
         loop
-        preload="auto"
+        preload="metadata"
         controls={false}
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
@@ -105,12 +165,11 @@ function useDrawerBodyLock(isOpen) {
  * 1200px outer frame, 700px content column, scrollable body, primary CTA.
  *
  * IMPORTANT — Unmount lifecycle:
- * We keep a ref to the last non-null `project` so the drawer content stays
- * rendered during the 500 ms closing animation. Without this, the parent
- * would set `project` to null the instant `open` becomes false, causing the
- * drawer to flash blank before it slides out.
+ * Parents keep `project` populated until Vaul reports the close animation has
+ * finished. Clearing it earlier unmounts the drawer before `data-state="closed"`
+ * can animate.
  */
-export default function ProjectDrawer({ open, onOpenChange, project }) {
+export default function ProjectDrawer({ open, onOpenChange, onCloseAnimationEnd, project }) {
   useDrawerBodyLock(open);
 
   const renderProject = project;
@@ -124,7 +183,14 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
   const activeCoverVideo = isDarkTheme && coverVideoDark ? coverVideoDark : coverVideo;
 
   return (
-    <Drawer.Root open={open} onOpenChange={onOpenChange}>
+    <Drawer.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      onAnimationEnd={(isOpen) => {
+        if (isOpen) return;
+        onCloseAnimationEnd?.();
+      }}
+    >
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-40 bg-black/40" />
         <Drawer.Content
@@ -171,7 +237,7 @@ export default function ProjectDrawer({ open, onOpenChange, project }) {
               {(activeCoverVideo || coverImage) && (
                 <div className="max-w-[700px] w-full mx-auto mt-8 mb-8">
                   {activeCoverVideo ? (
-                    <DrawerVideo src={activeCoverVideo} thumbnail={coverImage} name={name} />
+                    <DrawerVideo src={activeCoverVideo} thumbnail={coverImage} name={name} active={open} />
                   ) : coverImage ? (
                     <div className="relative w-full aspect-video rounded-[16px] overflow-hidden border-[0.5px] border-(--text-color-80)">
                       <Image

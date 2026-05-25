@@ -17,7 +17,14 @@ const ITEM_VARIANTS = {
 
 export default function WorkGrid({ projects = [], animate = "visible", prefersReducedMotion = false }) {
   const [activeSlug, setActiveSlug] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const renderProject = projects.find((project) => project.slug === activeSlug) ?? null;
+  const drawerActive = drawerOpen || Boolean(activeSlug);
+
+  const openProject = (slug) => {
+    setActiveSlug(slug);
+    setDrawerOpen(true);
+  };
 
   const cards = projects.map((project) => {
     const card = (
@@ -29,7 +36,8 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
         thumbnail={project.coverImage}
         videoSrc={project.coverVideo}
         darkVideoSrc={project.coverVideoDark}
-        onOpen={() => setActiveSlug(project.slug)}
+        paused={drawerActive}
+        onOpen={() => openProject(project.slug)}
       />
     );
 
@@ -47,8 +55,9 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
           ))}
         </div>
         <ProjectDrawer
-          open={!!activeSlug}
-          onOpenChange={(open) => { if (!open) setActiveSlug(null); }}
+          open={drawerOpen}
+          onOpenChange={setDrawerOpen}
+          onCloseAnimationEnd={() => setActiveSlug(null)}
           project={renderProject}
         />
       </>
@@ -75,8 +84,9 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
       </motion.div>
 
       <ProjectDrawer
-        open={!!activeSlug}
-        onOpenChange={(open) => { if (!open) setActiveSlug(null); }}
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        onCloseAnimationEnd={() => setActiveSlug(null)}
         project={renderProject}
       />
     </>

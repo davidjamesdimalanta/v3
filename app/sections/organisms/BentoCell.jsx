@@ -18,6 +18,7 @@ export default function BentoCell({
   thumbnail,
   videoSrc,
   darkVideoSrc,
+  paused = false,
   onOpen,
 }) {
   const { playHover, playNavigateProject } = useSoundEffects();
@@ -84,7 +85,7 @@ export default function BentoCell({
 
   // Autoplay via IntersectionObserver once loaded
   useEffect(() => {
-    if (!activeVideoSrc || !videoRef.current || !videoLoaded || prefersReducedMotion) return;
+    if (!activeVideoSrc || !videoRef.current || !videoLoaded || prefersReducedMotion || paused) return;
     const el = videoRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -100,7 +101,12 @@ export default function BentoCell({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [activeVideoSrc, videoLoaded, prefersReducedMotion]);
+  }, [activeVideoSrc, videoLoaded, paused, prefersReducedMotion]);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (paused && el && !el.paused) el.pause();
+  }, [activeVideoSrc, paused]);
 
   const handleClick = () => {
     playNavigateProject();
