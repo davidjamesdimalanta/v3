@@ -32,7 +32,6 @@ class WaveErrorBoundary extends Component {
 export default function SiteShell({ children }) {
   const pathname = usePathname()
   const isStudio = pathname.startsWith('/studio')
-  const isProjectRoute = pathname.startsWith('/project/')
 
   if (isStudio) {
     return children
@@ -54,7 +53,7 @@ export default function SiteShell({ children }) {
       <ViewTransition
         key={pathname}
         default="page-transition"
-        enter={isProjectRoute ? 'page-enter-none' : 'page-transition'}
+        enter="page-transition"
         exit="page-transition"
       >
         {children}
