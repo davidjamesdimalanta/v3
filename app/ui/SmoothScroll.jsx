@@ -11,11 +11,10 @@ export default function SmoothScroll() {
   // Initialize Lenis once
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => 1 - Math.pow(1 - t, 5), // easeOutQuint
+      lerp: 0.12, // frame-rate-independent interpolation; higher = snappier/more native
       smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      syncTouch: false, // native touch scrolling
+      wheelMultiplier: 1,
       infinite: false,
     });
 

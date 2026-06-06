@@ -16,9 +16,9 @@ const ITEM_VARIANTS = {
 
 function HeroHeading() {
   return (
-    <div className="max-w-[1200px] w-full mx-auto px-4 md:px-5 pt-40 pb-6">
+    <div className="max-w-[1200px] w-full mx-auto px-4 xl:px-0 pt-40 pb-6">
       <h1 className="t-h2 text-on-surface text-balance">
-        i design stuff. i build them too.
+        <span style={{ color: 'var(--text-color-60)' }}>I am an </span><span style={{ color: 'var(--text-color-100)' }}>AI-native</span><span style={{ color: 'var(--text-color-60)' }}> but </span><span style={{ color: 'var(--text-color-100)' }}>human-first</span><span style={{ color: 'var(--text-color-60)' }}> designer and builder, making my designs 1:1 with the code.</span>
       </h1>
     </div>
   );

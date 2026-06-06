@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import BentoCell from "./organisms/BentoCell";
-import { useProjectDrawer } from "../ui/ProjectDrawerProvider";
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
@@ -15,15 +14,12 @@ const ITEM_VARIANTS = {
 };
 
 export default function WorkGrid({ projects = [], animate = "visible", prefersReducedMotion = false }) {
-  const { openProject, isDrawerActive } = useProjectDrawer();
-
   const cards = projects.map((project, index) => {
     const card = (
       <BentoCell
         variant="hero"
         category={project.featuredCategory}
-        title={project.name}
-        subtitle={project.title}
+        title={project.title}
         thumbnail={project.coverImage}
         darkThumbnail={project.coverImageDark}
         videoSrc={project.coverVideo}
@@ -31,8 +27,8 @@ export default function WorkGrid({ projects = [], animate = "visible", prefersRe
         darkVideoSrc={project.coverVideoDark}
         darkHevcVideoSrc={project.coverVideoDarkHevc}
         priority={index === 0}
-        paused={isDrawerActive}
-        onOpen={() => openProject(project)}
+        href={`/project/${project.slug}`}
+        comingSoon={project.comingSoon}
       />
     );
 

@@ -100,7 +100,7 @@ export default function Landing() {
         {prefersReducedMotion ? (
           <>
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              i design stuff. i build them too.
+              <span style={{ color: 'var(--text-color-60)' }}>I am an </span><span style={{ color: 'var(--text-color-100)' }}>AI-native</span><span style={{ color: 'var(--text-color-60)' }}> but </span><span style={{ color: 'var(--text-color-100)' }}>human-first</span><span style={{ color: 'var(--text-color-60)' }}> designer and builder, making my designs 1:1 with the code.. .</span>
             </span>
             {bottomRow('visible')}
           </>
@@ -116,7 +116,7 @@ export default function Landing() {
             }}
           >
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              i design stuff. i build them too.
+              <span style={{ color: 'var(--text-color-60)' }}>I am an </span><span style={{ color: 'var(--text-color-100)' }}>AI-native</span><span style={{ color: 'var(--text-color-60)' }}> but </span><span style={{ color: 'var(--text-color-100)' }}>human-first</span><span style={{ color: 'var(--text-color-60)' }}> designer and builder, making my designs 1:1 with the code.. .</span>
             </span>
             {bottomRow(isReady ? 'visible' : 'hidden')}
           </AnimatedGroup>

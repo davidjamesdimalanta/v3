@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { toast } from "sonner";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import { initHls, registerFeaturedSrc, attachTo, detachFrom } from "../../ui/lib/hlsManager";
 import { useMediaQuery } from "../../ui/hooks/useMediaQuery";
@@ -9,6 +11,14 @@ import { useIsDarkTheme } from "../../ui/hooks/useIsDarkTheme";
 
 const isMuxHLS = (url) =>
   typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
+
+const getStaticVideoType = (url) => {
+  if (typeof url !== "string") return undefined;
+  if (url.includes(".webm")) return "video/webm";
+  if (url.includes(".mov")) return 'video/quicktime; codecs="hvc1"';
+  if (url.includes(".mp4")) return "video/mp4";
+  return undefined;
+};
 
 export default function BentoCell({
   variant = "hero",
@@ -22,8 +32,8 @@ export default function BentoCell({
   darkVideoSrc,
   darkHevcVideoSrc,
   priority = false,
-  paused = false,
-  onOpen,
+  href,
+  comingSoon = false,
 }) {
   const { playHover, playNavigateProject } = useSoundEffects();
   const videoRef = useRef(null);
@@ -93,7 +103,7 @@ export default function BentoCell({
 
   // Autoplay via IntersectionObserver once loaded
   useEffect(() => {
-    if (!activeVideoSrc || !videoRef.current || !videoLoaded || prefersReducedMotion || paused) return;
+    if (!activeVideoSrc || !videoRef.current || !videoLoaded || prefersReducedMotion) return;
     const el = videoRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -109,18 +119,25 @@ export default function BentoCell({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [activeVideoSrc, videoLoaded, paused, prefersReducedMotion]);
+  }, [activeVideoSrc, videoLoaded, prefersReducedMotion]);
 
-  useEffect(() => {
-    const el = videoRef.current;
-    if (paused && el && !el.paused) el.pause();
-  }, [activeVideoSrc, paused]);
-
-  const handleClick = () => {
-    playNavigateProject();
-    onOpen?.();
+  const handleComingSoon = () => {
+    toast("Coming soon", {
+      description: "This project is currently being documented.",
+    });
   };
 
+  const Action = comingSoon ? "button" : Link;
+  const actionProps = comingSoon
+    ? {
+        type: "button",
+        onClick: handleComingSoon,
+        "aria-disabled": "true",
+      }
+    : {
+        href,
+        onClick: playNavigateProject,
+      };
   const isHero = variant === "hero";
   const isR2 = variant === "r2";
 
@@ -135,12 +152,11 @@ export default function BentoCell({
 
   if (isHero) {
     return (
-      <button
-        type="button"
+      <Action
+        {...actionProps}
         className={`${baseClasses} w-full h-full bg-surface`}
-        onClick={handleClick}
         onMouseEnter={playHover}
-        aria-label={`View project: ${title}`}
+        aria-label={comingSoon ? `${title} case study coming soon` : `View project: ${title}`}
       >
         {/* Background media — absolutely positioned, right-aligned */}
         <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
@@ -169,8 +185,8 @@ export default function BentoCell({
             >
               {!isMuxHLS(activeVideoSrc) && (
                 <>
-                  <source src={activeVideoSrc} />
-                  {activeHevcVideoSrc && <source src={activeHevcVideoSrc} type='video/quicktime; codecs="hvc1"' />}
+                  <source src={activeVideoSrc} type={getStaticVideoType(activeVideoSrc)} />
+                  {activeHevcVideoSrc && <source src={activeHevcVideoSrc} type={getStaticVideoType(activeHevcVideoSrc)} />}
                 </>
               )}
             </video>
@@ -186,19 +202,18 @@ export default function BentoCell({
           <h2 className="t-h4 text-on-surface">{title}</h2>
           {subtitle && <p className="t-p text-on-surface-variant">{subtitle}</p>}
         </div>
-      </button>
+      </Action>
     );
   }
 
   // R1 — surface-container-highest bg (matches Figma DS top-right card tint)
   if (!isR2) {
     return (
-      <button
-        type="button"
+      <Action
+        {...actionProps}
         className={`${baseClasses} flex-1 min-h-0 w-full bg-surface-container-highest`}
-        onClick={handleClick}
         onMouseEnter={playHover}
-        aria-label={`View project: ${title}`}
+        aria-label={comingSoon ? `${title} case study coming soon` : `View project: ${title}`}
       >
         {activeThumbnail && (
           <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px] bg-surface-container-highest">
@@ -214,19 +229,21 @@ export default function BentoCell({
         )}
 
         <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
-        <h2 className="relative z-10 mt-auto t-h5 text-on-surface">{title}</h2>
-      </button>
+        <div className="relative z-10 mt-auto flex flex-col gutter-xs">
+          <h2 className="t-h5 text-on-surface">{title}</h2>
+          {subtitle && <p className="t-p text-on-surface-variant">{subtitle}</p>}
+        </div>
+      </Action>
     );
   }
 
   // R2 — surface-container bg, gradient overlay
   return (
-    <button
-      type="button"
+    <Action
+      {...actionProps}
       className={`${baseClasses} flex-1 min-h-0 w-full bg-surface-container`}
-      onClick={handleClick}
       onMouseEnter={playHover}
-      aria-label={`View project: ${title}`}
+      aria-label={comingSoon ? `${title} case study coming soon` : `View project: ${title}`}
     >
       {/* Background image — full bleed cover */}
       {activeThumbnail && (
@@ -244,7 +261,10 @@ export default function BentoCell({
       )}
 
       <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
-      <h2 className="relative z-10 mt-auto t-h5 text-on-surface">{title}</h2>
-    </button>
+      <div className="relative z-10 mt-auto flex flex-col gutter-xs">
+        <h2 className="t-h5 text-on-surface">{title}</h2>
+        {subtitle && <p className="t-p text-on-surface-variant">{subtitle}</p>}
+      </div>
+    </Action>
   );
 }

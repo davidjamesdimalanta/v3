@@ -7,7 +7,6 @@ import Nav from './nav'
 import SmoothScroll from './SmoothScroll'
 import WaveBackground from './WaveBackground'
 import Footer from './Footer'
-import { ProjectDrawerProvider } from './ProjectDrawerProvider'
 
 class WaveErrorBoundary extends Component {
   constructor(props) {
@@ -38,7 +37,7 @@ export default function SiteShell({ children }) {
   }
 
   return (
-    <ProjectDrawerProvider>
+    <>
       <SmoothScroll />
       <WaveErrorBoundary>
         <motion.div
@@ -59,6 +58,6 @@ export default function SiteShell({ children }) {
         {children}
       </ViewTransition>
       <Footer />
-    </ProjectDrawerProvider>
+    </>
   )
 }

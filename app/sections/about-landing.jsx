@@ -49,20 +49,39 @@ export default function AboutLanding() {
             <div className="flex flex-col gutter-base">
 
             <span className="text-h2 text-500 md:text-h2 lg:text-h1">
-              a bit about me.
+              A bit about me.
             </span>
 
             <span className="text-p pt-4">
-            The persistent & pragmatic problem solver? The crazy ideas guy? I&apos;m still crafting my narrative, but for now, here&apos;s who I am:
+              I started out as a freelance web designer and builder for small companies run by friends and family.
+              During a degree switch, I found the iSchool at U of T and did both my undergrad and
+              current Master&apos;s degree in the UX Design program.
             </span>
 
             <span className="text-p">
-            I am an AI-native but human-first designer and builder, making my designs 1:1 with the code.
+              I&apos;ve since had the opportunity to work at{" "}
+              <a
+                href="https://blogs.studentlife.utoronto.ca/innovationhub/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-500 hover:bd-text transition-all duration-150"
+              >
+                University of Toronto Innovation Hub
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://www.neolawgroup.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-500 hover:bd-text transition-all duration-150"
+              >
+                Neo Law Group
+              </a>,
+              applying my design thinking and full-stack expertise to projects that have meaningful impact.
             </span>
 
             <span className="text-p">
             Outside of work, I love handheld consoles, finding cafes around the city, and going to the gym.
-
             </span>
             </div>
               <div className="relative">

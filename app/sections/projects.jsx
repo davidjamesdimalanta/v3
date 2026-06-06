@@ -27,8 +27,7 @@ export default function Projects({ projects = [] }) {
     const projectCardsData = projects.map((data) => {
       return {
         slug: data.slug,
-        title: data.name,
-        description: data.title,
+        title: data.title,
         videoSrc: data.coverVideo,
         thumbnail: data.coverImage,
         imageAlt: `${data.name} Preview`,
