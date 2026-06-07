@@ -89,12 +89,14 @@ export default function Footer() {
             <Link
               href="/"
               aria-label="Go to home page"
-              className="w-hug rounded-sm transition-opacity duration-150 hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+              className="w-hug inline-flex items-center gutter-sm rounded-sm transition-opacity duration-150 hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
               onMouseEnter={playButtonHover}
             >
               <FooterLogo className="block h-auto w-[30px]" />
+              <span className="hidden md:inline-flex text-h5 text-500 leading-none">
+                David Dimalanta
+              </span>
             </Link>
-            <h2 className="t-h3">David Dimalanta</h2>
             <div className="t-sm opacity-70 inline-flex flex-wrap">
               <span>Powered by matcha pandan.&nbsp;</span>
               <span className="inline-flex whitespace-nowrap">

@@ -1,0 +1,186 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { attachTo, detachFrom, initHls, registerFeaturedSrc } from "../../ui/lib/hlsManager";
+
+const isMuxHLS = (url) =>
+  typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
+
+const getStaticVideoType = (url) => {
+  if (typeof url !== "string") return undefined;
+  if (url.includes(".webm")) return "video/webm";
+  if (url.includes(".mov")) return 'video/quicktime; codecs="hvc1"';
+  if (url.includes(".mp4")) return "video/mp4";
+  return undefined;
+};
+
+export default function BentoHeroStage({
+  media,
+  fallbackThumbnail,
+  title,
+  activeIndex = 0,
+  priority = false,
+  prefersReducedMotion = false,
+}) {
+  const videoRef = useRef(null);
+  const [loadedVideoSrc, setLoadedVideoSrc] = useState(null);
+  const [mediaVisible, setMediaVisible] = useState(prefersReducedMotion);
+  const activeMedia = media?.[activeIndex];
+  const activeSrc = activeMedia?.src;
+  const activeHevcSrc = activeMedia?.hevcSrc;
+  const isVideo = activeMedia?.type === "video" && activeSrc;
+  const poster = activeMedia?.thumbnail || fallbackThumbnail;
+  const imageSrc = activeMedia?.type === "image" ? activeSrc : poster;
+  const videoLoaded = Boolean(isVideo && loadedVideoSrc === activeSrc);
+
+  useEffect(() => {
+    setLoadedVideoSrc(null);
+    if (prefersReducedMotion) {
+      setMediaVisible(true);
+      return undefined;
+    }
+
+    setMediaVisible(false);
+    const timer = window.setTimeout(() => setMediaVisible(true), 40);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, activeSrc, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!isVideo || !isMuxHLS(activeSrc)) return;
+    registerFeaturedSrc(activeSrc);
+    initHls(activeSrc);
+  }, [isVideo, activeSrc]);
+
+  useEffect(() => {
+    if (!isVideo || !isMuxHLS(activeSrc) || prefersReducedMotion) return;
+    const el = videoRef.current;
+    if (!el) return;
+
+    const onReady = () => setLoadedVideoSrc(activeSrc);
+    el.addEventListener("canplay", onReady);
+    el.addEventListener("loadeddata", onReady);
+
+    if (el.canPlayType("application/vnd.apple.mpegurl")) {
+      el.src = activeSrc;
+      el.load();
+    } else {
+      attachTo(activeSrc, el);
+    }
+
+    return () => {
+      el.removeEventListener("canplay", onReady);
+      el.removeEventListener("loadeddata", onReady);
+      if (!el.canPlayType("application/vnd.apple.mpegurl")) {
+        detachFrom(activeSrc);
+      }
+      el.removeAttribute("src");
+      el.load();
+    };
+  }, [isVideo, activeSrc, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!isVideo || isMuxHLS(activeSrc) || prefersReducedMotion) return;
+    const el = videoRef.current;
+    if (!el) return;
+
+    const markReady = () => setLoadedVideoSrc(activeSrc);
+    el.addEventListener("canplay", markReady);
+    el.addEventListener("loadeddata", markReady);
+
+    el.load();
+    if (el.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      markReady();
+    }
+
+    return () => {
+      el.removeEventListener("canplay", markReady);
+      el.removeEventListener("loadeddata", markReady);
+      el.removeAttribute("src");
+      el.load();
+    };
+  }, [isVideo, activeSrc, activeHevcSrc, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!isVideo || !videoRef.current || !videoLoaded || prefersReducedMotion) return;
+    const el = videoRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.play().catch(() => {});
+          } else if (!el.paused) {
+            el.pause();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isVideo, videoLoaded, prefersReducedMotion]);
+
+  const caption = activeMedia?.caption;
+  const mediaTransitionClass = prefersReducedMotion
+    ? ""
+    : "transition-opacity duration-500";
+  const visibleOpacityClass = prefersReducedMotion || mediaVisible ? "opacity-100" : "opacity-0";
+  const posterOpacityClass = isVideo && videoLoaded ? "opacity-0" : visibleOpacityClass;
+  const videoOpacityClass = videoLoaded ? visibleOpacityClass : "opacity-0";
+
+  return (
+    <div className="relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 border border-outline-variant rounded-[24px] p-6 overflow-hidden bd-card bg-surface-container-highest">
+      <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
+        {imageSrc && (
+          <Image
+            key={`poster-${activeIndex}-${imageSrc}`}
+            src={imageSrc}
+            alt={activeMedia?.alt || title}
+            fill
+            sizes="(max-width: 768px) 100vw, 66vw"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : undefined}
+            className={`object-cover ${mediaTransitionClass} ${posterOpacityClass}`}
+          />
+        )}
+
+        {isVideo && !prefersReducedMotion && (
+          <video
+            key={`video-${activeIndex}-${activeSrc}`}
+            ref={videoRef}
+            muted
+            playsInline
+            loop
+            preload="metadata"
+            controls={false}
+            disablePictureInPicture
+            controlsList="nodownload nofullscreen noremoteplayback"
+            className={`w-full h-full object-cover ${mediaTransitionClass} ${videoOpacityClass}`}
+          >
+            {!isMuxHLS(activeSrc) && (
+              <>
+                {activeHevcSrc && <source src={activeHevcSrc} type={getStaticVideoType(activeHevcSrc)} />}
+                <source src={activeSrc} type={getStaticVideoType(activeSrc)} />
+              </>
+            )}
+          </video>
+        )}
+
+        {!activeMedia && (
+          <div className="flex h-full w-full items-center justify-center bg-surface-container-highest p-6 text-center">
+            <p className="t-p text-on-surface-variant">Media preview coming soon</p>
+          </div>
+        )}
+
+        {caption && <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-(--schemes-surface) via-(--schemes-surface)/70 to-transparent" />}
+      </div>
+
+      {caption && (
+        <p className="absolute inset-x-6 bottom-6 z-10 max-w-xl t-p text-on-surface-variant bd-text">
+          {caption}
+        </p>
+      )}
+    </div>
+  );
+}

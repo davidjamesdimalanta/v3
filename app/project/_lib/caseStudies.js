@@ -119,6 +119,7 @@ const caseStudySchema = z
     comingSoon: z.boolean().optional().default(false),
     name: z.string(),
     title: z.string(),
+    tagline: z.string().optional(),
     links: z.array(linkSchema).default([]),
     coverVideo: z.string().optional(),
     coverVideoHevc: z.string().optional(),
@@ -140,6 +141,7 @@ const caseStudySchema = z
     }),
     nav: z.array(z.object({ id: z.string(), heading: z.string() })).default([]),
     heroMedia: z.array(mediaSchema).default([]),
+    bentoMedia: z.array(mediaSchema).max(6).default([]),
     assets: z.record(z.string(), mediaSchema).default({}),
     definitions: z.record(z.string(), definitionSchema).default({}),
     personas: z.array(personaSchema).default([]),
@@ -201,6 +203,7 @@ function toProjectData(data) {
   return {
     name: data.name,
     title: data.title,
+    tagline: data.tagline,
     links: data.links,
     coverVideo: data.coverVideo,
     coverVideoHevc: data.coverVideoHevc,
@@ -228,6 +231,7 @@ function toSummary(caseStudy) {
     comingSoon: caseStudy.comingSoon,
     name: caseStudy.name,
     title: caseStudy.title,
+    tagline: caseStudy.tagline,
     links: caseStudy.links,
     coverVideo: caseStudy.coverVideo,
     coverVideoHevc: caseStudy.coverVideoHevc,
@@ -245,6 +249,7 @@ function toSummary(caseStudy) {
     skills: caseStudy.skills,
     caseStudy: caseStudy.caseStudy,
     bento: caseStudy.bento,
+    bentoMedia: caseStudy.bentoMedia,
   };
 }
 

@@ -1,6 +1,7 @@
 import "./globals.css";
 import { inter, aspekta } from "./fonts";
 import SiteShell from "./ui/SiteShell";
+import ThemeProvider from "./ui/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "@/app/ui/sonner"
@@ -76,14 +77,16 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${aspekta.variable}`}>
+    <html lang="en" className={`${inter.variable} ${aspekta.variable}`} suppressHydrationWarning>
       <body className="relative antialiased">
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         {/* <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script> */}
-        <SpeedInsights />
-        <Analytics/>
-        <SiteShell>{children}</SiteShell>
-        <Toaster />
+        <ThemeProvider>
+          <SpeedInsights />
+          <Analytics/>
+          <SiteShell>{children}</SiteShell>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

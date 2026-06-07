@@ -6,6 +6,15 @@ const nextConfig = {
     viewTransition: true,
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  async redirects() {
+    return [
+      {
+        source: '/work',
+        destination: '/#all-projects',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

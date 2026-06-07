@@ -4,6 +4,7 @@ import React from "react";
 
 import Link from "next/link";
 import Button from "./Button";
+import ThemeToggle from "./ThemeToggle";
 import { useWaveCompleteAnimation } from "./hooks/useWaveCompleteAnimation";
 import { useNavbarScrollFade } from "./hooks/useNavbarScrollFade";
 import { useSoundEffects } from "./hooks/useSoundEffects";
@@ -57,6 +58,9 @@ export default function Nav() {
                 fill="currentColor"
               />
             </svg>
+            <span className="hidden md:inline-flex text-h5 text-500 leading-none">
+              David Dimalanta
+            </span>
           </div>
 
         </Link>
@@ -64,12 +68,6 @@ export default function Nav() {
           className={`flex flex-row gutter-xs md:gutter-sm items-center ${getAnimationClass('nav-logo-name')}`}
           style={getAnimationStyle('nav-logo-name')}
         >
-          <Button
-            text={"Work"}
-            href="/work"
-            variant="ghost"
-            soundEffect="navigateProject"
-          />
           <Button
             text={"About"}
             href="/about"
@@ -84,9 +82,9 @@ export default function Nav() {
             variant="ghost"
             soundEffect="hover"
           />
+          <ThemeToggle />
         </div>
       </div>
     </nav>
   );
 }
-

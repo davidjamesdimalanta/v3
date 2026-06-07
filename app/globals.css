@@ -220,6 +220,29 @@ body {
         0 8px 32px rgba(155, 144, 122, 0.12);
 }
 
+@utility bd-liquid-glass-primary {
+    background-color: color-mix(in oklch, var(--schemes-primary-container) 35%, transparent);
+    backdrop-filter: blur(2rem) saturate(180%);
+    border-color: color-mix(in oklch, var(--schemes-outline-variant) 45%, transparent);
+    box-shadow:
+        inset 0 -1px 2px color-mix(in oklch, var(--schemes-shadow) 10%, transparent),
+        inset 0 1px 1px color-mix(in oklch, var(--schemes-on-primary) 35%, transparent);
+    transition:
+        background-color 150ms ease-out,
+        backdrop-filter 150ms ease-out,
+        border-radius 150ms ease-out,
+        border-color 150ms ease-out,
+        box-shadow 150ms ease-out;
+}
+
+@utility bd-liquid-glass-primary-hover {
+    backdrop-filter: blur(3.75rem) saturate(200%);
+    border-color: color-mix(in oklch, var(--schemes-outline-variant) 60%, transparent);
+    box-shadow:
+        inset 0 -1px 2px color-mix(in oklch, var(--schemes-shadow) 15%, transparent),
+        inset 0 1px 1px color-mix(in oklch, var(--schemes-on-primary) 55%, transparent);
+}
+
 /* Image depth — subtle inner outline to separate image from background */
 @utility img-depth {
     outline: 1px solid rgba(0, 0, 0, 0.1);

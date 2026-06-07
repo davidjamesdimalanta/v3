@@ -44,8 +44,8 @@ export const IconOnly = {
 
 export const WithSoundEffect = {
   args: {
-    text: 'Work',
-    href: '/work',
+    text: 'All Projects',
+    href: '/#all-projects',
     soundEffect: 'navigateProject',
   },
 };
