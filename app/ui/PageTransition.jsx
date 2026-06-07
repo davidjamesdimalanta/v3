@@ -10,8 +10,8 @@ import FrozenRouter from './FrozenRouter';
 /**
  * Browser-aware page enter/exit transitions.
  *
- *   • Production, OR Chromium/Firefox      → React's <ViewTransition> (default)
- *   • Preview/dev AND Apple WebKit (Safari + iOS) → Framer Motion fallback
+ *   • Chromium/Firefox (any environment)   → React's <ViewTransition> (default)
+ *   • Apple WebKit (Safari + iOS)          → Framer Motion fallback
  *
  * The Framer Motion path exists because Safari's View Transitions are janky
  * and can drop the live WebGL <WaveBackground> context when it gets recaptured
@@ -23,10 +23,10 @@ import FrozenRouter from './FrozenRouter';
  * touching either.
  */
 
-// Hybrid runs only on preview deploys and local dev. On production
-// NEXT_PUBLIC_VERCEL_ENV === 'production', so every browser keeps the existing
-// View Transitions path and nothing changes for real users.
-const HYBRID_ENABLED = process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production';
+// Validated on preview, now enabled in all environments. Apple WebKit always
+// takes the Framer Motion path; Chromium/Firefox always take View Transitions.
+// Flip to `false` to fully revert to View Transitions everywhere.
+const HYBRID_ENABLED = true;
 
 const T = ANIMATION_CONFIG.transitions;
 // Mirrors the cubic-bezier used by the .page-transition keyframes.
@@ -57,7 +57,7 @@ export default function PageTransition({ children }) {
   const isAppleWebKit = useIsAppleWebKit();
   const prefersReducedMotion = useReducedMotion();
 
-  // Chromium/Firefox, or production on any browser → unchanged behavior.
+  // Chromium/Firefox (any environment) → View Transitions.
   if (!HYBRID_ENABLED || !isAppleWebKit) {
     return (
       <ViewTransition
@@ -71,7 +71,7 @@ export default function PageTransition({ children }) {
     );
   }
 
-  // Apple WebKit on preview/dev → Framer Motion enter + exit.
+  // Apple WebKit (Safari + iOS) → Framer Motion enter + exit.
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
