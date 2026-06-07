@@ -1,12 +1,13 @@
 'use client'
 
-import { Component, ViewTransition } from 'react'
+import { Component } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion } from 'motion/react'
 import Nav from './nav'
 import SmoothScroll from './SmoothScroll'
 import WaveBackground from './WaveBackground'
 import Footer from './Footer'
+import PageTransition from './PageTransition'
 
 class WaveErrorBoundary extends Component {
   constructor(props) {
@@ -49,14 +50,7 @@ export default function SiteShell({ children }) {
         </motion.div>
       </WaveErrorBoundary>
       <Nav />
-      <ViewTransition
-        key={pathname}
-        default="page-transition"
-        enter="page-transition"
-        exit="page-transition"
-      >
-        {children}
-      </ViewTransition>
+      <PageTransition>{children}</PageTransition>
       <Footer />
     </>
   )
