@@ -59,7 +59,7 @@ function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
           onClick={handleTogglePlayback}
           aria-label={isPlaying ? "Pause video" : "Play video"}
           aria-pressed={isPlaying}
-          className="bg-black/80 hover:bg-black/90 rounded-full min-w-[44px] min-h-[44px] px-3 py-3 flex items-center justify-center text-[rgb(245,245,245)] transition-all duration-150 focus-visible:outline focus-visible:outline-white focus-visible:outline-offset-2"
+          className="bg-(--primary-900)/80 hover:bg-(--primary-900)/90 rounded-full min-w-[44px] min-h-[44px] px-3 py-3 flex items-center justify-center text-(--primary-50) transition-all duration-150 focus-visible:outline focus-visible:outline-(--primary-50) focus-visible:outline-offset-2"
         >
           {isPlaying ? (
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -76,7 +76,7 @@ function VideoControls({ isPlaying, hasEnded, onPlay, onPause, onRestart }) {
         <button
           onClick={onRestart}
           aria-label="Restart video"
-          className="bg-black/80 hover:bg-black/90 rounded-full min-w-[44px] min-h-[44px] px-3 py-3 flex items-center justify-center text-[rgb(245,245,245)] transition-all duration-150 focus-visible:outline focus-visible:outline-white focus-visible:outline-offset-2"
+          className="bg-(--primary-900)/80 hover:bg-(--primary-900)/90 rounded-full min-w-[44px] min-h-[44px] px-3 py-3 flex items-center justify-center text-(--primary-50) transition-all duration-150 focus-visible:outline focus-visible:outline-(--primary-50) focus-visible:outline-offset-2"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M4 10C4 6.686 6.686 4 10 4C12.2 4 14.1 5.2 15.1 7M16 7V3M16 7H12M16 10C16 13.314 13.314 16 10 16C7.8 16 5.9 14.8 4.9 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

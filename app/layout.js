@@ -6,10 +6,9 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "@/app/ui/sonner"
 
-
 export const metadata = {
   title: "David Dimalanta",
-  description: "Toronto-based Product Designer specializing in product design, UX, and UI. Based in Toronto, Canada. Previously at iHub, Socratic, and Goable.",
+  description: "Toronto-based Product Designer specializing in product design, UX, and UI. Based in Toronto, Canada. Previously at iHub, currently at Hand Eye Society.",
   metadataBase: new URL('https://daviddim.ca'),
   keywords: [
     "David Dimalanta",
@@ -70,8 +69,8 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: light)', color: 'oklch(0.977 0.003 145.55)' },
+    { media: '(prefers-color-scheme: dark)', color: 'oklch(0.185 0.003 145.471)' },
   ],
 };
 

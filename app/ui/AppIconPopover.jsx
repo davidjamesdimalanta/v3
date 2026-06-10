@@ -122,7 +122,7 @@ export default function AppIconPopover({ name, icon, videoSrc, thumbnail, descri
               className="object-cover w-full h-full"
             />
           ) : (
-            <span className="w-full h-full bg-[#D6CAC8] block" />
+            <span className="w-full h-full bg-(--primary-300) block" />
           )}
         </button>
       </HoverCardTrigger>
@@ -133,14 +133,14 @@ export default function AppIconPopover({ name, icon, videoSrc, thumbnail, descri
         align="start"
         sideOffset={8}
       >
-        <div className="w-full aspect-video bg-[#D6CAC8] overflow-hidden">
+        <div className="w-full aspect-video bg-(--primary-300) overflow-hidden">
           {videoSrc ? (
             <HlsVideo
               src={videoSrc}
               thumbnail={thumbnail}
             />
           ) : (
-            <div className="w-full h-full bg-[#D6CAC8]" />
+            <div className="w-full h-full bg-(--primary-300)" />
           )}
         </div>
 
@@ -148,7 +148,7 @@ export default function AppIconPopover({ name, icon, videoSrc, thumbnail, descri
         <div className="p-2 flex flex-col gutter-xs">
           <span className="text-small text-600">{name}</span>
           {description && (
-            <span className="text-small text-pretty" style={{ color: 'var(--text-color-60, #9B907A)' }}>
+            <span className="text-small text-pretty" style={{ color: 'var(--text-color-60)' }}>
               {description}
             </span>
           )}

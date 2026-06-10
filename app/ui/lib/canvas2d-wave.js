@@ -25,20 +25,20 @@ export class Canvas2DWaveRenderer {
     // Wave color modes — design mode pulls from MT --schemes-primary so the
     // wave inherits theme/contrast changes from globals.css automatically.
     // Fallback matches the resolved oklch() value of the light scheme primary.
-    this.figGreen = { r: 17, g: 174, b: 92 };
-    this.figBlue = readCssColor255('--schemes-primary') ?? { r: 144, g: 74, b: 72 };
+    this.figGreen = { r: 80, g: 81, b: 80 };
+    this.figBlue = readCssColor255('--schemes-primary') ?? { r: 50, g: 51, b: 50 };
 
     this.color = initialMode === 'dev' ? this.figGreen : this.figBlue;
 
     // Wave configs matching the WGSL shader parameters
     this.waves = [
-      { speed: 0.2, freq: 0.20, amp: 0.2,  offset: 0.65,  lineWidth: 0.1,  sharpness: 15, invert: false },
-      { speed: 0.4, freq: 0.40, amp: 0.15, offset: 0.65,  lineWidth: 0.1,  sharpness: 17, invert: false },
-      { speed: 0.3, freq: 0.60, amp: 0.15, offset: 0.65,  lineWidth: 0.05, sharpness: 23, invert: false },
-      { speed: 0.1, freq: 0.26, amp: 0.07, offset: 0.35,  lineWidth: 0.1,  sharpness: 17, invert: true  },
-      { speed: 0.3, freq: 0.36, amp: 0.07, offset: 0.35,  lineWidth: 0.1,  sharpness: 17, invert: true  },
-      { speed: 0.5, freq: 0.46, amp: 0.07, offset: 0.35,  lineWidth: 0.05, sharpness: 23, invert: true  },
-      { speed: 0.2, freq: 0.58, amp: 0.05, offset: 0.35,  lineWidth: 0.2,  sharpness: 15, invert: true  },
+      { speed: 0.2, freq: 0.20, amp: 0.2,  offset: 0.48, lineWidth: 0.1,  sharpness: 15, invert: false },
+      { speed: 0.4, freq: 0.40, amp: 0.15, offset: 0.48, lineWidth: 0.1,  sharpness: 17, invert: false },
+      { speed: 0.3, freq: 0.60, amp: 0.15, offset: 0.48, lineWidth: 0.05, sharpness: 23, invert: false },
+      { speed: 0.1, freq: 0.26, amp: 0.07, offset: 0.28, lineWidth: 0.1,  sharpness: 17, invert: true  },
+      { speed: 0.3, freq: 0.36, amp: 0.07, offset: 0.28, lineWidth: 0.1,  sharpness: 17, invert: true  },
+      { speed: 0.5, freq: 0.46, amp: 0.07, offset: 0.28, lineWidth: 0.05, sharpness: 23, invert: true  },
+      { speed: 0.2, freq: 0.58, amp: 0.05, offset: 0.28, lineWidth: 0.2,  sharpness: 15, invert: true  },
     ];
   }
 

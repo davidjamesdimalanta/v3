@@ -25,7 +25,6 @@ export default function BentoHeroStage({
 }) {
   const videoRef = useRef(null);
   const [loadedVideoSrc, setLoadedVideoSrc] = useState(null);
-  const [mediaVisible, setMediaVisible] = useState(prefersReducedMotion);
   const activeMedia = media?.[activeIndex];
   const activeSrc = activeMedia?.src;
   const activeHevcSrc = activeMedia?.hevcSrc;
@@ -33,18 +32,31 @@ export default function BentoHeroStage({
   const poster = activeMedia?.thumbnail || fallbackThumbnail;
   const imageSrc = activeMedia?.type === "image" ? activeSrc : poster;
   const videoLoaded = Boolean(isVideo && loadedVideoSrc === activeSrc);
+  const mediaKey = `${activeIndex}:${activeSrc || imageSrc || "empty"}`;
+  const [mediaVisibility, setMediaVisibility] = useState(() => ({
+    key: mediaKey,
+    visible: prefersReducedMotion,
+  }));
+
+  if (mediaVisibility.key !== mediaKey) {
+    setMediaVisibility({
+      key: mediaKey,
+      visible: prefersReducedMotion,
+    });
+  }
 
   useEffect(() => {
-    setLoadedVideoSrc(null);
-    if (prefersReducedMotion) {
-      setMediaVisible(true);
-      return undefined;
-    }
+    if (prefersReducedMotion || mediaVisibility.visible) return undefined;
 
-    setMediaVisible(false);
-    const timer = window.setTimeout(() => setMediaVisible(true), 40);
+    const timer = window.setTimeout(() => {
+      setMediaVisibility((current) => {
+        if (current.key !== mediaKey || current.visible) return current;
+        return { ...current, visible: true };
+      });
+    }, 40);
+
     return () => window.clearTimeout(timer);
-  }, [activeIndex, activeSrc, prefersReducedMotion]);
+  }, [mediaKey, mediaVisibility.visible, prefersReducedMotion]);
 
   useEffect(() => {
     if (!isVideo || !isMuxHLS(activeSrc)) return;
@@ -125,7 +137,7 @@ export default function BentoHeroStage({
   const mediaTransitionClass = prefersReducedMotion
     ? ""
     : "transition-opacity duration-500";
-  const visibleOpacityClass = prefersReducedMotion || mediaVisible ? "opacity-100" : "opacity-0";
+  const visibleOpacityClass = prefersReducedMotion || mediaVisibility.visible ? "opacity-100" : "opacity-0";
   const posterOpacityClass = isVideo && videoLoaded ? "opacity-0" : visibleOpacityClass;
   const videoOpacityClass = videoLoaded ? visibleOpacityClass : "opacity-0";
 

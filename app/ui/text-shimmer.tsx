@@ -59,16 +59,15 @@ function TextShimmerComponent({
     return children.length * spread;
   }, [children, spread]);
 
-  // Color configurations matching existing gradients
+  // Color configurations mapped to the primary token scale.
   const colorConfig = {
     brown: {
       baseColor: "var(--text-color-100)",
-      // gradientColor: "#6CC2FF",
-      gradientColor: "#D6CAC8",
+      gradientColor: "var(--primary-300)",
     },
     green: {
-      baseColor: "#39FF14",
-      gradientColor: "#D0EFDE",
+      baseColor: "var(--primary-900)",
+      gradientColor: "var(--primary-200)",
     },
   };
 

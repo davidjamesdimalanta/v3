@@ -1,7 +1,7 @@
 "use client";
 
 import { TextLoop } from "@/components/motion-primitives/text-loop";
-import { Fragment, useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useSoundEffects } from "./hooks/useSoundEffects";
 import { toast } from "sonner";
@@ -26,11 +26,6 @@ const connectLinks = [
   { label: "CV", href: "https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing", external: true },
 ];
 
-const themeChoices = [
-  { label: "Milk", theme: "light", ariaLabel: "Use Milk light theme" },
-  { label: "Mocha", theme: "dark", ariaLabel: "Use Mocha dark theme" },
-];
-
 function FooterLogo({ className = "" }) {
   return (
     <svg
@@ -53,35 +48,12 @@ function FooterLogo({ className = "" }) {
 
 export default function Footer() {
   const [isPaused, setIsPaused] = useState(false);
-  const [activeTheme, setActiveTheme] = useState(null);
   const { playButtonHover } = useSoundEffects();
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const syncTheme = () => setActiveTheme(root.getAttribute("data-theme"));
-    const observer = new MutationObserver(syncTheme);
-
-    syncTheme();
-    observer.observe(root, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  function handleThemeChoice(theme) {
-    const root = document.documentElement;
-
-    root.classList.remove("dark", "light");
-    root.setAttribute("data-theme", theme);
-    setActiveTheme(theme);
-  }
 
   return (
     <footer className="px-4 md:px-5 pb-4 md:pb-5 w-full" data-label="site-footer">
       <div
-        className="max-w-[1200px] mx-auto bg-inverse-surface text-inverse-on-surface rounded-[24px] pt-12 pb-8 px-8 flex flex-col gutter-md"
+        className="max-w-[1200px] mx-auto bg-inverse-surface text-inverse-on-surface rounded-[24px] p-8 flex flex-col gutter-md"
       >
         {/* Top row: brand + tagline (left) · CONNECT links (right) */}
         <div className="flex flex-col md:flex-row gutter-md md:gutter-md items-start">
@@ -89,7 +61,7 @@ export default function Footer() {
             <Link
               href="/"
               aria-label="Go to home page"
-              className="w-hug inline-flex items-center gutter-sm rounded-sm transition-opacity duration-150 hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+              className="w-hug inline-flex items-center gutter-sm rounded-sm transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
               onMouseEnter={playButtonHover}
             >
               <FooterLogo className="block h-auto w-[30px]" />
@@ -174,30 +146,6 @@ export default function Footer() {
           </div>
         </div>
 
-        <div
-          role="group"
-          className="t-sm w-hug max-w-full opacity-80"
-          aria-label="Choose a temporary session theme"
-        >
-          {themeChoices.map((choice, index) => (
-            <Fragment key={choice.theme}>
-              {index > 0 && <span> or </span>}
-              <button
-                type="button"
-                aria-label={choice.ariaLabel}
-                aria-pressed={activeTheme === choice.theme}
-                className={`-mx-3 inline-flex min-h-[44px] cursor-pointer items-center justify-center rounded-sm px-3 decoration-current decoration-[0.08em] underline-offset-4 transition-opacity duration-150 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${
-                  activeTheme === choice.theme ? "underline opacity-100" : "no-underline opacity-80 hover:opacity-100"
-                }`}
-                onClick={() => handleThemeChoice(choice.theme)}
-                onMouseEnter={playButtonHover}
-              >
-                {choice.label}
-              </button>
-            </Fragment>
-          ))}
-          <span> theme?</span>
-        </div>
       </div>
     </footer>
   );
