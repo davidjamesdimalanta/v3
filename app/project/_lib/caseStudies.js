@@ -54,6 +54,13 @@ const mediaSchema = z
   })
   .strict();
 
+const bentoPreviewSchema = z
+  .object({
+    enabled: z.boolean(),
+    sources: z.record(z.string(), mediaSchema).default({}),
+  })
+  .strict();
+
 const drawerBlockSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
@@ -142,6 +149,7 @@ const caseStudySchema = z
     nav: z.array(z.object({ id: z.string(), heading: z.string() })).default([]),
     heroMedia: z.array(mediaSchema).default([]),
     bentoMedia: z.array(mediaSchema).max(6).default([]),
+    bentoPreview: bentoPreviewSchema.optional(),
     assets: z.record(z.string(), mediaSchema).default({}),
     definitions: z.record(z.string(), definitionSchema).default({}),
     personas: z.array(personaSchema).default([]),
@@ -220,6 +228,7 @@ function toProjectData(data) {
     details: data.details,
     skills: data.skills,
     caseStudy: data.caseStudy,
+    heroMedia: data.heroMedia,
   };
 }
 
@@ -250,6 +259,7 @@ function toSummary(caseStudy) {
     caseStudy: caseStudy.caseStudy,
     bento: caseStudy.bento,
     bentoMedia: caseStudy.bentoMedia,
+    bentoPreview: caseStudy.bentoPreview,
   };
 }
 
@@ -308,6 +318,10 @@ export function getNextCaseStudy(currentSlug) {
   const caseStudies = getAllCaseStudies();
   const current = caseStudies.find((project) => project.slug === currentSlug);
   if (!current) return null;
+
+  // Opt out of the auto-forward: "none" sends the reader back to the work list
+  // instead of pushing the next case study.
+  if (current.nextProject === "none") return null;
 
   const explicitNext = current.nextProject
     ? caseStudies.find((project) => project.slug === current.nextProject)

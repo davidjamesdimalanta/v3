@@ -17,13 +17,13 @@ export default function ProjectCaseStudyPage({ caseStudy, children }) {
   return (
     <>
       <ProjectLayout projectData={caseStudy.projectData}>
-        {caseStudy.heroMedia.map((media, index) => (
+        {caseStudy.heroMedia.slice(1).map((media, index) => (
           <ContentBlock
             key={`${media.src}-${index}`}
             media={media}
             thumbnail={media.thumbnail}
             isFirstVideo={media.isFirstVideo}
-            priority={media.priority || index === 0}
+            priority={media.priority}
           />
         ))}
       </ProjectLayout>
@@ -44,7 +44,7 @@ export default function ProjectCaseStudyPage({ caseStudy, children }) {
               children
             )}
 
-            {nextProject && (
+            {nextProject ? (
               <div className="max-w-lg mx-auto text-center pt-16">
                 <span className="text-xs text-400 opacity-60 block mb-2">Next Project</span>
                 <Link
@@ -53,6 +53,16 @@ export default function ProjectCaseStudyPage({ caseStudy, children }) {
                   onMouseEnter={playHover}
                 >
                   {nextProject.title} →
+                </Link>
+              </div>
+            ) : (
+              <div className="max-w-lg mx-auto text-center pt-16">
+                <Link
+                  href="/#all-projects"
+                  className="group text-h5 hover:bd-text transition-all duration-150 inline-block"
+                  onMouseEnter={playHover}
+                >
+                  ← Back to all work
                 </Link>
               </div>
             )}

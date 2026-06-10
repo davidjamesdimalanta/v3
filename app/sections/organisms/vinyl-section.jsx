@@ -101,7 +101,7 @@ export default function VinylSection() {
 
 
       <div className="flex flex-col gutter-xs">
-        <span className="text-[#799A92] uppercase tracking-wide text-sm">
+        <span className="text-(--text-color-60) uppercase tracking-wide text-sm">
           Now Playing:
         </span>
         <TextScramble
@@ -126,11 +126,11 @@ export default function VinylSection() {
             transition={{ duration: 0.2 }}
           >
             <motion.div
-              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-(--primary-900)/40 backdrop-blur-sm"
               onClick={() => setShowSoundModal(false)}
             />
             <motion.div
-              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_rgba(214,202,200,0.6),0_4px_12px_rgba(155,144,122,0.2),0_12px_32px_rgba(155,144,122,0.1)] bg-[#ECEAE9] text-(--figma-brown) w-72 flex flex-col gutter-sm"
+              className="relative rounded-xl px-6 py-5 shadow-[0_0_0_1px_oklch(from_var(--primary-300)_l_c_h_/_0.6),0_4px_12px_oklch(from_var(--primary-500)_l_c_h_/_0.2),0_12px_32px_oklch(from_var(--primary-500)_l_c_h_/_0.1)] bg-(--primary-100) text-(--figma-brown) w-72 flex flex-col gutter-sm"
               initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -4, filter: 'blur(4px)' }}
@@ -138,10 +138,10 @@ export default function VinylSection() {
             >
               <p className="text-p">Enable sound to play music?</p>
               <div className="flex gutter-xs">
-                <button onClick={handleEnableSound} className="flex-1 px-4 py-2 rounded-lg bg-(--figma-brown) text-[#ECEAE9] text-sm cursor-pointer hover:opacity-80 transition-opacity">
+                <button onClick={handleEnableSound} className="flex-1 px-4 py-2 rounded-lg bg-(--figma-brown) text-(--primary-100) text-sm cursor-pointer hover:opacity-80 transition-opacity">
                   Enable Sound
                 </button>
-                <button onClick={() => setShowSoundModal(false)} className="flex-1 px-4 py-2 rounded-lg border border-[#D6CAC8] text-sm cursor-pointer hover:bg-[#D6CAC8] transition-colors">
+                <button onClick={() => setShowSoundModal(false)} className="flex-1 px-4 py-2 rounded-lg border border-(--primary-300) text-sm cursor-pointer hover:bg-(--primary-300) transition-colors">
                   Not now
                 </button>
               </div>

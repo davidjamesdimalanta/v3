@@ -2,8 +2,7 @@
 
 import { Component } from 'react'
 import { usePathname } from 'next/navigation'
-import { motion } from 'motion/react'
-import Nav from './nav'
+import SiteNav from './SiteNav'
 import SmoothScroll from './SmoothScroll'
 import WaveBackground from './WaveBackground'
 import Footer from './Footer'
@@ -41,15 +40,11 @@ export default function SiteShell({ children }) {
     <>
       <SmoothScroll />
       <WaveErrorBoundary>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-        >
+        <div className="animate-in fade-in-0 motion-reduce:animate-none" style={{ animationDuration: '1.2s' }}>
           <WaveBackground />
-        </motion.div>
+        </div>
       </WaveErrorBoundary>
-      <Nav />
+      <SiteNav />
       <PageTransition>{children}</PageTransition>
       <Footer />
     </>

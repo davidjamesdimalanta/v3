@@ -84,8 +84,8 @@ fn fragmentMain(@builtin(position) fragCoord: vec4f) -> @location(0) vec4f {
 
   var accumulatedColor = vec3f(0.0);
 
-  let offset1 = mix(0.65, 0.65, u.isMobile);
-  let offset2 = mix(0.35, 0.4, u.isMobile);
+  let offset1 = 0.48;
+  let offset2 = 0.28;
 
   accumulatedColor += calcSine(uv, 0.2, 0.20, 0.2,  0.0, offset1, u.waveColor, 0.1,  15.0, false, u.waveOpacity0);
   accumulatedColor += calcSine(uv, 0.4, 0.40, 0.15, 0.0, offset1, u.waveColor, 0.1,  17.0, false, u.waveOpacity1);
@@ -140,9 +140,9 @@ export class WaveRenderer {
 
     // Wave color modes — design mode pulls from MT --schemes-primary so the
     // wave inherits theme/contrast changes from globals.css automatically.
-    // Fallback matches the resolved oklch() value of the light scheme primary (#904a48).
-    this.figGreen = { r: 0.067, g: 0.682, b: 0.361 };
-    this.figBlue = readCssColor('--schemes-primary') ?? { r: 0.565, g: 0.290, b: 0.282 };
+    // Fallback matches the primary neutral scale when CSS token reads fail.
+    this.figGreen = { r: 0.314, g: 0.318, b: 0.314 };
+    this.figBlue = readCssColor('--schemes-primary') ?? { r: 0.196, g: 0.2, b: 0.196 };
 
     // Uniform data (Float32Array matching the WGSL struct layout)
     this.uniformData = new Float32Array(UNIFORM_BUFFER_SIZE / 4);

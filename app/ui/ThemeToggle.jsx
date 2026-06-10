@@ -29,12 +29,18 @@ const MoonIcon = () => (
   </svg>
 );
 
-const subscribeMounted = (onStoreChange) => {
-  const frame = window.requestAnimationFrame(onStoreChange);
-  return () => window.cancelAnimationFrame(frame);
-};
-const getMountedSnapshot = () => true;
-const getServerMountedSnapshot = () => false;
+function subscribeMounted(callback) {
+  const frame = requestAnimationFrame(callback);
+  return () => cancelAnimationFrame(frame);
+}
+
+function getMountedSnapshot() {
+  return true;
+}
+
+function getServerMountedSnapshot() {
+  return false;
+}
 
 /**
  * Light/dark mode pill switch for the navbar.
@@ -83,23 +89,49 @@ export default function ThemeToggle({ className = "" }) {
       onMouseEnter={playButtonHover}
       className={`group relative flex h-8 w-[52px] shrink-0 cursor-pointer items-center rounded-full bd text-(--text-color-100) hover:bd-active hover:bd-text hover-surface ${className}`}
     >
-      <span className="absolute inset-0 flex items-center justify-between px-[3px]">
+      {/* Track icons sit behind the knob and fade in as the knob leaves them. */}
+      <span className="pointer-events-none absolute inset-0 flex items-center justify-between px-[7px]">
+        <span
+          className={`flex items-center justify-center transition-opacity duration-150 motion-reduce:transition-none ${isDark ? "opacity-40" : "opacity-0"}`}
+        >
+          <SunIcon />
+        </span>
+        <span
+          className={`flex items-center justify-center transition-opacity duration-150 motion-reduce:transition-none ${isDark ? "opacity-0" : "opacity-40"}`}
+        >
+          <MoonIcon />
+        </span>
+      </span>
+
+      <span className="relative z-10 grid h-8 w-[52px] grid-cols-2">
         <AnimatedBackground
           defaultValue={activeTheme}
-          transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-full bg-(--schemes-surface-container-highest) shadow-[0_0_4px_1px_rgba(155,144,122,0.4)]"
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 0.24, ease: [0.22, 1, 0.36, 1] }
+          }
+          className="m-[4px_1px] rounded-full bg-(--schemes-surface-container-highest) shadow-[0_0_4px_1px_oklch(from_var(--primary-500)_l_c_h_/_0.4)]"
         >
           <span
             data-id="light"
-            className="h-6 w-6 items-center justify-center rounded-full text-(--text-color-100) transition-opacity duration-150 motion-reduce:transition-none data-[checked=false]:opacity-40"
+            className="flex h-8 w-[26px] items-center justify-center"
           >
-            <SunIcon />
+            <span
+              className={`transition-opacity duration-150 motion-reduce:transition-none ${isDark ? "opacity-0" : "opacity-100"}`}
+            >
+              <SunIcon />
+            </span>
           </span>
           <span
             data-id="dark"
-            className="h-6 w-6 items-center justify-center rounded-full text-(--text-color-100) transition-opacity duration-150 motion-reduce:transition-none data-[checked=false]:opacity-40"
+            className="flex h-8 w-[26px] items-center justify-center"
           >
-            <MoonIcon />
+            <span
+              className={`transition-opacity duration-150 motion-reduce:transition-none ${isDark ? "opacity-100" : "opacity-0"}`}
+            >
+              <MoonIcon />
+            </span>
           </span>
         </AnimatedBackground>
       </span>

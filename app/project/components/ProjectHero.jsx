@@ -1,5 +1,6 @@
 "use client";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
+import MediaBlock from "./contentTypes/MediaBlock";
 
 export default function ProjectHero({
   name,
@@ -8,21 +9,32 @@ export default function ProjectHero({
   awards = [],
   description = [],
   details = {},
+  heroMedia = [],
 }) {
   // Sound effects
   const { playButtonHover } = useSoundEffects();
+  const primaryHeroMedia = heroMedia[0];
+
   return (
     <section className="w-full px-4 pt-20 pb-8 md:px-5 md:pt-24 md:pb-8">
       <div className="max-w-[1200px] w-full mx-auto">
         {/* Two-column row: title/links left, meta/description right */}
         <div className="flex flex-col md:flex-row gutter-base md:gutter-lg pt-4">
 
-        {/* LEFT: Title + links + awards */}
+        {/* LEFT */}
         <div className="flex flex-col gutter-base flex-1 lg:basis-[720px]">
           <div className="flex flex-col gutter-xs">
             <h1 className="text-h3 md:text-h1 text-400">{name}</h1>
             <h6 className="text-h6 text-400 text-(--schemes-tertiary)">{title}</h6>
           </div>
+
+          {description.length > 0 && (
+            <div className="flex flex-col gutter-xs text-p">
+              {description.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          )}
 
           {links.length > 0 && (
             <div className="flex flex-col gutter-xs">
@@ -73,22 +85,23 @@ export default function ProjectHero({
           )}
         </div>
 
-        {/* RIGHT: Details grid + description */}
-        <div className="flex flex-col lg:flex-row gutter-base lg:gutter-lg flex-1 max-w-full lg:max-w-[min(75vw,120vh)] lg:basis-[75vw]">
-          {description.length > 0 && (
-            <div className="flex flex-col gutter-xs text-p flex-1 lg:flex-2">
-              {description.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
+        {/* RIGHT */}
+        <div className="flex flex-col gutter-base flex-1 max-w-full lg:max-w-[min(75vw,120vh)] lg:basis-[75vw]">
+          {primaryHeroMedia?.src && (
+            <MediaBlock
+              {...primaryHeroMedia}
+              thumbnail={primaryHeroMedia.thumbnail}
+              isFirstVideo={primaryHeroMedia.isFirstVideo}
+              priority={primaryHeroMedia.priority}
+            />
           )}
 
-                    {Object.keys(details).length > 0 && (
-            <div className="grid grid-cols-2 gutter-sm text-sm flex-1">
-              {details.role && (
+          {Object.keys(details).length > 0 && (
+            <div className="grid grid-cols-4 gutter-sm text-sm">
+              {details.year && (
                 <div className="flex flex-col gutter-xs">
-                  <span className="text-xs text-(--schemes-tertiary)">Role</span>
-                  <span>{details.role}</span>
+                  <span className="text-xs text-(--schemes-tertiary)">Year</span>
+                  <span>{details.year}</span>
                 </div>
               )}
               {details.timeline && (
@@ -103,10 +116,10 @@ export default function ProjectHero({
                   <span>{details.team}</span>
                 </div>
               )}
-              {details.year && (
+              {details.role && (
                 <div className="flex flex-col gutter-xs">
-                  <span className="text-xs text-(--schemes-tertiary)">Year</span>
-                  <span>{details.year}</span>
+                  <span className="text-xs text-(--schemes-tertiary)">Role</span>
+                  <span>{details.role}</span>
                 </div>
               )}
             </div>

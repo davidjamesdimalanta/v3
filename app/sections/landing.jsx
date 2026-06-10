@@ -56,7 +56,7 @@ export default function Landing() {
   // gets its own motion child, not the whole row as one block
   const exploringRow = (animate) => (
     <div className="flex flex-col gutter-xs">
-      <span className="text-sm text-400" style={{ color: 'var(--text-color-60, #9B907A)' }}>
+      <span className="text-sm text-400" style={{ color: 'var(--text-color-60)' }}>
         PLAYING AROUND WITH:
       </span>
       {prefersReducedMotion ? (

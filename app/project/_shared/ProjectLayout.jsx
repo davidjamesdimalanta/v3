@@ -27,6 +27,7 @@ export default function ProjectLayout({ projectData, children }) {
           awards={projectData.awards}
           description={projectData.description}
           details={projectData.details}
+          heroMedia={projectData.heroMedia}
         />
 
         {/* Content — media/video blocks below hero */}

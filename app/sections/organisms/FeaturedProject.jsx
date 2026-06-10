@@ -152,7 +152,7 @@ export default function FeaturedProject({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Video Container */}
-      <div className="relative aspect-video rounded-xl overflow-hidden bg-#ffffff img-depth">
+      <div className="relative aspect-video rounded-xl overflow-hidden bg-(--primary-50) img-depth">
         {/* Thumbnail - shown while video loads */}
         {thumbnail && (
           <div

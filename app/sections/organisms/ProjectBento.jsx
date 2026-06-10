@@ -1,19 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BentoHeroStage from "./BentoHeroStage";
 import BentoMetaCell from "./BentoMetaCell";
 import BentoPreviewGrid from "./BentoPreviewGrid";
 
 export default function ProjectBento({ project, priority = false, animate = true, prefersReducedMotion = false }) {
   const media = project.bentoMedia ?? [];
+  const previewMedia = Object.values(project.bentoPreview?.sources ?? {});
+  const showPreview = project.bentoPreview?.enabled === true && previewMedia.length > 0;
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    if (media.length > 0 && activeIndex >= media.length) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, media.length]);
+  const safeActiveIndex = media.length > 0 && activeIndex >= media.length ? 0 : activeIndex;
 
   const fallbackThumbnail = project.bento?.thumbnail || project.coverImageDark || project.coverImage;
 
@@ -26,19 +23,21 @@ export default function ProjectBento({ project, priority = false, animate = true
         media={media}
         fallbackThumbnail={fallbackThumbnail}
         title={project.name}
-        activeIndex={activeIndex}
+        activeIndex={safeActiveIndex}
         priority={priority}
         prefersReducedMotion={prefersReducedMotion}
       />
-      <div className="flex flex-col gutter-sm flex-1 min-w-0">
-        <BentoPreviewGrid
-          media={media}
-          fallbackThumbnail={fallbackThumbnail}
-          activeIndex={activeIndex}
-          onSelect={setActiveIndex}
-          priority={priority}
-        />
+      <div className="flex flex-col md:grid md:grid-rows-2 gutter-sm flex-1 min-w-0">
         <BentoMetaCell project={project} />
+        {showPreview && (
+          <BentoPreviewGrid
+            media={previewMedia}
+            fallbackThumbnail={fallbackThumbnail}
+            activeIndex={safeActiveIndex}
+            onSelect={setActiveIndex}
+            priority={priority}
+          />
+        )}
       </div>
     </div>
   );

@@ -107,7 +107,7 @@ export default function AboutLanding() {
                     }}
                     transition={{ ease: "easeInOut", duration: 0.15 }}
                   >
-                    <div className="flex items-center gutter-xs px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap">
+                    <div className="flex items-center gutter-xs px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_oklch(from_var(--primary-500)_l_c_h_/_0.3)] text-button text-400 uppercase whitespace-nowrap">
                       mount benson, i miss you.
                     </div>
                   </Cursor>
@@ -137,7 +137,7 @@ export default function AboutLanding() {
                     }}
                     transition={{ ease: "easeInOut", duration: 0.15 }}
                   >
-                    <div className="flex items-center gutter-xs px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_rgba(155,144,122,0.3)] text-button text-400 uppercase whitespace-nowrap">
+                    <div className="flex items-center gutter-xs px-4 py-3 rounded-full bg-(--bg-color) shadow-[0_0_4px_2px_oklch(from_var(--primary-500)_l_c_h_/_0.3)] text-button text-400 uppercase whitespace-nowrap">
                       Tori, short for Yakitori.
                     </div>
                   </Cursor>

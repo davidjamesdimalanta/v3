@@ -8,7 +8,7 @@ export default function BentoPreviewGrid({ media = [], fallbackThumbnail, active
   const visibleMedia = media.slice(0, 6);
 
   return (
-    <div className="grid grid-cols-[repeat(3,44px)] md:grid-cols-3 grid-rows-2 gap-3 w-hug md:w-full md:flex-1 min-h-0" aria-label="Project media previews">
+    <div className="grid grid-cols-[repeat(3,44px)] md:grid-cols-3 grid-rows-[repeat(2,max-content)]! items-start content-start gap-3 w-hug md:w-full md:flex-1 min-h-0" aria-label="Project media previews">
       {visibleMedia.map((item, index) => {
         const thumbnail = item?.thumbnail || (item?.type === "image" ? item.src : fallbackThumbnail);
         const isActive = index === activeIndex;
@@ -17,7 +17,7 @@ export default function BentoPreviewGrid({ media = [], fallbackThumbnail, active
           <button
             key={`${item.src}-${index}`}
             type="button"
-            className={`relative size-[44px] md:size-auto md:aspect-square rounded-[16px] bd overflow-hidden min-w-[44px] min-h-[44px] bg-surface-dim cursor-pointer focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2 ${
+            className={`relative size-[44px] md:size-auto md:aspect-square self-start rounded-[16px] bd hover:bd-active hover-surface overflow-hidden min-w-[44px] min-h-[44px] bg-surface-dim cursor-pointer focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2 ${
               isActive ? "outline-2 outline-(--schemes-primary)" : ""
             }`}
             onClick={() => onSelect(index)}

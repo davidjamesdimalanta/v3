@@ -13,18 +13,18 @@ export default function SkillTag({ skill, category = 'tools' }) {
   const getCategoryStyles = (category) => {
     switch (category) {
       case 'design':
-        return 'bd-tag text-[#3A1F1E]';
+        return 'bd-tag text-(--primary-900)';
 
       case 'dev':
-        return 'bd-tag text-[#3A1F1E]'; 
+        return 'bd-tag text-(--primary-900)';
 
       case 'specialized':
-        return 'bd-tag text-[#3A1F1E]'; 
+        return 'bd-tag text-(--primary-900)';
 
       case 'tools':
 
       default:
-        return 'bd-tag text-[#3A1F1E]';   
+        return 'bd-tag text-(--primary-900)';
       }
   };
 

@@ -20,7 +20,7 @@ export default function NotFound() {
       <div className="absolute inset-0 bg-(--figma-brown)/80 backdrop-blur-xl -z-10" />
 
       {/* Menu band — full-width strip like PS3 XMB */}
-      <div className="w-full border-y border-[#A0A0A0]/30 bd py-12 px-[20px] md:px-[40px] flex flex-col items-start gutter-lg">
+      <div className="w-full border-y border-(--primary-400)/30 bd py-12 px-[20px] md:px-[40px] flex flex-col items-start gutter-lg">
 
         {/* Label */}
         <span className="text-sm text-400 text-(--text-lightcolor-60) uppercase tracking-widest">

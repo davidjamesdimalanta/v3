@@ -6,6 +6,12 @@
       "sourceType": "github",
       "computedHash": "d37d75f60df4a1e9592544a509e9ca65121b76b1cb5e3847c58fd33cb157d2fc"
     },
+    "oklch-skill": {
+      "source": "jakubkrehel/oklch-skill",
+      "sourceType": "github",
+      "skillPath": "skills/oklch-skill/SKILL.md",
+      "computedHash": "3825dcd7ea094655e9f07280185ba9da1d10d08f44cf06a8c316eb42334d7cd3"
+    },
     "portfolio-audit": {
       "source": "hey-stefan/portfolio-audit",
       "sourceType": "github",
