@@ -23,7 +23,7 @@ const connectLinks = [
   { label: "Email", value: "david.dimalanta@mail.utoronto.ca", isCopy: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/daviddimalanta/", external: true },
   { label: "GitHub", href: "https://github.com/davidjamesdimalanta", external: true },
-  { label: "CV", href: "https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing", external: true },
+  { label: "CV", href: "https://drive.google.com/file/d/1706XGX278fWazY9RKDWsjRDsfolJQZXz/view?usp=sharing", external: true },
 ];
 
 function FooterLogo({ className = "" }) {

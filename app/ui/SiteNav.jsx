@@ -78,7 +78,7 @@ export default function SiteNav() {
           />
           <Button
             text="CV"
-            href="https://drive.google.com/file/d/1LcdDAdHLevMjm8qTPHausg9N1TRkvDBZ/view?usp=sharing"
+            href="https://drive.google.com/file/d/1706XGX278fWazY9RKDWsjRDsfolJQZXz/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             variant="ghost"
