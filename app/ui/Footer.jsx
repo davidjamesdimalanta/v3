@@ -53,7 +53,7 @@ export default function Footer() {
   return (
     <footer className="px-4 md:px-5 pb-4 md:pb-5 w-full" data-label="site-footer">
       <div
-        className="max-w-[1200px] mx-auto bg-inverse-surface text-inverse-on-surface rounded-[24px] p-8 flex flex-col gutter-md"
+        className="max-w-[1200px] mx-auto bg-(--schemes-on-surface-variant) text-inverse-on-surface rounded-[24px] p-8 flex flex-col gutter-md"
       >
         {/* Top row: brand + tagline (left) · CONNECT links (right) */}
         <div className="flex flex-col md:flex-row gutter-md md:gutter-md items-start">

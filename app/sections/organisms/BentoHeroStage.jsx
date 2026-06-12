@@ -142,7 +142,7 @@ export default function BentoHeroStage({
   const videoOpacityClass = videoLoaded ? visibleOpacityClass : "opacity-0";
 
   return (
-    <div className="relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 rounded-[24px] p-6 overflow-hidden bg-surface-container-highest">
+    <div className="relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 rounded-[24px] p-4 overflow-hidden bg-surface-container-highest">
       <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
         {imageSrc && (
           <Image

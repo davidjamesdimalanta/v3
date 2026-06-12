@@ -16,7 +16,7 @@ export default function ProjectBento({ project, priority = false, animate = true
 
   return (
     <div
-      className={`flex flex-col md:flex-row gutter-sm md:h-[600px] w-full fade-up-hidden ${animate ? "fade-up-visible" : ""}`}
+      className={`flex flex-col md:flex-row gutter-md md:h-[600px] w-full fade-up-hidden ${animate ? "fade-up-visible" : ""}`}
       style={{ transitionDuration: prefersReducedMotion ? "0s" : "0.4s" }}
     >
       <BentoHeroStage
