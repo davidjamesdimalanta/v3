@@ -4,12 +4,17 @@ import SiteShell from "./ui/SiteShell";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "@/app/ui/sonner"
+import { buildSocialMetadata, SITE_URL } from "@/app/shared-metadata"
 
+const social = buildSocialMetadata({
+  title: "David Dimalanta",
+  description: "Toronto-based Product Designer",
+});
 
 export const metadata = {
   title: "David Dimalanta",
   description: "Toronto-based Product Designer specializing in product design, UX, and UI. Based in Toronto, Canada. Previously at iHub, Socratic, and Goable.",
-  metadataBase: new URL('https://daviddim.ca'),
+  metadataBase: new URL(SITE_URL),
   keywords: [
     "David Dimalanta",
     "product designer",
@@ -26,28 +31,8 @@ export const metadata = {
     "Figma",
   ],
   authors: [{ name: "David Dimalanta", url: "https://daviddim.ca" }],
-  openGraph: {
-    title: "David Dimalanta",
-    description: "Toronto-based Product Designer",
-    url: 'https://daviddim.ca',
-    siteName: 'David Dimalanta — Toronto-based Product Designer',
-    images: [
-      {
-        url: '/assets/images/web-preview/preview_.png',
-        width: 1200,
-        height: 630,
-        alt: 'David Dimalanta Portfolio Preview',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "David Dimalanta",
-    description: "Toronto-based Product Designer",
-    images: ['/assets/images/web-preview/preview_.png'],
-  },
+  openGraph: social.openGraph,
+  twitter: social.twitter,
   icons: {
     icon: [
       { url: '/assets/icon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },

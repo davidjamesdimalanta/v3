@@ -4,6 +4,7 @@ import ProjectCaseStudyPage from "../_components/ProjectCaseStudyPage";
 import { CaseStudyMdxProvider } from "../_components/CaseStudyMdxComponents";
 import { getAllCaseStudySummaries, getCaseStudyBySlug } from "../_lib/caseStudies";
 import { renderCaseStudyFilesDynamicallyInDevelopment } from "../_lib/devRendering";
+import { buildSocialMetadata } from "@/app/shared-metadata";
 
 export function generateStaticParams() {
   return getAllCaseStudySummaries().map((project) => ({
@@ -18,20 +19,22 @@ export async function generateMetadata({ params }) {
   const caseStudy = getCaseStudyBySlug(slug);
 
   if (!caseStudy) {
+    const title = "Project Case Study | David Dimalanta";
+    const description = "Detailed case study showcasing design process, challenges, and outcomes";
     return {
-      title: "Project Case Study | David Dimalanta",
-      description: "Detailed case study showcasing design process, challenges, and outcomes",
+      title,
+      description,
+      ...buildSocialMetadata({ title, description, path: '/project' }),
     };
   }
 
+  const title = `${caseStudy.name} | David Dimalanta`;
+  const description = caseStudy.description[0];
+
   return {
-    title: `${caseStudy.name} | David Dimalanta`,
-    description: caseStudy.description[0],
-    openGraph: {
-      title: `${caseStudy.name} | David Dimalanta`,
-      description: caseStudy.description[0],
-      type: "website",
-    },
+    title,
+    description,
+    ...buildSocialMetadata({ title, description, path: `/project/${slug}` }),
   };
 }
 

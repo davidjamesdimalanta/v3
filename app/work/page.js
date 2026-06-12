@@ -1,10 +1,16 @@
 import WorkGrid from "../sections/WorkGrid";
 import { getAllCaseStudySummaries } from "../project/_lib/caseStudies";
 import { renderCaseStudyFilesDynamicallyInDevelopment } from "../project/_lib/devRendering";
+import { buildSocialMetadata } from "@/app/shared-metadata";
 
 export const metadata = {
   title: "Work — David Dimalanta",
   description: "Selected projects by David Dimalanta — product design, agentic workflows, and web development.",
+  ...buildSocialMetadata({
+    title: "Work — David Dimalanta",
+    description: "Selected projects by David Dimalanta — product design, agentic workflows, and web development.",
+    path: '/work',
+  }),
 };
 
 export default async function WorkPage() {

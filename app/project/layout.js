@@ -1,30 +1,14 @@
+import { buildSocialMetadata, SITE_URL } from "@/app/shared-metadata";
+
 export async function generateMetadata({ params }) {
+  const title = 'Project Case Study | David Dimalanta';
+  const description = 'Detailed case study showcasing design process, challenges, and outcomes';
+
   return {
-    title: 'Project Case Study | David Dimalanta',
-    description: 'Detailed case study showcasing design process, challenges, and outcomes',
-    metadataBase: new URL('https://daviddim.ca'),
-    openGraph: {
-      title: 'Project Case Study | David Dimalanta',
-      description: 'Detailed case study showcasing design process, challenges, and outcomes',
-      url: 'https://daviddim.ca/project',
-      siteName: 'David Dimalanta — Toronto-based Product Designer',
-      images: [
-        {
-          url: '/assets/images/web-preview/preview_.png',
-          width: 1200,
-          height: 630,
-          alt: 'Project Case Study Preview',
-        },
-      ],
-      locale: 'en_US',
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Project Case Study | David Dimalanta',
-      description: 'Detailed case study showcasing design process, challenges, and outcomes',
-      images: ['/assets/images/web-preview/preview_.png'],
-    },
+    title,
+    description,
+    metadataBase: new URL(SITE_URL),
+    ...buildSocialMetadata({ title, description, path: '/project' }),
   };
 }
 
