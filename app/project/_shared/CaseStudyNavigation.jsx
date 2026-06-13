@@ -119,17 +119,18 @@ export default function CaseStudyNavigation({ sections = [] }) {
   if (sections.length === 0) return null;
 
   return (
-    <nav aria-label="Case study sections" className="sticky top-0 z-60 w-full border-b border-(--schemes-outline-variant) hidden lg:block" style={{ backgroundColor: 'color-mix(in oklch, var(--schemes-surface) 72%, transparent)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
-      <div className="mx-auto px-4 md:px-8 py-4">
-        <ul className="flex flex-wrap justify-center items-center gutter-base">
+    <nav aria-label="Case study sections" className="sticky top-0 z-60 hidden w-full border-b border-(--schemes-outline-variant) px-4 py-4 md:px-5 lg:block" style={{ backgroundColor: 'color-mix(in oklch, var(--schemes-surface) 72%, transparent)', backdropFilter: 'saturate(180%) blur(20px)', WebkitBackdropFilter: 'saturate(180%) blur(20px)' }}>
+      <div className="mx-auto w-full max-w-[1200px]">
+        <ul className="flex w-full items-center justify-between">
           {sections.map(({ id, heading }) => (
-            <li key={id}>
+            <li key={id} className="w-hug">
               <a
                 href={`#${id}`}
                 onClick={(event) => handleNavigationClick(event, id)}
                 onMouseEnter={playButtonHover}
                 aria-current={activeSection === id ? "location" : undefined}
                 className={`
+                  inline-flex w-hug whitespace-nowrap
                   text-button uppercase tracking-wider
                   transition-all duration-300 ease-in-out
                   hover:bd-text cursor-pointer

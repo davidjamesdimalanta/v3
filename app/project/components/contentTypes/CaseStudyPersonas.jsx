@@ -123,7 +123,7 @@ function PersonaCard({ persona }) {
         <HoverCardTrigger asChild>
           <button
             type="button"
-            className="cursor-pointer appearance-none border-0 bg-transparent p-0 [font:inherit] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--schemes-primary)"
+            className="cursor-pointer appearance-none border-0 bg-transparent p-0 [font:inherit] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--schemes-primary)"
             aria-label={`Learn more about ${persona.name}`}
           >
             {avatar}
@@ -148,7 +148,7 @@ function PersonaCard({ persona }) {
         <button
           ref={triggerRef}
           type="button"
-          className="cursor-pointer appearance-none border-0 bg-transparent p-0 [font:inherit] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--schemes-primary)"
+          className="cursor-pointer appearance-none border-0 bg-transparent p-0 [font:inherit] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-(--schemes-primary)"
           aria-label={`Learn more about ${persona.name}`}
         >
           {avatar}

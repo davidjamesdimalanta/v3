@@ -23,6 +23,7 @@ export default function ProjectBento({ project, priority = false, animate = true
         media={media}
         fallbackThumbnail={fallbackThumbnail}
         title={project.name}
+        href={`/project/${project.slug}`}
         activeIndex={safeActiveIndex}
         priority={priority}
         prefersReducedMotion={prefersReducedMotion}

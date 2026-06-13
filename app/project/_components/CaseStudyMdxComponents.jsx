@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import CaseStudyTextBlock from "../components/contentTypes/CaseStudyTextBlock";
 import CaseStudyMediaBlock from "../components/contentTypes/CaseStudyMediaBlock";
+import CaseStudyMorphingMediaBlock from "../components/contentTypes/CaseStudyMorphingMediaBlock";
 import { CaseStudySectionBlock, CaseStudySectionBlockFixed } from "../components/contentTypes/CaseStudySectionBlock";
 import CaseStudyHighlightsBlock from "../components/contentTypes/CaseStudyHighlightsBlock";
 import CaseStudyPersonas from "../components/contentTypes/CaseStudyPersonas";
@@ -13,6 +14,7 @@ import ParticipantDemographics from "../components/contentTypes/ParticipantDemog
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 
 const CaseStudyMdxContext = createContext(null);
+const CaseMediaDialogContext = createContext(false);
 
 const COMPONENT_REGISTRY = {
   ParticipantDemographics,
@@ -179,12 +181,15 @@ export function CaseMedia({
   first,
   isFirstVideo,
   priority,
+  enableDialog = false,
 }) {
   const { caseStudy } = useCaseStudyMdx();
+  const enableDialogFromContext = useContext(CaseMediaDialogContext);
   const media = asset ? caseStudy.assets[asset] || {} : {};
+  const MediaComponent = enableDialog || enableDialogFromContext ? CaseStudyMorphingMediaBlock : CaseStudyMediaBlock;
 
   return (
-    <CaseStudyMediaBlock
+    <MediaComponent
       {...media}
       type={type || media.type}
       src={src || media.src}
@@ -224,7 +229,9 @@ export function CaseScroll({
       dark={asBoolean(dark) || block.dark}
       className={className}
     >
-      {children}
+      <CaseMediaDialogContext.Provider value={true}>
+        {children}
+      </CaseMediaDialogContext.Provider>
     </CaseStudySectionBlock>
   );
 
@@ -242,15 +249,24 @@ export function CaseFixed({
 }) {
   const { caseStudy } = useCaseStudyMdx();
   const block = caseStudy.fixedBlocks[blockKey] || {};
+  const childNodes = React.Children.toArray(children).filter((child) => {
+    return typeof child !== "string" || child.trim().length > 0;
+  });
+  const mediaChildren = childNodes.filter((child) => {
+    return React.isValidElement(child) && (child.props?.asset || child.type === CaseMedia || child.type?.name === "CaseMedia");
+  });
+  const textChildren = childNodes.filter((child) => !mediaChildren.includes(child));
   const content = (
     <CaseStudySectionBlockFixed
       sectionHeading={sectionHeading || block.sectionHeading}
       title={title || block.title}
-      descriptionNode={<RichMarkdown value={block.description} />}
+      descriptionNode={textChildren.length > 0 ? <>{textChildren}</> : <RichMarkdown value={block.description} />}
       dark={asBoolean(dark) || block.dark}
       className={className}
     >
-      {children}
+      <CaseMediaDialogContext.Provider value={true}>
+        {mediaChildren.length > 0 ? mediaChildren : children}
+      </CaseMediaDialogContext.Provider>
     </CaseStudySectionBlockFixed>
   );
 

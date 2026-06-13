@@ -430,8 +430,8 @@ export function validateCaseStudy(caseStudy) {
 
     if (node.name === "CaseFixed") {
       const ref = getMdxReference(node, ["block"]);
-      if (!ref || !caseStudy.fixedBlocks[ref]) {
-        issues.push(`CaseFixed is missing a valid block: ${ref || "(none)"}`);
+      if (ref && !caseStudy.fixedBlocks[ref]) {
+        issues.push(`CaseFixed is missing a valid block: ${ref}`);
       }
     }
 

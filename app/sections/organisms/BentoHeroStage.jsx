@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { attachTo, detachFrom, initHls, registerFeaturedSrc } from "../../ui/lib/hlsManager";
 
 const isMuxHLS = (url) =>
@@ -19,6 +20,7 @@ export default function BentoHeroStage({
   media,
   fallbackThumbnail,
   title,
+  href,
   activeIndex = 0,
   priority = false,
   prefersReducedMotion = false,
@@ -140,9 +142,13 @@ export default function BentoHeroStage({
   const visibleOpacityClass = prefersReducedMotion || mediaVisibility.visible ? "opacity-100" : "opacity-0";
   const posterOpacityClass = isVideo && videoLoaded ? "opacity-0" : visibleOpacityClass;
   const videoOpacityClass = videoLoaded ? visibleOpacityClass : "opacity-0";
+  const Container = href ? Link : "div";
 
   return (
-    <div className="relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 rounded-[24px] p-4 overflow-hidden bg-surface-container-highest">
+    <Container
+      {...(href ? { href, "aria-label": `View ${title} case study` } : {})}
+      className={`relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 rounded-[24px] p-4 overflow-hidden bg-surface-container-highest ${href ? "cursor-pointer focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2" : ""}`}
+    >
       <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
         {imageSrc && (
           <Image
@@ -195,6 +201,6 @@ export default function BentoHeroStage({
           {caption}
         </p>
       )}
-    </div>
+    </Container>
   );
 }

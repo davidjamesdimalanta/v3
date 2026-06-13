@@ -736,6 +736,7 @@ body {
 [data-theme="light-hc"],
 [data-theme="light-mc"] {
     --schemes-primary: var(--primary-800);
+    --schemes-primary-hover: var(--primary-900);
     --schemes-surface-tint: var(--primary-800);
     --schemes-on-primary: var(--primary-50);
     --schemes-primary-container: var(--primary-200);
@@ -796,6 +797,7 @@ body {
 [data-theme="dark-mc"],
 .dark {
     --schemes-primary: var(--primary-100);
+    --schemes-primary-hover: var(--primary-200);
     --schemes-surface-tint: var(--primary-100);
     --schemes-on-primary: var(--primary-900);
     --schemes-primary-container: var(--primary-800);
@@ -854,6 +856,7 @@ body {
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
         --schemes-primary: var(--primary-100);
+        --schemes-primary-hover: var(--primary-200);
         --schemes-surface-tint: var(--primary-100);
         --schemes-on-primary: var(--primary-900);
         --schemes-primary-container: var(--primary-800);
@@ -1102,11 +1105,11 @@ body {
     background-color: var(--schemes-primary);
     color: var(--schemes-on-primary);
     &:hover {
-        background-color: var(--schemes-on-primary-container);
+        background-color: var(--schemes-primary-hover, var(--schemes-on-primary-container));
     }
     &:active,
     &[aria-pressed="true"] {
-        background-color: var(--schemes-on-primary-container);
+        background-color: var(--schemes-primary-hover, var(--schemes-on-primary-container));
         opacity: 0.85;
     }
     &:disabled,

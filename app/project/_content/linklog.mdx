@@ -123,7 +123,7 @@ nav:
   - id: discovery
     heading: Discovery
   - id: decision
-    heading: The Decision
+    heading: Key Decision
   - id: journey-one
     heading: Link Worker
   - id: co-design
@@ -196,108 +196,118 @@ personas:
     name: Brenda, Link Worker
     avatarLabel: Link Worker
     traits:
-      - Manages follow-up across **hundreds of clients** with local spreadsheets, paper notes, and memory
-      - Needs to know **who needs a call next** without rebuilding the whole client list
-      - Loses days at year-end reconstructing what happened across the programme
-    designConnection: Brenda shaped the Priority Call List and the read-only CTT review; the product had to surface the next best action without turning relationship work into another reporting burden.
+      - Carries **hundreds of client relationships** across spreadsheets, paper notes, and memory, one conversation at a time
+      - Judges a good day by **who showed up and who is doing better**, while the logging comes last
+      - Needs to know **who to call next** without rebuilding the whole client list
+      - Loses days at year-end reconstructing the program, because capturing a record in the moment competes with the client in front of her
+    designConnection: For Brenda, LinkLog had to make the next call obvious and quick enough to fit between clients, so that structure never turned relationship work into paperwork.
   - id: oacao-admin
     name: OACAO Administrator
     avatarLabel: OACAO Admin
     traits:
-      - Needs aggregate outcomes across SALCs to support **funding renewal conversations**
-      - Cannot rely on raw local files when every centre tracks work differently
-      - Needs programme-wide visibility without exposing client identifiers across centres
-    designConnection: This role forced the service to split into two permission scopes; Link Workers manage identifiable client work locally, while OACAO reviews de-identified outcomes across the programme.
+      - Aggregates outcomes across every SALC to prove program impact in **funding renewal conversations**
+      - Cannot compare centers when each one tracks its work a different way
+      - Works in **funding cycles**, where a missing or mismatched report becomes a blind spot months later
+      - Needs program-wide visibility without exposing client identifiers across centers
+    designConnection: This role pulled the service the opposite way from Brenda as the record she enters in seconds is the row OACAO reads back as evidence. Reconciling those two moments split the service into two permission scopes.
 fixedBlocks:
   import-onramp:
     sectionHeading: Co-Design
-    title: The fix a worker asked for out loud.
+    title: Not all spreadsheets are made equally.
     description: |
       > "My sheet doesn't look anything like that. Would it still take mine?"
 
-      A Link Worker asked me that in co-design, looking at the importer I'd built. It only worked if her spreadsheet already matched the one shape I had assumed.
+      A Link Worker asked me that in co-design, looking at the importer we built. It only worked if her spreadsheet already matched the one shape I had assumed.
 
-      **So I tore that assumption out.** LinkLog now accepts any CSV or XLSX structure and maps it on import, so workers upload the sheet they already keep and the system adapts to them.
+      **So we made it normalize sheets**. After our co-design, we wrote a Python script that formatted any CSV or XLSX structure and maps it on import, so workers upload the sheet they already keep and the system adapts to them.
 ---
 
-<CaseText id="problem" className="pt-32" sectionHeading="Overview" title="6 days, 10 centres, a product you can log into.">
-My team took a year of by-hand reporting and shipped a hosted, working product in a 6-day build sprint. You can open it in a browser and use it, instead of clicking through a Figma file.
+<CaseText id="problem" className="pt-32" sectionHeading="Overview" title="What is Social Prescribing?">
+**Social prescribing** is a structured way to route people from a clinical encounter to non-clinical community supports such as 
+housing, fitness, food security, and social connection. 
 
-I ran both tracks myself: the service design and the code. I co-designed with the people who live the problem, Link Workers at Seniors Active Living Centres (SALCs), and with staff at the Older Adult Centres' Association of Ontario (OACAO), the provincial body that funds those centres and collects their year-end data.
+A **Link Worker** is the human liason connecting people to the community supports, often working in a SALC.
 
-The part I'm proud of is the feat behind the screens: a messy service problem moving from discovery to co-design to a hosted build in one sprint, by pairing service design with AI-assisted building.
+A **SALC** is a community centre that provides social prescribing services.
+
+**OACAO** is the provincial body that funds the centres and collects their year-end data.
+
 </CaseText>
 
-<CaseText sectionHeading="The Problem" title="10 out of 10 centres compile the year-end report by hand.">
-Every SALC I interviewed told me the same thing: reporting to OACAO once a year is a paper chase that eats days. Workers cross-reference paper binders, Excel sheets, and SurveyMonkey forms to reconstruct a year they already lived.
+<CaseText sectionHeading="The Problem" title="Every SALC did their year-end report by hand.">
+Every year, reporting to OACAO is a paper chase that takes days. Link Workers have to cross-reference paper binders, Excel sheets, and SurveyMonkey forms to reconstruct a year of work.
 
-That time comes straight out of <Def definition="social-prescribing">Social Prescribing</Def>: the calls, the check-ins, the trust-building that are the actual job. Proving the work happened squeezes out the work itself.
+Though time consuming, the report is a requirement for OACAO to fund the centres.
 </CaseText>
 
-<CaseText className="pb-32" sectionHeading="The Challenge">
-How do I give Link Workers more of the relational time that defines their role, **while making OACAO's funding case easier to prove at the same time?**
+<CaseText sectionHeading="The Challenge">
+How do we reduce the time spent on the report, **while making OACAO's funding case easier to prove at the same time?**
 </CaseText>
 
 <CaseGroup id="discovery" variant="discovery">
 <CaseText sectionHeading="Discovery" title="Every centre tracks differently.">
-I spoke with 10 SALCs over the winter. Each had its own way of managing clients, but OACAO's year-end report asked for data they didn't keep in one place, or didn't keep at all.
+Interviewing 10 SALCs, each described a different way of managing clients, but OACAO's year-end report asked for data they didn't keep in one place, or didn't keep at all.
 
 > "I don't know if you know all about the reporting process, but it's, it's like a three-day event to try and do the final report."
 
-So the goal got specific: cut the cost of reporting without making everyday client work more bureaucratic.
 </CaseText>
 
 <CaseText sectionHeading="Constraint" title="The backstage was a privacy problem.">
-I was handling personal health information, which in Ontario means two laws: PHIPA (the Personal Health Information Protection Act) and PIPEDA (Canada's federal privacy law). That set a hard line: useful reporting was fine, but OACAO could never become the owner of identifiable client records.
+We were handling personal health information, which in Ontario means two laws: **PHIPA** (the Personal Health Information Protection Act) and **PIPEDA** (Canada's federal privacy law). 
 
-That constraint shaped the architecture later, and it shaped the service now. The centres keep their clients' identities; OACAO only ever sees numbers.
+This meant that centres keep their clients' identities while OACAO only ever sees numbers.
 </CaseText>
 </CaseGroup>
 
 <CaseGroup id="decision" variant="discovery">
-<CaseText sectionHeading="The Key Decision" title="Two roles, two permission scopes.">
-Here is the service-level call everything else hangs on. LinkLog is really two products with one database between them. Link Workers hold identifiable client data locally and do the follow-up. OACAO sees only de-identified aggregates and does the funding math. Neither one sees the other's view.
+<CaseFixed sectionHeading="The Key Decision" title="Choosing which part of the service to improve">
+We approached our solution by looking at the service from end-to-end, with all the frontstage and backstage dependancies in mind.
 
-The second decision fell out of the first. If the directory already knows a client's referrals, attendance, and outcomes, the year-end report has no business asking for any of it again. The report became a view of data the system already had, rather than a form to refill.
+Having this wholistic view gave us a better understanding of where Link Workers were hurting the most, and where a digital solution would be most impactful.
 
-These are service decisions, the kind you make before you design a single screen. The execution came after.
-</CaseText>
+For Link Workers, LinkLog helped the most when it **standardized their follow up and reporting workflows**. 
+
+For OACAO, it was most rewarding **to be on the same platform as Link Workers**, and to **get all reports from every SALC in one place**.
+
 <CaseMedia
   size="large"
   aspectRatio="video"
-  caption="The future-state service blueprint, end to end. The two permission scopes are baked into the backstage, not bolted on at the reporting step."
+  caption="The future-state service blueprint, end to end."
   className="pt-0!"
   asset="serviceBlueprint"
 />
+</CaseFixed>
 </CaseGroup>
 
 <CasePersonas
   id="personas"
-  sectionHeading="Who I Designed For"
-  title="One needs context. The other needs evidence."
-  text="LinkLog only works if it respects the gap between the person doing the follow-up and the organization proving the programme's value. One needs client-level context to act. The other needs aggregate evidence to fund."
+  sectionHeading="Who We Designed For"
+  title="Depth versus Breadth"
+  text="In order to understand where a shared platform could work, we first had to see how differently each side measures a good day."
   spacingClassName="pt-8 pb-64"
 />
 
 <CaseGroup id="journey-one" variant="surfaceStack">
 <CaseGroup className="flex flex-col gutter-md">
-  <CaseText sectionHeading="Journey One: Link Worker" title="Who do I call next?">
-  Brenda manages hundreds of clients with local spreadsheets, paper notes, and memory. Her hardest daily question is short to ask and slow to answer: who needs a call today, without re-reading the whole list?
+  <CaseFixed sectionHeading="Journey One: Link Worker" title="Who do I call next?">
+  Brenda manages hundreds of clients with local spreadsheets, paper notes, and memory. 
+  
+  Her hardest daily question is short to ask and slow to answer: who needs a call today, without re-reading the whole list?
 
-  Co-design pointed me at a sort order rather than a smarter search. The dashboard externalizes the judgment that used to live in her head: overdue calls, upcoming check-ins, and unfinished outcomes rise to the top, above the alphabet.
-  </CaseText>
+  For Brenda, the dashboard is organized in order of whats important to her: overdue calls, upcoming check-ins, and unfinished outcomes. 
+  
   <CaseMedia
     size="large"
     className="pt-0!"
     first
     asset="priorityCallListInitial"
   />
+  </CaseFixed>
 </CaseGroup>
 
 <CaseGroup className="flex flex-col gutter-md">
-  <CaseText title="From five scattered sheets to one directory.">
-  The first thing I built was the Client Directory: a single, normalized home for the client data that used to live in five files. The follow-up queue sits on top of it, so the next action is always in view instead of buried in a tab.
-  </CaseText>
+  <CaseFixed title="From five scattered sheets to one directory.">
+  The client directory acts as a single, normalized home for the client data that used to live in five files.
   <CaseMedia
     size="large"
     aspectRatio="video"
@@ -305,14 +315,15 @@ These are service decisions, the kind you make before you design a single screen
     className="pt-0!"
     asset="clientDirectory"
   />
+  </CaseFixed>
 </CaseGroup>
 
 <CaseGroup className="flex flex-col gutter-md">
-  <CaseText title="The year-end report fills itself in.">
-  The Common Tracking Tool (CTT) is OACAO's year-end form. It used to be a blank annual artifact Brenda rebuilt from scratch. Now it generates itself from the directory she already keeps current: structured fields pull forward automatically, and she's left to write only the narrative pieces a human still owns.
+  <CaseFixed title="The year-end report fills itself in.">
+  The Common Tracking Tool (CTT) is OACAO's year-end form. It used to be a blank annual artifact Brenda rebuilt from scratch. 
+  
+  Now it generates itself from the directory she already keeps current: structured fields pull forward automatically, only writing in text-fields where elaboration is needed.
 
-  That is the whole payoff of the two upstream decisions. A three-day reconstruction becomes a review she can finish in minutes.
-  </CaseText>
   <CaseMedia
     size="large"
     aspectRatio="video"
@@ -320,6 +331,7 @@ These are service decisions, the kind you make before you design a single screen
     className="pt-0!"
     asset="cttReport"
   />
+  </CaseFixed>
 </CaseGroup>
 </CaseGroup>
 
@@ -336,11 +348,10 @@ These are service decisions, the kind you make before you design a single screen
 
 <CaseGroup id="journey-two" variant="surfaceStack">
 <CaseGroup className="flex flex-col gutter-md">
-  <CaseText sectionHeading="Journey Two: OACAO" title="A different product for a different user.">
-  OACAO needs proof, and only proof. Its view is the inverse of Brenda's: every identifier stripped out, every outcome rolled up across centres.
+  <CaseFixed sectionHeading="Journey Two: OACAO" title="Aggregating a year of work across a hundred SALCs">
+  Designing a dashboard-view of aggregate data also meant identifying what pieces of data to aggregate, and how to present them visually.
 
-  The problem they described was reconciliation. When every SALC tracks work differently, building a province-wide picture means chasing forms and merging formats by hand. The dashboard does that consolidation automatically and exports clean CSV for funding renewals.
-  </CaseText>
+  Through co-designs, we learned that they also needed individual SALC data, **so we included filters** to allow OACAO to see strengths and weakness of programming at the SALC level.
   <CaseMedia
     size="large"
     aspectRatio="video"
@@ -349,19 +360,18 @@ These are service decisions, the kind you make before you design a single screen
     first
     asset="oacaoDashboard"
   />
+  </CaseFixed>
 </CaseGroup>
 </CaseGroup>
 
 <CaseGroup id="implementation" variant="discovery">
-<CaseText sectionHeading="The Build" title="A product you can log into, in 6 days.">
-The stack is deliberately boring where it has to be trustworthy. Django and PostgreSQL on the back end, role-based access so the two scopes stay separated, hosted on AWS in **ca-central-1** so the data physically stays in Canada, with safe-harbour encryption on the fields that need it. That is what PHIPA and PIPEDA actually demand, and it is why I built a relational schema rather than a spreadsheet with extra steps.
+<CaseFixed sectionHeading="The Build" title="Building the damn thing">
+Built on Django and PostgreSQL on the back end, role-based access to keep the two scopes separated, hosted on AWS in ca-central-1 so the data stays in Canada, with field-level encryption.
 
-AI is how a 4-person team shipped this in a week, so let me be precise about who did what. Codex wrote most of the backend, generated test suites, and pushed live images to AWS through Terraform. Claude Code reviewed the pull requests Codex opened and turned Figma frames into front-end code. Gemini Deep Research cross-referenced our implementation choices against the actual text of PHIPA and PIPEDA, so the privacy decisions were grounded in policy instead of guesswork.
+We used a lot of AI, but in targeted and meaningful ways. Codex wrote most of the backend, generated tests, and deployed to AWS through Terraform, while Claude Code reviewed its pull requests and turned Figma frames into front-end code. Gemini was used for deep research to check our choices against PHIPA and PIPEDA, keeping our platform compliant and informed.
 
-None of this was hands-off. The importer is the clearest case: the fast path Codex generated assumed one rigid spreadsheet schema, co-design told me that was wrong, so I overrode it and rebuilt import to accept any structure. AI moved fast; the user-protecting calls stayed mine.
+We intended to ship a working platform instead of a Figma prototype to showcase how our solution made real impact, doing so through scenario walkthroughs as Brenda and the OACAO.
 
-I shipped a running product over a blueprint on purpose, because a hosted demo answers questions a slide can't. You can log in as a Link Worker, import a real sheet, generate a real report, then switch to the OACAO view and watch the same data come back de-identified. The two permission scopes stop being a claim and become something you can test.
-</CaseText>
 {/* TODO (optional): a dedicated architecture or database-schema diagram would strengthen this section further. None exists as a clean standalone asset yet; the multi-agent build screenshot below is the closest build-specific media available. */}
 <CaseMedia
   size="large"
@@ -370,24 +380,21 @@ I shipped a running product over a blueprint on purpose, because a hosted demo a
   className="pt-0!"
   asset="buildMultiAgent"
 />
+</CaseFixed>
 </CaseGroup>
 
-<CaseText id="outcomes" sectionHeading="Outcomes" title="Where it actually stands.">
-I'll be straight about the status, because the honest version is still a good one.
+<CaseText id="outcomes" sectionHeading="Outcomes" title="Currently in cosideration to build">
+Of all the demos presented (in class), ours was deemed most impactful, ready to implement, and will be piloted in the next fiscal year with 3 SALCs.
 
-LinkLog runs as a hosted demo on AWS, and I presented it as a working product at the final review, not as mockups. OACAO took part in the co-design and came away interested in a pilot. No pilot has run yet; that is the next step, not a result I get to claim.
 
-I also haven't measured impact, because there is nothing live to measure. What I designed toward is concrete: turning the year-end report from a multi-day reconstruction into a minutes-long review, and giving OACAO one consolidated, de-identified view in place of a SurveyMonkey scavenger hunt. The metrics that would prove it, time saved per worker and on-time CTT completion rate, are specified and waiting on a pilot.
 </CaseText>
 
-<CaseText id="closing" sectionHeading="Takeaways" title="What I'm taking from this.">
-<CaseThought title="I can move fast with AI without outsourcing judgment.">
-  The importer is the proof. Codex generated a clean, fast import flow that quietly assumed one spreadsheet schema, and a Link Worker in co-design asked whether her differently-shaped sheet would even load. The interviews had already told me it wouldn't, so I overrode the AI's default and rebuilt import to accept any structure.
-
-  That is why I trust myself with these tools now. They write the code and move the week along; I keep the calls that protect the people using it. The judgment transfers to any team trying to ship real software fast without letting the model design the product.
+<CaseText id="closing" sectionHeading="Takeaways">
+<CaseThought title="The service design mindset">
+Learning to look at problems more wholistically helps me better surface the intent and purpose behind future design desicions. I look forward to taking this mindset to future problems i tackle.
 </CaseThought>
 
-<CaseThought title="Shipping a real product changed how the work landed.">
-  I could have stopped at a polished prototype. Building a hosted product meant OACAO could log in and react to something real, and that is what turned a class project into a pilot conversation. The honest scorecard: a working product in 6 days, genuine OACAO interest, and no measured impact yet because the pilot hasn't run. I'd rather state that plainly than dress it up.
+<CaseThought title="AI as a conversation starter">
+With only six days, we could have stopped at a prototype, however building it with AI meant OACAO could log in and react to something real which led to the conversation of piloting at future SALCs. With restraint and careful execution, I plan on building more, and showing how my design solutions could be implemented in real settings.
 </CaseThought>
 </CaseText>

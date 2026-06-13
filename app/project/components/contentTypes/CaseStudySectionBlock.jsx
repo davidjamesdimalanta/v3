@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import CaseStudyMediaBlock from "./CaseStudyMediaBlock";
+import CaseStudyMorphingMediaBlock from "./CaseStudyMorphingMediaBlock";
 import { renderDescription } from "./renderDescription";
 
 /**
@@ -44,6 +45,8 @@ export function CaseStudySectionBlock({
 
   const childrenArray = React.Children.toArray(children);
   const hasTextStates = textStates && textStates.length > 0;
+  const hasMorphingMedia = media?.src && (media.type ?? "image") === "image";
+  const mediaDialogCaption = media?.caption ?? mediaCaption;
 
   const headingColor = dark ? "text-(--text-lightcolor-60)" : "text-(--text-color-60)";
   const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
@@ -110,7 +113,14 @@ export function CaseStudySectionBlock({
   const currentState = hasTextStates ? textStates[activeIndex] ?? textStates[0] : null;
 
   const rightColumnContent = (() => {
-    if (!children) return media?.src ? <CaseStudyMediaBlock {...media} /> : null;
+    if (!children) {
+      if (!media?.src) return null;
+      return hasMorphingMedia ? (
+        <CaseStudyMorphingMediaBlock {...media} caption={mediaDialogCaption} />
+      ) : (
+        <CaseStudyMediaBlock {...media} />
+      );
+    }
     if (!hasTextStates) return children;
     return childrenArray.map((child, i) => {
       const state = textStates[i] ?? textStates[0];
@@ -240,7 +250,7 @@ export function CaseStudySectionBlock({
             </p>
           )}
           {rightColumnContent}
-          {mediaCaption && (
+          {mediaCaption && !hasMorphingMedia && (
             <p className={`text-small text-400 ${headingColor} text-center`}>
               {mediaCaption}
             </p>
@@ -275,11 +285,13 @@ export function CaseStudySectionBlockFixed({
   const titleColor   = dark ? "text-(--text-lightcolor-100)" : "text-(--text-color-100)";
   const descColor    = dark ? "text-(--schemes-inverse-on-surface)" : "text-(--schemes-on-surface)";
   const bgClass      = dark ? "bg-(--schemes-inverse-surface)" : "";
+  const hasMorphingMedia = media?.src && (media.type ?? "image") === "image";
+  const mediaDialogCaption = media?.caption ?? mediaCaption;
 
   return (
     <div className={`flex flex-col lg:flex-row lg:items-center lg:gutter-lg px-4 xl:px-0 w-full max-w-[1200px] mx-auto ${bgClass} ${className}`}>
       {/* LEFT — scrolling text column (no sticky) */}
-      <aside className="flex-1 lg:basis-[720px] flex flex-col gutter-sm py-8">
+      <aside className="flex-1 lg:basis-[720px] flex flex-col gutter-sm">
         {(sectionHeading || title) && (
           <div className="flex flex-col gutter-xs">
             {sectionHeading && (
@@ -315,9 +327,13 @@ export function CaseStudySectionBlockFixed({
             </p>
           )}
           {children ? children : media?.src && (
-            <CaseStudyMediaBlock {...media} />
+            hasMorphingMedia ? (
+              <CaseStudyMorphingMediaBlock {...media} caption={mediaDialogCaption} />
+            ) : (
+              <CaseStudyMediaBlock {...media} />
+            )
           )}
-          {mediaCaption && (
+          {mediaCaption && !hasMorphingMedia && (
             <p className={`text-small text-400 ${headingColor} text-center`}>
               {mediaCaption}
             </p>

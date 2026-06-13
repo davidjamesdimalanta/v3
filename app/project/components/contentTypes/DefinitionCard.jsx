@@ -184,7 +184,7 @@ export default function DefinitionCard({
           ref={triggerRef}
           aria-label={`Show definition: ${accessibleTriggerLabel}`}
           className={cn(
-            "inline cursor-pointer appearance-none border-0 bg-transparent p-0 pr-[2px] text-left text-inherit text-500 italic underline-offset-2 font-[inherit] text-[length:inherit] leading-[inherit] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--schemes-primary)",
+            "inline cursor-pointer appearance-none border-0 bg-transparent p-0 pr-[2px] text-left text-inherit text-500 italic underline-offset-2 font-[inherit] text-[length:inherit] leading-[inherit] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--schemes-primary)",
             triggerClassName
           )}
           {...triggerProps}
