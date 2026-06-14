@@ -4,7 +4,7 @@ This is David Dimalanta's portfolio site, built with Next.js 16 App Router and J
 
 ## Case Study Editing
 
-Current case-study content lives in `app/project/_content/*.mdx`. To create a new case study, copy `app/project/_template/case-study-template.mdx` into `app/project/_content/{slug}.mdx`, then edit the copied file.
+Current case-study content lives in `content/case-studies/*.mdx`. To create a new case study, copy `content/case-studies/_template/case-study-template.mdx` into `content/case-studies/{slug}.mdx`, then edit the copied file.
 
 Use frontmatter for metadata, reusable media, definitions, personas, and scroll/highlight block data. Use the MDX body for the narrative.
 
@@ -17,9 +17,9 @@ Supported author-facing components include `CaseText`, `CaseMedia`, `CaseScroll`
 - `app/layout.js`: Root layout and global font variable wiring.
 - `app/ui/`: Shared UI components such as navigation, footer, buttons, tags, and wave background.
 - `app/sections/`: Page-level sections used by the main portfolio pages.
-- `app/project/`: Case-study routes, shared layout, components, content, and authoring template.
-- `app/project/_content/`: Published case-study MDX files.
-- `app/project/_template/`: Case-study template and authoring notes.
+- `app/project/`: Case-study routes, shared layout, components, and route helpers.
+- `content/case-studies/`: Published case-study MDX files and authoring notes.
+- `content/case-studies/_template/`: Case-study template.
 - `components/motion-primitives/`: Existing animation primitives used by the site.
 - `public/assets/`: Static images, icons, audio, and video assets.
 
@@ -51,7 +51,7 @@ npm run lint
 
 ## Content Workflow
 
-1. Copy the case-study template into `app/project/_content/{slug}.mdx`.
+1. Copy `content/case-studies/_template/case-study-template.mdx` into `content/case-studies/{slug}.mdx`.
 2. Update frontmatter first: title, summary, dates, roles, media references, definitions, personas, and scroll/highlight data.
 3. Write the narrative in the MDX body using the supported case-study components.
 4. Keep media references accessible and token-based where validation requires it.

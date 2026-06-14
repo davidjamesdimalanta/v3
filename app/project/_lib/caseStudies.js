@@ -10,7 +10,7 @@ import { visit } from "unist-util-visit";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const CONTENT_DIR = path.join(__dirname, "../_content");
+const CONTENT_DIR = path.join(__dirname, "../../../content/case-studies");
 
 const REGISTERED_COMPONENTS = new Set(["ParticipantDemographics"]);
 const ALLOWED_MDX_COMPONENTS = new Set([

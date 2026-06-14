@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }) {
   }
 
   const MdxContent = caseStudy.content && !caseStudy.comingSoon
-    ? (await import(`../_content/${slug}.mdx`)).default
+    ? (await import(`../../../content/case-studies/${slug}.mdx`)).default
     : null;
 
   return (

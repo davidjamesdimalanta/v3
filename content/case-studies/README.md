@@ -1,6 +1,6 @@
 # Case Study Authoring
 
-Create a new case study by copying `case-study-template.mdx` into `app/project/_content/{slug}.mdx`.
+Create a new case study by copying `content/case-studies/_template/case-study-template.mdx` into `content/case-studies/{slug}.mdx`.
 
 Use frontmatter for metadata, reusable media, definitions, personas, and scroll/highlight block data. Use the MDX body for the narrative. Supported components are `CaseText`, `CaseMedia`, `CaseScroll`, `CaseFixed`, `CasePersonas`, `CaseHighlights`, `CaseGroup`, and inline `Def`.
 
