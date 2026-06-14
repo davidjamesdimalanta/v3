@@ -6,6 +6,12 @@
       "sourceType": "github",
       "computedHash": "d37d75f60df4a1e9592544a509e9ca65121b76b1cb5e3847c58fd33cb157d2fc"
     },
+    "improve": {
+      "source": "shadcn/improve",
+      "sourceType": "github",
+      "skillPath": "skills/improve/SKILL.md",
+      "computedHash": "7a0f09dd535fc84391dc63bea826d6aeab985b92423fa4dd93edacb5dfb82524"
+    },
     "oklch-skill": {
       "source": "jakubkrehel/oklch-skill",
       "sourceType": "github",

@@ -24,8 +24,8 @@ export default function ProjectHero({
         {/* LEFT */}
         <div className="flex flex-col gutter-base flex-1 lg:basis-[720px]">
           <div className="flex flex-col gutter-xs">
-            <h1 className="text-h3 md:text-h1 text-400">{name}</h1>
-            <h6 className="text-h6 text-400 text-(--schemes-tertiary)">{title}</h6>
+            <h1 className="t-h3 text-400">{title}</h1>
+            <h6 className="text-h6 text-400 text-(--schemes-tertiary)">{name}</h6>
           </div>
 
           {description.length > 0 && (

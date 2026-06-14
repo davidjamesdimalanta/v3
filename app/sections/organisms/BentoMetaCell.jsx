@@ -7,7 +7,7 @@ export default function BentoMetaCell({ project }) {
   const subtitle = project.tagline || project.description?.[0] || project.details?.type;
   const category = project.featuredCategory || project.details?.type || "Project";
   const cardClassName =
-    "flex flex-col gutter-md h-full md:flex-1 min-h-[260px] py-6 overflow-hidden";
+    "flex flex-col gutter-md h-full md:flex-1 min-h-[260px] pt-0 pb-6 md:py-6 overflow-hidden";
 
   const handleComingSoon = () => {
     toast("Coming soon", {

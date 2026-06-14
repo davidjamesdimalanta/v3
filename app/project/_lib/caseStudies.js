@@ -125,8 +125,7 @@ const caseStudySchema = z
     nextProject: z.string().optional(),
     comingSoon: z.boolean().optional().default(false),
     name: z.string(),
-    title: z.string(),
-    tagline: z.string().optional(),
+    tagline: z.string(),
     links: z.array(linkSchema).default([]),
     coverVideo: z.string().optional(),
     coverVideoHevc: z.string().optional(),
@@ -210,7 +209,7 @@ function readCaseStudyFiles() {
 function toProjectData(data) {
   return {
     name: data.name,
-    title: data.title,
+    title: data.tagline,
     tagline: data.tagline,
     links: data.links,
     coverVideo: data.coverVideo,
@@ -239,7 +238,7 @@ function toSummary(caseStudy) {
     nextProject: caseStudy.nextProject,
     comingSoon: caseStudy.comingSoon,
     name: caseStudy.name,
-    title: caseStudy.title,
+    title: caseStudy.tagline,
     tagline: caseStudy.tagline,
     links: caseStudy.links,
     coverVideo: caseStudy.coverVideo,
