@@ -26,3 +26,19 @@ slug rendered by `app/project/[slug]/page.js`.
   `CaseMedia`, `CaseScroll`, `CaseFixed`, and related components.
 - `projects.js` is a compatibility registry backed by the same case-study
   loader. It should not become a second source of truth.
+
+## Component Boundaries
+
+- `_components/` owns route-level case-study composition, including MDX
+  provider and bridge components.
+- `_shared/` owns shared case-study layout, navigation, and theme context.
+- `components/` owns project renderer components.
+- `components/contentTypes/` owns MDX-facing content blocks.
+- `_lib/` owns the filesystem loader, validation, and development rendering
+  helpers.
+- `projects.js` is a compatibility registry only. Do not add new
+  source-of-truth content here.
+- `content/case-studies` is the author-facing content home after Plan 002. Add
+  case-study source content there, not in component folders.
+- Reusable motion primitives live under root `components/motion-primitives/`.
+  Do not copy them into `app/ui`, `app/sections`, or `app/project`.
