@@ -2,7 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report; do not improvise. When done, update the status row for this plan in `plans/README.md` unless a reviewer dispatched you and told you they maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat 69936b2..HEAD -- app/project README.md`
+> **Drift check (run first)**: `git diff --stat 86476f3..HEAD -- app/project README.md`
 > If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
@@ -12,7 +12,7 @@
 - **Risk**: LOW
 - **Depends on**: `plans/002-content-case-studies-home.md`
 - **Category**: dx
-- **Planned at**: commit `69936b2`, 2026-06-14
+- **Planned at**: commit `86476f3`, 2026-06-14
 
 ## Why This Matters
 
@@ -153,4 +153,3 @@ Stop and report back if:
 ## Maintenance Notes
 
 If project-specific route folders reappear later, reviewers should ask why the dynamic route and MDX slug system are insufficient. Historical ignored docs may still mention old per-project files; do not update ignored backlog docs unless specifically asked.
-
