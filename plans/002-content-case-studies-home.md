@@ -2,7 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report; do not improvise. When done, update the status row for this plan in `plans/README.md` unless a reviewer dispatched you and told you they maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat fb1e25c..HEAD -- README.md app/project/_content app/project/_template app/project/_lib/caseStudies.js app/project/[slug]/page.js`
+> **Drift check (run first)**: `git diff --stat eb5cbbf..HEAD -- README.md app/project/_content app/project/_template app/project/_lib/caseStudies.js app/project/[slug]/page.js`
 > If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
@@ -12,7 +12,7 @@
 - **Risk**: MED
 - **Depends on**: `plans/001-root-readme-content-map.md`
 - **Category**: tech-debt
-- **Planned at**: commit `fb1e25c`, 2026-06-14
+- **Planned at**: commit `eb5cbbf`, 2026-06-14
 
 ## Why This Matters
 
@@ -92,7 +92,6 @@ Note: `npm run lint` currently exits 1 on pre-existing lint errors outside this 
 - Fixing lint errors
 - Moving `mdx-components.js`
 - Moving `app/project/components/**`, `_components/**`, `_shared/**`, or `_lib/**`
-- Staging or committing pre-existing uncommitted case-study/schema edits
 
 ## Git Workflow
 
@@ -111,7 +110,7 @@ git status --short
 git status --short -- README.md app/project/_content app/project/_template app/project/_lib/caseStudies.js 'app/project/[slug]/page.js'
 ```
 
-This checkout may already contain unrelated uncommitted edits outside this plan and content/schema edits inside this plan. Do not revert any of them. Record both command outputs in your final report, preserve in-scope edits during the move, and do not touch out-of-scope dirty files. Because pre-existing user edits are present, do **not** create a commit in this plan unless the reviewer explicitly tells you the worktree is isolated and clean.
+This checkout should be clean at the start of the plan. If unrelated uncommitted edits appear, do not revert them. Record both command outputs in your final report and do not touch out-of-scope dirty files. If the tree is clean and all verification passes, create the plan commit.
 
 **Verify**: both commands exit 0. The full status may show unrelated dirty files; keep them out of your edits.
 
