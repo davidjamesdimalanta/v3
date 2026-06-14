@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# David Dimalanta Portfolio (v3)
 
-## Getting Started
+This is David Dimalanta's portfolio site, built with Next.js 16 App Router and JavaScript. Styling uses Tailwind CSS v4 via PostCSS, with project tokens and custom utilities defined in `app/globals.css`.
 
-First, run the development server:
+## Case Study Editing
+
+Current case-study content lives in `app/project/_content/*.mdx`. To create a new case study, copy `app/project/_template/case-study-template.mdx` into `app/project/_content/{slug}.mdx`, then edit the copied file.
+
+Use frontmatter for metadata, reusable media, definitions, personas, and scroll/highlight block data. Use the MDX body for the narrative.
+
+Supported author-facing components include `CaseText`, `CaseMedia`, `CaseScroll`, `CaseFixed`, `CasePersonas`, `CaseHighlights`, `CaseGroup`, and inline `Def`. Use regular Markdown for prose inside MDX components, and use `<Def definition="key-term">key term</Def>` for inline definition popovers. Do not use legacy `:::case-*` directive syntax.
+
+## Repo Map
+
+- `app/globals.css`: Tailwind CSS v4 theme tokens, CSS variables, and custom utilities.
+- `app/fonts.js`: Aspekta and Inter font definitions.
+- `app/layout.js`: Root layout and global font variable wiring.
+- `app/ui/`: Shared UI components such as navigation, footer, buttons, tags, and wave background.
+- `app/sections/`: Page-level sections used by the main portfolio pages.
+- `app/project/`: Case-study routes, shared layout, components, content, and authoring template.
+- `app/project/_content/`: Published case-study MDX files.
+- `app/project/_template/`: Case-study template and authoring notes.
+- `components/motion-primitives/`: Existing animation primitives used by the site.
+- `public/assets/`: Static images, icons, audio, and video assets.
+
+## Commands
+
+Start the local development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Validate case-study content before build or deployment:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run validate:case-studies
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build the production app:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run lint:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content Workflow
 
-## Deploy on Vercel
+1. Copy the case-study template into `app/project/_content/{slug}.mdx`.
+2. Update frontmatter first: title, summary, dates, roles, media references, definitions, personas, and scroll/highlight data.
+3. Write the narrative in the MDX body using the supported case-study components.
+4. Keep media references accessible and token-based where validation requires it.
+5. Run `npm run validate:case-studies` before build or deployment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Verification Baseline
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For case-study edits, `npm run validate:case-studies` should exit 0 and print `Case study validation passed.`
+
+`npm run lint` currently has known pre-existing lint failures, so content-only case-study edits should at minimum pass the validator until lint is separately cleaned up.
