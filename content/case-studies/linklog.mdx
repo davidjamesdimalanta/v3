@@ -17,8 +17,8 @@ coverImage: https://cdn.sanity.io/images/iy4m4myd/production/8ce9bd86c57866bbd09
 coverImageDark: https://cdn.sanity.io/images/iy4m4myd/production/8ce9bd86c57866bbd0996634ecf14ae91caf4bef-1920x1048.png
 awards: []
 description:
-  - In a 6-day sprint, we built a working CRM for healthcare workers, and for admin, a program analytics dashboard.
-  - I led both the service design and the build, assessing the service end-to-end to see where design improvements could be made, then built the platform using AI.
+  - Applying service design concepts, we built a working CRM for older-adult healthcare workers and admin to improve tedious and time-consuming workflows in the service.
+  - I led the build, assessing the service end-to-end to see where design improvements could be made, then built the platform using AI.
 problem:
   title: The Problem
   description: |
@@ -177,9 +177,10 @@ assets:
     alt: Future-state service blueprint laid out left to right across onboarding, intake and follow-up, auto-populated reporting and one-click submission, and aggregated SALC data, with frontstage steps, new touchpoints, and backstage implementation considerations
     caption: The future-state service blueprint, end to end, with the two permission scopes designed in.
   buildMultiAgent:
-    type: image
-    src: /assets/linklog/build-multi-agent.png
-    alt: Two screenshots side by side, Codex generating backend code on the left and Claude Code reviewing a pull request on the right, with a note that privacy and security requirements were cross-referenced in Gemini Deep Research
+    type: video
+    src: https://cdn.sanity.io/files/iy4m4myd/production/5350887acf61a0f4a6d54f8072d61b7e611ca9d8.webm
+    thumbnail: /assets/linklog/build-multi-agent.png
+    loop: true
     caption: The real build, Codex writing the backend and Claude Code reviewing its pull requests, with privacy requirements checked against policy in Gemini Deep Research.
 definitions:
   social-prescribing:
@@ -364,18 +365,16 @@ For OACAO, it was most rewarding **to be on the same platform as Link Workers**,
 </CaseGroup>
 
 <CaseGroup id="implementation" variant="discovery">
-<CaseFixed sectionHeading="The Build" title="Building the damn thing">
-Built on Django and PostgreSQL on the back end, role-based access to keep the two scopes separated, hosted on AWS in ca-central-1 so the data stays in Canada, with field-level encryption.
+<CaseFixed sectionHeading="The Build" title="Building the platform over the weekend">
 
-We used a lot of AI, but in targeted and meaningful ways. Codex wrote most of the backend, generated tests, and deployed to AWS through Terraform, while Claude Code reviewed its pull requests and turned Figma frames into front-end code. Gemini was used for deep research to check our choices against PHIPA and PIPEDA, keeping our platform compliant and informed.
+We used a lot of AI, but in targeted and meaningful ways. It was important to **validate its output across models**, but what was more crucial to our success was **communicating our intent through carefully crafted prompts**.
 
-We intended to ship a working platform instead of a Figma prototype to showcase how our solution made real impact, doing so through scenario walkthroughs as Brenda and the OACAO.
+We shipped a working platform instead of a Figma prototype to showcase how our solution made real impact, doing so through scenario walkthroughs as Brenda and the OACAO.
 
-{/* TODO (optional): a dedicated architecture or database-schema diagram would strengthen this section further. None exists as a clean standalone asset yet; the multi-agent build screenshot below is the closest build-specific media available. */}
 <CaseMedia
   size="large"
   aspectRatio="video"
-  caption="The real build: Codex writing the backend, Claude Code reviewing its pull requests, privacy requirements checked against policy in Gemini Deep Research."
+  caption="Codex writing the backend, Claude Code reviewing its pull requests, privacy requirements checked against policy in Gemini Deep Research."
   className="pt-0!"
   asset="buildMultiAgent"
 />

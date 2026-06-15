@@ -48,6 +48,7 @@ const mediaSchema = z
     bgColor: tokenColorSchema.optional(),
     fgColor: tokenColorSchema.optional(),
     isFirstVideo: z.boolean().optional(),
+    loop: z.boolean().optional(),
     priority: z.boolean().optional(),
     size: z.enum(["small", "medium", "large"]).optional(),
     className: z.string().optional(),

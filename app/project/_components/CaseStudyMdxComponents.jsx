@@ -180,6 +180,7 @@ export function CaseMedia({
   className,
   first,
   isFirstVideo,
+  loop,
   priority,
   enableDialog = false,
 }) {
@@ -203,6 +204,7 @@ export function CaseMedia({
       fgColor={fgColor || media.fgColor}
       className={className || media.className || ""}
       isFirstVideo={asBoolean(first) || asBoolean(isFirstVideo) || media.isFirstVideo}
+      loop={asBoolean(loop) || media.loop}
       priority={asBoolean(priority) || media.priority}
     />
   );
@@ -221,18 +223,18 @@ export function CaseScroll({
   const { caseStudy } = useCaseStudyMdx();
   const block = caseStudy.scrollBlocks[blockKey] || {};
   const content = (
-    <CaseStudySectionBlock
-      sectionHeading={sectionHeading || block.sectionHeading}
-      title={title || block.title}
-      description={description || block.description}
-      textStates={block.textStates}
-      dark={asBoolean(dark) || block.dark}
-      className={className}
-    >
-      <CaseMediaDialogContext.Provider value={true}>
+    <CaseMediaDialogContext.Provider value={true}>
+      <CaseStudySectionBlock
+        sectionHeading={sectionHeading || block.sectionHeading}
+        title={title || block.title}
+        description={description || block.description}
+        textStates={block.textStates}
+        dark={asBoolean(dark) || block.dark}
+        className={className}
+      >
         {children}
-      </CaseMediaDialogContext.Provider>
-    </CaseStudySectionBlock>
+      </CaseStudySectionBlock>
+    </CaseMediaDialogContext.Provider>
   );
 
   return id ? <div id={id}>{content}</div> : content;

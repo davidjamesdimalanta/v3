@@ -99,6 +99,7 @@ export default function CaseStudyMediaBlock({
   bgColor,  // Optional override
   fgColor,  // Optional override
   isFirstVideo = false,
+  loop = false,
   size = "large",  // "small", "medium", or "large"
   id,
   className = "",
@@ -516,6 +517,7 @@ export default function CaseStudyMediaBlock({
                   preload="metadata"
                   muted
                   playsInline
+                  loop={loop}
                   controls={false}
                   disablePictureInPicture
                   controlsList="nodownload nofullscreen noremoteplayback"
