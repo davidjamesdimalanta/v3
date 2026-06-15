@@ -10,6 +10,10 @@
     "figma-plugin": {
       "url": "http://127.0.0.1:3845/mcp"
     },
+    "Sanity": {
+      "type": "http",
+      "url": "https://mcp.sanity.io"
+    },
     "markitdown": {
       "command": "/Users/daviddimalanta/Desktop/v3/v3/.codex/mcp/markitdown-venv/bin/markitdown-mcp",
       "args": [

@@ -66,6 +66,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
               priority
               href={`/project/${heroCell.data.slug}`}
               comingSoon={heroCell.data.comingSoon}
+              showCategory={false}
             />
           </div>
           <div className="flex flex-col gutter-sm flex-1 min-w-0">
@@ -77,6 +78,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
                 thumbnail={r1Cell.data.bento?.thumbnail || r1Cell.data.coverImage}
                 href={`/project/${r1Cell.data.slug}`}
                 comingSoon={r1Cell.data.comingSoon}
+                showCategory={false}
               />
             </div>
             <div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto">
@@ -87,6 +89,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
                 thumbnail={r2Cell.data.bento?.thumbnail || r2Cell.data.coverImage}
                 href={`/project/${r2Cell.data.slug}`}
                 comingSoon={r2Cell.data.comingSoon}
+                showCategory={false}
               />
             </div>
           </div>
@@ -112,6 +115,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
               priority
               href={`/project/${heroCell.data.slug}`}
               comingSoon={heroCell.data.comingSoon}
+              showCategory={false}
             />
           </motion.div>
           <motion.div className="flex flex-col gutter-sm flex-1 min-w-0" variants={RIGHT_COLUMN_VARIANTS}>
@@ -123,6 +127,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
                 thumbnail={r1Cell.data.bento?.thumbnail || r1Cell.data.coverImage}
                 href={`/project/${r1Cell.data.slug}`}
                 comingSoon={r1Cell.data.comingSoon}
+                showCategory={false}
               />
             </motion.div>
             <motion.div className="flex flex-col flex-none h-[180px] md:flex-1 md:h-auto" variants={ITEM_VARIANTS}>
@@ -133,6 +138,7 @@ export default function BentoGrid({ projects = [], animate = "visible", prefersR
                 thumbnail={r2Cell.data.bento?.thumbnail || r2Cell.data.coverImage}
                 href={`/project/${r2Cell.data.slug}`}
                 comingSoon={r2Cell.data.comingSoon}
+                showCategory={false}
               />
             </motion.div>
           </motion.div>

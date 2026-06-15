@@ -34,6 +34,7 @@ export default function BentoCell({
   priority = false,
   href,
   comingSoon = false,
+  showCategory = true,
 }) {
   const { playHover, playNavigateProject } = useSoundEffects();
   const videoRef = useRef(null);
@@ -195,7 +196,9 @@ export default function BentoCell({
           <div className="absolute inset-0 bg-linear-to-t from-(--schemes-surface) via-(--schemes-surface)/10 " />
         </div>
         {/* Category label — top-left */}
-        <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
+        {showCategory && category && (
+          <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
+        )}
 
         {/* Title + subtitle — bottom */}
         <div className="relative z-10 mt-auto flex flex-col gutter-xs">
@@ -228,7 +231,9 @@ export default function BentoCell({
           </div>
         )}
 
-        <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
+        {showCategory && category && (
+          <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
+        )}
         <div className="relative z-10 mt-auto flex flex-col gutter-xs">
           <h2 className="t-h5 text-on-surface">{title}</h2>
           {subtitle && <p className="t-p text-on-surface-variant">{subtitle}</p>}
@@ -260,7 +265,9 @@ export default function BentoCell({
         </div>
       )}
 
-      <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
+      {showCategory && category && (
+        <span className="relative z-10 t-label text-(--schemes-tertiary) bd-text">{category}</span>
+      )}
       <div className="relative z-10 mt-auto flex flex-col gutter-xs">
         <h2 className="t-h5 text-on-surface">{title}</h2>
         {subtitle && <p className="t-p text-on-surface-variant">{subtitle}</p>}
