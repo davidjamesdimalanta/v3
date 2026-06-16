@@ -156,7 +156,7 @@ export default function WaveBackground({ mode = 'design' }) {
 
   // Don't render a canvas during the probe phase
   if (backend === 'pending') {
-    return <div className="fixed inset-0 -z-10" />;
+    return <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden="true" />;
   }
 
   // Key on backend so React creates a fresh canvas when switching from
@@ -165,7 +165,8 @@ export default function WaveBackground({ mode = 'design' }) {
     <canvas
       key={backend}
       ref={canvasRef}
-      className="fixed inset-0 -z-10"
+      aria-hidden="true"
+      className="fixed inset-0 -z-10 pointer-events-none"
       style={{ opacity: waveOpacity, transition: 'none' }}
     />
   );

@@ -18,7 +18,7 @@ export default function BentoPreviewGrid({ media = [], fallbackThumbnail, active
           (item?.type === "image" ? itemSrc : fallbackThumbnail);
         const isActive = index === activeIndex;
         const previewClassName =
-          "relative size-[44px] md:size-auto md:aspect-square self-start rounded-[16px] overflow-hidden min-w-[44px] min-h-[44px] bg-surface-dim";
+          "relative size-[44px] md:size-auto md:aspect-square self-start rounded-none overflow-hidden min-w-[44px] min-h-[44px] bg-surface-dim";
         const media = thumbnail ? (
           <Image
             src={thumbnail}

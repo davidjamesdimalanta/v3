@@ -149,9 +149,9 @@ export default function BentoHeroStage({
   return (
     <Container
       {...(href ? { href, "aria-label": `View ${title} case study` } : {})}
-      className={`relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 rounded-[24px] p-4 overflow-hidden bg-surface-container-highest ${href ? "cursor-pointer focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2" : ""}`}
+      className={`relative flex-none h-[420px] w-full md:flex-2 md:h-full min-w-0 rounded-none p-4 overflow-hidden bg-surface-container-highest ${href ? "cursor-pointer focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2" : ""}`}
     >
-      <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
+      <div className="absolute inset-0 z-0 overflow-hidden rounded-none">
         {imageSrc && (
           <Image
             key={`poster-${activeIndex}-${imageSrc}`}

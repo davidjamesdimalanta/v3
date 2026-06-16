@@ -147,7 +147,7 @@ export default function BentoCell({
   // hover:bd-active = elevated shadow on interaction
   const baseClasses =
     "relative flex flex-col text-left cursor-pointer " +
-    "border border-outline-variant rounded-[24px] p-6 overflow-hidden " +
+    "border border-outline-variant rounded-none p-6 overflow-hidden " +
     "bd-card hover:bd-active hover-surface " +
     "focus-visible:outline-2 focus-visible:outline-(--schemes-primary) focus-visible:outline-offset-2";
 
@@ -160,7 +160,7 @@ export default function BentoCell({
         aria-label={comingSoon ? `${title} case study coming soon` : `View project: ${title}`}
       >
         {/* Background media — absolutely positioned, right-aligned */}
-        <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
+        <div className="absolute inset-0 z-0 overflow-hidden rounded-none">
           {activeThumbnail && (
             <Image
               src={activeThumbnail}
@@ -219,7 +219,7 @@ export default function BentoCell({
         aria-label={comingSoon ? `${title} case study coming soon` : `View project: ${title}`}
       >
         {activeThumbnail && (
-          <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px] bg-surface-container-highest">
+          <div className="absolute inset-0 z-0 overflow-hidden rounded-none bg-surface-container-highest">
             <Image
               src={activeThumbnail}
               alt={title}
@@ -252,7 +252,7 @@ export default function BentoCell({
     >
       {/* Background image — full bleed cover */}
       {activeThumbnail && (
-        <div className="absolute inset-0 z-0 overflow-hidden rounded-[24px]">
+        <div className="absolute inset-0 z-0 overflow-hidden rounded-none">
           <Image
             src={activeThumbnail}
             alt={title}
