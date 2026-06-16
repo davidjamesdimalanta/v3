@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { attachTo, detachFrom, initHls, registerFeaturedSrc } from "../../ui/lib/hlsManager";
+import { useIsDarkTheme } from "../../ui/hooks/useIsDarkTheme";
 
 const isMuxHLS = (url) =>
   typeof url === "string" && (url.includes(".m3u8") || url.includes("stream.mux.com"));
@@ -27,11 +28,12 @@ export default function BentoHeroStage({
 }) {
   const videoRef = useRef(null);
   const [loadedVideoSrc, setLoadedVideoSrc] = useState(null);
+  const isDarkTheme = useIsDarkTheme();
   const activeMedia = media?.[activeIndex];
-  const activeSrc = activeMedia?.src;
-  const activeHevcSrc = activeMedia?.hevcSrc;
+  const activeSrc = isDarkTheme && activeMedia?.darkSrc ? activeMedia.darkSrc : activeMedia?.src;
+  const activeHevcSrc = isDarkTheme && activeMedia?.darkSrc ? activeMedia?.darkHevcSrc : activeMedia?.hevcSrc;
   const isVideo = activeMedia?.type === "video" && activeSrc;
-  const poster = activeMedia?.thumbnail || fallbackThumbnail;
+  const poster = (isDarkTheme && activeMedia?.darkThumbnail ? activeMedia.darkThumbnail : activeMedia?.thumbnail) || fallbackThumbnail;
   const imageSrc = activeMedia?.type === "image" ? activeSrc : poster;
   const videoLoaded = Boolean(isVideo && loadedVideoSrc === activeSrc);
   const mediaKey = `${activeIndex}:${activeSrc || imageSrc || "empty"}`;
