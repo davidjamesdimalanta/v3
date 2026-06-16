@@ -260,8 +260,7 @@ export default function BentoCell({
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
           />
-          {/* Figma gradient: transparent 66% -> surface-container 86% */}
-          <div className="absolute inset-0 bg-linear-to-b from-transparent from-66% to-(--schemes-surface-container) to-86%" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent from-50% to-(--schemes-surface-container) to-80%" />
         </div>
       )}
 
