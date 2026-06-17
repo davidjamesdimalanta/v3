@@ -111,7 +111,7 @@ export default function CaseStudyMorphingMediaBlock({
           />
         </MorphingDialogTrigger>
         <MorphingDialogContainer>
-          <MorphingDialogContent className="relative flex max-h-[72dvh] max-w-[min(96vw,1400px)] flex-col items-center overflow-visible">
+          <MorphingDialogContent className="relative flex max-h-[80dvh] max-w-[min(96vw,1400px)] flex-col items-center overflow-visible">
             <MorphingDialogTitle className="sr-only">
               {dialogLabel}
             </MorphingDialogTitle>
@@ -124,7 +124,7 @@ export default function CaseStudyMorphingMediaBlock({
                 item: dialogItemVariants,
               }}
             >
-              <div className="relative h-[60dvh] w-[96vw] max-w-[1400px]">
+              <div className="relative max-h-[80dvh] h-[80dvh] w-[96vw] max-w-[1400px]">
                 <Image
                   src={src}
                   alt={alt}

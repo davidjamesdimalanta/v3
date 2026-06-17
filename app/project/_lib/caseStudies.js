@@ -65,20 +65,6 @@ const bentoPreviewSchema = z
   })
   .strict();
 
-const drawerBlockSchema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
-  items: z
-    .array(
-      z.object({
-        title: z.string(),
-        description: z.string(),
-        media: z.string().optional(),
-      })
-    )
-    .optional(),
-});
-
 const definitionSchema = z
   .object({
     content: z.string().optional(),
@@ -139,9 +125,6 @@ const caseStudySchema = z
     coverImageDark: z.string().optional(),
     awards: z.array(z.object({ name: z.string(), url: z.string().optional() })).default([]),
     description: z.array(z.string()).default([]),
-    problem: drawerBlockSchema.optional(),
-    solutions: drawerBlockSchema.optional(),
-    takeaways: drawerBlockSchema.optional(),
     featuredCategory: z.string().optional(),
     details: z.record(z.string(), z.string()).default({}),
     skills: z.array(z.object({ name: z.string(), category: z.string() })).default([]),
@@ -224,9 +207,6 @@ function toProjectData(data) {
     coverImageDark: data.coverImageDark,
     awards: data.awards,
     description: data.description,
-    problem: data.problem,
-    solutions: data.solutions,
-    takeaways: data.takeaways,
     featuredCategory: data.featuredCategory,
     details: data.details,
     skills: data.skills,
@@ -253,9 +233,6 @@ function toSummary(caseStudy) {
     coverImageDark: caseStudy.coverImageDark,
     awards: caseStudy.awards,
     description: caseStudy.description,
-    problem: caseStudy.problem,
-    solutions: caseStudy.solutions,
-    takeaways: caseStudy.takeaways,
     featuredCategory: caseStudy.featuredCategory,
     details: caseStudy.details,
     skills: caseStudy.skills,

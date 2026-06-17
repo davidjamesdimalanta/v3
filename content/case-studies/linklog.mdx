@@ -3,7 +3,7 @@ slug: linklog
 order: 1
 nextProject: none
 name: LinkLog
-tagline: Reduced time spent on year-end reporting through service design, shipped in 6 days.
+tagline: Reduced time spent on year-end reporting, shipped in 6 days.
 links:
   - url: https://tinyurl.com/LinkLogV3byTeam2
     label: Figma Prototype
@@ -16,30 +16,7 @@ coverImageDark: https://image.mux.com/hGtEm4wXPsL8ZqFPLhVEumy00OFKRDiBPgrQECMd01
 awards: []
 description:
   - Applying service design concepts, we built a working CRM for older-adult healthcare workers and admin to improve tedious and time-consuming workflows in the service.
-  - I led the build, assessing the service end-to-end to see where design improvements could be made, then built the platform using AI.
-problem:
-  title: The Problem
-  description: |
-    All 10 SALCs we talked to did their year-end reporting by hand, cross-referencing paper binders, Excel sheets, and SurveyMonkey forms.
-    This is time taken away from Social Prescribing work: client calls, follow-ups, and relationship-building.
-solutions:
-  title: Our Solution
-  items:
-    - title: One source of truth for client data
-      description: Link workers can import any client-tracking spreadsheet into a standardized Client Directory, ending the duplicate entry across local files, appendix forms, and SurveyMonkey.
-
-    - title: Auto-populated year-end reports
-      description: Form fields fill themselves from the Client Directory, so Link Workers go from reconstructing a year of work to reviewing it in minutes.
-
-    - title: Admin reporting dashboard
-      description: OACAO sees aggregated outcomes across every SALC on the platform; exportable as CSV, viewable as interactive charts, and ready for funding renewals.
-takeaways:
-  title: Takeaways
-  items:
-    - title: I can move fast with AI without outsourcing judgment.
-      description: Codex generated a fast importer that assumed one spreadsheet schema; co-design told me that was wrong, so I overrode it and rebuilt import to accept any structure. The tools write code and move the week along; I keep the calls that protect the people using it.
-    - title: Shipping a real product changed how the work landed.
-      description: A hosted product let OACAO log in and react to something real, which turned a class project into a pilot conversation. Working product in 6 days, genuine OACAO interest, no measured impact yet.
+  - I led the actual build, but also assessed the service end-to-end to see where design improvements could be made.
 featuredCategory: SERVICE DESIGN
 details:
   type: Concept
@@ -130,22 +107,18 @@ bentoPreview:
 nav:
   - id: problem
     heading: Overview
+  - id: solutions
+    heading: Solutions
   - id: discovery
     heading: Discovery
   - id: decision
     heading: Key Decision
   - id: journey-one
-    heading: Link Worker
-  - id: co-design
-    heading: Co-Design
-  - id: journey-two
-    heading: OACAO
+    heading: Improved Workflows
   - id: implementation
     heading: The Build
   - id: outcomes
     heading: Outcomes
-  - id: closing
-    heading: Takeaways
 heroMedia:
   - type: image
     src: https://cdn.sanity.io/images/iy4m4myd/production/43ba809e70315133281b75a5d5ac9d2661b12d90-2880x1620.png
@@ -176,7 +149,7 @@ assets:
     type: image
     src: /assets/linklog/import-preview-data.png
     alt: Preview Import Data modal showing the first five records from a central_clients.csv file before confirming import
-    caption: Reviewing imported CSV records before confirming the Client Directory import.
+    caption: Reviewing imported CSV records before confirming the Client Directory import now outlines the fields that were mapped, and new fields that are rendered as "custom fields".
   priorityCallListInitial:
     type: image
     src: https://cdn.sanity.io/images/iy4m4myd/production/0f09a4429794bbc6b41c480d6e08d7884933bbc3-795x528.png
@@ -193,6 +166,11 @@ assets:
     thumbnail: /assets/linklog/build-multi-agent.png
     loop: true
     caption: The real build, Codex writing the backend and Claude Code reviewing its pull requests, with privacy requirements checked against policy in Gemini Deep Research.
+  policyTechStack:
+    type: image
+    src: https://cdn.sanity.io/images/iy4m4myd/production/d564649bfa8fbae14a4efcc7164b071146c9ed66-2400x1350.webp
+    alt: A table pairing each LinkLog tech-stack decision with the privacy policy it satisfies, mapping PHIPA and PIPEDA requirements to features such as tenant isolation, Safe Harbor de-identification, no-PHI logging, and small-cell suppression in reports
+    caption: Each stack decision was made to satisfy a specific PHIPA or PIPEDA requirement.
 definitions:
   social-prescribing:
     content: |
@@ -202,25 +180,17 @@ definitions:
       link: https://www.who.int/publications/i/item/9789290619765
     side: bottom
     width: w-96
-personas:
-  - id: link-worker
-    name: Brenda, Link Worker
-    avatarLabel: Link Worker
-    traits:
-      - Carries **hundreds of client relationships** across spreadsheets, paper notes, and memory, one conversation at a time
-      - Judges a good day by **who showed up and who is doing better**, while the logging comes last
-      - Needs to know **who to call next** without rebuilding the whole client list
-      - Loses days at year-end reconstructing the program, because capturing a record in the moment competes with the client in front of her
-    designConnection: For Brenda, LinkLog had to make the next call obvious and quick enough to fit between clients, so that structure never turned relationship work into paperwork.
-  - id: oacao-admin
-    name: OACAO Administrator
-    avatarLabel: OACAO Admin
-    traits:
-      - Aggregates outcomes across every SALC to prove program impact in **funding renewal conversations**
-      - Cannot compare centers when each one tracks its work a different way
-      - Works in **funding cycles**, where a missing or mismatched report becomes a blind spot months later
-      - Needs program-wide visibility without exposing client identifiers across centers
-    designConnection: This role pulled the service the opposite way from Brenda as the record she enters in seconds is the row OACAO reads back as evidence. Reconciling those two moments split the service into two permission scopes.
+scrollBlocks:
+  solutions:
+    sectionHeading: Solutions
+    dark: true
+    textStates:
+      - title: One source of truth for client data
+        description: Link workers can import any spreadsheet into a standardized Client Directory, ending the duplicate and manual entry across local files.
+      - title: Auto-populated year-end reports
+        description: Form fields fill themselves from the Client Directory, so Link Workers go from reconstructing a year of work to reviewing it in minutes.
+      - title: Admin reporting dashboard
+        description: OACAO sees aggregated outcomes across every SALC on the platform; exportable as CSV, viewable as interactive charts, and ready for funding renewals.
 fixedBlocks:
   import-onramp:
     sectionHeading: Co-Design
@@ -230,7 +200,7 @@ fixedBlocks:
 
       A Link Worker asked me that in co-design, looking at the importer we built. It only worked if her spreadsheet already matched the one shape I had assumed.
 
-      **So we made it normalize sheets**. After our co-design, we wrote a Python script that formatted any CSV or XLSX structure and maps it on import, so workers upload the sheet they already keep and the system adapts to them.
+      **So I made it normalize sheets**. After our co-design, we wrote a Python script that formatted any CSV or XLSX structure and maps it on import, so workers upload the sheet they already keep and the system adapts to them.
 ---
 
 <CaseText id="problem" className="pt-32" sectionHeading="Overview" title="What is Social Prescribing?">
@@ -246,14 +216,18 @@ A **SALC** is a community centre that provides social prescribing services.
 </CaseText>
 
 <CaseText sectionHeading="The Problem" title="Every SALC did their year-end report by hand.">
-Every year, reporting to OACAO is a paper chase that takes days. Link Workers have to cross-reference paper binders, Excel sheets, and SurveyMonkey forms to reconstruct a year of work.
-
-Though time consuming, the report is a requirement for OACAO to fund the centres.
+In interviews, Link Workers described having to cross-reference paper binders and Excel sheets for patient data to report, **taking days to do the report**.
 </CaseText>
 
-<CaseText sectionHeading="The Challenge">
-How do we reduce the time spent on the report, **while making OACAO's funding case easier to prove at the same time?**
+<CaseText sectionHeading="The Challenge" className="pb-32">
+How do we reduce the time spent on the year-end reporting for link workers, **while giving OACAO's high quality data for funding grants?**
 </CaseText>
+
+<CaseScroll id="solutions" className="py-16" dark block="solutions">
+<CaseMedia size="medium" aspectRatio="video" caption="A client-directory that fits your data" className="max-w-full pt-0 pb-4" asset="clientDirectory" />
+<CaseMedia size="medium" aspectRatio="video" caption="Forms that auto-populate" className="max-w-full pt-0 pb-4" asset="cttReport" />
+<CaseMedia size="medium" aspectRatio="video" caption="Program level metrics for admins" className="max-w-full pt-0 pb-4" asset="oacaoDashboard" />
+</CaseScroll>
 
 <CaseGroup id="discovery" variant="discovery">
 <CaseText sectionHeading="Discovery" title="Every centre tracks differently.">
@@ -263,22 +237,26 @@ Interviewing 10 SALCs, each described a different way of managing clients, but O
 
 </CaseText>
 
-<CaseText sectionHeading="Constraint" title="The backstage was a privacy problem.">
-We were handling personal health information, which in Ontario means two laws: **PHIPA** (the Personal Health Information Protection Act) and **PIPEDA** (Canada's federal privacy law). 
-
-This meant that centres keep their clients' identities while OACAO only ever sees numbers.
+<CaseText sectionHeading="A Constraint" title="The service dealt with PHI">
+Personal health information in Ontario is governed by two laws: **PHIPA**, which regulates how health information custodians collect, use, and disclose patient data, and **PIPEDA**, Canada's federal private-sector privacy law. **Our designs had to comply with both, or OACAO could not proceed with our work**.
 </CaseText>
 </CaseGroup>
 
 <CaseGroup id="decision" variant="discovery">
 <CaseFixed sectionHeading="The Key Decision" title="Choosing which part of the service to improve">
-We approached our solution by looking at the service from end-to-end, with all the frontstage and backstage dependancies in mind.
+Looking at the service end-to-end, we identified the following bottlenecks:
 
-Having this wholistic view gave us a better understanding of where Link Workers were hurting the most, and where a digital solution would be most impactful.
+**Link workers**
+ - SALCs didn't have a *standardardized* client sheet
+ - they were doing reporting twice (once on paper forms, and once on surveymonkey)
 
-For Link Workers, LinkLog helped the most when it **standardized their follow up and reporting workflows**. 
+**OACAO**
+ - SALCs would sometimes skip reporting and simply email them with client lists and receipts
+ - They had to manually aggregate due to multiple sources of data
 
-For OACAO, it was most rewarding **to be on the same platform as Link Workers**, and to **get all reports from every SALC in one place**.
+Overall, we decided LinkLog helped Link Workers most when it **was easy to get started with and simplified year-end reporting**, and for OACAO, it was most rewarding to be on the **same platform as Link Workers**, and to get all **reports from every SALC in one place**.
+
+Some design opportunities we did not pursue due to lack of impact & time included improving client onboarding and client follow-up workflows.
 
 <CaseMedia
   size="large"
@@ -290,22 +268,14 @@ For OACAO, it was most rewarding **to be on the same platform as Link Workers**,
 </CaseFixed>
 </CaseGroup>
 
-<CasePersonas
-  id="personas"
-  sectionHeading="Who We Designed For"
-  title="Depth versus Breadth"
-  text="In order to understand where a shared platform could work, we first had to see how differently each side measures a good day."
-  spacingClassName="pt-8 pb-64"
-/>
-
 <CaseGroup id="journey-one" variant="surfaceStack">
 <CaseGroup className="flex flex-col gutter-md">
-  <CaseFixed sectionHeading="Journey One: Link Worker" title="Who do I call next?">
-  Brenda manages hundreds of clients with local spreadsheets, paper notes, and memory. 
+  <CaseFixed sectionHeading="Improved Workflow: Link Worker" title="Who do I call next?">
+  A link worker manages hundreds of clients with local spreadsheets, paper notes, and memory. 
   
-  Her hardest daily question is short to ask and slow to answer: who needs a call today, without re-reading the whole list?
+  Their hardest daily question is short to ask and slow to answer: who needs a call today, without re-reading the whole list?
 
-  For Brenda, the dashboard is organized in order of whats important to her: overdue calls, upcoming check-ins, and unfinished outcomes. 
+  For the link worker, the dashboard is organized in order of what's important to them: overdue calls, upcoming check-ins, and unfinished outcomes. 
   
   <CaseMedia
     size="large"
@@ -331,9 +301,9 @@ For OACAO, it was most rewarding **to be on the same platform as Link Workers**,
 
 <CaseGroup className="flex flex-col gutter-md">
   <CaseFixed title="The year-end report fills itself in.">
-  The Common Tracking Tool (CTT) is OACAO's year-end form. It used to be a blank annual artifact Brenda rebuilt from scratch. 
+  The Common Tracking Tool (CTT) is OACAO's year-end form. It used to be a blank annual artifact the link worker rebuilt from scratch. 
   
-  Now it generates itself from the directory she already keeps current: structured fields pull forward automatically, only writing in text-fields where elaboration is needed.
+  Now it generates itself from the directory they already keep current: structured fields pull forward automatically, only writing in text-fields where elaboration is needed.
 
   <CaseMedia
     size="large"
@@ -359,10 +329,10 @@ For OACAO, it was most rewarding **to be on the same platform as Link Workers**,
 
 <CaseGroup id="journey-two" variant="surfaceStack">
 <CaseGroup className="flex flex-col gutter-md">
-  <CaseFixed sectionHeading="Journey Two: OACAO" title="Aggregating a year of work across a hundred SALCs">
-  Designing a dashboard-view of aggregate data also meant identifying what pieces of data to aggregate, and how to present them visually.
+  <CaseFixed sectionHeading="Improved Workflow: OACAO" title="Aggregating a year of work across a hundred SALCs">
+  Year-end numbers that OACAO once chased down centre by centre now arrive on their own through a dashboard providing a **programme-wide view** and is **filterable by SALC** for more specific insights.
 
-  Through co-designs, we learned that they also needed individual SALC data, **so we included filters** to allow OACAO to see strengths and weakness of programming at the SALC level.
+  Through co-design, we also implemented an **export of de-identified data** to a spreadsheet, as it would be helpful for deeper analysis the dashboard can't do on its own.
   <CaseMedia
     size="large"
     aspectRatio="video"
@@ -380,7 +350,7 @@ For OACAO, it was most rewarding **to be on the same platform as Link Workers**,
 
 We used a lot of AI, but in targeted and meaningful ways. It was important to **validate its output across models**, but what was more crucial to our success was **communicating our intent through carefully crafted prompts**.
 
-We shipped a working platform instead of a Figma prototype to showcase how our solution made real impact, doing so through scenario walkthroughs as Brenda and the OACAO.
+We shipped a working platform instead of a Figma prototype to showcase how our solution made real impact, doing so through scenario walkthroughs as the link worker and OACAO.
 
 <CaseMedia
   size="large"
@@ -388,6 +358,23 @@ We shipped a working platform instead of a Figma prototype to showcase how our s
   caption="Codex writing the backend, Claude Code reviewing its pull requests, privacy requirements checked against policy in Gemini Deep Research."
   className="pt-0!"
   asset="buildMultiAgent"
+/>
+</CaseFixed>
+</CaseGroup>
+
+<CaseGroup id="policy-stack" variant="discovery">
+<CaseFixed sectionHeading="The Build" title="How policy affected the tech stack">
+The same **PHIPA** and **PIPEDA** rules that shaped the service also chose our tech stack. We picked tools built for handling health data, so every privacy promise was enforced by LinkLog itself.
+
+Each centre's records stay walled off from every other centre's. Personal details are stripped out before any data is shared or reported, and they never appear in the system's logs.
+
+And because small groups can be enough to identify someone, OACAO's reports automatically hide any count under five.
+<CaseMedia
+  size="large"
+  aspectRatio="video"
+  caption="We wrote a tech spec sheet that outlined the entire stack, as well as some privacy features mapped to the exact PHIPA/PIPEDA law that it covers."
+  className="pt-0!"
+  asset="policyTechStack"
 />
 </CaseFixed>
 </CaseGroup>
@@ -404,6 +391,6 @@ Learning to look at problems more wholistically helps me better surface the inte
 </CaseThought>
 
 <CaseThought title="AI as a conversation starter">
-With only six days, we could have stopped at a prototype, however building it with AI meant OACAO could log in and react to something real which led to the conversation of piloting at future SALCs. With restraint and careful execution, I plan on building more, and showing how my design solutions could be implemented in real settings.
+With only six days, we could have stopped at a prototype. However building it with AI meant OACAO could log in and react to something real which led to the conversation of piloting at future SALCs. With restraint and careful execution, I plan on building more, and showing how my design solutions could be implemented in real settings.
 </CaseThought>
 </CaseText>
