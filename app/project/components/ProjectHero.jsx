@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import MediaBlock from "./contentTypes/MediaBlock";
 
@@ -9,123 +10,133 @@ export default function ProjectHero({
   awards = [],
   description = [],
   details = {},
+  skills = [],
   heroMedia = [],
 }) {
   // Sound effects
-  const { playButtonHover } = useSoundEffects();
+  const { playButtonHover, playNavigateProject } = useSoundEffects();
   const primaryHeroMedia = heroMedia[0];
+  const toolSkills = skills
+    .filter((skill) => skill.category === "tools")
+    .map((skill) => skill.name);
+  const detailItems = [
+    details.role && { label: "Role", value: details.role },
+    toolSkills.length > 0 && { label: "Tools", value: toolSkills.join(", ") },
+    details.team && { label: "Team", value: details.team },
+    details.timeline && { label: "Duration", value: details.timeline },
+  ].filter(Boolean);
 
   return (
     <section className="w-full px-4 pt-20 pb-8 md:px-5 md:pt-24 md:pb-8">
-      <div className="max-w-[1200px] w-full mx-auto">
-        {/* Two-column row: title/links left, meta/description right */}
-        <div className="flex flex-col md:flex-row gutter-base md:gutter-lg pt-4">
+      <div className="max-w-[1200px] w-full mx-auto flex flex-col gutter-lg">
+        <Link
+          href="/"
+          className="group w-hug inline-flex min-h-[44px] items-center gutter-xs text-button text-400 uppercase text-(--schemes-on-surface-variant) transition-opacity duration-150 hover:opacity-70"
+          onClick={playNavigateProject}
+          onMouseEnter={playButtonHover}
+        >
+          <span aria-hidden="true" className="text-h5 leading-none transition-transform duration-150 group-hover:-translate-x-1">
+            ←
+          </span>
+          <span>Back</span>
+        </Link>
 
-        {/* LEFT */}
-        <div className="flex flex-col gutter-base flex-1 lg:basis-[720px]">
-          <div className="flex flex-col gutter-xs">
-            <h1 className="t-h3 text-400">{title}</h1>
-            <h6 className="text-h6 text-400 text-(--schemes-tertiary)">{name}</h6>
+        <div className="flex flex-col gutter-md">
+          <div className="flex flex-col gutter-sm">
+            <p className="text-button text-500 uppercase text-(--schemes-on-surface-variant)">
+              {name}
+            </p>
+            <h1 className="text-h2 text-400 max-w-[980px]">{title}</h1>
           </div>
 
-          {description.length > 0 && (
-            <div className="flex flex-col gutter-xs text-p">
-              {description.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-          )}
+          <div className="h-px w-full bg-(--schemes-outline-variant)" />
 
-          {links.length > 0 && (
-            <div className="flex flex-col gutter-xs">
-              {links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-button text-400 uppercase hover:bd-text transition-all duration-150 w-hug"
-                  onMouseEnter={playButtonHover}
-                >
-                  {link.label} →
-                </a>
-              ))}
-            </div>
-          )}
-
-          {awards.length > 0 && (
-            <div className="flex flex-col gutter-sm">
-              <h2 className="text-sm text-500 opacity-60">Recognition</h2>
-              <div className="flex flex-col gutter-xs">
-                {awards.map((award, index) => {
-                  if (!award.url) {
-                    return (
-                      <p key={index} className="text-p text-400">
-                        {award.name}
-                      </p>
-                    );
-                  }
-
-                  return (
+          <div className="grid grid-cols-1 gutter-base md:grid-cols-[minmax(220px,1fr)_minmax(0,1fr)] md:gutter-lg">
+            <div className="order-2 flex flex-col items-start gutter-sm md:order-none">
+              {links.length > 0 && (
+                <div className="flex flex-wrap gutter-xs">
+                  {links.map((link, index) => (
                     <a
                       key={index}
-                      href={award.url}
+                      href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between text-p text-400 hover:bd-text transition-all duration-150"
+                      className="btn-base btn-md btn-ghost hover-surface min-h-[44px] gutter-xs"
                       onMouseEnter={playButtonHover}
                     >
-                      <span>{award.name}</span>
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150">→</span>
+                      <span aria-hidden="true">↗</span>
+                      <span>{link.label}</span>
                     </a>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
+                  ))}
+                </div>
+              )}
 
-        {/* RIGHT */}
-        <div className="flex flex-col gutter-base flex-1 max-w-full lg:max-w-[min(75vw,120vh)] lg:basis-[75vw]">
+              {awards.length > 0 && (
+                <div className="flex flex-col gutter-xs">
+                  <h2 className="text-xs text-500 uppercase text-(--schemes-tertiary)">
+                    Recognition
+                  </h2>
+                  {awards.map((award, index) => {
+                    if (!award.url) {
+                      return (
+                        <p key={index} className="text-sm text-400">
+                          {award.name}
+                        </p>
+                      );
+                    }
+
+                    return (
+                      <a
+                        key={index}
+                        href={award.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gutter-xs text-sm text-400 transition-all duration-150 hover:bd-text"
+                        onMouseEnter={playButtonHover}
+                      >
+                        <span>{award.name}</span>
+                        <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">
+                          →
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {description.length > 0 && (
+              <div className="order-1 flex flex-col gutter-xs text-p text-400 md:order-none md:col-start-2 md:row-start-1 md:max-w-[620px]">
+                {description.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {detailItems.length > 0 && (
+            <dl className="grid grid-cols-2 gutter-base text-xs lg:flex lg:flex-row lg:items-start lg:justify-between">
+              {detailItems.map((item) => (
+                <div key={item.label} className="flex w-hug max-w-full flex-col gutter-xs md:whitespace-nowrap">
+                  <dt className="text-xs text-600 uppercase text-(--schemes-tertiary)">
+                    {item.label}
+                  </dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
           {primaryHeroMedia?.src && (
             <MediaBlock
               {...primaryHeroMedia}
+              className="w-full"
               thumbnail={primaryHeroMedia.thumbnail}
               isFirstVideo={primaryHeroMedia.isFirstVideo}
               priority={primaryHeroMedia.priority}
             />
           )}
-
-          {Object.keys(details).length > 0 && (
-            <div className="grid grid-cols-4 gutter-sm text-sm">
-              {details.year && (
-                <div className="flex flex-col gutter-xs">
-                  <span className="text-xs text-(--schemes-tertiary)">Year</span>
-                  <span>{details.year}</span>
-                </div>
-              )}
-              {details.timeline && (
-                <div className="flex flex-col gutter-xs">
-                  <span className="text-xs text-(--schemes-tertiary)">Timeline</span>
-                  <span>{details.timeline}</span>
-                </div>
-              )}
-              {details.team && (
-                <div className="flex flex-col gutter-xs">
-                  <span className="text-xs text-(--schemes-tertiary)">Team</span>
-                  <span>{details.team}</span>
-                </div>
-              )}
-              {details.role && (
-                <div className="flex flex-col gutter-xs">
-                  <span className="text-xs text-(--schemes-tertiary)">Role</span>
-                  <span>{details.role}</span>
-                </div>
-              )}
-            </div>
-          )}
         </div>
-      </div>
       </div>
     </section>
   );
