@@ -35,9 +35,19 @@ export default function ProjectHero({
           onClick={playNavigateHome}
           onMouseEnter={playButtonHover}
         >
-          <span aria-hidden="true" className="text-h5 leading-none transition-transform duration-150 group-hover:-translate-x-1">
-            ←
-          </span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 12 12"
+            className="size-[1cap] overflow-visible transition-transform duration-150 group-hover:-translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          >
+            <path d="M5.5 1 1 6l4.5 5" />
+            <path d="M1.5 6H11" />
+          </svg>
           <span>Back</span>
         </Link>
 
