@@ -114,6 +114,16 @@ export default function ProjectHero({
             )}
           </div>
 
+          {primaryHeroMedia?.src && (
+            <MediaBlock
+              {...primaryHeroMedia}
+              className="w-full"
+              thumbnail={primaryHeroMedia.thumbnail}
+              isFirstVideo={primaryHeroMedia.isFirstVideo}
+              priority={primaryHeroMedia.priority}
+            />
+          )}
+
           {detailItems.length > 0 && (
             <dl className="grid grid-cols-2 gutter-base text-xs lg:flex lg:flex-row lg:items-start lg:justify-between">
               {detailItems.map((item) => (
@@ -125,16 +135,6 @@ export default function ProjectHero({
                 </div>
               ))}
             </dl>
-          )}
-
-          {primaryHeroMedia?.src && (
-            <MediaBlock
-              {...primaryHeroMedia}
-              className="w-full"
-              thumbnail={primaryHeroMedia.thumbnail}
-              isFirstVideo={primaryHeroMedia.isFirstVideo}
-              priority={primaryHeroMedia.priority}
-            />
           )}
         </div>
       </div>
