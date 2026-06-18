@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { audioManager } from '../lib/audioManager';
 
 /**
@@ -23,11 +23,24 @@ export function useSoundEffects() {
     audioManager.initialize();
   }, []);
 
+  const playHover = useCallback(() => audioManager.playHover(), []);
+  const playButtonHover = useCallback(() => audioManager.playButtonHover(), []);
+  const playNavigateHome = useCallback(() => audioManager.playNavigateHome(), []);
+  const playNavigateProject = useCallback(() => audioManager.playNavigateProject(), []);
+  const primeAudio = useCallback(() => audioManager.prime(), []);
+
   // Delegate all audio playback to the singleton manager
-  return {
-    playHover: () => audioManager.playHover(),
-    playButtonHover: () => audioManager.playButtonHover(),
-    playNavigateHome: () => audioManager.playNavigateHome(),
-    playNavigateProject: () => audioManager.playNavigateProject(),
-  };
+  return useMemo(() => ({
+    playHover,
+    playButtonHover,
+    playNavigateHome,
+    playNavigateProject,
+    primeAudio,
+  }), [
+    playHover,
+    playButtonHover,
+    playNavigateHome,
+    playNavigateProject,
+    primeAudio,
+  ]);
 }

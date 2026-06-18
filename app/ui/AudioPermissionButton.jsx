@@ -1,14 +1,24 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
+import { useSoundEffects } from './hooks/useSoundEffects';
+
+const audioPermissionListeners = new Set();
+
+function subscribeAudioPermission(listener) {
+  audioPermissionListeners.add(listener);
+  return () => {
+    audioPermissionListeners.delete(listener);
+  };
+}
+
+function notifyAudioPermissionListeners() {
+  audioPermissionListeners.forEach((listener) => listener());
+}
 
 function shouldShowAudioButton() {
   // Server-side: don't show button
   if (typeof window === 'undefined') return false;
-
-  // Detect Safari browser - hide button in Safari
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  if (isSafari) return false;
 
   // Check localStorage for permission
   try {
@@ -21,21 +31,21 @@ function shouldShowAudioButton() {
 }
 
 export default function AudioPermissionButton() {
-  // Use useSyncExternalStore for reading from browser APIs
+  const { primeAudio } = useSoundEffects();
   const showButton = useSyncExternalStore(
-    () => () => {}, // No subscription needed (value doesn't change)
-    shouldShowAudioButton, // Client-side value
-    () => false // Server-side value
+    subscribeAudioPermission,
+    shouldShowAudioButton,
+    () => false
   );
 
   const handleEnableSound = () => {
     try {
       localStorage.setItem('audioPermission', 'allowed');
-      window.location.reload();
+      primeAudio();
     } catch (error) {
-      // Even if localStorage fails, still reload
-      window.location.reload();
+      // Keep the UI responsive even when storage is unavailable.
     }
+    notifyAudioPermissionListeners();
   };
 
   if (!showButton) return null;

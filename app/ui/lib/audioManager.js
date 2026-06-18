@@ -1,99 +1,71 @@
 /**
  * Audio Manager Singleton
- * Global audio pool manager that persists across component lifecycles
+ * Global audio pool manager that persists across component lifecycles.
  *
- * This singleton pattern fixes navigation bugs by ensuring audio instances
- * are never destroyed during component unmounting. Instead, they persist
- * for the entire application lifetime.
- *
- * Benefits:
- * - Eliminates race conditions during navigation
- * - Reduces memory footprint (3 instances instead of N*3 per component)
- * - Faster navigation (no audio re-initialization)
- * - No cleanup bugs
+ * Short UI sounds use Web Audio when available. Safari is noticeably slower
+ * when restarting tiny MP3 files through HTMLAudioElement.currentTime + play().
+ * Decoded AudioBuffers avoid that seek/play path after the first unlock.
  */
 
 import { SOUND_PATHS, SOUND_VOLUMES } from './sound-config';
 
+const HOVER_REPLAY_INTERVAL_MS = 45;
+
+const SOUND_ENTRIES = {
+  hover: {
+    path: SOUND_PATHS.HOVER,
+    volume: SOUND_VOLUMES.HOVER,
+  },
+  buttonHover: {
+    path: SOUND_PATHS.BUTTON_HOVER,
+    volume: SOUND_VOLUMES.BUTTON_HOVER,
+  },
+  navigateHome: {
+    path: SOUND_PATHS.NAVIGATE_HOME,
+    volume: SOUND_VOLUMES.NAVIGATE_HOME,
+  },
+  navigateProject: {
+    path: SOUND_PATHS.NAVIGATE_PROJECT,
+    volume: SOUND_VOLUMES.NAVIGATE_PROJECT,
+  },
+};
+
 class AudioManager {
   constructor() {
-    // Audio instance references
-    this.hoverAudio = null;
-    this.buttonHoverAudio = null;
-    this.navigateHomeAudio = null;
-    this.navigateProjectAudio = null;
-
-    // Track currently playing hover sound to prevent overlap
+    this.audioContext = null;
+    this.buffers = new Map();
+    this.bufferPromises = new Map();
+    this.fallbackAudios = new Map();
+    this.currentHoverSource = null;
     this.currentHoverAudio = null;
-
-    // Track initialization state
+    this.lastHoverPlayAt = 0;
     this.initialized = false;
+    this.unlockListenersBound = false;
   }
 
-  /**
-   * Initialize the audio pool
-   * Safe to call multiple times - only initializes once
-   * @returns {boolean} - True if initialized successfully or already initialized
-   */
   initialize() {
-    // Already initialized - return early
-    if (this.initialized) {
-      return true;
-    }
+    if (this.initialized) return true;
 
     try {
-      // Check permission first
-      const permission = this.getAudioPermission();
-      if (permission !== 'allowed') {
-        return false;
+      if (this.getAudioPermission() !== 'allowed') return false;
+      if (this.prefersReducedMotion()) return false;
+
+      const context = this.createAudioContext();
+      this.bindUnlockListeners();
+
+      if (context) {
+        this.preloadBuffers();
+      } else {
+        this.createFallbackAudios();
       }
-
-      // Check prefers-reduced-motion
-      if (typeof window !== 'undefined') {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) {
-          return false;
-        }
-      }
-
-      // Feature detection - check if Audio API is supported
-      if (typeof Audio === 'undefined') {
-        return false;
-      }
-
-      // Create audio instances for each sound effect
-      this.hoverAudio = new Audio(SOUND_PATHS.HOVER);
-      this.hoverAudio.volume = SOUND_VOLUMES.HOVER;
-      this.hoverAudio.preload = 'auto';
-      this.hoverAudio.load();
-
-      this.buttonHoverAudio = new Audio(SOUND_PATHS.BUTTON_HOVER);
-      this.buttonHoverAudio.volume = SOUND_VOLUMES.BUTTON_HOVER;
-      this.buttonHoverAudio.preload = 'auto';
-      this.buttonHoverAudio.load();
-
-      this.navigateHomeAudio = new Audio(SOUND_PATHS.NAVIGATE_HOME);
-      this.navigateHomeAudio.volume = SOUND_VOLUMES.NAVIGATE_HOME;
-      this.navigateHomeAudio.preload = 'auto';
-      this.navigateHomeAudio.load();
-
-      this.navigateProjectAudio = new Audio(SOUND_PATHS.NAVIGATE_PROJECT);
-      this.navigateProjectAudio.volume = SOUND_VOLUMES.NAVIGATE_PROJECT;
-      this.navigateProjectAudio.preload = 'auto';
-      this.navigateProjectAudio.load();
 
       this.initialized = true;
       return true;
-
     } catch (error) {
       return false;
     }
   }
 
-  /**
-   * Get audio permission from localStorage
-   * @returns {string|null} - Permission status or null
-   */
   getAudioPermission() {
     if (typeof window === 'undefined') return null;
 
@@ -104,94 +76,210 @@ class AudioManager {
     }
   }
 
-  /**
-   * Play hover sound effect (for links)
-   * Stops previous hover sound if still playing to prevent overlap
-   */
+  prefersReducedMotion() {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  createAudioContext() {
+    if (this.audioContext || typeof window === 'undefined') return this.audioContext;
+
+    const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextConstructor) return null;
+
+    this.audioContext = new AudioContextConstructor();
+    return this.audioContext;
+  }
+
+  createFallbackAudios() {
+    if (typeof Audio === 'undefined' || this.fallbackAudios.size > 0) return;
+
+    Object.entries(SOUND_ENTRIES).forEach(([key, sound]) => {
+      this.createFallbackAudio(key, sound);
+    });
+  }
+
+  createFallbackAudio(key, sound = SOUND_ENTRIES[key]) {
+    if (typeof Audio === 'undefined' || !sound) return null;
+    if (this.fallbackAudios.has(key)) return this.fallbackAudios.get(key);
+
+    const audio = new Audio(sound.path);
+    audio.volume = sound.volume;
+    audio.preload = 'auto';
+    audio.load();
+    this.fallbackAudios.set(key, audio);
+    return audio;
+  }
+
+  bindUnlockListeners() {
+    if (this.unlockListenersBound || typeof window === 'undefined') return;
+
+    const unlock = () => {
+      this.prime();
+      window.removeEventListener('pointerdown', unlock, true);
+      window.removeEventListener('touchstart', unlock, true);
+      window.removeEventListener('keydown', unlock, true);
+    };
+
+    window.addEventListener('pointerdown', unlock, { capture: true, passive: true });
+    window.addEventListener('touchstart', unlock, { capture: true, passive: true });
+    window.addEventListener('keydown', unlock, true);
+    this.unlockListenersBound = true;
+  }
+
+  preloadBuffers() {
+    Object.keys(SOUND_ENTRIES).forEach((key) => {
+      this.loadBuffer(key);
+    });
+  }
+
+  loadBuffer(key) {
+    const context = this.createAudioContext();
+    const sound = SOUND_ENTRIES[key];
+    if (!context || !sound) return null;
+    if (this.buffers.has(key)) return Promise.resolve(this.buffers.get(key));
+    if (this.bufferPromises.has(key)) return this.bufferPromises.get(key);
+
+    const bufferPromise = fetch(sound.path)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Unable to load sound: ${sound.path}`);
+        return response.arrayBuffer();
+      })
+      .then((arrayBuffer) => this.decodeAudioData(arrayBuffer))
+      .then((buffer) => {
+        this.buffers.set(key, buffer);
+        return buffer;
+      })
+      .catch(() => null);
+
+    this.bufferPromises.set(key, bufferPromise);
+    return bufferPromise;
+  }
+
+  decodeAudioData(arrayBuffer) {
+    const context = this.audioContext;
+    if (!context) return Promise.resolve(null);
+
+    return new Promise((resolve, reject) => {
+      const decodePromise = context.decodeAudioData(
+        arrayBuffer.slice(0),
+        resolve,
+        reject
+      );
+
+      if (decodePromise?.then) {
+        decodePromise.then(resolve).catch(reject);
+      }
+    });
+  }
+
+  resumeContext() {
+    const context = this.createAudioContext();
+    if (!context || context.state !== 'suspended') return Promise.resolve();
+    return context.resume().catch(() => {});
+  }
+
+  prime() {
+    if (!this.initialized && !this.initialize()) return;
+
+    this.resumeContext();
+    this.preloadBuffers();
+  }
+
+  playBuffer(key, { isHover = false } = {}) {
+    const context = this.audioContext;
+    const buffer = this.buffers.get(key);
+    const sound = SOUND_ENTRIES[key];
+    if (!context || !buffer || !sound || context.state !== 'running') return false;
+
+    try {
+      if (isHover && this.currentHoverSource) {
+        this.currentHoverSource.stop();
+        this.currentHoverSource = null;
+      }
+
+      const source = context.createBufferSource();
+      const gain = context.createGain();
+
+      source.buffer = buffer;
+      gain.gain.value = sound.volume;
+      source.connect(gain);
+      gain.connect(context.destination);
+      source.start(0);
+
+      if (isHover) {
+        this.currentHoverSource = source;
+        source.onended = () => {
+          if (this.currentHoverSource === source) {
+            this.currentHoverSource = null;
+          }
+        };
+      }
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  playFallback(key, { isHover = false } = {}) {
+    const audio = this.createFallbackAudio(key);
+    if (!audio) return false;
+
+    try {
+      if (isHover && this.currentHoverAudio) {
+        this.currentHoverAudio.pause();
+        this.currentHoverAudio.currentTime = 0;
+      }
+
+      audio.currentTime = 0;
+      const playAttempt = audio.play();
+      if (playAttempt?.catch) {
+        playAttempt.catch(() => {});
+      }
+
+      if (isHover) {
+        this.currentHoverAudio = audio;
+      }
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  playEffect(key, { isHover = false } = {}) {
+    if (!this.initialized && !this.initialize()) return;
+
+    if (isHover) {
+      const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
+      if (now - this.lastHoverPlayAt < HOVER_REPLAY_INTERVAL_MS) return;
+      this.lastHoverPlayAt = now;
+    }
+
+    this.resumeContext();
+
+    if (this.playBuffer(key, { isHover })) return;
+
+    this.loadBuffer(key);
+    this.playFallback(key, { isHover });
+  }
+
   playHover() {
-    if (!this.hoverAudio) return;
-
-    try {
-      // Stop previous hover sound if playing
-      if (this.currentHoverAudio) {
-        this.currentHoverAudio.pause();
-        this.currentHoverAudio.currentTime = 0;
-      }
-
-      // Play new hover sound
-      this.hoverAudio.currentTime = 0;
-      this.hoverAudio.play().catch(() => {
-        // Silently handle playback errors (e.g., user hasn't interacted yet)
-      });
-
-      // Track this as the currently playing hover sound
-      this.currentHoverAudio = this.hoverAudio;
-
-    } catch (error) {
-      // Silently handle errors
-    }
+    this.playEffect('hover', { isHover: true });
   }
 
-  /**
-   * Play button hover sound effect (Cancel sound)
-   * Stops previous hover sound if still playing to prevent overlap
-   */
   playButtonHover() {
-    if (!this.buttonHoverAudio) return;
-
-    try {
-      // Stop previous hover sound if playing
-      if (this.currentHoverAudio) {
-        this.currentHoverAudio.pause();
-        this.currentHoverAudio.currentTime = 0;
-      }
-
-      // Play button hover sound
-      this.buttonHoverAudio.currentTime = 0;
-      this.buttonHoverAudio.play().catch(() => {
-        // Silently handle playback errors (e.g., user hasn't interacted yet)
-      });
-
-      // Track this as the currently playing hover sound
-      this.currentHoverAudio = this.buttonHoverAudio;
-
-    } catch (error) {
-      // Silently handle errors
-    }
+    this.playEffect('buttonHover', { isHover: true });
   }
 
-  /**
-   * Play navigation to home sound effect
-   */
   playNavigateHome() {
-    if (!this.navigateHomeAudio) return;
-
-    try {
-      this.navigateHomeAudio.currentTime = 0;
-      this.navigateHomeAudio.play().catch(() => {
-        // Silently handle playback errors
-      });
-    } catch (error) {
-      // Silently handle errors
-    }
+    this.playEffect('navigateHome');
   }
 
-  /**
-   * Play navigation to project sound effect
-   */
   playNavigateProject() {
-    if (!this.navigateProjectAudio) return;
-
-    try {
-      this.navigateProjectAudio.currentTime = 0;
-      this.navigateProjectAudio.play().catch(() => {
-        // Silently handle playback errors
-      });
-    } catch (error) {
-      // Silently handle errors
-    }
+    this.playEffect('navigateProject');
   }
 }
 
-// Export singleton instance - shared across entire application
 export const audioManager = new AudioManager();

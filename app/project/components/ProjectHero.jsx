@@ -14,7 +14,7 @@ export default function ProjectHero({
   heroMedia = [],
 }) {
   // Sound effects
-  const { playButtonHover, playNavigateProject } = useSoundEffects();
+  const { playButtonHover, playNavigateHome } = useSoundEffects();
   const primaryHeroMedia = heroMedia[0];
   const toolSkills = skills
     .filter((skill) => skill.category === "tools")
@@ -32,7 +32,7 @@ export default function ProjectHero({
         <Link
           href="/"
           className="group w-hug inline-flex min-h-[44px] items-center gutter-xs text-button text-400 uppercase text-(--schemes-on-surface-variant) transition-opacity duration-150 hover:opacity-70"
-          onClick={playNavigateProject}
+          onClick={playNavigateHome}
           onMouseEnter={playButtonHover}
         >
           <span aria-hidden="true" className="text-h5 leading-none transition-transform duration-150 group-hover:-translate-x-1">

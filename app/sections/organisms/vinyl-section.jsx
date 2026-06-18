@@ -10,7 +10,11 @@ import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 function isMusicAllowed() {
   if (typeof window === "undefined") return false;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  return localStorage.getItem("audioPermission") === "allowed";
+  try {
+    return localStorage.getItem("audioPermission") === "allowed";
+  } catch {
+    return false;
+  }
 }
 
 export default function VinylSection() {
@@ -18,14 +22,15 @@ export default function VinylSection() {
   const [scrambleTrigger, setScrambleTrigger] = useState(false);
   const [showSoundModal, setShowSoundModal] = useState(false);
   const audioRef = useRef(null);
-  const { playNavigateProject } = useSoundEffects();
+  const { playNavigateProject, primeAudio } = useSoundEffects();
 
   const handleEnableSound = () => {
     try {
       localStorage.setItem('audioPermission', 'allowed');
-      window.location.reload();
+      primeAudio();
+      setShowSoundModal(false);
     } catch {
-      window.location.reload();
+      setShowSoundModal(false);
     }
   };
 
@@ -55,7 +60,6 @@ export default function VinylSection() {
               audio.pause();
               audio.src = record.audioSrc;
               audio.volume = 0.4;
-              audio.load();
               audio.play().catch(() => {});
             }
           }
@@ -114,7 +118,7 @@ export default function VinylSection() {
         </TextScramble>
       </div>
 
-      <audio ref={audioRef} loop hidden />
+      <audio ref={audioRef} loop preload="none" hidden />
 
       <AnimatePresence>
         {showSoundModal && (

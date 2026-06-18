@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSoundEffects } from "../../ui/hooks/useSoundEffects";
 import { useLenis } from "../../ui/hooks/useLenis";
 
 /**
@@ -18,7 +17,6 @@ import { useLenis } from "../../ui/hooks/useLenis";
  */
 export default function CaseStudyNavigation({ sections = [] }) {
   const [activeSection, setActiveSection] = useState(null);
-  const { playButtonHover } = useSoundEffects();
   const lenis = useLenis();
 
   useEffect(() => {
@@ -127,7 +125,6 @@ export default function CaseStudyNavigation({ sections = [] }) {
               <a
                 href={`#${id}`}
                 onClick={(event) => handleNavigationClick(event, id)}
-                onMouseEnter={playButtonHover}
                 aria-current={activeSection === id ? "location" : undefined}
                 className={`
                   inline-flex w-hug whitespace-nowrap

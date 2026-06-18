@@ -48,7 +48,7 @@ function FooterLogo({ className = "" }) {
 
 export default function Footer() {
   const [isPaused, setIsPaused] = useState(false);
-  const { playButtonHover } = useSoundEffects();
+  const { playButtonHover, playNavigateHome } = useSoundEffects();
 
   return (
     <footer className="px-4 md:px-5 pb-4 md:pb-5 w-full" data-label="site-footer">
@@ -63,6 +63,7 @@ export default function Footer() {
               aria-label="Go to home page"
               className="w-hug inline-flex items-center gutter-sm rounded-sm transition-opacity duration-150 hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
               onMouseEnter={playButtonHover}
+              onClick={playNavigateHome}
             >
               <FooterLogo className="block h-auto w-[30px]" />
               <span className="hidden md:inline-flex text-h5 text-500 leading-none">
